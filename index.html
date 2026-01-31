@@ -65,6 +65,26 @@
       box-shadow: 0 8px 20px rgba(0,0,0,0.25);
     }
 
+    /* ===== Input & Button for AI ===== */
+    #userQuestion {
+      width: 80%;
+      padding: 8px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    button {
+      padding: 8px 12px;
+      border-radius: 5px;
+      border: none;
+      background-color: #2a2d8f;
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    button:hover {
+      background-color: #3e40c9;
+    }
+
     /* ===== Footer ===== */
     footer {
       text-align: center;
@@ -86,9 +106,11 @@
   <a href="#news">News</a>
   <a href="#students">Students</a>
   <a href="#teachers">Teachers</a>
+  <a href="#ai">School AI</a>
 </nav>
 
 <main>
+  <!-- ===== News Section ===== -->
   <section id="news">
     <h2>School News & Events</h2>
     <div class="card">
@@ -101,6 +123,7 @@
     </div>
   </section>
 
+  <!-- ===== Students Section ===== -->
   <section id="students">
     <h2>Featured Students</h2>
     <div class="card">
@@ -113,6 +136,7 @@
     </div>
   </section>
 
+  <!-- ===== Teachers Section ===== -->
   <section id="teachers">
     <h2>Our Teachers</h2>
     <div class="card">
@@ -124,11 +148,40 @@
       <p>Computer Science and Robotics Instructor.</p>
     </div>
   </section>
+
+  <!-- ===== AI Section ===== -->
+  <section id="ai">
+    <h2>Ask the School AI</h2>
+    <div class="card">
+      <p>Type your question about the school, students, or teachers:</p>
+      <input type="text" id="userQuestion" placeholder="Ask me anything...">
+      <button onclick="answerQuestion()">Ask</button>
+      <p id="aiAnswer" style="margin-top:10px; font-weight:bold;"></p>
+    </div>
+  </section>
 </main>
 
 <footer>
   &copy; 2026 Laanqari Aisha High School
 </footer>
+
+<!-- ===== AI Script ===== -->
+<script>
+  function answerQuestion() {
+    const question = document.getElementById('userQuestion').value.toLowerCase();
+    const answer = document.getElementById('aiAnswer');
+
+    if(question.includes("student") || question.includes("students")){
+      answer.innerText = "Our school has many outstanding students in academics and activities!";
+    } else if(question.includes("teacher") || question.includes("teachers")){
+      answer.innerText = "Our teachers are highly qualified and supportive to all students.";
+    } else if(question.includes("event") || question.includes("news")){
+      answer.innerText = "Check out our News & Events section for the latest updates.";
+    } else {
+      answer.innerText = "Sorry, I don't know the answer yet. Try asking about students, teachers, or events.";
+    }
+  }
+</script>
 
 </body>
 </html>
