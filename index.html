@@ -2,10 +2,120 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>My First Website</title>
+  <title>Laanqari Aisha High School</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f4f4f9;
+      color: #333;
+    }
+    header {
+      background: #2a2d8f;
+      color: white;
+      padding: 20px 10px;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2em;
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      background: #4446b1;
+    }
+    nav a {
+      color: white;
+      padding: 14px 20px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    nav a:hover {
+      background: #3e40c9;
+    }
+    main {
+      padding: 20px;
+      max-width: 900px;
+      margin: auto;
+    }
+    section {
+      margin-bottom: 30px;
+    }
+    h2 {
+      color: #2a2d8f;
+      border-bottom: 2px solid #2a2d8f;
+      padding-bottom: 5px;
+    }
+    .card {
+      background: white;
+      padding: 15px;
+      margin: 10px 0;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 15px;
+      background: #2a2d8f;
+      color: white;
+    }
+  </style>
 </head>
 <body>
-  <h1>Hello, this is my first website</h1>
-  <p>Built for free, paid with time.</p>
+
+<header>
+  <h1>Laanqari Aisha High School</h1>
+  <p>Welcome to our official school page</p>
+</header>
+
+<nav>
+  <a href="#news">News</a>
+  <a href="#students">Students</a>
+  <a href="#teachers">Teachers</a>
+</nav>
+
+<main>
+  <section id="news">
+    <h2>School News & Events</h2>
+    <div class="card">
+      <h3>Science Fair 2026</h3>
+      <p>The annual science fair will take place on March 10. Students from all grades are encouraged to participate!</p>
+    </div>
+    <div class="card">
+      <h3>Sports Day</h3>
+      <p>Our school Sports Day is scheduled for April 5. Join us for a day full of fun and competitions.</p>
+    </div>
+  </section>
+
+  <section id="students">
+    <h2>Featured Students</h2>
+    <div class="card">
+      <h3>Emma Zaki</h3>
+      <p>Top student in mathematics and computer science projects.</p>
+    </div>
+    <div class="card">
+      <h3>Amin Khadija</h3>
+      <p>Active member in school cultural events and volunteering programs.</p>
+    </div>
+  </section>
+
+  <section id="teachers">
+    <h2>Our Teachers</h2>
+    <div class="card">
+      <h3>Mrs. Aisha Laanqari</h3>
+      <p>Mathematics Teacher with 15 years of experience.</p>
+    </div>
+    <div class="card">
+      <h3>Mr. Zaki Ahmed</h3>
+      <p>Computer Science and Robotics Instructor.</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  &copy; 2026 Laanqari Aisha High School
+</footer>
+
 </body>
 </html>
