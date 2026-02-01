@@ -662,6 +662,9 @@
       <div class="login-icon">🎓</div>
       <h1>Welcome Back!</h1>
       <p>Laanqari Aisha High School Portal</p>
+      <p style="font-size: 0.85em; color: #666; margin-top: 10px; padding: 10px; background: #fff3cd; border-radius: 8px;">
+        ⚠️ Note: This demo uses browser storage. Data is saved per device/browser. For cross-device sync, a real database is needed.
+      </p>
     </div>
     
     <div class="user-type-selector">
@@ -894,7 +897,24 @@
     <!-- ===== Notifications Page (Admin Only) ===== -->
     <div id="notificationsPage" class="page">
       <h2>Admin Notifications</h2>
-      <button class="clear-all-btn" onclick="clearAllNotifications()">🗑️ Clear All Notifications</button>
+      
+      <div style="display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap;">
+        <button class="clear-all-btn" onclick="clearAllNotifications()">🗑️ Clear All Notifications</button>
+        <button class="clear-all-btn" style="background: #d1ecf1; color: #0c5460;" onclick="exportData()">📥 Export All Data</button>
+        <button class="clear-all-btn" style="background: #d4edda; color: #155724;" onclick="importData()">📤 Import Data</button>
+      </div>
+      
+      <div style="background: #e7f3ff; padding: 15px; border-radius: 10px; margin-bottom: 20px; border-left: 4px solid #2196F3;">
+        <h4 style="margin-bottom: 10px; color: #0d47a1;">💡 Cross-Device Data Transfer</h4>
+        <p style="font-size: 0.9em; color: #555; line-height: 1.6;">
+          Since this demo uses browser storage (localStorage), each device has its own separate data. To sync data between devices:
+          <br><br>
+          <strong>1. On Device A:</strong> Click "📥 Export All Data" to download a JSON file<br>
+          <strong>2. On Device B:</strong> Click "📤 Import Data" and select the downloaded file<br>
+          <strong>3.</strong> All posts, comments, notifications, and user data will be transferred!
+        </p>
+      </div>
+      
       <div id="notificationsContent"></div>
     </div>
   </main>
@@ -1109,6 +1129,96 @@
       updateNotificationBadge();
       renderNotifications();
     }
+  }
+
+  // ===== Data Export/Import for Cross-Device Sync =====
+  function exportData() {
+    // Gather all data
+    const allData = {
+      registeredUsers: registeredUsers,
+      posts: posts,
+      notifications: notifications,
+      exportDate: new Date().toISOString(),
+      exportedBy: currentUser ? currentUser.fullName : 'Unknown'
+    };
+
+    // Convert to JSON
+    const dataStr = JSON.stringify(allData, null, 2);
+    const dataBlob = new Blob([dataStr], { type: 'application/json' });
+
+    // Create download link
+    const url = URL.createObjectURL(dataBlob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `laanqari-school-data-${new Date().toISOString().split('T')[0]}.json`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+
+    alert('✅ Data exported successfully! You can now import this file on another device.');
+  }
+
+  function importData() {
+    // Create file input
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = 'application/json';
+    
+    input.onchange = function(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function(event) {
+        try {
+          const importedData = JSON.parse(event.target.result);
+          
+          // Validate data structure
+          if (!importedData.registeredUsers || !importedData.posts || !importedData.notifications) {
+            alert('❌ Invalid data file! Please select a valid export file.');
+            return;
+          }
+
+          // Confirm before overwriting
+          const confirmMsg = `⚠️ This will replace all current data with imported data.\n\n` +
+                           `Imported data from: ${importedData.exportedBy}\n` +
+                           `Export date: ${new Date(importedData.exportDate).toLocaleString()}\n\n` +
+                           `Current data:\n` +
+                           `- ${registeredUsers.length} users\n` +
+                           `- ${posts.length} posts\n` +
+                           `- ${notifications.length} notifications\n\n` +
+                           `Imported data:\n` +
+                           `- ${importedData.registeredUsers.length} users\n` +
+                           `- ${importedData.posts.length} posts\n` +
+                           `- ${importedData.notifications.length} notifications\n\n` +
+                           `Continue?`;
+
+          if (confirm(confirmMsg)) {
+            // Import data
+            registeredUsers = importedData.registeredUsers;
+            posts = importedData.posts;
+            notifications = importedData.notifications;
+
+            // Save to localStorage
+            saveAllData();
+
+            // Refresh UI
+            updateNotificationBadge();
+            renderPage(currentPage);
+
+            alert('✅ Data imported successfully! The page will refresh to show updated content.');
+            location.reload();
+          }
+        } catch (error) {
+          alert('❌ Error reading file: ' + error.message);
+        }
+      };
+      
+      reader.readAsText(file);
+    };
+
+    input.click();
   }
 
   function toggleLike(postId) {
@@ -1370,7 +1480,7 @@
   const validCredentials = {
     student: { username: 'student', password: 'student123' },
     teacher: { username: 'teacher', password: 'teacher123' },
-    admin: { username: 'zakyth', password: 'zaky2009' }
+    admin: { username: 'admin', password: 'admin123' }
   };
 
   // ===== Notification System =====
