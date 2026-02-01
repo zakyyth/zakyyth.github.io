@@ -633,7 +633,84 @@
       <p><strong>Teacher:</strong> teacher / teacher123</p>
       <p><strong>Admin:</strong> admin / admin123</p>
       <br>
-      <p><a href="#" onclick="showForgotPassword()">Forgot Password?</a></p>
+      <p><a href="#" onclick="showForgotPassword()">Forgot Password?</a> | 
+         <a href="#" onclick="showRegisterPage()">Create Account</a></p>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Registration Page ===== -->
+<div id="registerPage" class="login-container" style="display:none;">
+  <div class="login-box">
+    <div class="login-header">
+      <div class="login-icon">📝</div>
+      <h1>Create Account</h1>
+      <p>Join Laanqari Aisha High School Portal</p>
+    </div>
+    
+    <div class="user-type-selector">
+      <button class="user-type-btn active" onclick="selectRegisterType('student')">
+        👨‍🎓 Student
+      </button>
+      <button class="user-type-btn" onclick="selectRegisterType('teacher')">
+        👩‍🏫 Teacher
+      </button>
+    </div>
+
+    <div id="registerError" class="error-message"></div>
+    <div id="registerSuccess" class="success-message"></div>
+
+    <form id="registerForm" onsubmit="handleRegister(event)">
+      <div class="form-group">
+        <label for="regFullName">Full Name</label>
+        <span class="icon">👤</span>
+        <input type="text" id="regFullName" placeholder="Enter your full name" required>
+      </div>
+
+      <div class="form-group">
+        <label for="regEmail">Email</label>
+        <span class="icon">✉️</span>
+        <input type="email" id="regEmail" placeholder="Enter your email" required>
+      </div>
+
+      <div class="form-group">
+        <label for="regUsername">Username</label>
+        <span class="icon">👤</span>
+        <input type="text" id="regUsername" placeholder="Choose a username" required minlength="4">
+      </div>
+
+      <div class="form-group">
+        <label for="regPassword">Password</label>
+        <span class="icon">🔒</span>
+        <input type="password" id="regPassword" placeholder="Choose a password" required minlength="6">
+      </div>
+
+      <div class="form-group">
+        <label for="regConfirmPassword">Confirm Password</label>
+        <span class="icon">🔒</span>
+        <input type="password" id="regConfirmPassword" placeholder="Confirm your password" required>
+      </div>
+
+      <div class="form-group" id="studentIdGroup">
+        <label for="regStudentId">Student ID</label>
+        <span class="icon">🎓</span>
+        <input type="text" id="regStudentId" placeholder="Enter your student ID">
+      </div>
+
+      <div class="form-group" id="teacherCodeGroup" style="display:none;">
+        <label for="regTeacherCode">Teacher Access Code</label>
+        <span class="icon">🔐</span>
+        <input type="text" id="regTeacherCode" placeholder="Enter teacher access code">
+      </div>
+
+      <button type="submit" class="login-btn">✨ Create Account</button>
+    </form>
+
+    <div class="login-footer">
+      <p>Already have an account? <a href="#" onclick="showLoginPage()">Sign In</a></p>
+      <p style="font-size: 0.85em; color: #999; margin-top: 10px;">
+        Teacher Access Code: TEACH2026
+      </p>
     </div>
   </div>
 </div>
@@ -809,6 +886,10 @@
   // ===== Authentication System =====
   let currentUser = null;
   let userType = 'student';
+  let registerType = 'student';
+
+  // Load registered users from localStorage
+  let registeredUsers = JSON.parse(localStorage.getItem('registeredUsers')) || [];
 
   const validCredentials = {
     student: { username: 'student', password: 'student123' },
@@ -824,6 +905,111 @@
     event.target.classList.add('active');
   }
 
+  function selectRegisterType(type) {
+    registerType = type;
+    document.querySelectorAll('#registerPage .user-type-btn').forEach(btn => {
+      btn.classList.remove('active');
+    });
+    event.target.classList.add('active');
+
+    // Show/hide appropriate fields
+    if (type === 'student') {
+      document.getElementById('studentIdGroup').style.display = 'block';
+      document.getElementById('teacherCodeGroup').style.display = 'none';
+      document.getElementById('regStudentId').required = true;
+      document.getElementById('regTeacherCode').required = false;
+    } else {
+      document.getElementById('studentIdGroup').style.display = 'none';
+      document.getElementById('teacherCodeGroup').style.display = 'block';
+      document.getElementById('regStudentId').required = false;
+      document.getElementById('regTeacherCode').required = true;
+    }
+  }
+
+  function showRegisterPage() {
+    document.getElementById('loginPage').style.display = 'none';
+    document.getElementById('registerPage').style.display = 'flex';
+    document.getElementById('registerError').style.display = 'none';
+    document.getElementById('registerSuccess').style.display = 'none';
+  }
+
+  function showLoginPage() {
+    document.getElementById('registerPage').style.display = 'none';
+    document.getElementById('loginPage').style.display = 'flex';
+    document.getElementById('errorMessage').style.display = 'none';
+    document.getElementById('successMessage').style.display = 'none';
+  }
+
+  function handleRegister(event) {
+    event.preventDefault();
+    
+    const fullName = document.getElementById('regFullName').value;
+    const email = document.getElementById('regEmail').value;
+    const username = document.getElementById('regUsername').value;
+    const password = document.getElementById('regPassword').value;
+    const confirmPassword = document.getElementById('regConfirmPassword').value;
+    const studentId = document.getElementById('regStudentId').value;
+    const teacherCode = document.getElementById('regTeacherCode').value;
+    
+    const errorMsg = document.getElementById('registerError');
+    const successMsg = document.getElementById('registerSuccess');
+    
+    errorMsg.style.display = 'none';
+    successMsg.style.display = 'none';
+
+    // Validation
+    if (password !== confirmPassword) {
+      errorMsg.textContent = '❌ Passwords do not match!';
+      errorMsg.style.display = 'block';
+      return;
+    }
+
+    if (password.length < 6) {
+      errorMsg.textContent = '❌ Password must be at least 6 characters long!';
+      errorMsg.style.display = 'block';
+      return;
+    }
+
+    // Check if username already exists
+    const existingUser = registeredUsers.find(u => u.username === username);
+    if (existingUser || username === 'student' || username === 'teacher' || username === 'admin') {
+      errorMsg.textContent = '❌ Username already exists! Please choose another one.';
+      errorMsg.style.display = 'block';
+      return;
+    }
+
+    // Check teacher code
+    if (registerType === 'teacher' && teacherCode !== 'TEACH2026') {
+      errorMsg.textContent = '❌ Invalid teacher access code!';
+      errorMsg.style.display = 'block';
+      return;
+    }
+
+    // Create new user
+    const newUser = {
+      fullName: fullName,
+      email: email,
+      username: username,
+      password: password,
+      type: registerType,
+      studentId: registerType === 'student' ? studentId : null,
+      createdAt: new Date().toISOString()
+    };
+
+    registeredUsers.push(newUser);
+    localStorage.setItem('registeredUsers', JSON.stringify(registeredUsers));
+
+    successMsg.textContent = `✅ Account created successfully! Welcome ${fullName}! Redirecting to login...`;
+    successMsg.style.display = 'block';
+
+    document.getElementById('registerForm').reset();
+    
+    setTimeout(() => {
+      showLoginPage();
+      document.getElementById('username').value = username;
+    }, 2000);
+  }
+
   function handleLogin(event) {
     event.preventDefault();
     
@@ -835,16 +1021,41 @@
     errorMsg.style.display = 'none';
     successMsg.style.display = 'none';
 
+    // Check default credentials first
     const credentials = validCredentials[userType];
     
     if (username === credentials.username && password === credentials.password) {
       currentUser = {
         username: username,
         type: userType,
-        displayName: userType.charAt(0).toUpperCase() + userType.slice(1)
+        displayName: userType.charAt(0).toUpperCase() + userType.slice(1),
+        fullName: userType.charAt(0).toUpperCase() + userType.slice(1) + ' User'
       };
       
       successMsg.textContent = `✅ Welcome ${currentUser.displayName}! Redirecting...`;
+      successMsg.style.display = 'block';
+      
+      setTimeout(() => {
+        showMainWebsite();
+      }, 1500);
+      return;
+    }
+
+    // Check registered users
+    const registeredUser = registeredUsers.find(u => 
+      u.username === username && u.password === password && u.type === userType
+    );
+
+    if (registeredUser) {
+      currentUser = {
+        username: registeredUser.username,
+        type: registeredUser.type,
+        displayName: registeredUser.type.charAt(0).toUpperCase() + registeredUser.type.slice(1),
+        fullName: registeredUser.fullName,
+        email: registeredUser.email
+      };
+      
+      successMsg.textContent = `✅ Welcome back ${registeredUser.fullName}! Redirecting...`;
       successMsg.style.display = 'block';
       
       setTimeout(() => {
@@ -862,8 +1073,10 @@
     
     const userIcon = currentUser.type === 'admin' ? '🔐' : 
                      currentUser.type === 'teacher' ? '👩‍🏫' : '👨‍🎓';
+    
+    const displayText = currentUser.fullName || currentUser.username;
     document.getElementById('userDisplay').textContent = 
-      `${userIcon} ${currentUser.displayName}: ${currentUser.username}`;
+      `${userIcon} ${displayText}`;
     
     // Show protected content based on user type
     if (currentUser.type === 'student') {
