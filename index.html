@@ -15,7 +15,183 @@
       line-height: 1.6;
     }
 
-    /* ===== Header with Animation ===== */
+    /* ===== Login Page ===== */
+    .login-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #2a2d8f, #4446b1);
+      position: relative;
+      overflow: hidden;
+    }
+    .login-container::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+      background-size: 50px 50px;
+      animation: backgroundMove 20s linear infinite;
+    }
+    @keyframes backgroundMove {
+      0% {transform: translate(0, 0);}
+      100% {transform: translate(50px, 50px);}
+    }
+    .login-box {
+      background: white;
+      padding: 50px 40px;
+      border-radius: 20px;
+      box-shadow: 0 15px 50px rgba(0,0,0,0.3);
+      max-width: 450px;
+      width: 90%;
+      position: relative;
+      z-index: 1;
+      animation: slideUp 0.6s ease-out;
+    }
+    @keyframes slideUp {
+      from {opacity: 0; transform: translateY(30px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+    .login-header {
+      text-align: center;
+      margin-bottom: 35px;
+    }
+    .login-header h1 {
+      color: #2a2d8f;
+      font-size: 2em;
+      margin-bottom: 10px;
+    }
+    .login-header p {
+      color: #666;
+      font-size: 1em;
+    }
+    .login-icon {
+      font-size: 4em;
+      margin-bottom: 20px;
+    }
+    .form-group {
+      margin-bottom: 25px;
+      position: relative;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      color: #2a2d8f;
+      font-weight: 600;
+      font-size: 0.95em;
+    }
+    .form-group input {
+      width: 100%;
+      padding: 14px 15px 14px 45px;
+      border: 2px solid #ddd;
+      border-radius: 10px;
+      font-size: 1em;
+      transition: all 0.3s;
+      background: #f9f9f9;
+    }
+    .form-group input:focus {
+      outline: none;
+      border-color: #2a2d8f;
+      box-shadow: 0 0 15px rgba(42,45,143,0.2);
+      background: white;
+    }
+    .form-group .icon {
+      position: absolute;
+      left: 15px;
+      top: 42px;
+      font-size: 1.2em;
+      color: #2a2d8f;
+    }
+    .login-btn {
+      width: 100%;
+      padding: 15px;
+      border: none;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #2a2d8f, #4446b1);
+      color: white;
+      font-size: 1.1em;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s;
+      box-shadow: 0 4px 15px rgba(42,45,143,0.4);
+    }
+    .login-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(42,45,143,0.5);
+    }
+    .login-btn:active {
+      transform: translateY(0);
+    }
+    .user-type-selector {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 25px;
+    }
+    .user-type-btn {
+      flex: 1;
+      padding: 12px;
+      border: 2px solid #ddd;
+      background: white;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-weight: 600;
+      color: #666;
+    }
+    .user-type-btn.active {
+      border-color: #2a2d8f;
+      background: linear-gradient(135deg, #2a2d8f, #4446b1);
+      color: white;
+    }
+    .user-type-btn:hover {
+      border-color: #4446b1;
+    }
+    .login-footer {
+      text-align: center;
+      margin-top: 25px;
+      color: #666;
+      font-size: 0.9em;
+    }
+    .login-footer a {
+      color: #2a2d8f;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .login-footer a:hover {
+      text-decoration: underline;
+    }
+    .error-message {
+      background: #f8d7da;
+      color: #721c24;
+      padding: 12px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      border: 1px solid #f5c6cb;
+      display: none;
+      animation: shake 0.5s;
+    }
+    @keyframes shake {
+      0%, 100% {transform: translateX(0);}
+      25% {transform: translateX(-10px);}
+      75% {transform: translateX(10px);}
+    }
+    .success-message {
+      background: #d4edda;
+      color: #155724;
+      padding: 12px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      border: 1px solid #c3e6cb;
+      display: none;
+    }
+
+    /* ===== Main Website Styles ===== */
+    .main-website {
+      display: none;
+    }
     header {
       background: linear-gradient(135deg, #2a2d8f, #4446b1);
       color: white;
@@ -35,10 +211,6 @@
       background-size: 50px 50px;
       animation: backgroundMove 20s linear infinite;
     }
-    @keyframes backgroundMove {
-      0% {transform: translate(0, 0);}
-      100% {transform: translate(50px, 50px);}
-    }
     header h1 {
       margin-bottom:8px; 
       font-size:2.5em;
@@ -50,6 +222,34 @@
       opacity:0.9;
       position: relative;
       animation: fadeInUp 1s ease-out;
+    }
+    .user-info {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: rgba(255,255,255,0.2);
+      padding: 10px 20px;
+      border-radius: 25px;
+      backdrop-filter: blur(10px);
+      z-index: 10;
+    }
+    .user-info span {
+      margin-right: 15px;
+      font-weight: bold;
+    }
+    .logout-btn {
+      background: white;
+      color: #2a2d8f;
+      border: none;
+      padding: 6px 15px;
+      border-radius: 15px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.3s;
+    }
+    .logout-btn:hover {
+      background: #f0f0f0;
+      transform: scale(1.05);
     }
     @keyframes fadeInDown {
       from {opacity: 0; transform: translateY(-30px);}
@@ -166,6 +366,21 @@
       margin-top: 10px;
     }
 
+    /* ===== Protected Content ===== */
+    .protected {
+      background: linear-gradient(135deg, #ffeaa7, #fdcb6e);
+      border-left-color: #fdcb6e;
+    }
+    .admin-only {
+      background: linear-gradient(135deg, #a29bfe, #6c5ce7);
+      border-left-color: #6c5ce7;
+      color: white;
+    }
+    .admin-only h3,
+    .admin-only p {
+      color: white;
+    }
+
     /* ===== AI Section Enhanced ===== */
     .ai-container {
       background: linear-gradient(135deg, #4446b1, #2a2d8f);
@@ -244,17 +459,8 @@
       border-radius: 15px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
-    .form-group {
-      margin-bottom: 20px;
-    }
-    .form-group label {
-      display: block;
-      margin-bottom: 8px;
-      color: #2a2d8f;
-      font-weight: bold;
-    }
-    .form-group input,
-    .form-group textarea {
+    .contact-form input,
+    .contact-form textarea {
       width: 100%;
       padding: 12px;
       border: 2px solid #ddd;
@@ -262,8 +468,8 @@
       font-size: 1em;
       transition: all 0.3s;
     }
-    .form-group input:focus,
-    .form-group textarea:focus {
+    .contact-form input:focus,
+    .contact-form textarea:focus {
       outline: none;
       border-color: #2a2d8f;
       box-shadow: 0 0 10px rgba(42,45,143,0.2);
@@ -374,168 +580,329 @@
       nav {flex-wrap: wrap;}
       nav a {padding: 12px 15px; font-size: 0.9em;}
       .stats-container {grid-template-columns: 1fr;}
+      .login-box {padding: 30px 25px;}
+      .user-info {position: static; margin: 10px; text-align: center;}
     }
   </style>
 </head>
 <body>
 
-<header>
-  <h1>🎓 Laanqari Aisha High School</h1>
-  <p>Excellence in Education Since 2000</p>
-</header>
+<!-- ===== Login Page ===== -->
+<div id="loginPage" class="login-container">
+  <div class="login-box">
+    <div class="login-header">
+      <div class="login-icon">🎓</div>
+      <h1>Welcome Back!</h1>
+      <p>Laanqari Aisha High School Portal</p>
+    </div>
+    
+    <div class="user-type-selector">
+      <button class="user-type-btn active" onclick="selectUserType('student')">
+        👨‍🎓 Student
+      </button>
+      <button class="user-type-btn" onclick="selectUserType('teacher')">
+        👩‍🏫 Teacher
+      </button>
+      <button class="user-type-btn" onclick="selectUserType('admin')">
+        🔐 Admin
+      </button>
+    </div>
 
-<nav>
-  <a href="#news">📰 News</a>
-  <a href="#students">👨‍🎓 Students</a>
-  <a href="#teachers">👩‍🏫 Teachers</a>
-  <a href="#stats">📊 Stats</a>
-  <a href="#ai">🤖 School AI</a>
-  <a href="#contact">📧 Contact</a>
-</nav>
+    <div id="errorMessage" class="error-message"></div>
+    <div id="successMessage" class="success-message"></div>
 
-<main>
-  <!-- ===== News Section ===== -->
-  <section id="news">
-    <h2>School News & Events</h2>
-    <div class="card" onclick="showEventDetails('Science Fair 2026', 'The annual science fair will take place on March 10. Students from all grades are encouraged to participate and showcase their innovative projects!')">
-      <h3>🔬 Science Fair 2026</h3>
-      <p>The annual science fair will take place on March 10. Students from all grades are encouraged to participate!</p>
-      <span class="badge">Upcoming</span>
-    </div>
-    <div class="card" onclick="showEventDetails('Sports Day', 'Our school Sports Day is scheduled for April 5. Join us for a day full of fun competitions, team spirit, and athletic excellence!')">
-      <h3>⚽ Sports Day</h3>
-      <p>Our school Sports Day is scheduled for April 5. Join us for a day full of fun and competitions.</p>
-      <span class="badge">April 2026</span>
-    </div>
-    <div class="card" onclick="showEventDetails('Art Exhibition', 'Student artwork will be displayed in the school gallery starting February 15. Come celebrate creativity and talent!')">
-      <h3>🎨 Art Exhibition</h3>
-      <p>Student artwork will be displayed in the school gallery starting February 15.</p>
-      <span class="badge">New</span>
-    </div>
-  </section>
-
-  <!-- ===== Students Section ===== -->
-  <section id="students">
-    <h2>Featured Students</h2>
-    <div class="card">
-      <h3>⭐ Emma Zaki</h3>
-      <p>Top student in mathematics and computer science projects. Winner of the 2025 Regional Coding Competition.</p>
-      <span class="badge">Mathematics</span>
-      <span class="badge">Computer Science</span>
-    </div>
-    <div class="card">
-      <h3>⭐ Amin Khadija</h3>
-      <p>Active member in school cultural events and volunteering programs. President of the Student Council.</p>
-      <span class="badge">Leadership</span>
-      <span class="badge">Volunteer</span>
-    </div>
-    <div class="card">
-      <h3>⭐ Youssef Ahmed</h3>
-      <p>National champion in debate competitions. Founder of the school's environmental club.</p>
-      <span class="badge">Debate</span>
-      <span class="badge">Environmental</span>
-    </div>
-  </section>
-
-  <!-- ===== Teachers Section ===== -->
-  <section id="teachers">
-    <h2>Our Dedicated Teachers</h2>
-    <div class="card">
-      <h3>👩‍🏫 Mrs. Aisha Laanqari</h3>
-      <p>Mathematics Teacher with 15 years of experience. Holder of the National Teaching Excellence Award.</p>
-      <span class="badge">15 Years Experience</span>
-    </div>
-    <div class="card">
-      <h3>👨‍🏫 Mr. Zaki Ahmed</h3>
-      <p>Computer Science and Robotics Instructor. Former software engineer at a leading tech company.</p>
-      <span class="badge">Robotics Expert</span>
-    </div>
-    <div class="card">
-      <h3>👩‍🏫 Dr. Sara Mohamed</h3>
-      <p>Science Department Head with PhD in Biology. Published researcher in environmental science.</p>
-      <span class="badge">PhD Holder</span>
-    </div>
-  </section>
-
-  <!-- ===== Stats Section ===== -->
-  <section id="stats">
-    <h2>School Statistics</h2>
-    <div class="stats-container">
-      <div class="stat-box">
-        <div class="stat-number" data-target="850">0</div>
-        <div class="stat-label">Students</div>
+    <form id="loginForm" onsubmit="handleLogin(event)">
+      <div class="form-group">
+        <label for="username">Username</label>
+        <span class="icon">👤</span>
+        <input type="text" id="username" name="username" placeholder="Enter your username" required>
       </div>
-      <div class="stat-box">
-        <div class="stat-number" data-target="45">0</div>
-        <div class="stat-label">Teachers</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-number" data-target="98">0</div>
-        <div class="stat-label">Success Rate %</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-number" data-target="26">0</div>
-        <div class="stat-label">Years Established</div>
-      </div>
-    </div>
-  </section>
 
-  <!-- ===== AI Section ===== -->
-  <section id="ai">
-    <h2>Ask the School AI</h2>
-    <div class="card ai-container">
-      <h3>💬 Interactive School Assistant</h3>
-      <p style="margin-bottom: 20px;">Ask me anything about our school, students, teachers, events, or programs!</p>
-      <input type="text" id="userQuestion" placeholder="Try: 'When is the science fair?' or 'Tell me about teachers'">
-      <button onclick="answerQuestion()">🚀 Ask AI</button>
-      <div id="aiAnswer"></div>
-    </div>
-  </section>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <span class="icon">🔒</span>
+        <input type="password" id="password" name="password" placeholder="Enter your password" required>
+      </div>
 
-  <!-- ===== Contact Section ===== -->
-  <section id="contact">
-    <h2>Contact Us</h2>
-    <div class="contact-form">
-      <form id="contactForm" onsubmit="handleSubmit(event)">
-        <div class="form-group">
-          <label for="name">Name *</label>
-          <input type="text" id="name" name="name" required>
-        </div>
-        <div class="form-group">
-          <label for="email">Email *</label>
-          <input type="email" id="email" name="email" required>
-        </div>
-        <div class="form-group">
-          <label for="subject">Subject *</label>
-          <input type="text" id="subject" name="subject" required>
-        </div>
-        <div class="form-group">
-          <label for="message">Message *</label>
-          <textarea id="message" name="message" rows="5" required></textarea>
-        </div>
-        <button type="submit">📤 Send Message</button>
-        <div id="formMessage" class="form-message"></div>
-      </form>
-    </div>
-  </section>
-</main>
+      <button type="submit" class="login-btn">🚀 Sign In</button>
+    </form>
 
-<!-- ===== Modal ===== -->
-<div id="eventModal" class="modal">
-  <div class="modal-content">
-    <span class="close" onclick="closeModal()">&times;</span>
-    <h2 id="modalTitle"></h2>
-    <p id="modalDescription"></p>
+    <div class="login-footer">
+      <p>Demo Credentials:</p>
+      <p><strong>Student:</strong> student / student123</p>
+      <p><strong>Teacher:</strong> teacher / teacher123</p>
+      <p><strong>Admin:</strong> admin / admin123</p>
+      <br>
+      <p><a href="#" onclick="showForgotPassword()">Forgot Password?</a></p>
+    </div>
   </div>
 </div>
 
-<footer>
-  <p>&copy; 2026 Laanqari Aisha High School</p>
-  <p>📍 Ouargla, Algeria | 📞 +213-XX-XXX-XXX | ✉️ info@laanqarischool.edu.dz</p>
-</footer>
+<!-- ===== Main Website ===== -->
+<div id="mainWebsite" class="main-website">
+  <header>
+    <div class="user-info">
+      <span id="userDisplay">👤 Guest</span>
+      <button class="logout-btn" onclick="logout()">Logout</button>
+    </div>
+    <h1>🎓 Laanqari Aisha High School</h1>
+    <p>Excellence in Education Since 2000</p>
+  </header>
 
-<!-- ===== Enhanced JavaScript ===== -->
+  <nav>
+    <a href="#news">📰 News</a>
+    <a href="#students">👨‍🎓 Students</a>
+    <a href="#teachers">👩‍🏫 Teachers</a>
+    <a href="#stats">📊 Stats</a>
+    <a href="#ai">🤖 School AI</a>
+    <a href="#contact">📧 Contact</a>
+  </nav>
+
+  <main>
+    <!-- ===== News Section ===== -->
+    <section id="news">
+      <h2>School News & Events</h2>
+      <div class="card" onclick="showEventDetails('Science Fair 2026', 'The annual science fair will take place on March 10. Students from all grades are encouraged to participate and showcase their innovative projects!')">
+        <h3>🔬 Science Fair 2026</h3>
+        <p>The annual science fair will take place on March 10. Students from all grades are encouraged to participate!</p>
+        <span class="badge">Upcoming</span>
+      </div>
+      <div class="card" onclick="showEventDetails('Sports Day', 'Our school Sports Day is scheduled for April 5. Join us for a day full of fun competitions, team spirit, and athletic excellence!')">
+        <h3>⚽ Sports Day</h3>
+        <p>Our school Sports Day is scheduled for April 5. Join us for a day full of fun and competitions.</p>
+        <span class="badge">April 2026</span>
+      </div>
+      <div class="card protected" id="teacherEvent" style="display:none;">
+        <h3>🔒 Teacher Meeting (Protected)</h3>
+        <p>Monthly teacher meeting scheduled for February 15. Agenda includes curriculum updates and student progress reviews.</p>
+        <span class="badge">Teachers Only</span>
+      </div>
+      <div class="card admin-only" id="adminEvent" style="display:none;">
+        <h3>🔐 Admin Dashboard (Admin Only)</h3>
+        <p>Access financial reports, staff management, and system settings. Click to view detailed analytics.</p>
+        <span class="badge">Admin Access</span>
+      </div>
+    </section>
+
+    <!-- ===== Students Section ===== -->
+    <section id="students">
+      <h2>Featured Students</h2>
+      <div class="card">
+        <h3>⭐ Emma Zaki</h3>
+        <p>Top student in mathematics and computer science projects. Winner of the 2025 Regional Coding Competition.</p>
+        <span class="badge">Mathematics</span>
+        <span class="badge">Computer Science</span>
+      </div>
+      <div class="card">
+        <h3>⭐ Amin Khadija</h3>
+        <p>Active member in school cultural events and volunteering programs. President of the Student Council.</p>
+        <span class="badge">Leadership</span>
+        <span class="badge">Volunteer</span>
+      </div>
+      <div class="card protected" id="studentGrades" style="display:none;">
+        <h3>📊 My Grades (Student Access)</h3>
+        <p>View your semester grades, attendance records, and performance analytics.</p>
+        <span class="badge">Personal</span>
+      </div>
+    </section>
+
+    <!-- ===== Teachers Section ===== -->
+    <section id="teachers">
+      <h2>Our Dedicated Teachers</h2>
+      <div class="card">
+        <h3>👩‍🏫 Mrs. Aisha Laanqari</h3>
+        <p>Mathematics Teacher with 15 years of experience. Holder of the National Teaching Excellence Award.</p>
+        <span class="badge">15 Years Experience</span>
+      </div>
+      <div class="card">
+        <h3>👨‍🏫 Mr. Zaki Ahmed</h3>
+        <p>Computer Science and Robotics Instructor. Former software engineer at a leading tech company.</p>
+        <span class="badge">Robotics Expert</span>
+      </div>
+      <div class="card protected" id="teacherResources" style="display:none;">
+        <h3>📚 Teacher Resources (Protected)</h3>
+        <p>Access lesson plans, teaching materials, and student management tools.</p>
+        <span class="badge">Teachers Only</span>
+      </div>
+    </section>
+
+    <!-- ===== Stats Section ===== -->
+    <section id="stats">
+      <h2>School Statistics</h2>
+      <div class="stats-container">
+        <div class="stat-box">
+          <div class="stat-number" data-target="850">0</div>
+          <div class="stat-label">Students</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-number" data-target="45">0</div>
+          <div class="stat-label">Teachers</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-number" data-target="98">0</div>
+          <div class="stat-label">Success Rate %</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-number" data-target="26">0</div>
+          <div class="stat-label">Years Established</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== AI Section ===== -->
+    <section id="ai">
+      <h2>Ask the School AI</h2>
+      <div class="card ai-container">
+        <h3>💬 Interactive School Assistant</h3>
+        <p style="margin-bottom: 20px;">Ask me anything about our school, students, teachers, events, or programs!</p>
+        <input type="text" id="userQuestion" placeholder="Try: 'When is the science fair?' or 'Tell me about teachers'">
+        <button onclick="answerQuestion()">🚀 Ask AI</button>
+        <div id="aiAnswer"></div>
+      </div>
+    </section>
+
+    <!-- ===== Contact Section ===== -->
+    <section id="contact">
+      <h2>Contact Us</h2>
+      <div class="contact-form">
+        <form id="contactForm" onsubmit="handleSubmit(event)">
+          <div class="form-group">
+            <label for="name">Name *</label>
+            <input type="text" id="name" name="name" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Email *</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+          <div class="form-group">
+            <label for="subject">Subject *</label>
+            <input type="text" id="subject" name="subject" required>
+          </div>
+          <div class="form-group">
+            <label for="message">Message *</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+          </div>
+          <button type="submit">📤 Send Message</button>
+          <div id="formMessage" class="form-message"></div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== Modal ===== -->
+  <div id="eventModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <h2 id="modalTitle"></h2>
+      <p id="modalDescription"></p>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2026 Laanqari Aisha High School</p>
+    <p>📍 Ouargla, Algeria | 📞 +213-XX-XXX-XXX | ✉️ info@laanqarischool.edu.dz</p>
+  </footer>
+</div>
+
+<!-- ===== JavaScript ===== -->
 <script>
+  // ===== Authentication System =====
+  let currentUser = null;
+  let userType = 'student';
+
+  const validCredentials = {
+    student: { username: 'student', password: 'student123' },
+    teacher: { username: 'teacher', password: 'teacher123' },
+    admin: { username: 'admin', password: 'admin123' }
+  };
+
+  function selectUserType(type) {
+    userType = type;
+    document.querySelectorAll('.user-type-btn').forEach(btn => {
+      btn.classList.remove('active');
+    });
+    event.target.classList.add('active');
+  }
+
+  function handleLogin(event) {
+    event.preventDefault();
+    
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+    const errorMsg = document.getElementById('errorMessage');
+    const successMsg = document.getElementById('successMessage');
+    
+    errorMsg.style.display = 'none';
+    successMsg.style.display = 'none';
+
+    const credentials = validCredentials[userType];
+    
+    if (username === credentials.username && password === credentials.password) {
+      currentUser = {
+        username: username,
+        type: userType,
+        displayName: userType.charAt(0).toUpperCase() + userType.slice(1)
+      };
+      
+      successMsg.textContent = `✅ Welcome ${currentUser.displayName}! Redirecting...`;
+      successMsg.style.display = 'block';
+      
+      setTimeout(() => {
+        showMainWebsite();
+      }, 1500);
+    } else {
+      errorMsg.textContent = '❌ Invalid username or password. Please try again.';
+      errorMsg.style.display = 'block';
+    }
+  }
+
+  function showMainWebsite() {
+    document.getElementById('loginPage').style.display = 'none';
+    document.getElementById('mainWebsite').style.display = 'block';
+    
+    const userIcon = currentUser.type === 'admin' ? '🔐' : 
+                     currentUser.type === 'teacher' ? '👩‍🏫' : '👨‍🎓';
+    document.getElementById('userDisplay').textContent = 
+      `${userIcon} ${currentUser.displayName}: ${currentUser.username}`;
+    
+    // Show protected content based on user type
+    if (currentUser.type === 'student') {
+      document.getElementById('studentGrades').style.display = 'block';
+    } else if (currentUser.type === 'teacher') {
+      document.getElementById('teacherEvent').style.display = 'block';
+      document.getElementById('teacherResources').style.display = 'block';
+    } else if (currentUser.type === 'admin') {
+      document.getElementById('teacherEvent').style.display = 'block';
+      document.getElementById('teacherResources').style.display = 'block';
+      document.getElementById('studentGrades').style.display = 'block';
+      document.getElementById('adminEvent').style.display = 'block';
+    }
+    
+    // Trigger stats animation
+    setTimeout(() => {
+      animateCounter();
+    }, 500);
+  }
+
+  function logout() {
+    if (confirm('Are you sure you want to logout?')) {
+      currentUser = null;
+      document.getElementById('mainWebsite').style.display = 'none';
+      document.getElementById('loginPage').style.display = 'flex';
+      document.getElementById('loginForm').reset();
+      
+      // Hide all protected content
+      document.getElementById('studentGrades').style.display = 'none';
+      document.getElementById('teacherEvent').style.display = 'none';
+      document.getElementById('teacherResources').style.display = 'none';
+      document.getElementById('adminEvent').style.display = 'none';
+    }
+  }
+
+  function showForgotPassword() {
+    alert('Please contact the school administrator at admin@laanqarischool.edu.dz to reset your password.');
+  }
+
   // ===== Enhanced AI Function =====
   function answerQuestion() {
     const question = document.getElementById('userQuestion').value.toLowerCase();
@@ -546,39 +913,31 @@
       return;
     }
 
-    // Show typing indicator
     answer.innerHTML = '<span class="typing">🤖 Thinking...</span>';
     
     setTimeout(() => {
       let response = '';
       
       if (question.includes('student') || question.includes('students')) {
-        response = '👨‍🎓 Our school has 850 outstanding students excelling in academics, sports, and cultural activities! Featured students include Emma Zaki (Math & CS), Amin Khadija (Leadership), and Youssef Ahmed (Debate).';
+        response = '👨‍🎓 Our school has 850 outstanding students excelling in academics, sports, and cultural activities!';
       } else if (question.includes('teacher') || question.includes('teachers')) {
-        response = '👩‍🏫 We have 45 highly qualified and supportive teachers, including Mrs. Aisha Laanqari (Math - 15 years), Mr. Zaki Ahmed (CS & Robotics), and Dr. Sara Mohamed (Science - PhD).';
+        response = '👩‍🏫 We have 45 highly qualified and supportive teachers dedicated to student success!';
       } else if (question.includes('event') || question.includes('news') || question.includes('science fair')) {
-        response = '📰 Upcoming events: Science Fair (March 10), Sports Day (April 5), and Art Exhibition (starting Feb 15). Check our News section for details!';
-      } else if (question.includes('contact') || question.includes('email') || question.includes('phone')) {
-        response = '📧 Contact us at: info@laanqarischool.edu.dz or call +213-XX-XXX-XXX. Visit our Contact section below to send a message!';
-      } else if (question.includes('when') && question.includes('science')) {
-        response = '🔬 The Science Fair 2026 is scheduled for March 10. All grades are welcome to participate!';
-      } else if (question.includes('sports') || question.includes('sport day')) {
-        response = '⚽ Sports Day is on April 5, 2026. Join us for competitions, fun activities, and team spirit!';
-      } else if (question.includes('how many') || question.includes('statistics') || question.includes('stats')) {
-        response = '📊 School Stats: 850 students, 45 teachers, 98% success rate, 26 years established. Check our Stats section!';
-      } else if (question.includes('location') || question.includes('where') || question.includes('address')) {
-        response = '📍 We are located in Ouargla, Algeria. Visit us or contact us for the exact address!';
-      } else if (question.includes('hello') || question.includes('hi') || question.includes('hey')) {
-        response = '👋 Hello! Welcome to Laanqari Aisha High School. How can I help you today?';
+        response = '📰 Upcoming events: Science Fair (March 10), Sports Day (April 5). Check News section!';
+      } else if (question.includes('login') || question.includes('account')) {
+        response = `🔐 You are currently logged in as: ${currentUser ? currentUser.displayName : 'Guest'}`;
+      } else if (question.includes('contact')) {
+        response = '📧 Contact us at: info@laanqarischool.edu.dz or call +213-XX-XXX-XXX';
+      } else if (question.includes('stats') || question.includes('how many')) {
+        response = '📊 Stats: 850 students, 45 teachers, 98% success rate, 26 years established!';
       } else {
-        response = '🤔 I\'m not sure about that. Try asking about: students, teachers, events, contact info, or statistics!';
+        response = '🤔 Try asking about: students, teachers, events, contact, or your account!';
       }
       
       answer.innerHTML = response;
     }, 800);
   }
 
-  // Enter key support
   document.getElementById('userQuestion').addEventListener('keypress', function(e) {
     if (e.key === 'Enter') {
       answerQuestion();
@@ -607,37 +966,20 @@
     });
   }
 
-  // Trigger counter animation when stats section is visible
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        animateCounter();
-        observer.unobserve(entry.target);
-      }
-    });
-  });
-  
-  const statsSection = document.getElementById('stats');
-  if (statsSection) {
-    observer.observe(statsSection);
-  }
-
   // ===== Contact Form Handler =====
   function handleSubmit(event) {
     event.preventDefault();
     
     const formMessage = document.getElementById('formMessage');
     const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
     
-    // Simulate form submission
     formMessage.className = 'form-message';
     formMessage.style.display = 'block';
     formMessage.textContent = '📤 Sending message...';
     
     setTimeout(() => {
       formMessage.className = 'form-message success';
-      formMessage.textContent = `✅ Thank you ${name}! Your message has been sent successfully. We'll reply to ${email} soon.`;
+      formMessage.textContent = `✅ Thank you ${name}! Your message has been sent successfully.`;
       document.getElementById('contactForm').reset();
       
       setTimeout(() => {
@@ -658,7 +1000,6 @@
     document.getElementById('eventModal').style.display = 'none';
   }
 
-  // Close modal when clicking outside
   window.onclick = function(event) {
     const modal = document.getElementById('eventModal');
     if (event.target == modal) {
@@ -666,7 +1007,7 @@
     }
   }
 
-  // ===== Smooth scroll with offset =====
+  // ===== Smooth Scroll =====
   document.querySelectorAll('nav a').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
       e.preventDefault();
