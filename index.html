@@ -83,7 +83,7 @@
       font-weight: 600;
       font-size: 0.95em;
     }
-    .form-group input {
+    .form-group input, .form-group textarea {
       width: 100%;
       padding: 14px 15px 14px 45px;
       border: 2px solid #ddd;
@@ -92,7 +92,12 @@
       transition: all 0.3s;
       background: #f9f9f9;
     }
-    .form-group input:focus {
+    .form-group textarea {
+      padding: 14px 15px;
+      resize: vertical;
+      min-height: 100px;
+    }
+    .form-group input:focus, .form-group textarea:focus {
       outline: none;
       border-color: #2a2d8f;
       box-shadow: 0 0 15px rgba(42,45,143,0.2);
@@ -105,7 +110,7 @@
       font-size: 1.2em;
       color: #2a2d8f;
     }
-    .login-btn {
+    .login-btn, .btn-primary {
       width: 100%;
       padding: 15px;
       border: none;
@@ -118,11 +123,11 @@
       transition: all 0.3s;
       box-shadow: 0 4px 15px rgba(42,45,143,0.4);
     }
-    .login-btn:hover {
+    .login-btn:hover, .btn-primary:hover {
       transform: translateY(-2px);
       box-shadow: 0 6px 20px rgba(42,45,143,0.5);
     }
-    .login-btn:active {
+    .login-btn:active, .btn-primary:active {
       transform: translateY(0);
     }
     .user-type-selector {
@@ -195,7 +200,7 @@
     header {
       background: linear-gradient(135deg, #2a2d8f, #4446b1);
       color: white;
-      padding: 40px 10px;
+      padding: 30px 20px;
       text-align: center;
       position: relative;
       overflow: hidden;
@@ -212,7 +217,6 @@
       animation: backgroundMove 20s linear infinite;
     }
     header h1 {
-      margin-bottom:8px; 
       font-size:2.5em;
       position: relative;
       animation: fadeInDown 1s ease-out;
@@ -232,9 +236,11 @@
       border-radius: 25px;
       backdrop-filter: blur(10px);
       z-index: 10;
+      display: flex;
+      align-items: center;
+      gap: 15px;
     }
     .user-info span {
-      margin-right: 15px;
       font-weight: bold;
     }
     .logout-btn {
@@ -264,6 +270,7 @@
     nav {
       display: flex;
       justify-content: center;
+      flex-wrap: wrap;
       background: #4446b1;
       position: sticky;
       top: 0;
@@ -277,34 +284,28 @@
       font-weight: bold;
       transition: all 0.3s;
       position: relative;
+      cursor: pointer;
     }
-    nav a::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      width: 0;
-      height: 3px;
-      background: white;
-      transition: all 0.3s;
-      transform: translateX(-50%);
-    }
-    nav a:hover::after {
-      width: 80%;
+    nav a.active {
+      background: rgba(255,255,255,0.2);
+      border-bottom: 3px solid white;
     }
     nav a:hover {
       background: rgba(255,255,255,0.1);
     }
 
     /* ===== Main Content ===== */
-    main {padding: 30px 20px; max-width: 1100px; margin: auto;}
-    section {margin-bottom: 50px; opacity: 0; animation: fadeIn 0.8s ease-out forwards;}
-    section:nth-child(1) {animation-delay: 0.1s;}
-    section:nth-child(2) {animation-delay: 0.2s;}
-    section:nth-child(3) {animation-delay: 0.3s;}
-    section:nth-child(4) {animation-delay: 0.4s;}
+    main {padding: 30px 20px; max-width: 1100px; margin: auto; min-height: calc(100vh - 300px);}
+    .page {
+      display: none;
+      animation: fadeIn 0.5s ease-out;
+    }
+    .page.active {
+      display: block;
+    }
     @keyframes fadeIn {
-      to {opacity: 1;}
+      from {opacity: 0; transform: translateY(20px);}
+      to {opacity: 1; transform: translateY(0);}
     }
     
     h2 {
@@ -313,39 +314,24 @@
       padding-bottom: 10px;
       margin-bottom: 25px;
       font-size: 2em;
-      position: relative;
       display: inline-block;
     }
 
-    /* ===== Enhanced Cards ===== */
+    /* ===== Cards ===== */
     .card {
       background: white;
       padding: 25px;
       margin: 15px 0;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
       border-radius: 15px;
-      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      transition: all 0.4s;
       border-left: 5px solid #2a2d8f;
-      cursor: pointer;
       position: relative;
       overflow: hidden;
     }
-    .card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(42,45,143,0.05), transparent);
-      transition: left 0.5s;
-    }
-    .card:hover::before {
-      left: 100%;
-    }
     .card:hover {
-      transform: translateY(-8px) scale(1.02);
-      box-shadow: 0 12px 30px rgba(42,45,143,0.3);
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(42,45,143,0.3);
     }
     .card h3 {
       color: #2a2d8f;
@@ -364,135 +350,84 @@
       border-radius: 20px;
       font-size: 0.8em;
       margin-top: 10px;
+      margin-right: 5px;
     }
-
-    /* ===== Protected Content ===== */
-    .protected {
-      background: linear-gradient(135deg, #ffeaa7, #fdcb6e);
-      border-left-color: #fdcb6e;
+    .card-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 15px;
+      padding-top: 15px;
+      border-top: 1px solid #eee;
+      font-size: 0.9em;
+      color: #666;
     }
-    .admin-only {
-      background: linear-gradient(135deg, #a29bfe, #6c5ce7);
-      border-left-color: #6c5ce7;
-      color: white;
+    .card-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 15px;
     }
-    .admin-only h3,
-    .admin-only p {
-      color: white;
-    }
-
-    /* ===== AI Section Enhanced ===== */
-    .ai-container {
-      background: linear-gradient(135deg, #4446b1, #2a2d8f);
-      color: white;
-      padding: 30px;
-      border-radius: 15px;
-      box-shadow: 0 8px 25px rgba(42,45,143,0.4);
-    }
-    .ai-container h3 {
-      color: white;
-      margin-bottom: 15px;
-    }
-    #userQuestion {
-      width: 100%;
-      padding: 15px;
-      border-radius: 10px;
-      border: 2px solid rgba(255,255,255,0.3);
-      font-size: 1em;
-      margin-bottom: 15px;
-      background: rgba(255,255,255,0.95);
-      transition: all 0.3s;
-    }
-    #userQuestion:focus {
-      outline: none;
-      border-color: white;
-      box-shadow: 0 0 15px rgba(255,255,255,0.5);
-    }
-    button {
-      padding: 12px 30px;
-      border-radius: 25px;
+    .btn-small {
+      padding: 8px 16px;
       border: none;
-      background: white;
-      color: #2a2d8f;
+      border-radius: 8px;
       cursor: pointer;
       font-weight: bold;
-      font-size: 1em;
       transition: all 0.3s;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      font-size: 0.9em;
     }
-    button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(0,0,0,0.3);
-      background: #f0f0f0;
+    .btn-like {
+      background: #e8f4fd;
+      color: #2a8fdb;
     }
-    button:active {
-      transform: translateY(0);
+    .btn-like:hover {
+      background: #2a8fdb;
+      color: white;
     }
-    #aiAnswer {
-      margin-top: 20px;
-      padding: 20px;
-      background: rgba(255,255,255,0.15);
-      border-radius: 10px;
-      min-height: 60px;
-      font-size: 1.1em;
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255,255,255,0.2);
-      animation: slideIn 0.5s ease-out;
+    .btn-like.liked {
+      background: #2a8fdb;
+      color: white;
     }
-    @keyframes slideIn {
-      from {opacity: 0; transform: translateX(-20px);}
-      to {opacity: 1; transform: translateX(0);}
+    .btn-comment {
+      background: #fff3cd;
+      color: #856404;
     }
-    .typing {
-      display: inline-block;
-      animation: blink 1s infinite;
+    .btn-comment:hover {
+      background: #856404;
+      color: white;
     }
-    @keyframes blink {
-      0%, 100% {opacity: 1;}
-      50% {opacity: 0.3;}
-    }
-
-    /* ===== Contact Form ===== */
-    .contact-form {
-      background: white;
-      padding: 30px;
-      border-radius: 15px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    }
-    .contact-form input,
-    .contact-form textarea {
-      width: 100%;
-      padding: 12px;
-      border: 2px solid #ddd;
-      border-radius: 8px;
-      font-size: 1em;
-      transition: all 0.3s;
-    }
-    .contact-form input:focus,
-    .contact-form textarea:focus {
-      outline: none;
-      border-color: #2a2d8f;
-      box-shadow: 0 0 10px rgba(42,45,143,0.2);
-    }
-    .form-message {
-      padding: 15px;
-      border-radius: 8px;
-      margin-top: 15px;
-      display: none;
-      animation: fadeIn 0.5s;
-    }
-    .form-message.success {
-      background: #d4edda;
-      color: #155724;
-      border: 1px solid #c3e6cb;
-    }
-    .form-message.error {
+    .btn-delete {
       background: #f8d7da;
       color: #721c24;
-      border: 1px solid #f5c6cb;
+    }
+    .btn-delete:hover {
+      background: #721c24;
+      color: white;
     }
 
-    /* ===== Stats Counter ===== */
+    /* ===== Add Content Button ===== */
+    .add-content-btn {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #2a2d8f, #4446b1);
+      color: white;
+      border: none;
+      font-size: 2em;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(42,45,143,0.5);
+      transition: all 0.3s;
+      z-index: 100;
+    }
+    .add-content-btn:hover {
+      transform: scale(1.1) rotate(90deg);
+      box-shadow: 0 6px 30px rgba(42,45,143,0.7);
+    }
+
+    /* ===== Stats ===== */
     .stats-container {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -522,19 +457,6 @@
       font-size: 1em;
     }
 
-    /* ===== Footer ===== */
-    footer {
-      text-align: center;
-      padding: 30px;
-      background: linear-gradient(135deg, #2a2d8f, #4446b1);
-      color: white;
-      margin-top: 50px;
-      box-shadow: 0 -4px 15px rgba(0,0,0,0.2);
-    }
-    footer p {
-      margin: 10px 0;
-    }
-
     /* ===== Modal ===== */
     .modal {
       display: none;
@@ -549,10 +471,12 @@
     }
     .modal-content {
       background: white;
-      margin: 5% auto;
+      margin: 3% auto;
       padding: 30px;
       border-radius: 15px;
       max-width: 600px;
+      max-height: 85vh;
+      overflow-y: auto;
       animation: slideDown 0.4s;
       position: relative;
     }
@@ -574,14 +498,59 @@
       color: #2a2d8f;
     }
 
+    /* ===== Comments Section ===== */
+    .comments-section {
+      margin-top: 20px;
+      padding: 15px;
+      background: #f9f9f9;
+      border-radius: 10px;
+      display: none;
+    }
+    .comments-section.active {
+      display: block;
+    }
+    .comment {
+      background: white;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 8px;
+      border-left: 3px solid #2a2d8f;
+    }
+    .comment-author {
+      font-weight: bold;
+      color: #2a2d8f;
+      margin-bottom: 5px;
+    }
+    .comment-text {
+      color: #555;
+    }
+    .comment-input {
+      width: 100%;
+      padding: 10px;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      margin-top: 10px;
+    }
+
+    /* ===== Footer ===== */
+    footer {
+      text-align: center;
+      padding: 30px;
+      background: linear-gradient(135deg, #2a2d8f, #4446b1);
+      color: white;
+      margin-top: 50px;
+      box-shadow: 0 -4px 15px rgba(0,0,0,0.2);
+    }
+    footer p {
+      margin: 10px 0;
+    }
+
     /* ===== Responsive ===== */
     @media (max-width: 768px) {
       header h1 {font-size: 1.8em;}
-      nav {flex-wrap: wrap;}
       nav a {padding: 12px 15px; font-size: 0.9em;}
-      .stats-container {grid-template-columns: 1fr;}
-      .login-box {padding: 30px 25px;}
-      .user-info {position: static; margin: 10px; text-align: center;}
+      .user-info {position: static; margin: 10px; justify-content: center;}
+      .add-content-btn {width: 50px; height: 50px; font-size: 1.5em;}
     }
   </style>
 </head>
@@ -694,7 +663,7 @@
       <div class="form-group" id="studentIdGroup">
         <label for="regStudentId">Student ID</label>
         <span class="icon">🎓</span>
-        <input type="text" id="regStudentId" placeholder="Enter your student ID">
+        <input type="text" id="regStudentId" placeholder="e.g., 2026001, STU12345">
       </div>
 
       <div class="form-group" id="teacherCodeGroup" style="display:none;">
@@ -727,151 +696,133 @@
   </header>
 
   <nav>
-    <a href="#news">📰 News</a>
-    <a href="#students">👨‍🎓 Students</a>
-    <a href="#teachers">👩‍🏫 Teachers</a>
-    <a href="#stats">📊 Stats</a>
-    <a href="#ai">🤖 School AI</a>
-    <a href="#contact">📧 Contact</a>
+    <a onclick="navigateTo('home')" class="active">🏠 Home</a>
+    <a onclick="navigateTo('news')">📰 News</a>
+    <a onclick="navigateTo('students')">👨‍🎓 Students</a>
+    <a onclick="navigateTo('teachers')">👩‍🏫 Teachers</a>
+    <a onclick="navigateTo('contact')">📧 Contact</a>
   </nav>
 
   <main>
-    <!-- ===== News Section ===== -->
-    <section id="news">
-      <h2>School News & Events</h2>
-      <div class="card" onclick="showEventDetails('Science Fair 2026', 'The annual science fair will take place on March 10. Students from all grades are encouraged to participate and showcase their innovative projects!')">
-        <h3>🔬 Science Fair 2026</h3>
-        <p>The annual science fair will take place on March 10. Students from all grades are encouraged to participate!</p>
-        <span class="badge">Upcoming</span>
-      </div>
-      <div class="card" onclick="showEventDetails('Sports Day', 'Our school Sports Day is scheduled for April 5. Join us for a day full of fun competitions, team spirit, and athletic excellence!')">
-        <h3>⚽ Sports Day</h3>
-        <p>Our school Sports Day is scheduled for April 5. Join us for a day full of fun and competitions.</p>
-        <span class="badge">April 2026</span>
-      </div>
-      <div class="card protected" id="teacherEvent" style="display:none;">
-        <h3>🔒 Teacher Meeting (Protected)</h3>
-        <p>Monthly teacher meeting scheduled for February 15. Agenda includes curriculum updates and student progress reviews.</p>
-        <span class="badge">Teachers Only</span>
-      </div>
-      <div class="card admin-only" id="adminEvent" style="display:none;">
-        <h3>🔐 Admin Dashboard (Admin Only)</h3>
-        <p>Access financial reports, staff management, and system settings. Click to view detailed analytics.</p>
-        <span class="badge">Admin Access</span>
-      </div>
-    </section>
-
-    <!-- ===== Students Section ===== -->
-    <section id="students">
-      <h2>Featured Students</h2>
-      <div class="card">
-        <h3>⭐ Emma Zaki</h3>
-        <p>Top student in mathematics and computer science projects. Winner of the 2025 Regional Coding Competition.</p>
-        <span class="badge">Mathematics</span>
-        <span class="badge">Computer Science</span>
-      </div>
-      <div class="card">
-        <h3>⭐ Amin Khadija</h3>
-        <p>Active member in school cultural events and volunteering programs. President of the Student Council.</p>
-        <span class="badge">Leadership</span>
-        <span class="badge">Volunteer</span>
-      </div>
-      <div class="card protected" id="studentGrades" style="display:none;">
-        <h3>📊 My Grades (Student Access)</h3>
-        <p>View your semester grades, attendance records, and performance analytics.</p>
-        <span class="badge">Personal</span>
-      </div>
-    </section>
-
-    <!-- ===== Teachers Section ===== -->
-    <section id="teachers">
-      <h2>Our Dedicated Teachers</h2>
-      <div class="card">
-        <h3>👩‍🏫 Mrs. Aisha Laanqari</h3>
-        <p>Mathematics Teacher with 15 years of experience. Holder of the National Teaching Excellence Award.</p>
-        <span class="badge">15 Years Experience</span>
-      </div>
-      <div class="card">
-        <h3>👨‍🏫 Mr. Zaki Ahmed</h3>
-        <p>Computer Science and Robotics Instructor. Former software engineer at a leading tech company.</p>
-        <span class="badge">Robotics Expert</span>
-      </div>
-      <div class="card protected" id="teacherResources" style="display:none;">
-        <h3>📚 Teacher Resources (Protected)</h3>
-        <p>Access lesson plans, teaching materials, and student management tools.</p>
-        <span class="badge">Teachers Only</span>
-      </div>
-    </section>
-
-    <!-- ===== Stats Section ===== -->
-    <section id="stats">
-      <h2>School Statistics</h2>
+    <!-- ===== Home Page ===== -->
+    <div id="homePage" class="page active">
+      <h2>Welcome to Our School</h2>
       <div class="stats-container">
         <div class="stat-box">
-          <div class="stat-number" data-target="850">0</div>
+          <div class="stat-number" data-target="850">850</div>
           <div class="stat-label">Students</div>
         </div>
         <div class="stat-box">
-          <div class="stat-number" data-target="45">0</div>
+          <div class="stat-number" data-target="45">45</div>
           <div class="stat-label">Teachers</div>
         </div>
         <div class="stat-box">
-          <div class="stat-number" data-target="98">0</div>
+          <div class="stat-number" data-target="98">98</div>
           <div class="stat-label">Success Rate %</div>
         </div>
         <div class="stat-box">
-          <div class="stat-number" data-target="26">0</div>
+          <div class="stat-number" data-target="26">26</div>
           <div class="stat-label">Years Established</div>
         </div>
       </div>
-    </section>
 
-    <!-- ===== AI Section ===== -->
-    <section id="ai">
-      <h2>Ask the School AI</h2>
-      <div class="card ai-container">
-        <h3>💬 Interactive School Assistant</h3>
-        <p style="margin-bottom: 20px;">Ask me anything about our school, students, teachers, events, or programs!</p>
-        <input type="text" id="userQuestion" placeholder="Try: 'When is the science fair?' or 'Tell me about teachers'">
-        <button onclick="answerQuestion()">🚀 Ask AI</button>
-        <div id="aiAnswer"></div>
+      <div class="card">
+        <h3>🎓 About Our School</h3>
+        <p>Laanqari Aisha High School has been a beacon of excellence in education since 2000. We provide a nurturing environment where students can grow academically, socially, and personally.</p>
+        <span class="badge">Established 2000</span>
+        <span class="badge">Excellence</span>
       </div>
-    </section>
 
-    <!-- ===== Contact Section ===== -->
-    <section id="contact">
+      <div class="card">
+        <h3>🏆 Our Mission</h3>
+        <p>To empower students with knowledge, skills, and values that prepare them for success in an ever-changing world.</p>
+      </div>
+    </div>
+
+    <!-- ===== News Page ===== -->
+    <div id="newsPage" class="page">
+      <h2>School News & Events</h2>
+      <div id="newsContent"></div>
+    </div>
+
+    <!-- ===== Students Page ===== -->
+    <div id="studentsPage" class="page">
+      <h2>Our Students</h2>
+      <div id="studentsContent"></div>
+    </div>
+
+    <!-- ===== Teachers Page ===== -->
+    <div id="teachersPage" class="page">
+      <h2>Our Teachers</h2>
+      <div id="teachersContent"></div>
+    </div>
+
+    <!-- ===== Contact Page ===== -->
+    <div id="contactPage" class="page">
       <h2>Contact Us</h2>
-      <div class="contact-form">
-        <form id="contactForm" onsubmit="handleSubmit(event)">
-          <div class="form-group">
-            <label for="name">Name *</label>
-            <input type="text" id="name" name="name" required>
-          </div>
-          <div class="form-group">
-            <label for="email">Email *</label>
-            <input type="email" id="email" name="email" required>
-          </div>
-          <div class="form-group">
-            <label for="subject">Subject *</label>
-            <input type="text" id="subject" name="subject" required>
-          </div>
-          <div class="form-group">
-            <label for="message">Message *</label>
-            <textarea id="message" name="message" rows="5" required></textarea>
-          </div>
-          <button type="submit">📤 Send Message</button>
-          <div id="formMessage" class="form-message"></div>
-        </form>
+      <div class="card">
+        <h3>📍 School Address</h3>
+        <p>Laanqari Aisha High School<br>
+        Ouargla, Algeria</p>
       </div>
-    </section>
+      <div class="card">
+        <h3>📞 Contact Information</h3>
+        <p>Phone: +213-XX-XXX-XXX<br>
+        Email: info@laanqarischool.edu.dz</p>
+      </div>
+      <div class="card">
+        <h3>📧 Send us a Message</h3>
+        <form onsubmit="handleContactSubmit(event)">
+          <div class="form-group">
+            <label for="contactName">Name</label>
+            <input type="text" id="contactName" required>
+          </div>
+          <div class="form-group">
+            <label for="contactEmail">Email</label>
+            <input type="email" id="contactEmail" required>
+          </div>
+          <div class="form-group">
+            <label for="contactMessage">Message</label>
+            <textarea id="contactMessage" required></textarea>
+          </div>
+          <button type="submit" class="btn-primary">Send Message</button>
+        </form>
+        <div id="contactFormMessage" class="success-message" style="margin-top: 15px;"></div>
+      </div>
+    </div>
   </main>
 
-  <!-- ===== Modal ===== -->
-  <div id="eventModal" class="modal">
+  <!-- Add Content Button (Only for Teachers and Admins) -->
+  <button id="addContentBtn" class="add-content-btn" onclick="showAddContentModal()" style="display:none;">+</button>
+
+  <!-- ===== Add Content Modal ===== -->
+  <div id="addContentModal" class="modal">
     <div class="modal-content">
-      <span class="close" onclick="closeModal()">&times;</span>
-      <h2 id="modalTitle"></h2>
-      <p id="modalDescription"></p>
+      <span class="close" onclick="closeAddContentModal()">&times;</span>
+      <h2>Create New Post</h2>
+      <form id="addContentForm" onsubmit="handleAddContent(event)">
+        <div class="form-group">
+          <label for="postCategory">Category</label>
+          <select id="postCategory" style="width:100%; padding:12px; border:2px solid #ddd; border-radius:8px;" required>
+            <option value="news">News & Events</option>
+            <option value="students">Students</option>
+            <option value="teachers">Teachers</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="postTitle">Title</label>
+          <input type="text" id="postTitle" required>
+        </div>
+        <div class="form-group">
+          <label for="postContent">Content</label>
+          <textarea id="postContent" rows="5" required></textarea>
+        </div>
+        <div class="form-group">
+          <label for="postTags">Tags (comma separated)</label>
+          <input type="text" id="postTags" placeholder="e.g., Important, Upcoming, Featured">
+        </div>
+        <button type="submit" class="btn-primary">📤 Post</button>
+      </form>
     </div>
   </div>
 
@@ -883,13 +834,64 @@
 
 <!-- ===== JavaScript ===== -->
 <script>
-  // ===== Authentication System =====
+  // ===== Data Storage =====
   let currentUser = null;
   let userType = 'student';
   let registerType = 'student';
+  let currentPage = 'home';
 
-  // Load registered users from localStorage
+  // Load data from localStorage
   let registeredUsers = JSON.parse(localStorage.getItem('registeredUsers')) || [];
+  let posts = JSON.parse(localStorage.getItem('schoolPosts')) || getDefaultPosts();
+
+  function getDefaultPosts() {
+    return [
+      {
+        id: 1,
+        category: 'news',
+        title: '🔬 Science Fair 2026',
+        content: 'The annual science fair will take place on March 10. Students from all grades are encouraged to participate and showcase their innovative projects!',
+        tags: ['Upcoming', 'Important'],
+        author: 'Admin',
+        date: new Date('2026-01-25').toISOString(),
+        likes: 15,
+        comments: []
+      },
+      {
+        id: 2,
+        category: 'news',
+        title: '⚽ Sports Day',
+        content: 'Our school Sports Day is scheduled for April 5. Join us for a day full of fun competitions, team spirit, and athletic excellence!',
+        tags: ['April 2026', 'Sports'],
+        author: 'Teacher',
+        date: new Date('2026-01-28').toISOString(),
+        likes: 23,
+        comments: []
+      },
+      {
+        id: 3,
+        category: 'students',
+        title: '⭐ Emma Zaki',
+        content: 'Top student in mathematics and computer science projects. Winner of the 2025 Regional Coding Competition.',
+        tags: ['Mathematics', 'Computer Science'],
+        author: 'Admin',
+        date: new Date('2026-01-20').toISOString(),
+        likes: 42,
+        comments: []
+      },
+      {
+        id: 4,
+        category: 'teachers',
+        title: '👩‍🏫 Mrs. Aisha Laanqari',
+        content: 'Mathematics Teacher with 15 years of experience. Holder of the National Teaching Excellence Award.',
+        tags: ['15 Years Experience', 'Mathematics'],
+        author: 'Admin',
+        date: new Date('2026-01-15').toISOString(),
+        likes: 56,
+        comments: []
+      }
+    ];
+  }
 
   const validCredentials = {
     student: { username: 'student', password: 'student123' },
@@ -897,9 +899,10 @@
     admin: { username: 'admin', password: 'admin123' }
   };
 
+  // ===== Authentication Functions =====
   function selectUserType(type) {
     userType = type;
-    document.querySelectorAll('.user-type-btn').forEach(btn => {
+    document.querySelectorAll('#loginPage .user-type-btn').forEach(btn => {
       btn.classList.remove('active');
     });
     event.target.classList.add('active');
@@ -912,7 +915,6 @@
     });
     event.target.classList.add('active');
 
-    // Show/hide appropriate fields
     if (type === 'student') {
       document.getElementById('studentIdGroup').style.display = 'block';
       document.getElementById('teacherCodeGroup').style.display = 'none';
@@ -957,7 +959,6 @@
     errorMsg.style.display = 'none';
     successMsg.style.display = 'none';
 
-    // Validation
     if (password !== confirmPassword) {
       errorMsg.textContent = '❌ Passwords do not match!';
       errorMsg.style.display = 'block';
@@ -970,7 +971,6 @@
       return;
     }
 
-    // Check if username already exists
     const existingUser = registeredUsers.find(u => u.username === username);
     if (existingUser || username === 'student' || username === 'teacher' || username === 'admin') {
       errorMsg.textContent = '❌ Username already exists! Please choose another one.';
@@ -978,14 +978,12 @@
       return;
     }
 
-    // Check teacher code
     if (registerType === 'teacher' && teacherCode !== 'TEACH2026') {
       errorMsg.textContent = '❌ Invalid teacher access code!';
       errorMsg.style.display = 'block';
       return;
     }
 
-    // Create new user
     const newUser = {
       fullName: fullName,
       email: email,
@@ -1021,7 +1019,6 @@
     errorMsg.style.display = 'none';
     successMsg.style.display = 'none';
 
-    // Check default credentials first
     const credentials = validCredentials[userType];
     
     if (username === credentials.username && password === credentials.password) {
@@ -1041,7 +1038,6 @@
       return;
     }
 
-    // Check registered users
     const registeredUser = registeredUsers.find(u => 
       u.username === username && u.password === password && u.type === userType
     );
@@ -1069,32 +1065,20 @@
 
   function showMainWebsite() {
     document.getElementById('loginPage').style.display = 'none';
+    document.getElementById('registerPage').style.display = 'none';
     document.getElementById('mainWebsite').style.display = 'block';
     
     const userIcon = currentUser.type === 'admin' ? '🔐' : 
                      currentUser.type === 'teacher' ? '👩‍🏫' : '👨‍🎓';
     
-    const displayText = currentUser.fullName || currentUser.username;
-    document.getElementById('userDisplay').textContent = 
-      `${userIcon} ${displayText}`;
+    document.getElementById('userDisplay').textContent = `${userIcon} ${currentUser.fullName}`;
     
-    // Show protected content based on user type
-    if (currentUser.type === 'student') {
-      document.getElementById('studentGrades').style.display = 'block';
-    } else if (currentUser.type === 'teacher') {
-      document.getElementById('teacherEvent').style.display = 'block';
-      document.getElementById('teacherResources').style.display = 'block';
-    } else if (currentUser.type === 'admin') {
-      document.getElementById('teacherEvent').style.display = 'block';
-      document.getElementById('teacherResources').style.display = 'block';
-      document.getElementById('studentGrades').style.display = 'block';
-      document.getElementById('adminEvent').style.display = 'block';
+    // Show add content button for teachers and admins
+    if (currentUser.type === 'teacher' || currentUser.type === 'admin') {
+      document.getElementById('addContentBtn').style.display = 'block';
     }
     
-    // Trigger stats animation
-    setTimeout(() => {
-      animateCounter();
-    }, 500);
+    renderPage(currentPage);
   }
 
   function logout() {
@@ -1103,12 +1087,7 @@
       document.getElementById('mainWebsite').style.display = 'none';
       document.getElementById('loginPage').style.display = 'flex';
       document.getElementById('loginForm').reset();
-      
-      // Hide all protected content
-      document.getElementById('studentGrades').style.display = 'none';
-      document.getElementById('teacherEvent').style.display = 'none';
-      document.getElementById('teacherResources').style.display = 'none';
-      document.getElementById('adminEvent').style.display = 'none';
+      document.getElementById('addContentBtn').style.display = 'none';
     }
   }
 
@@ -1116,129 +1095,203 @@
     alert('Please contact the school administrator at admin@laanqarischool.edu.dz to reset your password.');
   }
 
-  // ===== Enhanced AI Function =====
-  function answerQuestion() {
-    const question = document.getElementById('userQuestion').value.toLowerCase();
-    const answer = document.getElementById('aiAnswer');
+  // ===== Navigation =====
+  function navigateTo(page) {
+    currentPage = page;
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
     
-    if (!question.trim()) {
-      answer.innerHTML = '⚠️ Please type a question first!';
+    document.getElementById(page + 'Page').classList.add('active');
+    event.target.classList.add('active');
+    
+    renderPage(page);
+  }
+
+  function renderPage(page) {
+    if (page === 'news') {
+      renderPosts('news', 'newsContent');
+    } else if (page === 'students') {
+      renderPosts('students', 'studentsContent');
+    } else if (page === 'teachers') {
+      renderPosts('teachers', 'teachersContent');
+    }
+  }
+
+  function renderPosts(category, containerId) {
+    const container = document.getElementById(containerId);
+    const categoryPosts = posts.filter(p => p.category === category).sort((a, b) => new Date(b.date) - new Date(a.date));
+    
+    if (categoryPosts.length === 0) {
+      container.innerHTML = '<div class="card"><p>No posts yet. Teachers and admins can add content!</p></div>';
       return;
     }
-
-    answer.innerHTML = '<span class="typing">🤖 Thinking...</span>';
     
-    setTimeout(() => {
-      let response = '';
+    container.innerHTML = categoryPosts.map(post => {
+      const isLiked = post.likedBy && post.likedBy.includes(currentUser?.username);
+      const canDelete = currentUser && (currentUser.type === 'admin' || post.author === currentUser.fullName);
       
-      if (question.includes('student') || question.includes('students')) {
-        response = '👨‍🎓 Our school has 850 outstanding students excelling in academics, sports, and cultural activities!';
-      } else if (question.includes('teacher') || question.includes('teachers')) {
-        response = '👩‍🏫 We have 45 highly qualified and supportive teachers dedicated to student success!';
-      } else if (question.includes('event') || question.includes('news') || question.includes('science fair')) {
-        response = '📰 Upcoming events: Science Fair (March 10), Sports Day (April 5). Check News section!';
-      } else if (question.includes('login') || question.includes('account')) {
-        response = `🔐 You are currently logged in as: ${currentUser ? currentUser.displayName : 'Guest'}`;
-      } else if (question.includes('contact')) {
-        response = '📧 Contact us at: info@laanqarischool.edu.dz or call +213-XX-XXX-XXX';
-      } else if (question.includes('stats') || question.includes('how many')) {
-        response = '📊 Stats: 850 students, 45 teachers, 98% success rate, 26 years established!';
-      } else {
-        response = '🤔 Try asking about: students, teachers, events, contact, or your account!';
-      }
-      
-      answer.innerHTML = response;
-    }, 800);
+      return `
+        <div class="card" id="post-${post.id}">
+          <h3>${post.title}</h3>
+          <p>${post.content}</p>
+          ${post.tags.map(tag => `<span class="badge">${tag}</span>`).join('')}
+          <div class="card-meta">
+            <span>📝 By ${post.author} | 📅 ${new Date(post.date).toLocaleDateString()}</span>
+            <span>❤️ ${post.likes} | 💬 ${post.comments.length}</span>
+          </div>
+          <div class="card-actions">
+            <button class="btn-small btn-like ${isLiked ? 'liked' : ''}" onclick="toggleLike(${post.id})">
+              ${isLiked ? '❤️ Liked' : '🤍 Like'}
+            </button>
+            <button class="btn-small btn-comment" onclick="toggleComments(${post.id})">
+              💬 Comment (${post.comments.length})
+            </button>
+            ${canDelete ? `<button class="btn-small btn-delete" onclick="deletePost(${post.id})">🗑️ Delete</button>` : ''}
+          </div>
+          <div class="comments-section" id="comments-${post.id}">
+            <div id="comments-list-${post.id}">
+              ${post.comments.map(c => `
+                <div class="comment">
+                  <div class="comment-author">${c.author}</div>
+                  <div class="comment-text">${c.text}</div>
+                </div>
+              `).join('')}
+            </div>
+            <input type="text" class="comment-input" id="comment-input-${post.id}" placeholder="Write a comment...">
+            <button class="btn-small btn-comment" style="margin-top:10px;" onclick="addComment(${post.id})">Post Comment</button>
+          </div>
+        </div>
+      `;
+    }).join('');
   }
 
-  document.getElementById('userQuestion').addEventListener('keypress', function(e) {
-    if (e.key === 'Enter') {
-      answerQuestion();
+  // ===== Post Interactions =====
+  function toggleLike(postId) {
+    if (!currentUser) return;
+    
+    const post = posts.find(p => p.id === postId);
+    if (!post) return;
+    
+    if (!post.likedBy) post.likedBy = [];
+    
+    const index = post.likedBy.indexOf(currentUser.username);
+    if (index > -1) {
+      post.likedBy.splice(index, 1);
+      post.likes--;
+    } else {
+      post.likedBy.push(currentUser.username);
+      post.likes++;
     }
-  });
-
-  // ===== Stats Counter Animation =====
-  function animateCounter() {
-    const counters = document.querySelectorAll('.stat-number');
     
-    counters.forEach(counter => {
-      const target = parseInt(counter.getAttribute('data-target'));
-      const duration = 2000;
-      const increment = target / (duration / 16);
-      let current = 0;
-      
-      const timer = setInterval(() => {
-        current += increment;
-        if (current >= target) {
-          counter.textContent = target;
-          clearInterval(timer);
-        } else {
-          counter.textContent = Math.floor(current);
-        }
-      }, 16);
-    });
+    savePosts();
+    renderPage(currentPage);
   }
 
-  // ===== Contact Form Handler =====
-  function handleSubmit(event) {
+  function toggleComments(postId) {
+    const commentsSection = document.getElementById(`comments-${postId}`);
+    commentsSection.classList.toggle('active');
+  }
+
+  function addComment(postId) {
+    if (!currentUser) return;
+    
+    const input = document.getElementById(`comment-input-${postId}`);
+    const text = input.value.trim();
+    
+    if (!text) return;
+    
+    const post = posts.find(p => p.id === postId);
+    if (!post) return;
+    
+    post.comments.push({
+      author: currentUser.fullName,
+      text: text,
+      date: new Date().toISOString()
+    });
+    
+    savePosts();
+    input.value = '';
+    renderPage(currentPage);
+  }
+
+  function deletePost(postId) {
+    if (!confirm('Are you sure you want to delete this post?')) return;
+    
+    posts = posts.filter(p => p.id !== postId);
+    savePosts();
+    renderPage(currentPage);
+  }
+
+  // ===== Add Content =====
+  function showAddContentModal() {
+    document.getElementById('addContentModal').style.display = 'block';
+  }
+
+  function closeAddContentModal() {
+    document.getElementById('addContentModal').style.display = 'none';
+    document.getElementById('addContentForm').reset();
+  }
+
+  function handleAddContent(event) {
     event.preventDefault();
     
-    const formMessage = document.getElementById('formMessage');
-    const name = document.getElementById('name').value;
+    if (!currentUser || (currentUser.type !== 'teacher' && currentUser.type !== 'admin')) {
+      alert('Only teachers and admins can post content!');
+      return;
+    }
     
-    formMessage.className = 'form-message';
-    formMessage.style.display = 'block';
-    formMessage.textContent = '📤 Sending message...';
+    const category = document.getElementById('postCategory').value;
+    const title = document.getElementById('postTitle').value;
+    const content = document.getElementById('postContent').value;
+    const tags = document.getElementById('postTags').value.split(',').map(t => t.trim()).filter(t => t);
     
+    const newPost = {
+      id: Date.now(),
+      category: category,
+      title: title,
+      content: content,
+      tags: tags,
+      author: currentUser.fullName,
+      date: new Date().toISOString(),
+      likes: 0,
+      likedBy: [],
+      comments: []
+    };
+    
+    posts.unshift(newPost);
+    savePosts();
+    
+    closeAddContentModal();
+    
+    // Navigate to the category page
+    if (category === 'news') navigateTo('news');
+    else if (category === 'students') navigateTo('students');
+    else if (category === 'teachers') navigateTo('teachers');
+  }
+
+  function savePosts() {
+    localStorage.setItem('schoolPosts', JSON.stringify(posts));
+  }
+
+  // ===== Contact Form =====
+  function handleContactSubmit(event) {
+    event.preventDefault();
+    const msg = document.getElementById('contactFormMessage');
+    msg.textContent = '✅ Message sent successfully! We will get back to you soon.';
+    msg.style.display = 'block';
+    event.target.reset();
     setTimeout(() => {
-      formMessage.className = 'form-message success';
-      formMessage.textContent = `✅ Thank you ${name}! Your message has been sent successfully.`;
-      document.getElementById('contactForm').reset();
-      
-      setTimeout(() => {
-        formMessage.style.display = 'none';
-      }, 5000);
-    }, 1500);
+      msg.style.display = 'none';
+    }, 5000);
   }
 
-  // ===== Event Modal =====
-  function showEventDetails(title, description) {
-    const modal = document.getElementById('eventModal');
-    document.getElementById('modalTitle').textContent = title;
-    document.getElementById('modalDescription').textContent = description;
-    modal.style.display = 'block';
-  }
-
-  function closeModal() {
-    document.getElementById('eventModal').style.display = 'none';
-  }
-
+  // ===== Close modal when clicking outside =====
   window.onclick = function(event) {
-    const modal = document.getElementById('eventModal');
+    const modal = document.getElementById('addContentModal');
     if (event.target == modal) {
-      modal.style.display = 'none';
+      closeAddContentModal();
     }
   }
-
-  // ===== Smooth Scroll =====
-  document.querySelectorAll('nav a').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-      e.preventDefault();
-      const targetId = this.getAttribute('href').substring(1);
-      const targetElement = document.getElementById(targetId);
-      
-      if (targetElement) {
-        const offset = 80;
-        const elementPosition = targetElement.getBoundingClientRect().top;
-        const offsetPosition = elementPosition + window.pageYOffset - offset;
-        
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: 'smooth'
-        });
-      }
-    });
-  });
 </script>
 
 </body>
