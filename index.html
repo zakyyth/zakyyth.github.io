@@ -192,6 +192,15 @@
       border: 1px solid #c3e6cb;
       display: none;
     }
+    .info-message {
+      background: #d1ecf1;
+      color: #0c5460;
+      padding: 12px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      border: 1px solid #bee5eb;
+      font-size: 0.9em;
+    }
 
     /* ===== Main Website Styles ===== */
     .main-website {
@@ -631,6 +640,50 @@
       color: white;
     }
 
+    /* ===== Storage Info Box ===== */
+    .storage-info {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 20px;
+      border-radius: 15px;
+      margin-bottom: 25px;
+      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+    }
+    .storage-info h4 {
+      margin-bottom: 10px;
+      font-size: 1.2em;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .storage-info p {
+      opacity: 0.95;
+      line-height: 1.6;
+      font-size: 0.95em;
+    }
+    .storage-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 15px;
+      margin-top: 15px;
+    }
+    .storage-stat {
+      background: rgba(255,255,255,0.2);
+      padding: 12px;
+      border-radius: 10px;
+      text-align: center;
+      backdrop-filter: blur(10px);
+    }
+    .storage-stat-value {
+      font-size: 1.8em;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    .storage-stat-label {
+      font-size: 0.85em;
+      opacity: 0.9;
+    }
+
     /* ===== Footer ===== */
     footer {
       text-align: center;
@@ -662,9 +715,10 @@
       <div class="login-icon">🎓</div>
       <h1>Welcome Back!</h1>
       <p>Laanqari Aisha High School Portal</p>
-      <p style="font-size: 0.85em; color: #666; margin-top: 10px; padding: 10px; background: #fff3cd; border-radius: 8px;">
-        ⚠️ Note: This demo uses browser storage. Data is saved per device/browser. For cross-device sync, a real database is needed.
-      </p>
+      <div class="info-message" style="margin-top: 15px;">
+        💾 <strong>Persistent Storage Active</strong><br>
+        Your data is automatically saved and will persist across sessions on this device.
+      </div>
     </div>
     
     <div class="user-type-selector">
@@ -871,7 +925,7 @@
       <div class="card">
         <h3>📞 Contact Information</h3>
         <p>Phone: +213-0557522486<br>
-        Email: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7a13141c153a161b1b140b1b0813091912151516541f1e0f541e00">[email&#160;protected]</a></p>
+        Email: info@laanqarischool.edu.dz</p>
       </div>
       <div class="card">
         <h3>📧 Send us a Message</h3>
@@ -898,22 +952,31 @@
     <div id="notificationsPage" class="page">
       <h2>Admin Notifications</h2>
       
-      <div style="display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap;">
-        <button class="clear-all-btn" onclick="clearAllNotifications()">🗑️ Clear All Notifications</button>
-        <button class="clear-all-btn" style="background: #d1ecf1; color: #0c5460;" onclick="exportData()">📥 Export All Data</button>
-        <button class="clear-all-btn" style="background: #d4edda; color: #155724;" onclick="importData()">📤 Import Data</button>
+      <!-- Storage Information -->
+      <div class="storage-info">
+        <h4>💾 Storage Information</h4>
+        <p>All data is persistently stored in your browser's local storage. Data will be maintained across sessions on this device.</p>
+        <div class="storage-stats">
+          <div class="storage-stat">
+            <div class="storage-stat-value" id="totalUsers">0</div>
+            <div class="storage-stat-label">Total Users</div>
+          </div>
+          <div class="storage-stat">
+            <div class="storage-stat-value" id="totalPosts">0</div>
+            <div class="storage-stat-label">Total Posts</div>
+          </div>
+          <div class="storage-stat">
+            <div class="storage-stat-value" id="totalNotifications">0</div>
+            <div class="storage-stat-label">Notifications</div>
+          </div>
+          <div class="storage-stat">
+            <div class="storage-stat-value" id="storageSize">0 KB</div>
+            <div class="storage-stat-label">Storage Used</div>
+          </div>
+        </div>
       </div>
       
-      <div style="background: #e7f3ff; padding: 15px; border-radius: 10px; margin-bottom: 20px; border-left: 4px solid #2196F3;">
-        <h4 style="margin-bottom: 10px; color: #0d47a1;">💡 Cross-Device Data Transfer</h4>
-        <p style="font-size: 0.9em; color: #555; line-height: 1.6;">
-          Since this demo uses browser storage (localStorage), each device has its own separate data. To sync data between devices:
-          <br><br>
-          <strong>1. On Device A:</strong> Click "📥 Export All Data" to download a JSON file<br>
-          <strong>2. On Device B:</strong> Click "📤 Import Data" and select the downloaded file<br>
-          <strong>3.</strong> All posts, comments, notifications, and user data will be transferred!
-        </p>
-      </div>
+      <button class="clear-all-btn" onclick="clearAllNotifications()">🗑️ Clear All Notifications</button>
       
       <div id="notificationsContent"></div>
     </div>
@@ -965,19 +1028,261 @@
 
   <footer>
     <p>&copy; 2026 Laanqari Aisha High School</p>
-    <p>📍 Chlef Taougrit, Algeria | 📞 +213-0557522486 | ✉️ <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c6afa8a0a986aaa7a7a8b7a7b4afb5a5aea9a9aae8a3a2b3e8a2bc">[email&#160;protected]</a></p>
+    <p>📍 Chlef Taougrit, Algeria | 📞 +213-0557522486 | ✉️ info@laanqarischool.edu.dz</p>
   </footer>
 </div>
 
 <!-- ===== JavaScript ===== -->
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-  // ===== Data Storage =====
+<script>
+  // ===== STORAGE MANAGER =====
+  // Centralized storage system for all data persistence
+  const StorageManager = {
+    // Storage keys
+    KEYS: {
+      USERS: 'laanqari_users',
+      POSTS: 'laanqari_posts',
+      NOTIFICATIONS: 'laanqari_notifications',
+      SESSION: 'laanqari_session',
+      INITIALIZED: 'laanqari_initialized'
+    },
+
+    // Initialize storage with default data if first time
+    initialize() {
+      const isInitialized = localStorage.getItem(this.KEYS.INITIALIZED);
+      
+      if (!isInitialized) {
+        // First time setup
+        this.save(this.KEYS.USERS, []);
+        this.save(this.KEYS.POSTS, this.getDefaultPosts());
+        this.save(this.KEYS.NOTIFICATIONS, []);
+        localStorage.setItem(this.KEYS.INITIALIZED, 'true');
+        console.log('✅ Storage initialized with default data');
+      } else {
+        console.log('✅ Storage already initialized');
+      }
+    },
+
+    // Save data to localStorage
+    save(key, data) {
+      try {
+        localStorage.setItem(key, JSON.stringify(data));
+        return true;
+      } catch (error) {
+        console.error('Storage save error:', error);
+        return false;
+      }
+    },
+
+    // Load data from localStorage
+    load(key, defaultValue = null) {
+      try {
+        const data = localStorage.getItem(key);
+        return data ? JSON.parse(data) : defaultValue;
+      } catch (error) {
+        console.error('Storage load error:', error);
+        return defaultValue;
+      }
+    },
+
+    // Remove data from localStorage
+    remove(key) {
+      localStorage.removeItem(key);
+    },
+
+    // Get storage size in KB
+    getStorageSize() {
+      let total = 0;
+      for (let key in localStorage) {
+        if (localStorage.hasOwnProperty(key)) {
+          total += localStorage[key].length + key.length;
+        }
+      }
+      return (total / 1024).toFixed(2);
+    },
+
+    // Clear all app data (except initialization flag)
+    clearAll() {
+      this.remove(this.KEYS.USERS);
+      this.remove(this.KEYS.POSTS);
+      this.remove(this.KEYS.NOTIFICATIONS);
+      this.remove(this.KEYS.SESSION);
+      this.remove(this.KEYS.INITIALIZED);
+      console.log('🗑️ All storage cleared');
+    },
+
+    // Get default posts for initialization
+    getDefaultPosts() {
+      return [
+        {
+          id: Date.now() + 1,
+          category: 'news',
+          title: '🔬 Science Fair 2026',
+          content: 'The annual science fair will take place on March 10. Students from all grades are encouraged to participate and showcase their innovative projects!',
+          tags: ['Upcoming', 'Important'],
+          author: 'Admin',
+          date: new Date('2026-01-25').toISOString(),
+          likes: 15,
+          likedBy: [],
+          comments: []
+        },
+        {
+          id: Date.now() + 2,
+          category: 'news',
+          title: '⚽ Sports Day',
+          content: 'Our school Sports Day is scheduled for April 5. Join us for a day full of fun competitions, team spirit, and athletic excellence!',
+          tags: ['April 2026', 'Sports'],
+          author: 'Teacher',
+          date: new Date('2026-01-28').toISOString(),
+          likes: 23,
+          likedBy: [],
+          comments: []
+        },
+        {
+          id: Date.now() + 3,
+          category: 'students',
+          title: '⭐ Emma Zaki',
+          content: 'Top student in mathematics and computer science projects. Winner of the 2025 Regional Coding Competition.',
+          tags: ['Mathematics', 'Computer Science'],
+          author: 'Admin',
+          date: new Date('2026-01-20').toISOString(),
+          likes: 42,
+          likedBy: [],
+          comments: []
+        },
+        {
+          id: Date.now() + 4,
+          category: 'teachers',
+          title: '👩‍🏫 Mrs. Aisha Laanqari',
+          content: 'Mathematics Teacher with 15 years of experience. Holder of the National Teaching Excellence Award.',
+          tags: ['15 Years Experience', 'Mathematics'],
+          author: 'Admin',
+          date: new Date('2026-01-15').toISOString(),
+          likes: 56,
+          likedBy: [],
+          comments: []
+        }
+      ];
+    }
+  };
+
+  // ===== DATA LAYER =====
+  // Manages all data operations
+  const DataManager = {
+    // Get all users
+    getUsers() {
+      return StorageManager.load(StorageManager.KEYS.USERS, []);
+    },
+
+    // Save users
+    saveUsers(users) {
+      return StorageManager.save(StorageManager.KEYS.USERS, users);
+    },
+
+    // Add new user
+    addUser(user) {
+      const users = this.getUsers();
+      users.push(user);
+      return this.saveUsers(users);
+    },
+
+    // Get all posts
+    getPosts() {
+      return StorageManager.load(StorageManager.KEYS.POSTS, []);
+    },
+
+    // Save posts
+    savePosts(posts) {
+      return StorageManager.save(StorageManager.KEYS.POSTS, posts);
+    },
+
+    // Add new post
+    addPost(post) {
+      const posts = this.getPosts();
+      posts.unshift(post);
+      return this.savePosts(posts);
+    },
+
+    // Update post
+    updatePost(postId, updates) {
+      const posts = this.getPosts();
+      const index = posts.findIndex(p => p.id === postId);
+      if (index !== -1) {
+        posts[index] = { ...posts[index], ...updates };
+        return this.savePosts(posts);
+      }
+      return false;
+    },
+
+    // Delete post
+    deletePost(postId) {
+      const posts = this.getPosts().filter(p => p.id !== postId);
+      return this.savePosts(posts);
+    },
+
+    // Get all notifications
+    getNotifications() {
+      return StorageManager.load(StorageManager.KEYS.NOTIFICATIONS, []);
+    },
+
+    // Save notifications
+    saveNotifications(notifications) {
+      return StorageManager.save(StorageManager.KEYS.NOTIFICATIONS, notifications);
+    },
+
+    // Add notification
+    addNotification(notification) {
+      const notifications = this.getNotifications();
+      notifications.unshift(notification);
+      return this.saveNotifications(notifications);
+    },
+
+    // Clear all notifications
+    clearNotifications() {
+      return this.saveNotifications([]);
+    },
+
+    // Get session
+    getSession() {
+      return StorageManager.load(StorageManager.KEYS.SESSION, null);
+    },
+
+    // Save session
+    saveSession(session) {
+      return StorageManager.save(StorageManager.KEYS.SESSION, session);
+    },
+
+    // Clear session
+    clearSession() {
+      return StorageManager.remove(StorageManager.KEYS.SESSION);
+    },
+
+    // Get storage statistics
+    getStats() {
+      return {
+        users: this.getUsers().length,
+        posts: this.getPosts().length,
+        notifications: this.getNotifications().length,
+        storageSize: StorageManager.getStorageSize()
+      };
+    }
+  };
+
+  // ===== APPLICATION STATE =====
   let currentUser = null;
   let userType = 'student';
   let registerType = 'student';
   let currentPage = 'home';
+  let currentMediaData = null;
+  let currentMediaType = null;
 
-  // ===== Authentication Functions (Need to be global for onclick handlers) =====
+  // Default valid credentials
+  const validCredentials = {
+    student: { username: 'student', password: 'student123' },
+    teacher: { username: 'teacher', password: 'teacher123' },
+    admin: { username: 'admin', password: 'admin123' }
+  };
+
+  // ===== AUTHENTICATION FUNCTIONS =====
   function selectUserType(type) {
     userType = type;
     document.querySelectorAll('#loginPage .user-type-btn').forEach(btn => {
@@ -1024,570 +1329,6 @@
     alert('Please contact the school administrator at admin@laanqarischool.edu.dz to reset your password.');
   }
 
-  // ===== Navigation and Modal Functions (Global for onclick) =====
-  function navigateTo(page) {
-    currentPage = page;
-    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
-    
-    document.getElementById(page + 'Page').classList.add('active');
-    event.target.classList.add('active');
-    
-    renderPage(page);
-  }
-
-  function toggleComments(postId) {
-    const commentsSection = document.getElementById(`comments-${postId}`);
-    commentsSection.classList.toggle('active');
-  }
-
-  function showAddContentModal() {
-    document.getElementById('addContentModal').style.display = 'block';
-  }
-
-  function closeAddContentModal() {
-    document.getElementById('addContentModal').style.display = 'none';
-    document.getElementById('addContentForm').reset();
-    removeMedia();
-  }
-
-  function previewMedia(event) {
-    const file = event.target.files[0];
-    if (!file) return;
-
-    const reader = new FileReader();
-    
-    reader.onload = function(e) {
-      currentMediaData = e.target.result;
-      currentMediaType = file.type;
-      
-      const preview = document.getElementById('mediaPreview');
-      const imagePreview = document.getElementById('imagePreview');
-      const videoPreview = document.getElementById('videoPreview');
-      
-      preview.style.display = 'block';
-      
-      if (file.type.startsWith('image/')) {
-        imagePreview.src = e.target.result;
-        imagePreview.style.display = 'block';
-        videoPreview.style.display = 'none';
-      } else if (file.type.startsWith('video/')) {
-        videoPreview.src = e.target.result;
-        videoPreview.style.display = 'block';
-        imagePreview.style.display = 'none';
-      }
-    };
-    
-    reader.readAsDataURL(file);
-  }
-
-  function removeMedia() {
-    currentMediaData = null;
-    currentMediaType = null;
-    document.getElementById('postMedia').value = '';
-    document.getElementById('mediaPreview').style.display = 'none';
-    document.getElementById('imagePreview').src = '';
-    document.getElementById('videoPreview').src = '';
-  }
-
-  function handleContactSubmit(event) {
-    event.preventDefault();
-    const name = document.getElementById('contactName').value;
-    const email = document.getElementById('contactEmail').value;
-    const message = document.getElementById('contactMessage').value;
-    
-    // Send notification to admin
-    addNotification(
-      'New Message',
-      `Contact form message from ${name} (${email}): "${message.substring(0, 50)}${message.length > 50 ? '...' : ''}"`,
-      { name: name, email: email, message: message }
-    );
-    
-    const msg = document.getElementById('contactFormMessage');
-    msg.textContent = '✅ Message sent successfully! We will get back to you soon.';
-    msg.style.display = 'block';
-    event.target.reset();
-    setTimeout(() => {
-      msg.style.display = 'none';
-    }, 5000);
-  }
-
-  function markNotificationAsRead(notificationId) {
-    const notification = notifications.find(n => n.id === notificationId);
-    if (notification) {
-      notification.read = true;
-      saveAllData();
-      updateNotificationBadge();
-      renderNotifications();
-    }
-  }
-
-  function clearAllNotifications() {
-    if (confirm('Are you sure you want to clear all notifications?')) {
-      notifications = [];
-      saveAllData();
-      updateNotificationBadge();
-      renderNotifications();
-    }
-  }
-
-  // ===== Data Export/Import for Cross-Device Sync =====
-  function exportData() {
-    // Gather all data
-    const allData = {
-      registeredUsers: registeredUsers,
-      posts: posts,
-      notifications: notifications,
-      exportDate: new Date().toISOString(),
-      exportedBy: currentUser ? currentUser.fullName : 'Unknown'
-    };
-
-    // Convert to JSON
-    const dataStr = JSON.stringify(allData, null, 2);
-    const dataBlob = new Blob([dataStr], { type: 'application/json' });
-
-    // Create download link
-    const url = URL.createObjectURL(dataBlob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = `laanqari-school-data-${new Date().toISOString().split('T')[0]}.json`;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    URL.revokeObjectURL(url);
-
-    alert('✅ Data exported successfully! You can now import this file on another device.');
-  }
-
-  function importData() {
-    // Create file input
-    const input = document.createElement('input');
-    input.type = 'file';
-    input.accept = 'application/json';
-    
-    input.onchange = function(e) {
-      const file = e.target.files[0];
-      if (!file) return;
-
-      const reader = new FileReader();
-      reader.onload = function(event) {
-        try {
-          const importedData = JSON.parse(event.target.result);
-          
-          // Validate data structure
-          if (!importedData.registeredUsers || !importedData.posts || !importedData.notifications) {
-            alert('❌ Invalid data file! Please select a valid export file.');
-            return;
-          }
-
-          // Confirm before overwriting
-          const confirmMsg = `⚠️ This will replace all current data with imported data.\n\n` +
-                           `Imported data from: ${importedData.exportedBy}\n` +
-                           `Export date: ${new Date(importedData.exportDate).toLocaleString()}\n\n` +
-                           `Current data:\n` +
-                           `- ${registeredUsers.length} users\n` +
-                           `- ${posts.length} posts\n` +
-                           `- ${notifications.length} notifications\n\n` +
-                           `Imported data:\n` +
-                           `- ${importedData.registeredUsers.length} users\n` +
-                           `- ${importedData.posts.length} posts\n` +
-                           `- ${importedData.notifications.length} notifications\n\n` +
-                           `Continue?`;
-
-          if (confirm(confirmMsg)) {
-            // Import data
-            registeredUsers = importedData.registeredUsers;
-            posts = importedData.posts;
-            notifications = importedData.notifications;
-
-            // Save to localStorage
-            saveAllData();
-
-            // Refresh UI
-            updateNotificationBadge();
-            renderPage(currentPage);
-
-            alert('✅ Data imported successfully! The page will refresh to show updated content.');
-            location.reload();
-          }
-        } catch (error) {
-          alert('❌ Error reading file: ' + error.message);
-        }
-      };
-      
-      reader.readAsText(file);
-    };
-
-    input.click();
-  }
-
-  function toggleLike(postId) {
-    if (!currentUser) return;
-    
-    // Reload latest data from localStorage
-    loadStoredData();
-    
-    const post = posts.find(p => p.id === postId);
-    if (!post) return;
-    
-    if (!post.likedBy) post.likedBy = [];
-    if (!post.likes) post.likes = 0;
-    
-    const index = post.likedBy.indexOf(currentUser.username);
-    if (index > -1) {
-      post.likedBy.splice(index, 1);
-      post.likes--;
-    } else {
-      post.likedBy.push(currentUser.username);
-      post.likes++;
-    }
-    
-    saveAllData();
-    renderPage(currentPage);
-  }
-
-  function addComment(postId) {
-    if (!currentUser) return;
-    
-    const input = document.getElementById(`comment-input-${postId}`);
-    const text = input.value.trim();
-    
-    if (!text) return;
-    
-    // Reload latest data from localStorage
-    loadStoredData();
-    
-    const post = posts.find(p => p.id === postId);
-    if (!post) return;
-    
-    // Ensure comments array exists
-    if (!post.comments) {
-      post.comments = [];
-    }
-    
-    const newComment = {
-      author: currentUser.fullName,
-      text: text,
-      date: new Date().toISOString()
-    };
-    
-    post.comments.push(newComment);
-    
-    // Send notification to admin
-    addNotification(
-      'New Comment',
-      `${currentUser.fullName} commented on "${post.title}": "${text.substring(0, 50)}${text.length > 50 ? '...' : ''}"`,
-      { postId: postId, postTitle: post.title, commentText: text }
-    );
-    
-    // Save immediately
-    saveAllData();
-    
-    // Clear input
-    input.value = '';
-    
-    // Re-render the current page to show the new comment
-    renderPage(currentPage);
-  }
-
-  function deletePost(postId) {
-    if (!confirm('Are you sure you want to delete this post?')) return;
-    
-    const post = posts.find(p => p.id === postId);
-    const postTitle = post ? post.title : 'Unknown Post';
-    
-    posts = posts.filter(p => p.id !== postId);
-    
-    // Send notification to admin
-    addNotification(
-      'Post Deleted',
-      `${currentUser.fullName} deleted post: "${postTitle}"`,
-      { postId: postId, postTitle: postTitle }
-    );
-    
-    saveAllData();
-    renderPage(currentPage);
-  }
-
-  function handleAddContent(event) {
-    event.preventDefault();
-    
-    if (!currentUser || (currentUser.type !== 'teacher' && currentUser.type !== 'admin')) {
-      alert('Only teachers and admins can post content!');
-      return;
-    }
-    
-    const category = document.getElementById('postCategory').value;
-    const title = document.getElementById('postTitle').value;
-    const content = document.getElementById('postContent').value;
-    const tags = document.getElementById('postTags').value.split(',').map(t => t.trim()).filter(t => t);
-    
-    const newPost = {
-      id: Date.now(),
-      category: category,
-      title: title,
-      content: content,
-      tags: tags,
-      author: currentUser.fullName,
-      date: new Date().toISOString(),
-      likes: 0,
-      likedBy: [],
-      comments: [],
-      mediaData: currentMediaData,
-      mediaType: currentMediaType
-    };
-    
-    posts.unshift(newPost);
-    
-    // Send notification to admin
-    addNotification(
-      'New Post',
-      `${currentUser.fullName} created a new post in ${category}: "${title}"`,
-      { postId: newPost.id, category: category, title: title }
-    );
-    
-    saveAllData();
-    
-    closeAddContentModal();
-    
-    // Navigate to the category page
-    if (category === 'news') navigateTo('news');
-    else if (category === 'students') navigateTo('students');
-    else if (category === 'teachers') navigateTo('teachers');
-  }
-
-  function logout() {
-    if (confirm('Are you sure you want to logout?')) {
-      // Clear notification refresh interval
-      if (window.notificationInterval) {
-        clearInterval(window.notificationInterval);
-      }
-      
-      currentUser = null;
-      clearSession();
-      document.getElementById('mainWebsite').style.display = 'none';
-      document.getElementById('loginPage').style.display = 'flex';
-      document.getElementById('loginForm').reset();
-      document.getElementById('addContentBtn').style.display = 'none';
-      document.getElementById('notificationsTab').style.display = 'none';
-    }
-  }
-
-  // Load data from localStorage with persistent storage
-  function loadStoredData() {
-    registeredUsers = JSON.parse(localStorage.getItem('registeredUsers')) || [];
-    posts = JSON.parse(localStorage.getItem('schoolPosts')) || [];
-    notifications = JSON.parse(localStorage.getItem('adminNotifications')) || [];
-    
-    // Only set default posts if there are no posts at all
-    if (posts.length === 0) {
-      posts = getDefaultPosts();
-      localStorage.setItem('schoolPosts', JSON.stringify(posts));
-    }
-  }
-
-  let registeredUsers = [];
-  let posts = [];
-  let notifications = [];
-
-  // Check if user is already logged in
-  function checkSession() {
-    const savedSession = localStorage.getItem('currentSession');
-    if (savedSession) {
-      currentUser = JSON.parse(savedSession);
-      // Reload data when logging back in
-      loadStoredData();
-      showMainWebsite();
-    }
-  }
-
-  // Save session
-  function saveSession() {
-    localStorage.setItem('currentSession', JSON.stringify(currentUser));
-  }
-
-  // Clear session
-  function clearSession() {
-    localStorage.removeItem('currentSession');
-  }
-
-  // Save all data to localStorage
-  function saveAllData() {
-    localStorage.setItem('schoolPosts', JSON.stringify(posts));
-    localStorage.setItem('adminNotifications', JSON.stringify(notifications));
-    localStorage.setItem('registeredUsers', JSON.stringify(registeredUsers));
-  }
-
-  // Initialize on page load
-  window.addEventListener('DOMContentLoaded', function() {
-    loadStoredData();
-    checkSession();
-  });
-
-  function getDefaultPosts() {
-    return [
-      {
-        id: 1,
-        category: 'news',
-        title: '🔬 Science Fair 2026',
-        content: 'The annual science fair will take place on March 10. Students from all grades are encouraged to participate and showcase their innovative projects!',
-        tags: ['Upcoming', 'Important'],
-        author: 'Admin',
-        date: new Date('2026-01-25').toISOString(),
-        likes: 15,
-        likedBy: [],
-        comments: []
-      },
-      {
-        id: 2,
-        category: 'news',
-        title: '⚽ Sports Day',
-        content: 'Our school Sports Day is scheduled for April 5. Join us for a day full of fun competitions, team spirit, and athletic excellence!',
-        tags: ['April 2026', 'Sports'],
-        author: 'Teacher',
-        date: new Date('2026-01-28').toISOString(),
-        likes: 23,
-        likedBy: [],
-        comments: []
-      },
-      {
-        id: 3,
-        category: 'students',
-        title: '⭐ Emma Zaki',
-        content: 'Top student in mathematics and computer science projects. Winner of the 2025 Regional Coding Competition.',
-        tags: ['Mathematics', 'Computer Science'],
-        author: 'Admin',
-        date: new Date('2026-01-20').toISOString(),
-        likes: 42,
-        likedBy: [],
-        comments: []
-      },
-      {
-        id: 4,
-        category: 'teachers',
-        title: '👩‍🏫 Mrs. Aisha Laanqari',
-        content: 'Mathematics Teacher with 15 years of experience. Holder of the National Teaching Excellence Award.',
-        tags: ['15 Years Experience', 'Mathematics'],
-        author: 'Admin',
-        date: new Date('2026-01-15').toISOString(),
-        likes: 56,
-        likedBy: [],
-        comments: []
-      }
-    ];
-  }
-
-  const validCredentials = {
-    student: { username: 'student', password: 'student123' },
-    teacher: { username: 'teacher', password: 'teacher123' },
-    admin: { username: 'admin', password: 'admin123' }
-  };
-
-  // ===== Notification System =====
-  function addNotification(type, message, relatedData = {}) {
-    const notification = {
-      id: Date.now(),
-      type: type,
-      message: message,
-      timestamp: new Date().toISOString(),
-      read: false,
-      relatedData: relatedData
-    };
-    
-    notifications.unshift(notification);
-    saveAllData();
-    updateNotificationBadge();
-  }
-
-  function updateNotificationBadge() {
-    if (currentUser && currentUser.type === 'admin') {
-      // Reload notifications from localStorage to get the latest count
-      const storedNotifications = localStorage.getItem('adminNotifications');
-      notifications = storedNotifications ? JSON.parse(storedNotifications) : [];
-      
-      const unreadCount = notifications.filter(n => !n.read).length;
-      const badge = document.getElementById('notificationCount');
-      
-      if (badge) {
-        if (unreadCount > 0) {
-          badge.textContent = unreadCount;
-          badge.style.display = 'flex';
-        } else {
-          badge.style.display = 'none';
-        }
-      }
-    }
-  }
-
-  function markNotificationAsRead(notificationId) {
-    const notification = notifications.find(n => n.id === notificationId);
-    if (notification) {
-      notification.read = true;
-      saveAllData();
-      updateNotificationBadge();
-      renderNotifications();
-    }
-  }
-
-  function clearAllNotifications() {
-    if (confirm('Are you sure you want to clear all notifications?')) {
-      notifications = [];
-      saveAllData();
-      updateNotificationBadge();
-      renderNotifications();
-    }
-  }
-
-  function renderNotifications() {
-    // Reload notifications from localStorage to get the latest data
-    const storedNotifications = localStorage.getItem('adminNotifications');
-    notifications = storedNotifications ? JSON.parse(storedNotifications) : [];
-    
-    const container = document.getElementById('notificationsContent');
-    
-    if (notifications.length === 0) {
-      container.innerHTML = '<div class="card"><p>No notifications yet.</p></div>';
-      return;
-    }
-
-    container.innerHTML = notifications.map(notif => `
-      <div class="notification-item ${notif.read ? '' : 'unread'}">
-        <div class="notification-header">
-          <span class="notification-type">${getNotificationIcon(notif.type)} ${notif.type}</span>
-          <span class="notification-time">${formatTimeAgo(notif.timestamp)}</span>
-        </div>
-        <div class="notification-message">${notif.message}</div>
-        ${!notif.read ? `<button class="mark-read-btn" onclick="markNotificationAsRead(${notif.id})">✓ Mark as Read</button>` : ''}
-      </div>
-    `).join('');
-    
-    // Update the badge after rendering
-    updateNotificationBadge();
-  }
-
-  function getNotificationIcon(type) {
-    const icons = {
-      'New Login': '🔓',
-      'New Registration': '👤',
-      'New Post': '📝',
-      'New Comment': '💬',
-      'Post Deleted': '🗑️'
-    };
-    return icons[type] || '📌';
-  }
-
-  function formatTimeAgo(timestamp) {
-    const now = new Date();
-    const time = new Date(timestamp);
-    const diff = Math.floor((now - time) / 1000); // in seconds
-
-    if (diff < 60) return 'Just now';
-    if (diff < 3600) return `${Math.floor(diff / 60)} minutes ago`;
-    if (diff < 86400) return `${Math.floor(diff / 3600)} hours ago`;
-    if (diff < 604800) return `${Math.floor(diff / 86400)} days ago`;
-    return time.toLocaleDateString();
-  }
-
   function handleRegister(event) {
     event.preventDefault();
     
@@ -1617,7 +1358,9 @@
       return;
     }
 
-    const existingUser = registeredUsers.find(u => u.username === username);
+    const users = DataManager.getUsers();
+    const existingUser = users.find(u => u.username === username);
+    
     if (existingUser || username === 'student' || username === 'teacher' || username === 'admin') {
       errorMsg.textContent = '❌ Username already exists! Please choose another one.';
       errorMsg.style.display = 'block';
@@ -1640,8 +1383,7 @@
       createdAt: new Date().toISOString()
     };
 
-    registeredUsers.push(newUser);
-    saveAllData();
+    DataManager.addUser(newUser);
 
     // Send notification to admin
     addNotification(
@@ -1672,6 +1414,7 @@
     errorMsg.style.display = 'none';
     successMsg.style.display = 'none';
 
+    // Check default credentials
     const credentials = validCredentials[userType];
     
     if (username === credentials.username && password === credentials.password) {
@@ -1682,7 +1425,6 @@
         fullName: userType.charAt(0).toUpperCase() + userType.slice(1) + ' User'
       };
       
-      // Send login notification to admin
       addNotification(
         'New Login',
         `${currentUser.fullName} (${userType}) logged in`,
@@ -1692,7 +1434,7 @@
       successMsg.textContent = `✅ Welcome ${currentUser.displayName}! Redirecting...`;
       successMsg.style.display = 'block';
       
-      saveSession();
+      DataManager.saveSession(currentUser);
       
       setTimeout(() => {
         showMainWebsite();
@@ -1700,7 +1442,9 @@
       return;
     }
 
-    const registeredUser = registeredUsers.find(u => 
+    // Check registered users
+    const users = DataManager.getUsers();
+    const registeredUser = users.find(u => 
       u.username === username && u.password === password && u.type === userType
     );
 
@@ -1713,7 +1457,6 @@
         email: registeredUser.email
       };
       
-      // Send login notification to admin
       addNotification(
         'New Login',
         `${registeredUser.fullName} (${registeredUser.type}) logged in`,
@@ -1723,7 +1466,7 @@
       successMsg.textContent = `✅ Welcome back ${registeredUser.fullName}! Redirecting...`;
       successMsg.style.display = 'block';
       
-      saveSession();
+      DataManager.saveSession(currentUser);
       
       setTimeout(() => {
         showMainWebsite();
@@ -1731,6 +1474,23 @@
     } else {
       errorMsg.textContent = '❌ Invalid username or password. Please try again.';
       errorMsg.style.display = 'block';
+    }
+  }
+
+  function logout() {
+    if (confirm('Are you sure you want to logout?')) {
+      if (window.notificationInterval) {
+        clearInterval(window.notificationInterval);
+      }
+      
+      currentUser = null;
+      DataManager.clearSession();
+      
+      document.getElementById('mainWebsite').style.display = 'none';
+      document.getElementById('loginPage').style.display = 'flex';
+      document.getElementById('loginForm').reset();
+      document.getElementById('addContentBtn').style.display = 'none';
+      document.getElementById('notificationsTab').style.display = 'none';
     }
   }
 
@@ -1754,13 +1514,12 @@
       document.getElementById('notificationsTab').style.display = 'inline-block';
       updateNotificationBadge();
       
-      // Auto-refresh notifications every 3 seconds for admin
+      // Auto-refresh notifications every 3 seconds
       if (window.notificationInterval) {
         clearInterval(window.notificationInterval);
       }
       window.notificationInterval = setInterval(() => {
         updateNotificationBadge();
-        // If currently viewing notifications page, refresh it
         if (currentPage === 'notifications') {
           renderNotifications();
         }
@@ -1770,7 +1529,124 @@
     renderPage(currentPage);
   }
 
-  // ===== Page Rendering =====
+  // ===== NOTIFICATION FUNCTIONS =====
+  function addNotification(type, message, relatedData = {}) {
+    const notification = {
+      id: Date.now(),
+      type: type,
+      message: message,
+      timestamp: new Date().toISOString(),
+      read: false,
+      relatedData: relatedData
+    };
+    
+    DataManager.addNotification(notification);
+    updateNotificationBadge();
+  }
+
+  function updateNotificationBadge() {
+    if (currentUser && currentUser.type === 'admin') {
+      const notifications = DataManager.getNotifications();
+      const unreadCount = notifications.filter(n => !n.read).length;
+      const badge = document.getElementById('notificationCount');
+      
+      if (badge) {
+        if (unreadCount > 0) {
+          badge.textContent = unreadCount;
+          badge.style.display = 'flex';
+        } else {
+          badge.style.display = 'none';
+        }
+      }
+    }
+  }
+
+  function markNotificationAsRead(notificationId) {
+    const notifications = DataManager.getNotifications();
+    const notification = notifications.find(n => n.id === notificationId);
+    
+    if (notification) {
+      notification.read = true;
+      DataManager.saveNotifications(notifications);
+      updateNotificationBadge();
+      renderNotifications();
+    }
+  }
+
+  function clearAllNotifications() {
+    if (confirm('Are you sure you want to clear all notifications?')) {
+      DataManager.clearNotifications();
+      updateNotificationBadge();
+      renderNotifications();
+    }
+  }
+
+  function renderNotifications() {
+    const notifications = DataManager.getNotifications();
+    const container = document.getElementById('notificationsContent');
+    
+    // Update storage stats
+    const stats = DataManager.getStats();
+    document.getElementById('totalUsers').textContent = stats.users;
+    document.getElementById('totalPosts').textContent = stats.posts;
+    document.getElementById('totalNotifications').textContent = stats.notifications;
+    document.getElementById('storageSize').textContent = stats.storageSize + ' KB';
+    
+    if (notifications.length === 0) {
+      container.innerHTML = '<div class="card"><p>No notifications yet.</p></div>';
+      return;
+    }
+
+    container.innerHTML = notifications.map(notif => `
+      <div class="notification-item ${notif.read ? '' : 'unread'}">
+        <div class="notification-header">
+          <span class="notification-type">${getNotificationIcon(notif.type)} ${notif.type}</span>
+          <span class="notification-time">${formatTimeAgo(notif.timestamp)}</span>
+        </div>
+        <div class="notification-message">${notif.message}</div>
+        ${!notif.read ? `<button class="mark-read-btn" onclick="markNotificationAsRead(${notif.id})">✓ Mark as Read</button>` : ''}
+      </div>
+    `).join('');
+    
+    updateNotificationBadge();
+  }
+
+  function getNotificationIcon(type) {
+    const icons = {
+      'New Login': '🔓',
+      'New Registration': '👤',
+      'New Post': '📝',
+      'New Comment': '💬',
+      'New Message': '✉️',
+      'Post Deleted': '🗑️'
+    };
+    return icons[type] || '📌';
+  }
+
+  function formatTimeAgo(timestamp) {
+    const now = new Date();
+    const time = new Date(timestamp);
+    const diff = Math.floor((now - time) / 1000);
+
+    if (diff < 60) return 'Just now';
+    if (diff < 3600) return `${Math.floor(diff / 60)} minutes ago`;
+    if (diff < 86400) return `${Math.floor(diff / 3600)} hours ago`;
+    if (diff < 604800) return `${Math.floor(diff / 86400)} days ago`;
+    return time.toLocaleDateString();
+  }
+
+  // ===== NAVIGATION FUNCTIONS =====
+  function navigateTo(page) {
+    currentPage = page;
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+    
+    document.getElementById(page + 'Page').classList.add('active');
+    event.target.classList.add('active');
+    
+    renderPage(page);
+  }
+
   function renderPage(page) {
     if (page === 'news') {
       renderPosts('news', 'newsContent');
@@ -1783,12 +1659,12 @@
     }
   }
 
+  // ===== POST FUNCTIONS =====
   function renderPosts(category, containerId) {
-    // Reload posts from localStorage to ensure we have the latest data including comments
-    loadStoredData();
-    
+    const posts = DataManager.getPosts();
     const container = document.getElementById(containerId);
-    const categoryPosts = posts.filter(p => p.category === category).sort((a, b) => new Date(b.date) - new Date(a.date));
+    const categoryPosts = posts.filter(p => p.category === category)
+                               .sort((a, b) => new Date(b.date) - new Date(a.date));
     
     if (categoryPosts.length === 0) {
       container.innerHTML = '<div class="card"><p>No posts yet. Teachers and admins can add content!</p></div>';
@@ -1840,18 +1716,187 @@
     }).join('');
   }
 
-  // ===== Media Handling =====
-  let currentMediaData = null;
-  let currentMediaType = null;
+  function toggleLike(postId) {
+    if (!currentUser) return;
+    
+    const posts = DataManager.getPosts();
+    const post = posts.find(p => p.id === postId);
+    if (!post) return;
+    
+    if (!post.likedBy) post.likedBy = [];
+    if (!post.likes) post.likes = 0;
+    
+    const index = post.likedBy.indexOf(currentUser.username);
+    if (index > -1) {
+      post.likedBy.splice(index, 1);
+      post.likes--;
+    } else {
+      post.likedBy.push(currentUser.username);
+      post.likes++;
+    }
+    
+    DataManager.savePosts(posts);
+    renderPage(currentPage);
+  }
 
-  // ===== Contact Form =====
+  function toggleComments(postId) {
+    const commentsSection = document.getElementById(`comments-${postId}`);
+    commentsSection.classList.toggle('active');
+  }
+
+  function addComment(postId) {
+    if (!currentUser) return;
+    
+    const input = document.getElementById(`comment-input-${postId}`);
+    const text = input.value.trim();
+    
+    if (!text) return;
+    
+    const posts = DataManager.getPosts();
+    const post = posts.find(p => p.id === postId);
+    if (!post) return;
+    
+    if (!post.comments) post.comments = [];
+    
+    const newComment = {
+      author: currentUser.fullName,
+      text: text,
+      date: new Date().toISOString()
+    };
+    
+    post.comments.push(newComment);
+    
+    addNotification(
+      'New Comment',
+      `${currentUser.fullName} commented on "${post.title}": "${text.substring(0, 50)}${text.length > 50 ? '...' : ''}"`,
+      { postId: postId, postTitle: post.title, commentText: text }
+    );
+    
+    DataManager.savePosts(posts);
+    input.value = '';
+    renderPage(currentPage);
+  }
+
+  function deletePost(postId) {
+    if (!confirm('Are you sure you want to delete this post?')) return;
+    
+    const posts = DataManager.getPosts();
+    const post = posts.find(p => p.id === postId);
+    const postTitle = post ? post.title : 'Unknown Post';
+    
+    DataManager.deletePost(postId);
+    
+    addNotification(
+      'Post Deleted',
+      `${currentUser.fullName} deleted post: "${postTitle}"`,
+      { postId: postId, postTitle: postTitle }
+    );
+    
+    renderPage(currentPage);
+  }
+
+  // ===== MODAL FUNCTIONS =====
+  function showAddContentModal() {
+    document.getElementById('addContentModal').style.display = 'block';
+  }
+
+  function closeAddContentModal() {
+    document.getElementById('addContentModal').style.display = 'none';
+    document.getElementById('addContentForm').reset();
+    removeMedia();
+  }
+
+  function previewMedia(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    
+    reader.onload = function(e) {
+      currentMediaData = e.target.result;
+      currentMediaType = file.type;
+      
+      const preview = document.getElementById('mediaPreview');
+      const imagePreview = document.getElementById('imagePreview');
+      const videoPreview = document.getElementById('videoPreview');
+      
+      preview.style.display = 'block';
+      
+      if (file.type.startsWith('image/')) {
+        imagePreview.src = e.target.result;
+        imagePreview.style.display = 'block';
+        videoPreview.style.display = 'none';
+      } else if (file.type.startsWith('video/')) {
+        videoPreview.src = e.target.result;
+        videoPreview.style.display = 'block';
+        imagePreview.style.display = 'none';
+      }
+    };
+    
+    reader.readAsDataURL(file);
+  }
+
+  function removeMedia() {
+    currentMediaData = null;
+    currentMediaType = null;
+    document.getElementById('postMedia').value = '';
+    document.getElementById('mediaPreview').style.display = 'none';
+    document.getElementById('imagePreview').src = '';
+    document.getElementById('videoPreview').src = '';
+  }
+
+  function handleAddContent(event) {
+    event.preventDefault();
+    
+    if (!currentUser || (currentUser.type !== 'teacher' && currentUser.type !== 'admin')) {
+      alert('Only teachers and admins can post content!');
+      return;
+    }
+    
+    const category = document.getElementById('postCategory').value;
+    const title = document.getElementById('postTitle').value;
+    const content = document.getElementById('postContent').value;
+    const tags = document.getElementById('postTags').value.split(',').map(t => t.trim()).filter(t => t);
+    
+    const newPost = {
+      id: Date.now(),
+      category: category,
+      title: title,
+      content: content,
+      tags: tags,
+      author: currentUser.fullName,
+      date: new Date().toISOString(),
+      likes: 0,
+      likedBy: [],
+      comments: [],
+      mediaData: currentMediaData,
+      mediaType: currentMediaType
+    };
+    
+    DataManager.addPost(newPost);
+    
+    addNotification(
+      'New Post',
+      `${currentUser.fullName} created a new post in ${category}: "${title}"`,
+      { postId: newPost.id, category: category, title: title }
+    );
+    
+    closeAddContentModal();
+    
+    // Navigate to the category page
+    if (category === 'news') navigateTo('news');
+    else if (category === 'students') navigateTo('students');
+    else if (category === 'teachers') navigateTo('teachers');
+  }
+
+  // ===== CONTACT FORM =====
   function handleContactSubmit(event) {
     event.preventDefault();
+    
     const name = document.getElementById('contactName').value;
     const email = document.getElementById('contactEmail').value;
     const message = document.getElementById('contactMessage').value;
     
-    // Send notification to admin
     addNotification(
       'New Message',
       `Contact form message from ${name} (${email}): "${message.substring(0, 50)}${message.length > 50 ? '...' : ''}"`,
@@ -1862,12 +1907,26 @@
     msg.textContent = '✅ Message sent successfully! We will get back to you soon.';
     msg.style.display = 'block';
     event.target.reset();
+    
     setTimeout(() => {
       msg.style.display = 'none';
     }, 5000);
   }
 
-  // ===== Close modal when clicking outside =====
+  // ===== INITIALIZATION =====
+  window.addEventListener('DOMContentLoaded', function() {
+    // Initialize storage
+    StorageManager.initialize();
+    
+    // Check for existing session
+    const savedSession = DataManager.getSession();
+    if (savedSession) {
+      currentUser = savedSession;
+      showMainWebsite();
+    }
+  });
+
+  // Close modal when clicking outside
   window.onclick = function(event) {
     const modal = document.getElementById('addContentModal');
     if (event.target == modal) {
