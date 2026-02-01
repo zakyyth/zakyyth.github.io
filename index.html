@@ -597,11 +597,6 @@
     </form>
 
     <div class="login-footer">
-      <p>Demo Credentials:</p>
-      <p><strong>Student:</strong> student / student123</p>
-      <p><strong>Teacher:</strong> teacher / teacher123</p>
-      <p><strong>Admin:</strong> admin / admin123</p>
-      <br>
       <p><a href="#" onclick="showForgotPassword()">Forgot Password?</a> | 
          <a href="#" onclick="showRegisterPage()">Create Account</a></p>
     </div>
@@ -763,11 +758,11 @@
       <div class="card">
         <h3>📍 School Address</h3>
         <p>Laanqari Aisha High School<br>
-        Ouargla, Algeria</p>
+        Chlef Taougrit, Algeria</p>
       </div>
       <div class="card">
         <h3>📞 Contact Information</h3>
-        <p>Phone: +213-XX-XXX-XXX<br>
+        <p>Phone: +213-0557522486<br>
         Email: info@laanqarischool.edu.dz</p>
       </div>
       <div class="card">
@@ -853,6 +848,30 @@
   // Load data from localStorage
   let registeredUsers = JSON.parse(localStorage.getItem('registeredUsers')) || [];
   let posts = JSON.parse(localStorage.getItem('schoolPosts')) || getDefaultPosts();
+
+  // Check if user is already logged in
+  function checkSession() {
+    const savedSession = localStorage.getItem('currentSession');
+    if (savedSession) {
+      currentUser = JSON.parse(savedSession);
+      showMainWebsite();
+    }
+  }
+
+  // Save session
+  function saveSession() {
+    localStorage.setItem('currentSession', JSON.stringify(currentUser));
+  }
+
+  // Clear session
+  function clearSession() {
+    localStorage.removeItem('currentSession');
+  }
+
+  // Initialize on page load
+  window.addEventListener('DOMContentLoaded', function() {
+    checkSession();
+  });
 
   function getDefaultPosts() {
     return [
@@ -1042,6 +1061,8 @@
       successMsg.textContent = `✅ Welcome ${currentUser.displayName}! Redirecting...`;
       successMsg.style.display = 'block';
       
+      saveSession(); // Save session
+      
       setTimeout(() => {
         showMainWebsite();
       }, 1500);
@@ -1063,6 +1084,8 @@
       
       successMsg.textContent = `✅ Welcome back ${registeredUser.fullName}! Redirecting...`;
       successMsg.style.display = 'block';
+      
+      saveSession(); // Save session
       
       setTimeout(() => {
         showMainWebsite();
@@ -1094,6 +1117,7 @@
   function logout() {
     if (confirm('Are you sure you want to logout?')) {
       currentUser = null;
+      clearSession(); // Clear saved session
       document.getElementById('mainWebsite').style.display = 'none';
       document.getElementById('loginPage').style.display = 'flex';
       document.getElementById('loginForm').reset();
