@@ -958,15 +958,32 @@
   let currentPage = 'home';
 
   // Load data from localStorage with persistent storage
-  let registeredUsers = JSON.parse(localStorage.getItem('registeredUsers')) || [];
-  let posts = JSON.parse(localStorage.getItem('schoolPosts')) || getDefaultPosts();
-  let notifications = JSON.parse(localStorage.getItem('adminNotifications')) || [];
+  function loadStoredData() {
+    registeredUsers = JSON.parse(localStorage.getItem('registeredUsers')) || [];
+    posts = JSON.parse(localStorage.getItem('schoolPosts')) || [];
+    notifications = JSON.parse(localStorage.getItem('adminNotifications')) || [];
+    
+    // Only set default posts if there are no posts at all
+    if (posts.length === 0) {
+      posts = getDefaultPosts();
+      localStorage.setItem('schoolPosts', JSON.stringify(posts));
+    }
+  }
+
+  let registeredUsers = [];
+  let posts = [];
+  let notifications = [];
+  
+  // Load data immediately
+  loadStoredData();
 
   // Check if user is already logged in
   function checkSession() {
     const savedSession = localStorage.getItem('currentSession');
     if (savedSession) {
       currentUser = JSON.parse(savedSession);
+      // Reload data when logging back in
+      loadStoredData();
       showMainWebsite();
     }
   }
@@ -1071,16 +1088,19 @@
   function updateNotificationBadge() {
     if (currentUser && currentUser.type === 'admin') {
       // Reload notifications from localStorage to get the latest count
-      notifications = JSON.parse(localStorage.getItem('adminNotifications')) || [];
+      const storedNotifications = localStorage.getItem('adminNotifications');
+      notifications = storedNotifications ? JSON.parse(storedNotifications) : [];
       
       const unreadCount = notifications.filter(n => !n.read).length;
       const badge = document.getElementById('notificationCount');
       
-      if (unreadCount > 0) {
-        badge.textContent = unreadCount;
-        badge.style.display = 'flex';
-      } else {
-        badge.style.display = 'none';
+      if (badge) {
+        if (unreadCount > 0) {
+          badge.textContent = unreadCount;
+          badge.style.display = 'flex';
+        } else {
+          badge.style.display = 'none';
+        }
       }
     }
   }
@@ -1106,7 +1126,8 @@
 
   function renderNotifications() {
     // Reload notifications from localStorage to get the latest data
-    notifications = JSON.parse(localStorage.getItem('adminNotifications')) || [];
+    const storedNotifications = localStorage.getItem('adminNotifications');
+    notifications = storedNotifications ? JSON.parse(storedNotifications) : [];
     
     const container = document.getElementById('notificationsContent');
     
@@ -1424,6 +1445,9 @@
   }
 
   function renderPosts(category, containerId) {
+    // Reload posts from localStorage to ensure we have the latest data including comments
+    loadStoredData();
+    
     const container = document.getElementById(containerId);
     const categoryPosts = posts.filter(p => p.category === category).sort((a, b) => new Date(b.date) - new Date(a.date));
     
@@ -1481,10 +1505,14 @@
   function toggleLike(postId) {
     if (!currentUser) return;
     
+    // Reload latest data from localStorage
+    loadStoredData();
+    
     const post = posts.find(p => p.id === postId);
     if (!post) return;
     
     if (!post.likedBy) post.likedBy = [];
+    if (!post.likes) post.likes = 0;
     
     const index = post.likedBy.indexOf(currentUser.username);
     if (index > -1) {
@@ -1512,8 +1540,16 @@
     
     if (!text) return;
     
+    // Reload latest data from localStorage
+    loadStoredData();
+    
     const post = posts.find(p => p.id === postId);
     if (!post) return;
+    
+    // Ensure comments array exists
+    if (!post.comments) {
+      post.comments = [];
+    }
     
     const newComment = {
       author: currentUser.fullName,
@@ -1530,8 +1566,13 @@
       { postId: postId, postTitle: post.title, commentText: text }
     );
     
+    // Save immediately
     saveAllData();
+    
+    // Clear input
     input.value = '';
+    
+    // Re-render the current page to show the new comment
     renderPage(currentPage);
   }
 
