@@ -868,7 +868,7 @@
       <div class="card">
         <h3>📞 Contact Information</h3>
         <p>Phone: +213-0557522486<br>
-        Email: info@laanqarischool.edu.dz</p>
+        Email: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7a13141c153a161b1b140b1b0813091912151516541f1e0f541e00">[email&#160;protected]</a></p>
       </div>
       <div class="card">
         <h3>📧 Send us a Message</h3>
@@ -945,12 +945,12 @@
 
   <footer>
     <p>&copy; 2026 Laanqari Aisha High School</p>
-    <p>📍 Chlef Taougrit, Algeria | 📞 +213-0557522486 | ✉️ info@laanqarischool.edu.dz</p>
+    <p>📍 Chlef Taougrit, Algeria | 📞 +213-0557522486 | ✉️ <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c6afa8a0a986aaa7a7a8b7a7b4afb5a5aea9a9aae8a3a2b3e8a2bc">[email&#160;protected]</a></p>
   </footer>
 </div>
 
 <!-- ===== JavaScript ===== -->
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   // ===== Data Storage =====
   let currentUser = null;
   let userType = 'student';
@@ -1070,6 +1070,9 @@
 
   function updateNotificationBadge() {
     if (currentUser && currentUser.type === 'admin') {
+      // Reload notifications from localStorage to get the latest count
+      notifications = JSON.parse(localStorage.getItem('adminNotifications')) || [];
+      
       const unreadCount = notifications.filter(n => !n.read).length;
       const badge = document.getElementById('notificationCount');
       
@@ -1102,6 +1105,9 @@
   }
 
   function renderNotifications() {
+    // Reload notifications from localStorage to get the latest data
+    notifications = JSON.parse(localStorage.getItem('adminNotifications')) || [];
+    
     const container = document.getElementById('notificationsContent');
     
     if (notifications.length === 0) {
@@ -1119,6 +1125,9 @@
         ${!notif.read ? `<button class="mark-read-btn" onclick="markNotificationAsRead(${notif.id})">✓ Mark as Read</button>` : ''}
       </div>
     `).join('');
+    
+    // Update the badge after rendering
+    updateNotificationBadge();
   }
 
   function getNotificationIcon(type) {
@@ -1352,6 +1361,18 @@
     if (currentUser.type === 'admin') {
       document.getElementById('notificationsTab').style.display = 'inline-block';
       updateNotificationBadge();
+      
+      // Auto-refresh notifications every 3 seconds for admin
+      if (window.notificationInterval) {
+        clearInterval(window.notificationInterval);
+      }
+      window.notificationInterval = setInterval(() => {
+        updateNotificationBadge();
+        // If currently viewing notifications page, refresh it
+        if (currentPage === 'notifications') {
+          renderNotifications();
+        }
+      }, 3000);
     }
     
     renderPage(currentPage);
@@ -1359,6 +1380,11 @@
 
   function logout() {
     if (confirm('Are you sure you want to logout?')) {
+      // Clear notification refresh interval
+      if (window.notificationInterval) {
+        clearInterval(window.notificationInterval);
+      }
+      
       currentUser = null;
       clearSession();
       document.getElementById('mainWebsite').style.display = 'none';
@@ -1644,21 +1670,4 @@
     
     const msg = document.getElementById('contactFormMessage');
     msg.textContent = '✅ Message sent successfully! We will get back to you soon.';
-    msg.style.display = 'block';
-    event.target.reset();
-    setTimeout(() => {
-      msg.style.display = 'none';
-    }, 5000);
-  }
-
-  // ===== Close modal when clicking outside =====
-  window.onclick = function(event) {
-    const modal = document.getElementById('addContentModal');
-    if (event.target == modal) {
-      closeAddContentModal();
-    }
-  }
-</script>
-
-</body>
-</html>
+    msg.style.disp
