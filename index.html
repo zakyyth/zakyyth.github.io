@@ -3,120 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Laanqari Aisha High School - Excellence in Education</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <title>Laanqari Aisha High School</title>
   <style>
-    /* ===== CSS Variables ===== */
-    :root {
-      --primary: #667eea;
-      --primary-dark: #5568d3;
-      --secondary: #764ba2;
-      --accent: #f093fb;
-      --success: #10b981;
-      --warning: #f59e0b;
-      --error: #ef4444;
-      --info: #3b82f6;
-      --dark: #1e293b;
-      --light: #f8fafc;
-      --gray-50: #f9fafb;
-      --gray-100: #f3f4f6;
-      --gray-200: #e5e7eb;
-      --gray-300: #d1d5db;
-      --gray-400: #9ca3af;
-      --gray-500: #6b7280;
-      --gray-600: #4b5563;
-      --gray-700: #374151;
-      --gray-800: #1f2937;
-      --gray-900: #111827;
-      --gradient-1: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-      --gradient-2: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
-      --gradient-3: linear-gradient(to right, #667eea, #764ba2);
-      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-      --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-      --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-      --shadow-xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-      --radius-sm: 0.375rem;
-      --radius: 0.5rem;
-      --radius-md: 0.75rem;
-      --radius-lg: 1rem;
-      --radius-xl: 1.5rem;
-      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
     /* ===== Reset & Base ===== */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-      font-size: 16px;
-    }
-
+    * {margin:0; padding:0; box-sizing:border-box;}
+    html {scroll-behavior: smooth;}
     body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background: var(--light);
-      color: var(--gray-900);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(180deg, #f4f4f9, #e2e4f5);
+      color: #333;
       line-height: 1.6;
-      overflow-x: hidden;
-    }
-
-    /* ===== Glassmorphism Utilities ===== */
-    .glass {
-      background: rgba(255, 255, 255, 0.7);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.3);
-    }
-
-    .glass-dark {
-      background: rgba(30, 41, 59, 0.7);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    /* ===== Animated Background ===== */
-    .animated-bg {
-      background: linear-gradient(-45deg, #667eea, #764ba2, #f093fb, #667eea);
-      background-size: 400% 400%;
-      animation: gradientShift 15s ease infinite;
-    }
-
-    @keyframes gradientShift {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    /* ===== Floating Particles ===== */
-    .particles {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      top: 0;
-      left: 0;
-      pointer-events: none;
-    }
-
-    .particle {
-      position: absolute;
-      background: rgba(255, 255, 255, 0.5);
-      border-radius: 50%;
-      animation: float 20s infinite;
-    }
-
-    @keyframes float {
-      0%, 100% { transform: translateY(0) translateX(0); opacity: 0; }
-      10% { opacity: 1; }
-      90% { opacity: 1; }
-      100% { transform: translateY(-100vh) translateX(100px); opacity: 0; }
     }
 
     /* ===== Login Page ===== */
@@ -125,384 +21,221 @@
       justify-content: center;
       align-items: center;
       min-height: 100vh;
+      background: linear-gradient(135deg, #2a2d8f, #4446b1);
       position: relative;
       overflow: hidden;
-      padding: 20px;
     }
-
-    .login-background {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: var(--gradient-2);
-      z-index: 0;
-    }
-
     .login-box {
       background: white;
-      padding: 3rem 2.5rem;
-      border-radius: var(--radius-xl);
-      box-shadow: var(--shadow-xl);
-      max-width: 480px;
-      width: 100%;
+      padding: 50px 40px;
+      border-radius: 20px;
+      box-shadow: 0 15px 50px rgba(0,0,0,0.3);
+      max-width: 450px;
+      width: 90%;
       position: relative;
       z-index: 1;
-      animation: slideUpFade 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      animation: slideUp 0.6s ease-out;
     }
-
-    @keyframes slideUpFade {
-      from { opacity: 0; transform: translateY(40px); }
-      to { opacity: 1; transform: translateY(0); }
+    @keyframes slideUp {
+      from {opacity: 0; transform: translateY(30px);}
+      to {opacity: 1; transform: translateY(0);}
     }
-
     .login-header {
       text-align: center;
-      margin-bottom: 2.5rem;
+      margin-bottom: 35px;
     }
-
-    .login-icon {
-      width: 80px;
-      height: 80px;
-      margin: 0 auto 1.5rem;
-      background: var(--gradient-1);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2.5rem;
-      box-shadow: var(--shadow-lg);
-      animation: pulse 2s ease-in-out infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.05); }
-    }
-
     .login-header h1 {
-      color: var(--gray-900);
-      font-family: 'Poppins', sans-serif;
-      font-size: 2rem;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-      background: var(--gradient-3);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      color: #2a2d8f;
+      font-size: 2em;
+      margin-bottom: 10px;
     }
-
     .login-header p {
-      color: var(--gray-600);
-      font-size: 1rem;
-      font-weight: 500;
+      color: #666;
+      font-size: 1em;
     }
-
-    .info-box {
-      background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
-      border: 2px solid rgba(102, 126, 234, 0.2);
-      padding: 1rem;
-      border-radius: var(--radius-md);
-      margin-top: 1rem;
-      font-size: 0.875rem;
-      color: var(--gray-700);
-      line-height: 1.6;
+    .login-icon {
+      font-size: 4em;
+      margin-bottom: 20px;
     }
-
-    .info-box strong {
-      color: var(--primary);
-      font-weight: 600;
-    }
-
-    /* ===== User Type Selector ===== */
-    .user-type-selector {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 0.75rem;
-      margin-bottom: 2rem;
-    }
-
-    .user-type-btn {
-      padding: 1rem 0.75rem;
-      border: 2px solid var(--gray-200);
-      background: white;
-      border-radius: var(--radius-md);
-      cursor: pointer;
-      transition: var(--transition);
-      font-weight: 600;
-      font-size: 0.875rem;
-      color: var(--gray-600);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .user-type-btn .icon {
-      font-size: 1.5rem;
-    }
-
-    .user-type-btn:hover {
-      border-color: var(--primary);
-      background: rgba(102, 126, 234, 0.05);
-      transform: translateY(-2px);
-    }
-
-    .user-type-btn.active {
-      border-color: var(--primary);
-      background: var(--gradient-1);
-      color: white;
-      box-shadow: var(--shadow-md);
-    }
-
-    /* ===== Form Elements ===== */
     .form-group {
-      margin-bottom: 1.5rem;
+      margin-bottom: 25px;
       position: relative;
     }
-
     .form-group label {
       display: block;
-      margin-bottom: 0.5rem;
-      color: var(--gray-700);
+      margin-bottom: 8px;
+      color: #2a2d8f;
       font-weight: 600;
-      font-size: 0.875rem;
-      letter-spacing: 0.025em;
+      font-size: 0.95em;
     }
-
-    .form-group input,
-    .form-group textarea,
-    .form-group select {
+    .form-group input, .form-group textarea, .form-group select {
       width: 100%;
-      padding: 0.875rem 1rem 0.875rem 3rem;
-      border: 2px solid var(--gray-200);
-      border-radius: var(--radius-md);
-      font-size: 0.9375rem;
-      transition: var(--transition);
-      background: var(--gray-50);
-      font-family: 'Inter', sans-serif;
-      color: var(--gray-900);
+      padding: 14px 15px 14px 45px;
+      border: 2px solid #ddd;
+      border-radius: 10px;
+      font-size: 1em;
+      transition: all 0.3s;
+      background: #f9f9f9;
     }
-
     .form-group textarea {
-      padding: 0.875rem 1rem;
+      padding: 14px 15px;
       resize: vertical;
-      min-height: 120px;
+      min-height: 100px;
     }
-
     .form-group select {
-      padding: 0.875rem 1rem;
+      padding: 14px 15px;
     }
-
-    .form-group input:focus,
-    .form-group textarea:focus,
-    .form-group select:focus {
+    .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
       outline: none;
-      border-color: var(--primary);
+      border-color: #2a2d8f;
+      box-shadow: 0 0 15px rgba(42,45,143,0.2);
       background: white;
-      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
     }
-
-    .form-group .input-icon {
+    .form-group .icon {
       position: absolute;
-      left: 1rem;
-      top: 2.5rem;
-      font-size: 1.25rem;
-      color: var(--gray-400);
-      transition: var(--transition);
+      left: 15px;
+      top: 42px;
+      font-size: 1.2em;
+      color: #2a2d8f;
     }
-
-    .form-group input:focus + .input-icon {
-      color: var(--primary);
-    }
-
-    /* ===== Buttons ===== */
-    .btn {
+    .login-btn, .btn-primary {
       width: 100%;
-      padding: 1rem;
+      padding: 15px;
       border: none;
-      border-radius: var(--radius-md);
-      font-size: 1rem;
-      font-weight: 700;
-      cursor: pointer;
-      transition: var(--transition);
-      font-family: 'Inter', sans-serif;
-      letter-spacing: 0.025em;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .btn::before {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 0;
-      height: 0;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.3);
-      transform: translate(-50%, -50%);
-      transition: width 0.6s, height 0.6s;
-    }
-
-    .btn:active::before {
-      width: 300px;
-      height: 300px;
-    }
-
-    .btn-primary {
-      background: var(--gradient-1);
+      border-radius: 10px;
+      background: linear-gradient(135deg, #2a2d8f, #4446b1);
       color: white;
-      box-shadow: var(--shadow-md);
+      font-size: 1.1em;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s;
+      box-shadow: 0 4px 15px rgba(42,45,143,0.4);
     }
-
-    .btn-primary:hover {
+    .login-btn:hover, .btn-primary:hover {
       transform: translateY(-2px);
-      box-shadow: var(--shadow-lg);
+      box-shadow: 0 6px 20px rgba(42,45,143,0.5);
     }
-
-    .btn-primary:active {
-      transform: translateY(0);
+    .user-type-selector {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 25px;
     }
-
-    /* ===== Messages ===== */
-    .message {
-      padding: 1rem;
-      border-radius: var(--radius-md);
-      margin-bottom: 1.5rem;
-      display: none;
-      animation: slideInDown 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-      font-size: 0.875rem;
-      font-weight: 500;
+    .user-type-btn {
+      flex: 1;
+      padding: 12px;
+      border: 2px solid #ddd;
+      background: white;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-weight: 600;
+      color: #666;
     }
-
-    @keyframes slideInDown {
-      from { opacity: 0; transform: translateY(-20px); }
-      to { opacity: 1; transform: translateY(0); }
+    .user-type-btn.active {
+      border-color: #2a2d8f;
+      background: linear-gradient(135deg, #2a2d8f, #4446b1);
+      color: white;
     }
-
-    .message-error {
-      background: rgba(239, 68, 68, 0.1);
-      color: #dc2626;
-      border: 2px solid rgba(239, 68, 68, 0.2);
-    }
-
-    .message-success {
-      background: rgba(16, 185, 129, 0.1);
-      color: #059669;
-      border: 2px solid rgba(16, 185, 129, 0.2);
-    }
-
     .login-footer {
       text-align: center;
-      margin-top: 2rem;
-      color: var(--gray-600);
-      font-size: 0.875rem;
+      margin-top: 25px;
+      color: #666;
+      font-size: 0.9em;
     }
-
     .login-footer a {
-      color: var(--primary);
+      color: #2a2d8f;
       text-decoration: none;
       font-weight: 600;
-      transition: var(--transition);
+    }
+    .error-message {
+      background: #f8d7da;
+      color: #721c24;
+      padding: 12px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      border: 1px solid #f5c6cb;
+      display: none;
+    }
+    .success-message {
+      background: #d4edda;
+      color: #155724;
+      padding: 12px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      border: 1px solid #c3e6cb;
+      display: none;
     }
 
-    .login-footer a:hover {
-      color: var(--primary-dark);
-      text-decoration: underline;
-    }
-
-    /* ===== Main Website ===== */
+    /* ===== Main Website Styles ===== */
     .main-website {
       display: none;
     }
-
-    /* ===== Header ===== */
     header {
-      position: relative;
-      overflow: hidden;
-      padding: 2.5rem 2rem;
+      background: linear-gradient(135deg, #2a2d8f, #4446b1);
       color: white;
-    }
-
-    .header-background {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: var(--gradient-2);
-      z-index: 0;
-    }
-
-    .header-content {
-      position: relative;
-      z-index: 1;
-      max-width: 1200px;
-      margin: 0 auto;
+      padding: 30px 20px;
       text-align: center;
+      position: relative;
     }
-
-    .header-content h1 {
-      font-family: 'Poppins', sans-serif;
-      font-size: 3rem;
-      font-weight: 800;
-      margin-bottom: 0.75rem;
-      text-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-      animation: fadeInUp 0.8s ease-out;
+    header h1 {
+      font-size:2.5em;
+      position: relative;
     }
-
-    .header-content p {
-      font-size: 1.25rem;
-      opacity: 0.95;
-      font-weight: 500;
-      animation: fadeInUp 0.8s ease-out 0.2s backwards;
+    header p {
+      font-size:1.1em; 
+      opacity:0.9;
+      position: relative;
     }
-
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
     .user-info {
       position: absolute;
-      top: 1.5rem;
-      right: 2rem;
-      background: rgba(255, 255, 255, 0.25);
-      padding: 0.75rem 1.5rem;
-      border-radius: 50px;
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.3);
+      top: 20px;
+      right: 20px;
+      background: rgba(255,255,255,0.2);
+      padding: 10px 20px;
+      border-radius: 25px;
+      backdrop-filter: blur(10px);
       z-index: 10;
       display: flex;
       align-items: center;
-      gap: 1rem;
-      box-shadow: var(--shadow-lg);
+      gap: 15px;
     }
-
     .user-info span {
-      font-weight: 700;
-      font-size: 0.9375rem;
+      font-weight: bold;
+      cursor: pointer;
     }
-
+    .notification-bell {
+      position: relative;
+      cursor: pointer;
+      font-size: 1.3em;
+    }
+    .notification-badge {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      background: #ff4444;
+      color: white;
+      border-radius: 50%;
+      width: 18px;
+      height: 18px;
+      font-size: 0.7em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+    }
     .logout-btn {
       background: white;
-      color: var(--primary);
+      color: #2a2d8f;
       border: none;
-      padding: 0.5rem 1.25rem;
-      border-radius: 50px;
+      padding: 6px 15px;
+      border-radius: 15px;
       cursor: pointer;
-      font-weight: 700;
-      font-size: 0.875rem;
-      transition: var(--transition);
+      font-weight: bold;
+      transition: all 0.3s;
     }
-
     .logout-btn:hover {
-      background: var(--gray-100);
+      background: #f0f0f0;
       transform: scale(1.05);
-      box-shadow: var(--shadow-md);
     }
 
     /* ===== Navigation ===== */
@@ -510,438 +243,357 @@
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
-      background: white;
+      background: #4446b1;
       position: sticky;
       top: 0;
       z-index: 1000;
-      box-shadow: var(--shadow);
-      padding: 0.5rem;
-      gap: 0.5rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
     }
-
     nav a {
-      color: var(--gray-700);
-      padding: 0.875rem 1.75rem;
+      color: white;
+      padding: 16px 20px;
       text-decoration: none;
-      font-weight: 600;
-      font-size: 0.9375rem;
-      transition: var(--transition);
+      font-weight: bold;
+      transition: all 0.3s;
       position: relative;
       cursor: pointer;
-      border-radius: var(--radius-md);
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
     }
-
-    nav a::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      width: 0;
-      height: 3px;
-      background: var(--gradient-1);
-      transform: translateX(-50%);
-      transition: width 0.3s ease;
-      border-radius: 10px;
-    }
-
-    nav a:hover {
-      background: rgba(102, 126, 234, 0.05);
-      color: var(--primary);
-    }
-
-    nav a:hover::after {
-      width: 80%;
-    }
-
     nav a.active {
-      background: var(--gradient-1);
-      color: white;
-      box-shadow: var(--shadow-md);
+      background: rgba(255,255,255,0.2);
+      border-bottom: 3px solid white;
+    }
+    nav a:hover {
+      background: rgba(255,255,255,0.1);
     }
 
-    nav a.active::after {
-      display: none;
+    /* ===== Search Bar ===== */
+    .search-container {
+      max-width: 1100px;
+      margin: 20px auto;
+      padding: 0 20px;
     }
-
-    /* ===== Notification Badge ===== */
-    .notification-badge {
-      position: relative;
-      display: inline-flex;
+    .search-bar {
+      width: 100%;
+      padding: 15px 20px 15px 50px;
+      border: 2px solid #ddd;
+      border-radius: 25px;
+      font-size: 1em;
+      background: white url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="%232a2d8f" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>') no-repeat 15px center;
+      transition: all 0.3s;
     }
-
-    .notification-count {
-      position: absolute;
-      top: -8px;
-      right: -8px;
-      background: var(--error);
-      color: white;
-      border-radius: 50%;
-      width: 20px;
-      height: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.625rem;
-      font-weight: 700;
-      animation: bounce 2s infinite;
-      box-shadow: var(--shadow-md);
-    }
-
-    @keyframes bounce {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.2); }
+    .search-bar:focus {
+      outline: none;
+      border-color: #2a2d8f;
+      box-shadow: 0 0 15px rgba(42,45,143,0.2);
     }
 
     /* ===== Main Content ===== */
-    main {
-      padding: 3rem 2rem;
-      max-width: 1200px;
-      margin: 0 auto;
-      min-height: calc(100vh - 400px);
-    }
-
+    main {padding: 30px 20px; max-width: 1100px; margin: auto; min-height: calc(100vh - 300px);}
     .page {
       display: none;
-      animation: pageEnter 0.5s ease-out;
+      animation: fadeIn 0.5s ease-out;
     }
-
     .page.active {
       display: block;
     }
-
-    @keyframes pageEnter {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(20px);}
+      to {opacity: 1; transform: translateY(0);}
     }
-
+    
     h2 {
-      color: var(--gray-900);
-      font-family: 'Poppins', sans-serif;
-      font-size: 2.5rem;
-      font-weight: 700;
-      margin-bottom: 2.5rem;
-      position: relative;
+      color: #2a2d8f;
+      border-bottom: 3px solid #2a2d8f;
+      padding-bottom: 10px;
+      margin-bottom: 25px;
+      font-size: 2em;
       display: inline-block;
-    }
-
-    h2::after {
-      content: '';
-      position: absolute;
-      bottom: -10px;
-      left: 0;
-      width: 60px;
-      height: 4px;
-      background: var(--gradient-1);
-      border-radius: 10px;
-    }
-
-    /* ===== Stats Container ===== */
-    .stats-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 1.5rem;
-      margin: 3rem 0;
-    }
-
-    .stat-box {
-      background: white;
-      padding: 2rem;
-      border-radius: var(--radius-xl);
-      text-align: center;
-      box-shadow: var(--shadow-md);
-      transition: var(--transition);
-      position: relative;
-      overflow: hidden;
-      border: 2px solid transparent;
-    }
-
-    .stat-box::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 4px;
-      background: var(--gradient-1);
-    }
-
-    .stat-box:hover {
-      transform: translateY(-8px);
-      box-shadow: var(--shadow-xl);
-      border-color: var(--primary);
-    }
-
-    .stat-number {
-      font-size: 3.5rem;
-      font-weight: 800;
-      font-family: 'Poppins', sans-serif;
-      background: var(--gradient-1);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      margin-bottom: 0.5rem;
-      line-height: 1;
-    }
-
-    .stat-label {
-      color: var(--gray-600);
-      font-size: 1rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
     }
 
     /* ===== Cards ===== */
     .card {
       background: white;
-      padding: 2rem;
-      margin: 1.5rem 0;
-      box-shadow: var(--shadow-md);
-      border-radius: var(--radius-xl);
-      transition: var(--transition);
-      border-left: 5px solid var(--primary);
+      padding: 25px;
+      margin: 15px 0;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      border-radius: 15px;
+      transition: all 0.4s;
+      border-left: 5px solid #2a2d8f;
       position: relative;
-      overflow: hidden;
     }
-
-    .card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: var(--gradient-1);
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      z-index: 0;
-    }
-
-    .card:hover::before {
-      opacity: 0.03;
-    }
-
-    .card > * {
-      position: relative;
-      z-index: 1;
-    }
-
     .card:hover {
-      transform: translateY(-8px);
-      box-shadow: var(--shadow-xl);
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(42,45,143,0.3);
     }
-
     .card h3 {
-      color: var(--gray-900);
-      margin-bottom: 1rem;
-      font-size: 1.5rem;
-      font-weight: 700;
-      font-family: 'Poppins', sans-serif;
+      color: #2a2d8f;
+      margin-bottom: 10px;
+      font-size: 1.4em;
     }
-
     .card p {
-      color: var(--gray-700);
-      line-height: 1.8;
-      font-size: 1rem;
+      color: #555;
+      line-height: 1.7;
     }
-
-    .badge {
+    .card .badge {
       display: inline-block;
-      background: var(--gradient-1);
+      background: #2a2d8f;
       color: white;
-      padding: 0.5rem 1rem;
-      border-radius: 50px;
-      font-size: 0.75rem;
-      font-weight: 700;
-      margin-top: 1rem;
-      margin-right: 0.5rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      box-shadow: var(--shadow-sm);
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 0.8em;
+      margin-top: 10px;
+      margin-right: 5px;
     }
-
     .card-meta {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-top: 1.5rem;
-      padding-top: 1.5rem;
-      border-top: 2px solid var(--gray-100);
-      font-size: 0.875rem;
-      color: var(--gray-600);
-      font-weight: 500;
+      margin-top: 15px;
+      padding-top: 15px;
+      border-top: 1px solid #eee;
+      font-size: 0.9em;
+      color: #666;
     }
-
     .card-actions {
       display: flex;
-      gap: 0.75rem;
-      margin-top: 1.5rem;
+      gap: 10px;
+      margin-top: 15px;
       flex-wrap: wrap;
     }
-
     .btn-small {
-      padding: 0.625rem 1.25rem;
+      padding: 8px 16px;
       border: none;
-      border-radius: 50px;
+      border-radius: 8px;
       cursor: pointer;
-      font-weight: 600;
-      transition: var(--transition);
-      font-size: 0.875rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
+      font-weight: bold;
+      transition: all 0.3s;
+      font-size: 0.9em;
     }
-
     .btn-like {
-      background: rgba(239, 68, 68, 0.1);
-      color: #dc2626;
-      border: 2px solid rgba(239, 68, 68, 0.2);
+      background: #e8f4fd;
+      color: #2a8fdb;
     }
-
     .btn-like:hover {
-      background: var(--error);
+      background: #2a8fdb;
       color: white;
-      transform: scale(1.05);
     }
-
     .btn-like.liked {
-      background: var(--error);
+      background: #2a8fdb;
       color: white;
-      border-color: var(--error);
     }
-
     .btn-comment {
-      background: rgba(59, 130, 246, 0.1);
-      color: #2563eb;
-      border: 2px solid rgba(59, 130, 246, 0.2);
+      background: #fff3cd;
+      color: #856404;
     }
-
     .btn-comment:hover {
-      background: var(--info);
+      background: #856404;
       color: white;
-      transform: scale(1.05);
     }
-
     .btn-delete {
-      background: rgba(249, 115, 22, 0.1);
-      color: #ea580c;
-      border: 2px solid rgba(249, 115, 22, 0.2);
+      background: #f8d7da;
+      color: #721c24;
     }
-
     .btn-delete:hover {
-      background: #ea580c;
+      background: #721c24;
       color: white;
-      transform: scale(1.05);
+    }
+    .btn-download {
+      background: #d4edda;
+      color: #155724;
+    }
+    .btn-download:hover {
+      background: #155724;
+      color: white;
     }
 
-    /* ===== Media Elements ===== */
-    .media-container {
-      margin: 1.5rem 0;
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      box-shadow: var(--shadow-md);
+    /* ===== Profile Card ===== */
+    .profile-card {
+      background: linear-gradient(135deg, #2a2d8f, #4446b1);
+      color: white;
+      padding: 30px;
+      border-radius: 15px;
+      text-align: center;
+      margin-bottom: 30px;
     }
-
-    .media-container img,
-    .media-container video {
-      width: 100%;
-      max-height: 500px;
-      object-fit: cover;
-      display: block;
-    }
-
-    /* ===== Comments Section ===== */
-    .comments-section {
-      margin-top: 1.5rem;
-      padding: 1.5rem;
-      background: var(--gray-50);
-      border-radius: var(--radius-lg);
-      display: none;
-      border: 2px solid var(--gray-100);
-    }
-
-    .comments-section.active {
-      display: block;
-      animation: slideInDown 0.3s ease-out;
-    }
-
-    .comment {
-      background: white;
-      padding: 1rem;
-      margin: 1rem 0;
-      border-radius: var(--radius-md);
-      border-left: 3px solid var(--primary);
-      box-shadow: var(--shadow-sm);
-      transition: var(--transition);
-    }
-
-    .comment:hover {
-      box-shadow: var(--shadow-md);
-      transform: translateX(5px);
-    }
-
-    .comment-author {
-      font-weight: 700;
-      color: var(--primary);
-      margin-bottom: 0.5rem;
-      font-size: 0.9375rem;
-    }
-
-    .comment-text {
-      color: var(--gray-700);
-      line-height: 1.6;
-    }
-
-    .comment-time {
-      font-size: 0.75rem;
-      color: var(--gray-500);
-      margin-top: 0.5rem;
-      font-weight: 500;
-    }
-
-    .comment-input {
-      width: 100%;
-      padding: 0.875rem 1rem;
-      border: 2px solid var(--gray-200);
-      border-radius: var(--radius-md);
-      margin-top: 1rem;
-      font-family: 'Inter', sans-serif;
-      transition: var(--transition);
-    }
-
-    .comment-input:focus {
-      outline: none;
-      border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-    }
-
-    /* ===== Floating Action Button ===== */
-    .fab {
-      position: fixed;
-      bottom: 2rem;
-      right: 2rem;
-      width: 64px;
-      height: 64px;
+    .profile-avatar {
+      width: 120px;
+      height: 120px;
       border-radius: 50%;
-      background: var(--gradient-1);
-      color: white;
-      border: none;
-      font-size: 2rem;
-      cursor: pointer;
-      box-shadow: var(--shadow-xl);
-      transition: var(--transition);
-      z-index: 100;
+      background: white;
+      margin: 0 auto 20px;
       display: flex;
       align-items: center;
       justify-content: center;
+      font-size: 3em;
+      color: #2a2d8f;
+    }
+    .profile-info h2 {
+      color: white;
+      border: none;
+      margin-bottom: 10px;
     }
 
-    .fab:hover {
+    /* ===== Calendar ===== */
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 10px;
+      margin-top: 20px;
+    }
+    .calendar-day {
+      background: white;
+      padding: 15px;
+      border-radius: 10px;
+      text-align: center;
+      border: 2px solid #eee;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .calendar-day:hover {
+      border-color: #2a2d8f;
+      transform: scale(1.05);
+    }
+    .calendar-day.has-event {
+      background: #e8f4fd;
+      border-color: #2a8fdb;
+    }
+    .calendar-day.today {
+      background: #2a2d8f;
+      color: white;
+    }
+
+    /* ===== Homework Card ===== */
+    .homework-card {
+      border-left-color: #ff9800;
+    }
+    .homework-card.submitted {
+      border-left-color: #4caf50;
+      background: #f1f8f4;
+    }
+    .homework-card.overdue {
+      border-left-color: #f44336;
+      background: #ffebee;
+    }
+
+    /* ===== Poll Card ===== */
+    .poll-option {
+      background: #f9f9f9;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .poll-option:hover {
+      background: #e8f4fd;
+    }
+    .poll-option.selected {
+      background: #2a8fdb;
+      color: white;
+    }
+    .poll-result {
+      height: 100%;
+      position: absolute;
+      left: 0;
+      top: 0;
+      background: rgba(42,143,219,0.2);
+      transition: width 0.5s;
+    }
+    .poll-text {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ===== File Upload ===== */
+    .file-item {
+      background: #f9f9f9;
+      padding: 15px;
+      margin: 10px 0;
+      border-radius: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border: 2px solid #eee;
+    }
+    .file-info {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    .file-icon {
+      font-size: 2em;
+    }
+
+    /* ===== Notification Panel ===== */
+    .notification-panel {
+      position: fixed;
+      top: 70px;
+      right: 20px;
+      width: 350px;
+      max-height: 500px;
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+      display: none;
+      z-index: 2000;
+      overflow: hidden;
+    }
+    .notification-panel.active {
+      display: block;
+      animation: slideInRight 0.3s;
+    }
+    @keyframes slideInRight {
+      from {transform: translateX(400px); opacity: 0;}
+      to {transform: translateX(0); opacity: 1;}
+    }
+    .notification-header {
+      background: #2a2d8f;
+      color: white;
+      padding: 15px 20px;
+      font-weight: bold;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .notification-list {
+      max-height: 400px;
+      overflow-y: auto;
+    }
+    .notification-item {
+      padding: 15px 20px;
+      border-bottom: 1px solid #eee;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .notification-item:hover {
+      background: #f9f9f9;
+    }
+    .notification-item.unread {
+      background: #e8f4fd;
+    }
+
+    /* ===== Add Content Button ===== */
+    .add-content-btn {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #2a2d8f, #4446b1);
+      color: white;
+      border: none;
+      font-size: 2em;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(42,45,143,0.5);
+      transition: all 0.3s;
+      z-index: 100;
+    }
+    .add-content-btn:hover {
       transform: scale(1.1) rotate(90deg);
-      box-shadow: 0 30px 60px -12px rgba(102, 126, 234, 0.5);
+      box-shadow: 0 6px 30px rgba(42,45,143,0.7);
     }
 
     /* ===== Modal ===== */
@@ -953,378 +605,123 @@
       top: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.6);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      animation: fadeIn 0.3s ease;
+      background: rgba(0,0,0,0.7);
+      animation: fadeIn 0.3s;
     }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
     .modal-content {
       background: white;
-      margin: 2% auto;
-      padding: 2.5rem;
-      border-radius: var(--radius-xl);
-      max-width: 700px;
-      max-height: 90vh;
+      margin: 3% auto;
+      padding: 30px;
+      border-radius: 15px;
+      max-width: 600px;
+      max-height: 85vh;
       overflow-y: auto;
-      animation: modalSlideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      animation: slideDown 0.4s;
       position: relative;
-      box-shadow: var(--shadow-xl);
     }
-
-    @keyframes modalSlideUp {
-      from { opacity: 0; transform: translateY(50px) scale(0.95); }
-      to { opacity: 1; transform: translateY(0) scale(1); }
+    @keyframes slideDown {
+      from {opacity: 0; transform: translateY(-50px);}
+      to {opacity: 1; transform: translateY(0);}
     }
-
     .close {
       position: absolute;
-      right: 1.5rem;
-      top: 1.5rem;
-      font-size: 2rem;
-      font-weight: 700;
-      color: var(--gray-400);
+      right: 20px;
+      top: 15px;
+      font-size: 28px;
+      font-weight: bold;
+      color: #aaa;
       cursor: pointer;
-      transition: var(--transition);
-      width: 40px;
-      height: 40px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 50%;
+      transition: color 0.3s;
     }
-
     .close:hover {
-      color: var(--error);
-      background: rgba(239, 68, 68, 0.1);
-      transform: rotate(90deg);
+      color: #2a2d8f;
     }
 
-    .modal-content h2 {
-      margin-bottom: 2rem;
-      font-size: 2rem;
+    /* ===== Comments Section ===== */
+    .comments-section {
+      margin-top: 20px;
+      padding: 15px;
+      background: #f9f9f9;
+      border-radius: 10px;
+      display: none;
     }
-
-    /* ===== File Upload Preview ===== */
-    .media-preview {
-      margin-top: 1.5rem;
-      padding: 1.5rem;
-      background: var(--gray-50);
-      border-radius: var(--radius-lg);
-      border: 2px dashed var(--gray-300);
+    .comments-section.active {
+      display: block;
     }
-
-    .media-preview img,
-    .media-preview video {
-      width: 100%;
-      max-height: 350px;
-      object-fit: cover;
-      border-radius: var(--radius-md);
-      margin-bottom: 1rem;
-    }
-
-    .preview-header {
-      font-weight: 700;
-      color: var(--primary);
-      margin-bottom: 1rem;
-      font-size: 0.9375rem;
-    }
-
-    /* ===== Notifications ===== */
-    .notification-item {
+    .comment {
       background: white;
-      padding: 1.5rem;
-      margin: 1rem 0;
-      border-radius: var(--radius-lg);
-      border-left: 4px solid var(--primary);
-      box-shadow: var(--shadow-md);
-      transition: var(--transition);
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 8px;
+      border-left: 3px solid #2a2d8f;
+    }
+    .comment-author {
+      font-weight: bold;
+      color: #2a2d8f;
+      margin-bottom: 5px;
+    }
+    .comment-text {
+      color: #555;
+    }
+    .comment-input {
+      width: 100%;
+      padding: 10px;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      margin-top: 10px;
     }
 
-    .notification-item:hover {
-      transform: translateX(8px);
-      box-shadow: var(--shadow-lg);
-    }
-
-    .notification-item.unread {
-      background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(102, 126, 234, 0.05) 100%);
-      border-left-color: var(--info);
-    }
-
-    .notification-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 0.75rem;
-    }
-
-    .notification-type {
-      font-weight: 700;
-      color: var(--primary);
-      font-size: 1rem;
-    }
-
-    .notification-time {
-      font-size: 0.8125rem;
-      color: var(--gray-500);
-      font-weight: 500;
-    }
-
-    .notification-message {
-      color: var(--gray-700);
-      line-height: 1.6;
-      font-size: 0.9375rem;
-    }
-
-    .mark-read-btn {
-      margin-top: 1rem;
-      padding: 0.5rem 1rem;
-      background: var(--primary);
-      color: white;
-      border: none;
-      border-radius: 50px;
-      cursor: pointer;
-      font-size: 0.8125rem;
-      font-weight: 600;
-      transition: var(--transition);
-    }
-
-    .mark-read-btn:hover {
-      background: var(--primary-dark);
-      transform: scale(1.05);
-    }
-
-    .clear-all-btn {
-      padding: 0.875rem 1.75rem;
-      background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(249, 115, 22, 0.1) 100%);
-      color: #dc2626;
-      border: 2px solid rgba(239, 68, 68, 0.3);
-      border-radius: var(--radius-md);
-      cursor: pointer;
-      font-weight: 700;
-      margin-bottom: 2rem;
-      transition: var(--transition);
-      font-size: 0.9375rem;
-    }
-
-    .clear-all-btn:hover {
-      background: var(--error);
-      color: white;
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-md);
-    }
-
-    /* ===== Storage Info Box ===== */
-    .storage-info {
-      background: var(--gradient-2);
-      color: white;
-      padding: 2rem;
-      border-radius: var(--radius-xl);
-      margin-bottom: 2.5rem;
-      box-shadow: var(--shadow-lg);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .storage-info::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      right: -50%;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
-      background-size: 40px 40px;
-      animation: patternMove 30s linear infinite;
-    }
-
-    @keyframes patternMove {
-      0% { transform: translate(0, 0); }
-      100% { transform: translate(40px, 40px); }
-    }
-
-    .storage-info > * {
-      position: relative;
-      z-index: 1;
-    }
-
-    .storage-info h4 {
-      margin-bottom: 1rem;
-      font-size: 1.5rem;
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      font-family: 'Poppins', sans-serif;
-    }
-
-    .storage-info p {
-      opacity: 0.95;
-      line-height: 1.7;
-      font-size: 0.9375rem;
-    }
-
-    .storage-stats {
+    /* ===== Stats ===== */
+    .stats-container {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-      gap: 1rem;
-      margin-top: 1.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin: 30px 0;
     }
-
-    .storage-stat {
-      background: rgba(255, 255, 255, 0.2);
-      padding: 1.25rem;
-      border-radius: var(--radius-lg);
+    .stat-box {
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
       text-align: center;
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      transition: var(--transition);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: all 0.3s;
     }
-
-    .storage-stat:hover {
-      background: rgba(255, 255, 255, 0.25);
-      transform: translateY(-4px);
+    .stat-box:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(42,45,143,0.3);
     }
-
-    .storage-stat-value {
-      font-size: 2rem;
-      font-weight: 800;
-      margin-bottom: 0.5rem;
-      font-family: 'Poppins', sans-serif;
+    .stat-number {
+      font-size: 2.5em;
+      font-weight: bold;
+      color: #2a2d8f;
+      margin-bottom: 10px;
     }
-
-    .storage-stat-label {
-      font-size: 0.8125rem;
-      opacity: 0.9;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
+    .stat-label {
+      color: #666;
+      font-size: 1em;
     }
 
     /* ===== Footer ===== */
     footer {
       text-align: center;
-      padding: 3rem 2rem;
-      background: var(--gradient-1);
+      padding: 30px;
+      background: linear-gradient(135deg, #2a2d8f, #4446b1);
       color: white;
-      margin-top: 5rem;
-      box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+      margin-top: 50px;
+      box-shadow: 0 -4px 15px rgba(0,0,0,0.2);
     }
-
     footer p {
-      margin: 0.75rem 0;
-      font-size: 0.9375rem;
-      opacity: 0.95;
+      margin: 10px 0;
     }
 
-    footer a {
-      color: white;
-      text-decoration: underline;
-    }
-
-    /* ===== Loading Spinner ===== */
-    .spinner {
-      border: 3px solid rgba(255, 255, 255, 0.3);
-      border-top: 3px solid white;
-      border-radius: 50%;
-      width: 40px;
-      height: 40px;
-      animation: spin 1s linear infinite;
-      margin: 2rem auto;
-    }
-
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-
-    /* ===== Responsive Design ===== */
+    /* ===== Responsive ===== */
     @media (max-width: 768px) {
-      .header-content h1 {
-        font-size: 2rem;
-      }
-
-      .header-content p {
-        font-size: 1rem;
-      }
-
-      .user-info {
-        position: static;
-        margin: 1rem auto;
-        width: fit-content;
-      }
-
-      nav {
-        flex-direction: column;
-        align-items: stretch;
-      }
-
-      nav a {
-        justify-content: center;
-        padding: 1rem;
-      }
-
-      h2 {
-        font-size: 2rem;
-      }
-
-      .stat-number {
-        font-size: 2.5rem;
-      }
-
-      .fab {
-        width: 56px;
-        height: 56px;
-        font-size: 1.5rem;
-        bottom: 1.5rem;
-        right: 1.5rem;
-      }
-
-      .user-type-selector {
-        grid-template-columns: 1fr;
-      }
-
-      .login-box {
-        padding: 2rem 1.5rem;
-      }
-
-      main {
-        padding: 2rem 1rem;
-      }
-    }
-
-    /* ===== Scrollbar Styling ===== */
-    ::-webkit-scrollbar {
-      width: 12px;
-    }
-
-    ::-webkit-scrollbar-track {
-      background: var(--gray-100);
-    }
-
-    ::-webkit-scrollbar-thumb {
-      background: var(--gradient-1);
-      border-radius: 10px;
-    }
-
-    ::-webkit-scrollbar-thumb:hover {
-      background: var(--gradient-3);
-    }
-
-    /* ===== Selection Styling ===== */
-    ::selection {
-      background: var(--primary);
-      color: white;
-    }
-
-    ::-moz-selection {
-      background: var(--primary);
-      color: white;
+      header h1 {font-size: 1.8em;}
+      nav a {padding: 12px 15px; font-size: 0.9em;}
+      .user-info {position: static; margin: 10px; justify-content: center;}
+      .add-content-btn {width: 50px; height: 50px; font-size: 1.5em;}
+      .notification-panel {width: 90%; right: 5%;}
+      .calendar-grid {grid-template-columns: repeat(3, 1fr);}
     }
   </style>
 </head>
@@ -1332,70 +729,53 @@
 
 <!-- ===== Login Page ===== -->
 <div id="loginPage" class="login-container">
-  <div class="login-background animated-bg">
-    <div class="particles" id="particles"></div>
-  </div>
-  
   <div class="login-box">
     <div class="login-header">
       <div class="login-icon">🎓</div>
       <h1>Welcome Back!</h1>
       <p>Laanqari Aisha High School Portal</p>
-      <div class="info-box">
-        💾 <strong>Persistent Storage Active</strong><br>
-        Your data is securely saved and will persist across all sessions on this device.
-      </div>
     </div>
     
     <div class="user-type-selector">
       <button class="user-type-btn active" onclick="selectUserType('student')">
-        <span class="icon">👨‍🎓</span>
-        <span>Student</span>
+        👨‍🎓 Student
       </button>
       <button class="user-type-btn" onclick="selectUserType('teacher')">
-        <span class="icon">👩‍🏫</span>
-        <span>Teacher</span>
+        👩‍🏫 Teacher
       </button>
       <button class="user-type-btn" onclick="selectUserType('admin')">
-        <span class="icon">🔐</span>
-        <span>Admin</span>
+        🔐 Admin
       </button>
     </div>
 
-    <div id="errorMessage" class="message message-error"></div>
-    <div id="successMessage" class="message message-success"></div>
+    <div id="errorMessage" class="error-message"></div>
+    <div id="successMessage" class="success-message"></div>
 
     <form id="loginForm" onsubmit="handleLogin(event)">
       <div class="form-group">
         <label for="username">Username</label>
-        <input type="text" id="username" placeholder="Enter your username" required>
-        <span class="input-icon">👤</span>
+        <span class="icon">👤</span>
+        <input type="text" id="username" name="username" placeholder="Enter your username" required>
       </div>
 
       <div class="form-group">
         <label for="password">Password</label>
-        <input type="password" id="password" placeholder="Enter your password" required>
-        <span class="input-icon">🔒</span>
+        <span class="icon">🔒</span>
+        <input type="password" id="password" name="password" placeholder="Enter your password" required>
       </div>
 
-      <button type="submit" class="btn btn-primary">🚀 Sign In</button>
+      <button type="submit" class="login-btn">🚀 Sign In</button>
     </form>
 
     <div class="login-footer">
-      <p>
-        <a href="#" onclick="showForgotPassword()">Forgot Password?</a> | 
-        <a href="#" onclick="showRegisterPage()">Create Account</a>
-      </p>
+      <p><a href="#" onclick="showForgotPassword()">Forgot Password?</a> | 
+         <a href="#" onclick="showRegisterPage()">Create Account</a></p>
     </div>
   </div>
 </div>
 
 <!-- ===== Registration Page ===== -->
 <div id="registerPage" class="login-container" style="display:none;">
-  <div class="login-background animated-bg">
-    <div class="particles" id="particles2"></div>
-  </div>
-  
   <div class="login-box">
     <div class="login-header">
       <div class="login-icon">📝</div>
@@ -1405,68 +785,66 @@
     
     <div class="user-type-selector">
       <button class="user-type-btn active" onclick="selectRegisterType('student')">
-        <span class="icon">👨‍🎓</span>
-        <span>Student</span>
+        👨‍🎓 Student
       </button>
       <button class="user-type-btn" onclick="selectRegisterType('teacher')">
-        <span class="icon">👩‍🏫</span>
-        <span>Teacher</span>
+        👩‍🏫 Teacher
       </button>
     </div>
 
-    <div id="registerError" class="message message-error"></div>
-    <div id="registerSuccess" class="message message-success"></div>
+    <div id="registerError" class="error-message"></div>
+    <div id="registerSuccess" class="success-message"></div>
 
     <form id="registerForm" onsubmit="handleRegister(event)">
       <div class="form-group">
         <label for="regFullName">Full Name</label>
+        <span class="icon">👤</span>
         <input type="text" id="regFullName" placeholder="Enter your full name" required>
-        <span class="input-icon">👤</span>
       </div>
 
       <div class="form-group">
         <label for="regEmail">Email</label>
+        <span class="icon">✉️</span>
         <input type="email" id="regEmail" placeholder="Enter your email" required>
-        <span class="input-icon">✉️</span>
       </div>
 
       <div class="form-group">
         <label for="regUsername">Username</label>
+        <span class="icon">👤</span>
         <input type="text" id="regUsername" placeholder="Choose a username" required minlength="4">
-        <span class="input-icon">👤</span>
       </div>
 
       <div class="form-group">
         <label for="regPassword">Password</label>
+        <span class="icon">🔒</span>
         <input type="password" id="regPassword" placeholder="Choose a password" required minlength="6">
-        <span class="input-icon">🔒</span>
       </div>
 
       <div class="form-group">
         <label for="regConfirmPassword">Confirm Password</label>
+        <span class="icon">🔒</span>
         <input type="password" id="regConfirmPassword" placeholder="Confirm your password" required>
-        <span class="input-icon">🔒</span>
       </div>
 
       <div class="form-group" id="studentIdGroup">
         <label for="regStudentId">Student ID</label>
+        <span class="icon">🎓</span>
         <input type="text" id="regStudentId" placeholder="e.g., 2026001, STU12345">
-        <span class="input-icon">🎓</span>
       </div>
 
       <div class="form-group" id="teacherCodeGroup" style="display:none;">
         <label for="regTeacherCode">Teacher Access Code</label>
+        <span class="icon">🔐</span>
         <input type="text" id="regTeacherCode" placeholder="Enter teacher access code">
-        <span class="input-icon">🔐</span>
       </div>
 
-      <button type="submit" class="btn btn-primary">✨ Create Account</button>
+      <button type="submit" class="login-btn">✨ Create Account</button>
     </form>
 
     <div class="login-footer">
       <p>Already have an account? <a href="#" onclick="showLoginPage()">Sign In</a></p>
-      <p style="font-size: 0.8125rem; color: var(--gray-500); margin-top: 0.75rem;">
-        Teacher Access Code: <strong>TEACH2026</strong>
+      <p style="font-size: 0.85em; color: #999; margin-top: 10px;">
+        Teacher Access Code: TEACH2026
       </p>
     </div>
   </div>
@@ -1475,38 +853,48 @@
 <!-- ===== Main Website ===== -->
 <div id="mainWebsite" class="main-website">
   <header>
-    <div class="header-background animated-bg">
-      <div class="particles" id="particles3"></div>
-    </div>
     <div class="user-info">
-      <span id="userDisplay">👤 Guest</span>
+      <div class="notification-bell" onclick="toggleNotifications()">
+        🔔
+        <span class="notification-badge" id="notificationBadge" style="display:none;">0</span>
+      </div>
+      <span id="userDisplay" onclick="navigateTo('profile')">👤 Guest</span>
       <button class="logout-btn" onclick="logout()">Logout</button>
     </div>
-    <div class="header-content">
-      <h1>🎓 Laanqari Aisha High School</h1>
-      <p>Excellence in Education Since 2000</p>
-    </div>
+    <h1>🎓 Laanqari Aisha High School</h1>
+    <p>Excellence in Education Since 2000</p>
   </header>
+
+  <!-- Notification Panel -->
+  <div id="notificationPanel" class="notification-panel">
+    <div class="notification-header">
+      <span>🔔 Notifications</span>
+      <span style="cursor:pointer;" onclick="toggleNotifications()">✕</span>
+    </div>
+    <div class="notification-list" id="notificationList">
+      <!-- Notifications will be added here -->
+    </div>
+  </div>
 
   <nav>
     <a onclick="navigateTo('home')" class="active">🏠 Home</a>
     <a onclick="navigateTo('news')">📰 News</a>
-    <a onclick="navigateTo('students')">👨‍🎓 Students</a>
-    <a onclick="navigateTo('teachers')">👩‍🏫 Teachers</a>
+    <a onclick="navigateTo('homework')">📚 Homework</a>
+    <a onclick="navigateTo('calendar')">📅 Calendar</a>
+    <a onclick="navigateTo('files')">📁 Files</a>
+    <a onclick="navigateTo('polls')">📊 Polls</a>
     <a onclick="navigateTo('contact')">📧 Contact</a>
-    <a id="notificationsTab" onclick="navigateTo('notifications')" style="display:none;">
-      <span class="notification-badge">
-        🔔 Notifications
-        <span id="notificationCount" class="notification-count" style="display:none;">0</span>
-      </span>
-    </a>
   </nav>
+
+  <!-- Search Bar -->
+  <div class="search-container">
+    <input type="text" class="search-bar" id="searchBar" placeholder="🔍 Search posts, homework, events..." onkeyup="handleSearch()">
+  </div>
 
   <main>
     <!-- ===== Home Page ===== -->
     <div id="homePage" class="page active">
       <h2>Welcome to Our School</h2>
-      
       <div class="stats-container">
         <div class="stat-box">
           <div class="stat-number">850</div>
@@ -1517,31 +905,41 @@
           <div class="stat-label">Teachers</div>
         </div>
         <div class="stat-box">
-          <div class="stat-number">98%</div>
-          <div class="stat-label">Success Rate</div>
+          <div class="stat-number">98</div>
+          <div class="stat-label">Success Rate %</div>
         </div>
         <div class="stat-box">
           <div class="stat-number">26</div>
-          <div class="stat-label">Years</div>
+          <div class="stat-label">Years Established</div>
         </div>
       </div>
 
       <div class="card">
         <h3>🎓 About Our School</h3>
-        <p>Laanqari Aisha High School has been a beacon of excellence in education since 2000. We provide a nurturing environment where students can grow academically, socially, and personally. Our commitment to fostering critical thinking, creativity, and leadership has made us one of the leading educational institutions in the region.</p>
+        <p>Laanqari Aisha High School has been a beacon of excellence in education since 2000. We provide a nurturing environment where students can grow academically, socially, and personally.</p>
         <span class="badge">Established 2000</span>
         <span class="badge">Excellence</span>
-        <span class="badge">Innovation</span>
+      </div>
+    </div>
+
+    <!-- ===== Profile Page ===== -->
+    <div id="profilePage" class="page">
+      <h2>My Profile</h2>
+      <div class="profile-card">
+        <div class="profile-avatar" id="profileAvatar">👤</div>
+        <div class="profile-info">
+          <h2 id="profileName">User Name</h2>
+          <p id="profileEmail">user@email.com</p>
+          <p id="profileRole">Student</p>
+        </div>
+        <button class="logout-btn" style="margin-top:20px;" onclick="showEditProfile()">✏️ Edit Profile</button>
       </div>
 
       <div class="card">
-        <h3>🏆 Our Mission</h3>
-        <p>To empower students with knowledge, skills, and values that prepare them for success in an ever-changing world. We strive to create lifelong learners who are compassionate, responsible, and ready to make a positive impact on society.</p>
-      </div>
-
-      <div class="card">
-        <h3>🌟 Our Vision</h3>
-        <p>To be the premier educational institution that inspires excellence, innovation, and integrity in every student, preparing them to become leaders and changemakers in a global society.</p>
+        <h3>📊 Your Activity</h3>
+        <p>Posts: <strong id="userPosts">0</strong></p>
+        <p>Comments: <strong id="userComments">0</strong></p>
+        <p>Likes Given: <strong id="userLikes">0</strong></p>
       </div>
     </div>
 
@@ -1551,363 +949,277 @@
       <div id="newsContent"></div>
     </div>
 
-    <!-- ===== Students Page ===== -->
-    <div id="studentsPage" class="page">
-      <h2>Our Students</h2>
-      <div id="studentsContent"></div>
+    <!-- ===== Homework Page ===== -->
+    <div id="homeworkPage" class="page">
+      <h2>Homework & Assignments</h2>
+      <div id="homeworkContent"></div>
     </div>
 
-    <!-- ===== Teachers Page ===== -->
-    <div id="teachersPage" class="page">
-      <h2>Our Teachers</h2>
-      <div id="teachersContent"></div>
+    <!-- ===== Calendar Page ===== -->
+    <div id="calendarPage" class="page">
+      <h2>School Calendar</h2>
+      <div class="card">
+        <h3>📅 Upcoming Events</h3>
+        <div id="calendarContent"></div>
+      </div>
+    </div>
+
+    <!-- ===== Files Page ===== -->
+    <div id="filesPage" class="page">
+      <h2>Shared Files & Documents</h2>
+      <div id="filesContent"></div>
+    </div>
+
+    <!-- ===== Polls Page ===== -->
+    <div id="pollsPage" class="page">
+      <h2>Polls & Surveys</h2>
+      <div id="pollsContent"></div>
     </div>
 
     <!-- ===== Contact Page ===== -->
     <div id="contactPage" class="page">
       <h2>Contact Us</h2>
-      
       <div class="card">
         <h3>📍 School Address</h3>
-        <p><strong>Laanqari Aisha High School</strong><br>
+        <p>Laanqari Aisha High School<br>
         Chlef Taougrit, Algeria</p>
       </div>
-
       <div class="card">
         <h3>📞 Contact Information</h3>
-        <p><strong>Phone:</strong> +213-0557522486<br>
-        <strong>Email:</strong> info@laanqarischool.edu.dz<br>
-        <strong>Office Hours:</strong> Sunday - Thursday, 8:00 AM - 4:00 PM</p>
+        <p>Phone: +213-0557522486<br>
+        Email: info@laanqarischool.edu.dz</p>
       </div>
-
       <div class="card">
         <h3>📧 Send us a Message</h3>
         <form onsubmit="handleContactSubmit(event)">
           <div class="form-group">
-            <label for="contactName">Your Name</label>
-            <input type="text" id="contactName" placeholder="Enter your name" required>
+            <label for="contactName">Name</label>
+            <input type="text" id="contactName" style="padding-left:15px;" required>
           </div>
           <div class="form-group">
-            <label for="contactEmail">Your Email</label>
-            <input type="email" id="contactEmail" placeholder="Enter your email" required>
+            <label for="contactEmail">Email</label>
+            <input type="email" id="contactEmail" style="padding-left:15px;" required>
           </div>
           <div class="form-group">
             <label for="contactMessage">Message</label>
-            <textarea id="contactMessage" placeholder="Write your message here..." required></textarea>
+            <textarea id="contactMessage" required></textarea>
           </div>
-          <button type="submit" class="btn btn-primary">📤 Send Message</button>
+          <button type="submit" class="btn-primary">Send Message</button>
         </form>
-        <div id="contactFormMessage" class="message message-success" style="margin-top: 1rem;"></div>
+        <div id="contactFormMessage" class="success-message" style="margin-top: 15px;"></div>
       </div>
-    </div>
-
-    <!-- ===== Notifications Page ===== -->
-    <div id="notificationsPage" class="page">
-      <h2>Admin Notifications</h2>
-      
-      <div class="storage-info">
-        <h4>💾 Storage Dashboard</h4>
-        <p>All application data is securely stored in your browser's local storage. Data persists across sessions and is automatically saved with every interaction.</p>
-        <div class="storage-stats">
-          <div class="storage-stat">
-            <div class="storage-stat-value" id="totalUsers">0</div>
-            <div class="storage-stat-label">Total Users</div>
-          </div>
-          <div class="storage-stat">
-            <div class="storage-stat-value" id="totalPosts">0</div>
-            <div class="storage-stat-label">Total Posts</div>
-          </div>
-          <div class="storage-stat">
-            <div class="storage-stat-value" id="totalNotifications">0</div>
-            <div class="storage-stat-label">Notifications</div>
-          </div>
-          <div class="storage-stat">
-            <div class="storage-stat-value" id="storageSize">0 KB</div>
-            <div class="storage-stat-label">Storage Used</div>
-          </div>
-        </div>
-      </div>
-      
-      <button class="clear-all-btn" onclick="clearAllNotifications()">🗑️ Clear All Notifications</button>
-      
-      <div id="notificationsContent"></div>
     </div>
   </main>
 
-  <!-- Floating Action Button -->
-  <button id="addContentBtn" class="fab" onclick="showAddContentModal()" style="display:none;">+</button>
+  <!-- Add Content Button (Only for Teachers and Admins) -->
+  <button id="addContentBtn" class="add-content-btn" onclick="showAddContentModal()" style="display:none;">+</button>
 
   <!-- ===== Add Content Modal ===== -->
   <div id="addContentModal" class="modal">
     <div class="modal-content">
       <span class="close" onclick="closeAddContentModal()">&times;</span>
-      <h2>Create New Post</h2>
-      
+      <h2>Create New Content</h2>
       <form id="addContentForm" onsubmit="handleAddContent(event)">
         <div class="form-group">
-          <label for="postCategory">Category</label>
-          <select id="postCategory" required>
-            <option value="news">📰 News & Events</option>
-            <option value="students">👨‍🎓 Students</option>
-            <option value="teachers">👩‍🏫 Teachers</option>
+          <label for="contentType">Content Type</label>
+          <select id="contentType" onchange="updateContentForm()" required>
+            <option value="post">📰 Post/News</option>
+            <option value="homework">📚 Homework</option>
+            <option value="event">📅 Event</option>
+            <option value="file">📁 File</option>
+            <option value="poll">📊 Poll</option>
           </select>
         </div>
-
-        <div class="form-group">
-          <label for="postTitle">Title</label>
-          <input type="text" id="postTitle" placeholder="Enter post title" required>
-        </div>
-
-        <div class="form-group">
-          <label for="postContent">Content</label>
-          <textarea id="postContent" rows="6" placeholder="Write your content here..." required></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="postMedia">📷 Add Photo or Video (Optional)</label>
-          <input type="file" id="postMedia" accept="image/*,video/*" onchange="previewMedia(event)">
-          <div id="mediaPreview" class="media-preview" style="display:none;">
-            <p class="preview-header">Preview:</p>
-            <img id="imagePreview" style="display:none;">
-            <video id="videoPreview" controls style="display:none;"></video>
-            <button type="button" class="btn-small btn-delete" onclick="removeMedia()">❌ Remove Media</button>
+        
+        <div id="postFields">
+          <div class="form-group">
+            <label for="postTitle">Title</label>
+            <input type="text" id="postTitle" style="padding-left:15px;">
+          </div>
+          <div class="form-group">
+            <label for="postContent">Content</label>
+            <textarea id="postContent" rows="5"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="postMedia">📷 Add Photo or Video (Optional)</label>
+            <input type="file" id="postMedia" accept="image/*,video/*" onchange="previewMedia(event)" style="padding:12px;">
+            <div id="mediaPreview" style="margin-top:15px; display:none;">
+              <p style="font-weight:bold; color:#2a2d8f; margin-bottom:10px;">Preview:</p>
+              <img id="imagePreview" style="max-width:100%; max-height:300px; border-radius:10px; display:none;">
+              <video id="videoPreview" controls style="max-width:100%; max-height:300px; border-radius:10px; display:none;"></video>
+              <button type="button" onclick="removeMedia()" style="margin-top:10px; padding:8px 16px; background:#f8d7da; color:#721c24; border:none; border-radius:8px; cursor:pointer;">❌ Remove Media</button>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="postTags">Tags (comma separated)</label>
+            <input type="text" id="postTags" placeholder="e.g., Important, Upcoming" style="padding-left:15px;">
           </div>
         </div>
 
-        <div class="form-group">
-          <label for="postTags">Tags (comma separated)</label>
-          <input type="text" id="postTags" placeholder="e.g., Important, Upcoming, Featured">
+        <div id="homeworkFields" style="display:none;">
+          <div class="form-group">
+            <label for="hwTitle">Homework Title</label>
+            <input type="text" id="hwTitle" style="padding-left:15px;">
+          </div>
+          <div class="form-group">
+            <label for="hwDescription">Description</label>
+            <textarea id="hwDescription" rows="5"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="hwDueDate">Due Date</label>
+            <input type="date" id="hwDueDate" style="padding-left:15px;">
+          </div>
+          <div class="form-group">
+            <label for="hwSubject">Subject</label>
+            <input type="text" id="hwSubject" placeholder="e.g., Mathematics" style="padding-left:15px;">
+          </div>
         </div>
 
-        <button type="submit" class="btn btn-primary">📤 Publish Post</button>
+        <div id="eventFields" style="display:none;">
+          <div class="form-group">
+            <label for="eventTitle">Event Title</label>
+            <input type="text" id="eventTitle" style="padding-left:15px;">
+          </div>
+          <div class="form-group">
+            <label for="eventDescription">Description</label>
+            <textarea id="eventDescription" rows="3"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="eventDate">Event Date</label>
+            <input type="date" id="eventDate" style="padding-left:15px;">
+          </div>
+          <div class="form-group">
+            <label for="eventLocation">Location</label>
+            <input type="text" id="eventLocation" placeholder="e.g., School Hall" style="padding-left:15px;">
+          </div>
+        </div>
+
+        <div id="fileFields" style="display:none;">
+          <div class="form-group">
+            <label for="fileTitle">File Title</label>
+            <input type="text" id="fileTitle" style="padding-left:15px;">
+          </div>
+          <div class="form-group">
+            <label for="fileDescription">Description</label>
+            <textarea id="fileDescription" rows="3"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="fileUpload">📎 Upload File</label>
+            <input type="file" id="fileUpload" style="padding:12px;">
+          </div>
+          <div class="form-group">
+            <label for="fileCategory">Category</label>
+            <select id="fileCategory" style="padding-left:15px;">
+              <option value="lesson">Lesson Materials</option>
+              <option value="exam">Exams & Tests</option>
+              <option value="general">General</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="pollFields" style="display:none;">
+          <div class="form-group">
+            <label for="pollQuestion">Poll Question</label>
+            <input type="text" id="pollQuestion" placeholder="What's your question?" style="padding-left:15px;">
+          </div>
+          <div class="form-group">
+            <label>Poll Options</label>
+            <input type="text" id="pollOption1" placeholder="Option 1" style="padding-left:15px; margin-bottom:10px;">
+            <input type="text" id="pollOption2" placeholder="Option 2" style="padding-left:15px; margin-bottom:10px;">
+            <input type="text" id="pollOption3" placeholder="Option 3" style="padding-left:15px; margin-bottom:10px;">
+            <input type="text" id="pollOption4" placeholder="Option 4 (Optional)" style="padding-left:15px;">
+          </div>
+        </div>
+
+        <button type="submit" class="btn-primary">📤 Create</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ===== Edit Profile Modal ===== -->
+  <div id="editProfileModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeEditProfile()">&times;</span>
+      <h2>Edit Profile</h2>
+      <form id="editProfileForm" onsubmit="handleEditProfile(event)">
+        <div class="form-group">
+          <label for="editFullName">Full Name</label>
+          <input type="text" id="editFullName" style="padding-left:15px;" required>
+        </div>
+        <div class="form-group">
+          <label for="editEmail">Email</label>
+          <input type="email" id="editEmail" style="padding-left:15px;" required>
+        </div>
+        <div class="form-group">
+          <label for="editBio">Bio</label>
+          <textarea id="editBio" rows="4" placeholder="Tell us about yourself..."></textarea>
+        </div>
+        <button type="submit" class="btn-primary">💾 Save Changes</button>
       </form>
     </div>
   </div>
 
   <footer>
-    <p><strong>&copy; 2026 Laanqari Aisha High School</strong></p>
+    <p>&copy; 2026 Laanqari Aisha High School</p>
     <p>📍 Chlef Taougrit, Algeria | 📞 +213-0557522486 | ✉️ info@laanqarischool.edu.dz</p>
-    <p style="margin-top: 1rem; font-size: 0.875rem; opacity: 0.9;">
-      Building Tomorrow's Leaders Today
-    </p>
   </footer>
 </div>
 
 <script>
-  // ===== PARTICLES ANIMATION =====
-  function createParticles(containerId) {
-    const container = document.getElementById(containerId);
-    if (!container) return;
-    
-    for (let i = 0; i < 50; i++) {
-      const particle = document.createElement('div');
-      particle.className = 'particle';
-      particle.style.width = Math.random() * 5 + 2 + 'px';
-      particle.style.height = particle.style.width;
-      particle.style.left = Math.random() * 100 + '%';
-      particle.style.animationDelay = Math.random() * 20 + 's';
-      particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
-      container.appendChild(particle);
-    }
-  }
-
-  createParticles('particles');
-  createParticles('particles2');
-  createParticles('particles3');
-
-  // ===== STORAGE MANAGER =====
-  const StorageManager = {
-    KEYS: {
-      USERS: 'laanqari_users_v2',
-      POSTS: 'laanqari_posts_v2',
-      NOTIFICATIONS: 'laanqari_notifications_v2',
-      SESSION: 'laanqari_session_v2',
-      INITIALIZED: 'laanqari_initialized_v2'
-    },
-
-    initialize() {
-      const isInitialized = localStorage.getItem(this.KEYS.INITIALIZED);
-      
-      if (!isInitialized) {
-        this.save(this.KEYS.USERS, []);
-        this.save(this.KEYS.POSTS, this.getDefaultPosts());
-        this.save(this.KEYS.NOTIFICATIONS, []);
-        localStorage.setItem(this.KEYS.INITIALIZED, 'true');
-        console.log('✅ Storage initialized');
-      }
-    },
-
-    save(key, data) {
-      try {
-        localStorage.setItem(key, JSON.stringify(data));
-        return true;
-      } catch (error) {
-        console.error('Storage error:', error);
-        return false;
-      }
-    },
-
-    load(key, defaultValue = null) {
-      try {
-        const data = localStorage.getItem(key);
-        return data ? JSON.parse(data) : defaultValue;
-      } catch (error) {
-        console.error('Load error:', error);
-        return defaultValue;
-      }
-    },
-
-    remove(key) {
-      localStorage.removeItem(key);
-    },
-
-    getStorageSize() {
-      let total = 0;
-      for (let key in localStorage) {
-        if (localStorage.hasOwnProperty(key)) {
-          total += localStorage[key].length + key.length;
-        }
-      }
-      return (total / 1024).toFixed(2);
-    },
-
-    getDefaultPosts() {
-      const now = Date.now();
-      return [
-        {
-          id: now + 1,
-          category: 'news',
-          title: '🔬 Annual Science Fair 2026',
-          content: 'We are excited to announce our Annual Science Fair taking place on March 10, 2026. Students from all grades are encouraged to participate and showcase their innovative projects. This year\'s theme is "Innovation for a Sustainable Future." Prizes will be awarded for the top three projects in each category!',
-          tags: ['Upcoming', 'Important', 'STEM'],
-          author: 'Admin',
-          date: new Date('2026-01-25').toISOString(),
-          likes: 15,
-          likedBy: [],
-          comments: []
-        },
-        {
-          id: now + 2,
-          category: 'news',
-          title: '⚽ Sports Day Championship',
-          content: 'Mark your calendars! Our annual Sports Day Championship is scheduled for April 5, 2026. Join us for a day filled with exciting competitions, team spirit, and athletic excellence. Events include track and field, basketball, soccer, and more. All students and families are welcome!',
-          tags: ['Sports', 'April 2026', 'Championship'],
-          author: 'Teacher',
-          date: new Date('2026-01-28').toISOString(),
-          likes: 23,
-          likedBy: [],
-          comments: []
-        },
-        {
-          id: now + 3,
-          category: 'students',
-          title: '⭐ Student Spotlight: Emma Zaki',
-          content: 'Meet Emma Zaki, our outstanding student in mathematics and computer science. Emma recently won first place in the 2025 Regional Coding Competition with her innovative AI-powered educational app. She maintains a perfect GPA while actively participating in our robotics club and volunteering at the local community center.',
-          tags: ['Mathematics', 'Computer Science', 'Achievement'],
-          author: 'Admin',
-          date: new Date('2026-01-20').toISOString(),
-          likes: 42,
-          likedBy: [],
-          comments: []
-        },
-        {
-          id: now + 4,
-          category: 'teachers',
-          title: '👩‍🏫 Meet Mrs. Aisha Laanqari',
-          content: 'We are proud to introduce Mrs. Aisha Laanqari, our distinguished Mathematics Teacher with 15 years of exceptional teaching experience. Mrs. Laanqari is a recipient of the National Teaching Excellence Award and has mentored numerous students who have gone on to pursue successful careers in STEM fields. Her innovative teaching methods and dedication to student success make her an invaluable member of our faculty.',
-          tags: ['Mathematics', '15 Years Experience', 'Excellence Award'],
-          author: 'Admin',
-          date: new Date('2026-01-15').toISOString(),
-          likes: 56,
-          likedBy: [],
-          comments: []
-        }
-      ];
-    }
-  };
-
-  // ===== DATA MANAGER =====
-  const DataManager = {
-    getUsers() {
-      return StorageManager.load(StorageManager.KEYS.USERS, []);
-    },
-
-    saveUsers(users) {
-      return StorageManager.save(StorageManager.KEYS.USERS, users);
-    },
-
-    addUser(user) {
-      const users = this.getUsers();
-      users.push(user);
-      return this.saveUsers(users);
-    },
-
-    getPosts() {
-      return StorageManager.load(StorageManager.KEYS.POSTS, []);
-    },
-
-    savePosts(posts) {
-      return StorageManager.save(StorageManager.KEYS.POSTS, posts);
-    },
-
-    addPost(post) {
-      const posts = this.getPosts();
-      posts.unshift(post);
-      return this.savePosts(posts);
-    },
-
-    deletePost(postId) {
-      const posts = this.getPosts().filter(p => p.id !== postId);
-      return this.savePosts(posts);
-    },
-
-    getNotifications() {
-      return StorageManager.load(StorageManager.KEYS.NOTIFICATIONS, []);
-    },
-
-    saveNotifications(notifications) {
-      return StorageManager.save(StorageManager.KEYS.NOTIFICATIONS, notifications);
-    },
-
-    addNotification(notification) {
-      const notifications = this.getNotifications();
-      notifications.unshift(notification);
-      return this.saveNotifications(notifications);
-    },
-
-    clearNotifications() {
-      return this.saveNotifications([]);
-    },
-
-    getSession() {
-      return StorageManager.load(StorageManager.KEYS.SESSION, null);
-    },
-
-    saveSession(session) {
-      return StorageManager.save(StorageManager.KEYS.SESSION, session);
-    },
-
-    clearSession() {
-      return StorageManager.remove(StorageManager.KEYS.SESSION);
-    },
-
-    getStats() {
-      return {
-        users: this.getUsers().length,
-        posts: this.getPosts().length,
-        notifications: this.getNotifications().length,
-        storageSize: StorageManager.getStorageSize()
-      };
-    }
-  };
-
-  // ===== APPLICATION STATE =====
+  // ===== Data Storage =====
   let currentUser = null;
   let userType = 'student';
   let registerType = 'student';
   let currentPage = 'home';
-  let currentMediaData = null;
-  let currentMediaType = null;
+
+  // Load data from localStorage
+  let registeredUsers = JSON.parse(localStorage.getItem('registeredUsers')) || [];
+  let posts = JSON.parse(localStorage.getItem('schoolPosts')) || getDefaultPosts();
+  let homework = JSON.parse(localStorage.getItem('schoolHomework')) || [];
+  let events = JSON.parse(localStorage.getItem('schoolEvents')) || getDefaultEvents();
+  let files = JSON.parse(localStorage.getItem('schoolFiles')) || [];
+  let polls = JSON.parse(localStorage.getItem('schoolPolls')) || [];
+  let notifications = JSON.parse(localStorage.getItem('schoolNotifications')) || [];
+
+  function getDefaultPosts() {
+    return [
+      {
+        id: 1,
+        type: 'post',
+        title: '🔬 Science Fair 2026',
+        content: 'The annual science fair will take place on March 10. Students from all grades are encouraged to participate!',
+        tags: ['Upcoming', 'Important'],
+        author: 'Admin',
+        date: new Date('2026-01-25').toISOString(),
+        likes: 15,
+        likedBy: [],
+        comments: []
+      }
+    ];
+  }
+
+  function getDefaultEvents() {
+    return [
+      {
+        id: 1,
+        title: 'Science Fair 2026',
+        description: 'Annual science fair for all grades',
+        date: '2026-03-10',
+        location: 'School Hall',
+        author: 'Admin',
+        createdAt: new Date().toISOString()
+      },
+      {
+        id: 2,
+        title: 'Sports Day',
+        description: 'School-wide sports competitions',
+        date: '2026-04-05',
+        location: 'Sports Field',
+        author: 'Admin',
+        createdAt: new Date().toISOString()
+      }
+    ];
+  }
 
   const validCredentials = {
     student: { username: 'student', password: 'student123' },
@@ -1915,13 +1227,34 @@
     admin: { username: 'admin', password: 'admin123' }
   };
 
-  // ===== AUTHENTICATION =====
+  // Check if user is already logged in
+  function checkSession() {
+    const savedSession = localStorage.getItem('currentSession');
+    if (savedSession) {
+      currentUser = JSON.parse(savedSession);
+      showMainWebsite();
+    }
+  }
+
+  function saveSession() {
+    localStorage.setItem('currentSession', JSON.stringify(currentUser));
+  }
+
+  function clearSession() {
+    localStorage.removeItem('currentSession');
+  }
+
+  window.addEventListener('DOMContentLoaded', function() {
+    checkSession();
+  });
+
+  // ===== Authentication Functions =====
   function selectUserType(type) {
     userType = type;
     document.querySelectorAll('#loginPage .user-type-btn').forEach(btn => {
       btn.classList.remove('active');
     });
-    event.target.closest('.user-type-btn').classList.add('active');
+    event.target.classList.add('active');
   }
 
   function selectRegisterType(type) {
@@ -1929,7 +1262,7 @@
     document.querySelectorAll('#registerPage .user-type-btn').forEach(btn => {
       btn.classList.remove('active');
     });
-    event.target.closest('.user-type-btn').classList.add('active');
+    event.target.classList.add('active');
 
     if (type === 'student') {
       document.getElementById('studentIdGroup').style.display = 'block';
@@ -1947,19 +1280,11 @@
   function showRegisterPage() {
     document.getElementById('loginPage').style.display = 'none';
     document.getElementById('registerPage').style.display = 'flex';
-    document.getElementById('registerError').style.display = 'none';
-    document.getElementById('registerSuccess').style.display = 'none';
   }
 
   function showLoginPage() {
     document.getElementById('registerPage').style.display = 'none';
     document.getElementById('loginPage').style.display = 'flex';
-    document.getElementById('errorMessage').style.display = 'none';
-    document.getElementById('successMessage').style.display = 'none';
-  }
-
-  function showForgotPassword() {
-    alert('Please contact the school administrator at admin@laanqarischool.edu.dz to reset your password.');
   }
 
   function handleRegister(event) {
@@ -1985,15 +1310,7 @@
       return;
     }
 
-    if (password.length < 6) {
-      errorMsg.textContent = '❌ Password must be at least 6 characters long!';
-      errorMsg.style.display = 'block';
-      return;
-    }
-
-    const users = DataManager.getUsers();
-    const existingUser = users.find(u => u.username === username);
-    
+    const existingUser = registeredUsers.find(u => u.username === username);
     if (existingUser || username === 'student' || username === 'teacher' || username === 'admin') {
       errorMsg.textContent = '❌ Username already exists!';
       errorMsg.style.display = 'block';
@@ -2013,16 +1330,12 @@
       password: password,
       type: registerType,
       studentId: registerType === 'student' ? studentId : null,
+      bio: '',
       createdAt: new Date().toISOString()
     };
 
-    DataManager.addUser(newUser);
-
-    addNotification(
-      'New Registration',
-      `New ${registerType} registered: ${fullName} (${username})`,
-      { username: username, type: registerType, email: email }
-    );
+    registeredUsers.push(newUser);
+    localStorage.setItem('registeredUsers', JSON.stringify(registeredUsers));
 
     successMsg.textContent = `✅ Account created successfully! Welcome ${fullName}!`;
     successMsg.style.display = 'block';
@@ -2053,19 +1366,15 @@
         username: username,
         type: userType,
         displayName: userType.charAt(0).toUpperCase() + userType.slice(1),
-        fullName: userType.charAt(0).toUpperCase() + userType.slice(1) + ' User'
+        fullName: userType.charAt(0).toUpperCase() + userType.slice(1) + ' User',
+        email: userType + '@school.edu.dz',
+        bio: ''
       };
-      
-      addNotification(
-        'New Login',
-        `${currentUser.fullName} (${userType}) logged in`,
-        { username: username, type: userType }
-      );
       
       successMsg.textContent = `✅ Welcome ${currentUser.displayName}!`;
       successMsg.style.display = 'block';
       
-      DataManager.saveSession(currentUser);
+      saveSession();
       
       setTimeout(() => {
         showMainWebsite();
@@ -2073,8 +1382,7 @@
       return;
     }
 
-    const users = DataManager.getUsers();
-    const registeredUser = users.find(u => 
+    const registeredUser = registeredUsers.find(u => 
       u.username === username && u.password === password && u.type === userType
     );
 
@@ -2084,43 +1392,21 @@
         type: registeredUser.type,
         displayName: registeredUser.type.charAt(0).toUpperCase() + registeredUser.type.slice(1),
         fullName: registeredUser.fullName,
-        email: registeredUser.email
+        email: registeredUser.email,
+        bio: registeredUser.bio || ''
       };
-      
-      addNotification(
-        'New Login',
-        `${registeredUser.fullName} (${registeredUser.type}) logged in`,
-        { username: username, type: registeredUser.type, email: registeredUser.email }
-      );
       
       successMsg.textContent = `✅ Welcome back ${registeredUser.fullName}!`;
       successMsg.style.display = 'block';
       
-      DataManager.saveSession(currentUser);
+      saveSession();
       
       setTimeout(() => {
         showMainWebsite();
       }, 1500);
     } else {
-      errorMsg.textContent = '❌ Invalid username or password!';
+      errorMsg.textContent = '❌ Invalid username or password.';
       errorMsg.style.display = 'block';
-    }
-  }
-
-  function logout() {
-    if (confirm('Are you sure you want to logout?')) {
-      if (window.notificationInterval) {
-        clearInterval(window.notificationInterval);
-      }
-      
-      currentUser = null;
-      DataManager.clearSession();
-      
-      document.getElementById('mainWebsite').style.display = 'none';
-      document.getElementById('loginPage').style.display = 'flex';
-      document.getElementById('loginForm').reset();
-      document.getElementById('addContentBtn').style.display = 'none';
-      document.getElementById('notificationsTab').style.display = 'none';
     }
   }
 
@@ -2135,169 +1421,127 @@
     document.getElementById('userDisplay').textContent = `${userIcon} ${currentUser.fullName}`;
     
     if (currentUser.type === 'teacher' || currentUser.type === 'admin') {
-      document.getElementById('addContentBtn').style.display = 'flex';
-    }
-
-    if (currentUser.type === 'admin') {
-      document.getElementById('notificationsTab').style.display = 'flex';
-      updateNotificationBadge();
-      
-      if (window.notificationInterval) {
-        clearInterval(window.notificationInterval);
-      }
-      window.notificationInterval = setInterval(() => {
-        updateNotificationBadge();
-        if (currentPage === 'notifications') {
-          renderNotifications();
-        }
-      }, 3000);
+      document.getElementById('addContentBtn').style.display = 'block';
     }
     
+    updateNotifications();
     renderPage(currentPage);
   }
 
-  // ===== NOTIFICATIONS =====
-  function addNotification(type, message, relatedData = {}) {
-    const notification = {
-      id: Date.now(),
-      type: type,
-      message: message,
-      timestamp: new Date().toISOString(),
-      read: false,
-      relatedData: relatedData
-    };
-    
-    DataManager.addNotification(notification);
-    updateNotificationBadge();
-  }
-
-  function updateNotificationBadge() {
-    if (currentUser && currentUser.type === 'admin') {
-      const notifications = DataManager.getNotifications();
-      const unreadCount = notifications.filter(n => !n.read).length;
-      const badge = document.getElementById('notificationCount');
-      
-      if (badge) {
-        if (unreadCount > 0) {
-          badge.textContent = unreadCount;
-          badge.style.display = 'flex';
-        } else {
-          badge.style.display = 'none';
-        }
-      }
+  function logout() {
+    if (confirm('Are you sure you want to logout?')) {
+      currentUser = null;
+      clearSession();
+      document.getElementById('mainWebsite').style.display = 'none';
+      document.getElementById('loginPage').style.display = 'flex';
+      document.getElementById('addContentBtn').style.display = 'none';
     }
   }
 
-  function markNotificationAsRead(notificationId) {
-    const notifications = DataManager.getNotifications();
-    const notification = notifications.find(n => n.id === notificationId);
-    
-    if (notification) {
-      notification.read = true;
-      DataManager.saveNotifications(notifications);
-      updateNotificationBadge();
-      renderNotifications();
-    }
+  function showForgotPassword() {
+    alert('Please contact admin@laanqarischool.edu.dz to reset your password.');
   }
 
-  function clearAllNotifications() {
-    if (confirm('Are you sure you want to clear all notifications?')) {
-      DataManager.clearNotifications();
-      updateNotificationBadge();
-      renderNotifications();
-    }
-  }
-
-  function renderNotifications() {
-    const notifications = DataManager.getNotifications();
-    const container = document.getElementById('notificationsContent');
-    
-    const stats = DataManager.getStats();
-    document.getElementById('totalUsers').textContent = stats.users;
-    document.getElementById('totalPosts').textContent = stats.posts;
-    document.getElementById('totalNotifications').textContent = stats.notifications;
-    document.getElementById('storageSize').textContent = stats.storageSize + ' KB';
-    
-    if (notifications.length === 0) {
-      container.innerHTML = '<div class="card"><p>No notifications yet.</p></div>';
-      return;
-    }
-
-    container.innerHTML = notifications.map(notif => `
-      <div class="notification-item ${notif.read ? '' : 'unread'}">
-        <div class="notification-header">
-          <span class="notification-type">${getNotificationIcon(notif.type)} ${notif.type}</span>
-          <span class="notification-time">${formatTimeAgo(notif.timestamp)}</span>
-        </div>
-        <div class="notification-message">${notif.message}</div>
-        ${!notif.read ? `<button class="mark-read-btn" onclick="markNotificationAsRead(${notif.id})">✓ Mark as Read</button>` : ''}
-      </div>
-    `).join('');
-    
-    updateNotificationBadge();
-  }
-
-  function getNotificationIcon(type) {
-    const icons = {
-      'New Login': '🔓',
-      'New Registration': '👤',
-      'New Post': '📝',
-      'New Comment': '💬',
-      'New Message': '✉️',
-      'Post Deleted': '🗑️'
-    };
-    return icons[type] || '📌';
-  }
-
-  function formatTimeAgo(timestamp) {
-    const now = new Date();
-    const time = new Date(timestamp);
-    const diff = Math.floor((now - time) / 1000);
-
-    if (diff < 60) return 'Just now';
-    if (diff < 3600) return `${Math.floor(diff / 60)} min ago`;
-    if (diff < 86400) return `${Math.floor(diff / 3600)} hrs ago`;
-    if (diff < 604800) return `${Math.floor(diff / 86400)} days ago`;
-    return time.toLocaleDateString();
-  }
-
-  // ===== NAVIGATION =====
+  // ===== Navigation =====
   function navigateTo(page) {
     currentPage = page;
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
     
     document.getElementById(page + 'Page').classList.add('active');
-    event.target.classList.add('active');
+    const navLinks = document.querySelectorAll('nav a');
+    navLinks.forEach(link => {
+      if (link.textContent.toLowerCase().includes(page.toLowerCase()) || 
+          (page === 'home' && link.textContent.includes('Home'))) {
+        link.classList.add('active');
+      }
+    });
     
     renderPage(page);
   }
 
   function renderPage(page) {
     if (page === 'news') {
-      renderPosts('news', 'newsContent');
-    } else if (page === 'students') {
-      renderPosts('students', 'studentsContent');
-    } else if (page === 'teachers') {
-      renderPosts('teachers', 'teachersContent');
-    } else if (page === 'notifications') {
-      renderNotifications();
+      renderPosts();
+    } else if (page === 'homework') {
+      renderHomework();
+    } else if (page === 'calendar') {
+      renderCalendar();
+    } else if (page === 'files') {
+      renderFiles();
+    } else if (page === 'polls') {
+      renderPolls();
+    } else if (page === 'profile') {
+      renderProfile();
     }
   }
 
-  // ===== POSTS =====
-  function renderPosts(category, containerId) {
-    const posts = DataManager.getPosts();
-    const container = document.getElementById(containerId);
-    const categoryPosts = posts.filter(p => p.category === category)
-                               .sort((a, b) => new Date(b.date) - new Date(a.date));
+  // ===== Profile Functions =====
+  function renderProfile() {
+    const icon = currentUser.type === 'admin' ? '🔐' : 
+                 currentUser.type === 'teacher' ? '👩‍🏫' : '👨‍🎓';
     
-    if (categoryPosts.length === 0) {
+    document.getElementById('profileAvatar').textContent = icon;
+    document.getElementById('profileName').textContent = currentUser.fullName;
+    document.getElementById('profileEmail').textContent = currentUser.email;
+    document.getElementById('profileRole').textContent = currentUser.type.charAt(0).toUpperCase() + currentUser.type.slice(1);
+
+    // Calculate user stats
+    const userPosts = posts.filter(p => p.author === currentUser.fullName).length;
+    const userComments = posts.reduce((total, p) => total + p.comments.filter(c => c.author === currentUser.fullName).length, 0);
+    const userLikes = posts.reduce((total, p) => total + (p.likedBy?.includes(currentUser.username) ? 1 : 0), 0);
+
+    document.getElementById('userPosts').textContent = userPosts;
+    document.getElementById('userComments').textContent = userComments;
+    document.getElementById('userLikes').textContent = userLikes;
+  }
+
+  function showEditProfile() {
+    document.getElementById('editProfileModal').style.display = 'block';
+    document.getElementById('editFullName').value = currentUser.fullName;
+    document.getElementById('editEmail').value = currentUser.email;
+    document.getElementById('editBio').value = currentUser.bio || '';
+  }
+
+  function closeEditProfile() {
+    document.getElementById('editProfileModal').style.display = 'none';
+  }
+
+  function handleEditProfile(event) {
+    event.preventDefault();
+    
+    currentUser.fullName = document.getElementById('editFullName').value;
+    currentUser.email = document.getElementById('editEmail').value;
+    currentUser.bio = document.getElementById('editBio').value;
+    
+    // Update in registered users
+    const userIndex = registeredUsers.findIndex(u => u.username === currentUser.username);
+    if (userIndex !== -1) {
+      registeredUsers[userIndex].fullName = currentUser.fullName;
+      registeredUsers[userIndex].email = currentUser.email;
+      registeredUsers[userIndex].bio = currentUser.bio;
+      localStorage.setItem('registeredUsers', JSON.stringify(registeredUsers));
+    }
+    
+    saveSession();
+    document.getElementById('userDisplay').textContent = `${currentUser.type === 'admin' ? '🔐' : currentUser.type === 'teacher' ? '👩‍🏫' : '👨‍🎓'} ${currentUser.fullName}`;
+    
+    closeEditProfile();
+    renderProfile();
+    alert('✅ Profile updated successfully!');
+  }
+
+  // ===== Posts Functions =====
+  function renderPosts() {
+    const container = document.getElementById('newsContent');
+    const sortedPosts = posts.filter(p => p.type === 'post').sort((a, b) => new Date(b.date) - new Date(a.date));
+    
+    if (sortedPosts.length === 0) {
       container.innerHTML = '<div class="card"><p>No posts yet. Teachers and admins can add content!</p></div>';
       return;
     }
     
-    container.innerHTML = categoryPosts.map(post => {
+    container.innerHTML = sortedPosts.map(post => {
       const isLiked = post.likedBy && post.likedBy.includes(currentUser?.username);
       const canDelete = currentUser && (currentUser.type === 'admin' || post.author === currentUser.fullName);
       
@@ -2305,18 +1549,15 @@
         <div class="card">
           <h3>${post.title}</h3>
           <p>${post.content}</p>
-          ${post.mediaData ? `
-            <div class="media-container">
-              ${post.mediaType.startsWith('image') ? 
-                `<img src="${post.mediaData}" alt="${post.title}">` : 
-                `<video controls><source src="${post.mediaData}" type="${post.mediaType}"></video>`
-              }
-            </div>
-          ` : ''}
+          ${post.mediaData ? (post.mediaType.startsWith('image') ? 
+            `<img src="${post.mediaData}" style="max-width:100%; max-height:400px; border-radius:10px; margin:15px 0;">` : 
+            `<video controls style="max-width:100%; max-height:400px; border-radius:10px; margin:15px 0;">
+              <source src="${post.mediaData}" type="${post.mediaType}">
+            </video>`) : ''}
           ${post.tags.map(tag => `<span class="badge">${tag}</span>`).join('')}
           <div class="card-meta">
-            <span>📝 ${post.author} • 📅 ${new Date(post.date).toLocaleDateString()}</span>
-            <span>❤️ ${post.likes} • 💬 ${post.comments.length}</span>
+            <span>📝 ${post.author} | 📅 ${new Date(post.date).toLocaleDateString()}</span>
+            <span>❤️ ${post.likes} | 💬 ${post.comments.length}</span>
           </div>
           <div class="card-actions">
             <button class="btn-small btn-like ${isLiked ? 'liked' : ''}" onclick="toggleLike(${post.id})">
@@ -2325,18 +1566,17 @@
             <button class="btn-small btn-comment" onclick="toggleComments(${post.id})">
               💬 Comment
             </button>
-            ${canDelete ? `<button class="btn-small btn-delete" onclick="deletePost(${post.id})">🗑️ Delete</button>` : ''}
+            ${canDelete ? `<button class="btn-small btn-delete" onclick="deleteItem('post', ${post.id})">🗑️ Delete</button>` : ''}
           </div>
           <div class="comments-section" id="comments-${post.id}">
             ${post.comments.map(c => `
               <div class="comment">
                 <div class="comment-author">${c.author}</div>
                 <div class="comment-text">${c.text}</div>
-                <div class="comment-time">${formatTimeAgo(c.date)}</div>
               </div>
             `).join('')}
             <input type="text" class="comment-input" id="comment-input-${post.id}" placeholder="Write a comment...">
-            <button class="btn-small btn-comment" style="margin-top:1rem;" onclick="addComment(${post.id})">Post Comment</button>
+            <button class="btn-small btn-comment" style="margin-top:10px;" onclick="addComment(${post.id})">Post Comment</button>
           </div>
         </div>
       `;
@@ -2346,12 +1586,10 @@
   function toggleLike(postId) {
     if (!currentUser) return;
     
-    const posts = DataManager.getPosts();
     const post = posts.find(p => p.id === postId);
     if (!post) return;
     
     if (!post.likedBy) post.likedBy = [];
-    if (!post.likes) post.likes = 0;
     
     const index = post.likedBy.indexOf(currentUser.username);
     if (index > -1) {
@@ -2360,9 +1598,10 @@
     } else {
       post.likedBy.push(currentUser.username);
       post.likes++;
+      addNotification(`${currentUser.fullName} liked your post "${post.title}"`, post.author);
     }
     
-    DataManager.savePosts(posts);
+    savePosts();
     renderPage(currentPage);
   }
 
@@ -2379,50 +1618,372 @@
     
     if (!text) return;
     
-    const posts = DataManager.getPosts();
     const post = posts.find(p => p.id === postId);
     if (!post) return;
     
-    if (!post.comments) post.comments = [];
-    
-    const newComment = {
+    post.comments.push({
       author: currentUser.fullName,
       text: text,
       date: new Date().toISOString()
-    };
+    });
     
-    post.comments.push(newComment);
+    addNotification(`${currentUser.fullName} commented on your post "${post.title}"`, post.author);
     
-    addNotification(
-      'New Comment',
-      `${currentUser.fullName} commented on "${post.title}"`,
-      { postId: postId, postTitle: post.title }
-    );
-    
-    DataManager.savePosts(posts);
+    savePosts();
     input.value = '';
     renderPage(currentPage);
   }
 
-  function deletePost(postId) {
-    if (!confirm('Are you sure you want to delete this post?')) return;
+  // ===== Homework Functions =====
+  function renderHomework() {
+    const container = document.getElementById('homeworkContent');
+    const sortedHomework = homework.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
     
-    const posts = DataManager.getPosts();
-    const post = posts.find(p => p.id === postId);
-    const postTitle = post ? post.title : 'Unknown Post';
+    if (sortedHomework.length === 0) {
+      container.innerHTML = '<div class="card"><p>No homework assigned yet.</p></div>';
+      return;
+    }
     
-    DataManager.deletePost(postId);
-    
-    addNotification(
-      'Post Deleted',
-      `${currentUser.fullName} deleted: "${postTitle}"`,
-      { postId: postId }
-    );
-    
-    renderPage(currentPage);
+    container.innerHTML = sortedHomework.map(hw => {
+      const dueDate = new Date(hw.dueDate);
+      const today = new Date();
+      const isOverdue = dueDate < today && !hw.submitted;
+      const isSubmitted = hw.submissions?.some(s => s.student === currentUser.username);
+      const canDelete = currentUser && (currentUser.type === 'admin' || hw.author === currentUser.fullName);
+      
+      let cardClass = 'card homework-card';
+      if (isSubmitted) cardClass += ' submitted';
+      else if (isOverdue) cardClass += ' overdue';
+      
+      return `
+        <div class="${cardClass}">
+          <h3>📚 ${hw.title}</h3>
+          <p>${hw.description}</p>
+          <span class="badge">${hw.subject}</span>
+          <span class="badge">Due: ${dueDate.toLocaleDateString()}</span>
+          ${isSubmitted ? '<span class="badge" style="background:#4caf50;">✅ Submitted</span>' : ''}
+          ${isOverdue && !isSubmitted ? '<span class="badge" style="background:#f44336;">⚠️ Overdue</span>' : ''}
+          <div class="card-meta">
+            <span>📝 By ${hw.author}</span>
+            <span>${hw.submissions?.length || 0} submissions</span>
+          </div>
+          <div class="card-actions">
+            ${currentUser.type === 'student' && !isSubmitted ? 
+              `<button class="btn-small btn-download" onclick="submitHomework(${hw.id})">📤 Submit</button>` : ''}
+            ${canDelete ? `<button class="btn-small btn-delete" onclick="deleteItem('homework', ${hw.id})">🗑️ Delete</button>` : ''}
+          </div>
+        </div>
+      `;
+    }).join('');
   }
 
-  // ===== MODAL =====
+  function submitHomework(hwId) {
+    const hw = homework.find(h => h.id === hwId);
+    if (!hw) return;
+    
+    if (!hw.submissions) hw.submissions = [];
+    
+    hw.submissions.push({
+      student: currentUser.username,
+      studentName: currentUser.fullName,
+      date: new Date().toISOString()
+    });
+    
+    addNotification(`${currentUser.fullName} submitted homework: ${hw.title}`, hw.author);
+    
+    saveHomework();
+    renderHomework();
+    alert('✅ Homework submitted successfully!');
+  }
+
+  // ===== Calendar Functions =====
+  function renderCalendar() {
+    const container = document.getElementById('calendarContent');
+    const sortedEvents = events.sort((a, b) => new Date(a.date) - new Date(b.date));
+    
+    if (sortedEvents.length === 0) {
+      container.innerHTML = '<p>No events scheduled.</p>';
+      return;
+    }
+    
+    container.innerHTML = sortedEvents.map(event => {
+      const eventDate = new Date(event.date);
+      const canDelete = currentUser && (currentUser.type === 'admin' || event.author === currentUser.fullName);
+      
+      return `
+        <div class="card">
+          <h3>📅 ${event.title}</h3>
+          <p>${event.description}</p>
+          <span class="badge">📍 ${event.location}</span>
+          <span class="badge">📆 ${eventDate.toLocaleDateString()}</span>
+          <div class="card-meta">
+            <span>Created by ${event.author}</span>
+          </div>
+          ${canDelete ? `
+            <div class="card-actions">
+              <button class="btn-small btn-delete" onclick="deleteItem('event', ${event.id})">🗑️ Delete</button>
+            </div>
+          ` : ''}
+        </div>
+      `;
+    }).join('');
+  }
+
+  // ===== Files Functions =====
+  function renderFiles() {
+    const container = document.getElementById('filesContent');
+    
+    if (files.length === 0) {
+      container.innerHTML = '<div class="card"><p>No files shared yet.</p></div>';
+      return;
+    }
+    
+    container.innerHTML = files.map(file => {
+      const canDelete = currentUser && (currentUser.type === 'admin' || file.author === currentUser.fullName);
+      
+      return `
+        <div class="card">
+          <h3>📁 ${file.title}</h3>
+          <p>${file.description}</p>
+          <span class="badge">${file.category}</span>
+          <span class="badge">📎 ${file.fileName}</span>
+          <div class="card-meta">
+            <span>📝 By ${file.author} | 📅 ${new Date(file.date).toLocaleDateString()}</span>
+          </div>
+          <div class="card-actions">
+            <button class="btn-small btn-download" onclick="downloadFile(${file.id})">⬇️ Download</button>
+            ${canDelete ? `<button class="btn-small btn-delete" onclick="deleteItem('file', ${file.id})">🗑️ Delete</button>` : ''}
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  function downloadFile(fileId) {
+    const file = files.find(f => f.id === fileId);
+    if (!file || !file.fileData) return;
+    
+    const link = document.createElement('a');
+    link.href = file.fileData;
+    link.download = file.fileName;
+    link.click();
+  }
+
+  // ===== Polls Functions =====
+  function renderPolls() {
+    const container = document.getElementById('pollsContent');
+    
+    if (polls.length === 0) {
+      container.innerHTML = '<div class="card"><p>No polls available.</p></div>';
+      return;
+    }
+    
+    container.innerHTML = polls.map(poll => {
+      const hasVoted = poll.votes?.some(v => v.user === currentUser.username);
+      const totalVotes = poll.votes?.length || 0;
+      const canDelete = currentUser && (currentUser.type === 'admin' || poll.author === currentUser.fullName);
+      
+      return `
+        <div class="card">
+          <h3>📊 ${poll.question}</h3>
+          <div style="margin:20px 0;">
+            ${poll.options.map((option, index) => {
+              const optionVotes = poll.votes?.filter(v => v.option === index).length || 0;
+              const percentage = totalVotes > 0 ? Math.round((optionVotes / totalVotes) * 100) : 0;
+              const userVoted = poll.votes?.some(v => v.user === currentUser.username && v.option === index);
+              
+              if (hasVoted) {
+                return `
+                  <div class="poll-option ${userVoted ? 'selected' : ''}" style="position:relative;">
+                    <div class="poll-result" style="width:${percentage}%;"></div>
+                    <div class="poll-text">${option} - ${percentage}% (${optionVotes} votes)</div>
+                  </div>
+                `;
+              } else {
+                return `
+                  <div class="poll-option" onclick="votePoll(${poll.id}, ${index})">
+                    <div class="poll-text">${option}</div>
+                  </div>
+                `;
+              }
+            }).join('')}
+          </div>
+          <div class="card-meta">
+            <span>📝 By ${poll.author}</span>
+            <span>🗳️ ${totalVotes} votes</span>
+          </div>
+          ${canDelete ? `
+            <div class="card-actions">
+              <button class="btn-small btn-delete" onclick="deleteItem('poll', ${poll.id})">🗑️ Delete</button>
+            </div>
+          ` : ''}
+        </div>
+      `;
+    }).join('');
+  }
+
+  function votePoll(pollId, optionIndex) {
+    if (!currentUser) return;
+    
+    const poll = polls.find(p => p.id === pollId);
+    if (!poll) return;
+    
+    if (!poll.votes) poll.votes = [];
+    
+    if (poll.votes.some(v => v.user === currentUser.username)) {
+      alert('You have already voted!');
+      return;
+    }
+    
+    poll.votes.push({
+      user: currentUser.username,
+      option: optionIndex,
+      date: new Date().toISOString()
+    });
+    
+    addNotification(`${currentUser.fullName} voted on your poll`, poll.author);
+    
+    savePolls();
+    renderPolls();
+  }
+
+  // ===== Search Function =====
+  function handleSearch() {
+    const query = document.getElementById('searchBar').value.toLowerCase();
+    
+    if (!query) {
+      renderPage(currentPage);
+      return;
+    }
+    
+    // Search in posts
+    if (currentPage === 'news') {
+      const filtered = posts.filter(p => 
+        p.type === 'post' && 
+        (p.title.toLowerCase().includes(query) || 
+         p.content.toLowerCase().includes(query) ||
+         p.tags.some(t => t.toLowerCase().includes(query)))
+      );
+      
+      const container = document.getElementById('newsContent');
+      if (filtered.length === 0) {
+        container.innerHTML = '<div class="card"><p>No results found.</p></div>';
+      } else {
+        // Re-render with filtered results
+        container.innerHTML = filtered.map(post => {
+          const isLiked = post.likedBy && post.likedBy.includes(currentUser?.username);
+          const canDelete = currentUser && (currentUser.type === 'admin' || post.author === currentUser.fullName);
+          
+          return `
+            <div class="card">
+              <h3>${post.title}</h3>
+              <p>${post.content}</p>
+              ${post.tags.map(tag => `<span class="badge">${tag}</span>`).join('')}
+              <div class="card-actions">
+                <button class="btn-small btn-like ${isLiked ? 'liked' : ''}" onclick="toggleLike(${post.id})">
+                  ${isLiked ? '❤️ Liked' : '🤍 Like'}
+                </button>
+              </div>
+            </div>
+          `;
+        }).join('');
+      }
+    }
+    
+    // Search in homework
+    if (currentPage === 'homework') {
+      const filtered = homework.filter(hw => 
+        hw.title.toLowerCase().includes(query) || 
+        hw.description.toLowerCase().includes(query) ||
+        hw.subject.toLowerCase().includes(query)
+      );
+      
+      const container = document.getElementById('homeworkContent');
+      if (filtered.length === 0) {
+        container.innerHTML = '<div class="card"><p>No results found.</p></div>';
+      } else {
+        renderHomework();
+      }
+    }
+  }
+
+  // ===== Notifications =====
+  function addNotification(message, recipient) {
+    if (recipient === currentUser.fullName) return; // Don't notify yourself
+    
+    notifications.push({
+      id: Date.now(),
+      message: message,
+      recipient: recipient,
+      date: new Date().toISOString(),
+      read: false
+    });
+    
+    localStorage.setItem('schoolNotifications', JSON.stringify(notifications));
+    updateNotifications();
+  }
+
+  function updateNotifications() {
+    if (!currentUser) return;
+    
+    const userNotifications = notifications.filter(n => 
+      n.recipient === currentUser.fullName && !n.read
+    );
+    
+    const badge = document.getElementById('notificationBadge');
+    if (userNotifications.length > 0) {
+      badge.textContent = userNotifications.length;
+      badge.style.display = 'flex';
+    } else {
+      badge.style.display = 'none';
+    }
+    
+    renderNotifications();
+  }
+
+  function renderNotifications() {
+    if (!currentUser) return;
+    
+    const userNotifications = notifications
+      .filter(n => n.recipient === currentUser.fullName)
+      .sort((a, b) => new Date(b.date) - new Date(a.date))
+      .slice(0, 10);
+    
+    const container = document.getElementById('notificationList');
+    
+    if (userNotifications.length === 0) {
+      container.innerHTML = '<div class="notification-item">No notifications yet.</div>';
+      return;
+    }
+    
+    container.innerHTML = userNotifications.map(notif => `
+      <div class="notification-item ${!notif.read ? 'unread' : ''}" onclick="markAsRead(${notif.id})">
+        <div>${notif.message}</div>
+        <div style="font-size:0.85em; color:#999; margin-top:5px;">
+          ${new Date(notif.date).toLocaleString()}
+        </div>
+      </div>
+    `).join('');
+  }
+
+  function toggleNotifications() {
+    const panel = document.getElementById('notificationPanel');
+    panel.classList.toggle('active');
+  }
+
+  function markAsRead(notifId) {
+    const notif = notifications.find(n => n.id === notifId);
+    if (notif) {
+      notif.read = true;
+      localStorage.setItem('schoolNotifications', JSON.stringify(notifications));
+      updateNotifications();
+    }
+  }
+
+  // ===== Add Content Functions =====
+  let currentMediaData = null;
+  let currentMediaType = null;
+
   function showAddContentModal() {
     document.getElementById('addContentModal').style.display = 'block';
   }
@@ -2431,6 +1992,16 @@
     document.getElementById('addContentModal').style.display = 'none';
     document.getElementById('addContentForm').reset();
     removeMedia();
+  }
+
+  function updateContentForm() {
+    const type = document.getElementById('contentType').value;
+    
+    document.getElementById('postFields').style.display = type === 'post' ? 'block' : 'none';
+    document.getElementById('homeworkFields').style.display = type === 'homework' ? 'block' : 'none';
+    document.getElementById('eventFields').style.display = type === 'event' ? 'block' : 'none';
+    document.getElementById('fileFields').style.display = type === 'file' ? 'block' : 'none';
+    document.getElementById('pollFields').style.display = type === 'poll' ? 'block' : 'none';
   }
 
   function previewMedia(event) {
@@ -2468,92 +2039,212 @@
     currentMediaType = null;
     document.getElementById('postMedia').value = '';
     document.getElementById('mediaPreview').style.display = 'none';
-    document.getElementById('imagePreview').src = '';
-    document.getElementById('videoPreview').src = '';
   }
 
   function handleAddContent(event) {
     event.preventDefault();
     
     if (!currentUser || (currentUser.type !== 'teacher' && currentUser.type !== 'admin')) {
-      alert('Only teachers and admins can post!');
+      alert('Only teachers and admins can post content!');
       return;
     }
     
-    const category = document.getElementById('postCategory').value;
-    const title = document.getElementById('postTitle').value;
-    const content = document.getElementById('postContent').value;
-    const tags = document.getElementById('postTags').value.split(',').map(t => t.trim()).filter(t => t);
+    const type = document.getElementById('contentType').value;
     
-    const newPost = {
-      id: Date.now(),
-      category: category,
-      title: title,
-      content: content,
-      tags: tags,
-      author: currentUser.fullName,
-      date: new Date().toISOString(),
-      likes: 0,
-      likedBy: [],
-      comments: [],
-      mediaData: currentMediaData,
-      mediaType: currentMediaType
-    };
-    
-    DataManager.addPost(newPost);
-    
-    addNotification(
-      'New Post',
-      `${currentUser.fullName} created: "${title}"`,
-      { postId: newPost.id, category: category }
-    );
+    if (type === 'post') {
+      const title = document.getElementById('postTitle').value;
+      const content = document.getElementById('postContent').value;
+      const tags = document.getElementById('postTags').value.split(',').map(t => t.trim()).filter(t => t);
+      
+      posts.unshift({
+        id: Date.now(),
+        type: 'post',
+        title: title,
+        content: content,
+        tags: tags,
+        author: currentUser.fullName,
+        date: new Date().toISOString(),
+        likes: 0,
+        likedBy: [],
+        comments: [],
+        mediaData: currentMediaData,
+        mediaType: currentMediaType
+      });
+      
+      savePosts();
+      navigateTo('news');
+    } 
+    else if (type === 'homework') {
+      const title = document.getElementById('hwTitle').value;
+      const description = document.getElementById('hwDescription').value;
+      const dueDate = document.getElementById('hwDueDate').value;
+      const subject = document.getElementById('hwSubject').value;
+      
+      homework.push({
+        id: Date.now(),
+        title: title,
+        description: description,
+        dueDate: dueDate,
+        subject: subject,
+        author: currentUser.fullName,
+        date: new Date().toISOString(),
+        submissions: []
+      });
+      
+      saveHomework();
+      navigateTo('homework');
+      
+      // Notify all students
+      addNotification(`New homework assigned: ${title}`, 'all_students');
+    }
+    else if (type === 'event') {
+      const title = document.getElementById('eventTitle').value;
+      const description = document.getElementById('eventDescription').value;
+      const date = document.getElementById('eventDate').value;
+      const location = document.getElementById('eventLocation').value;
+      
+      events.push({
+        id: Date.now(),
+        title: title,
+        description: description,
+        date: date,
+        location: location,
+        author: currentUser.fullName,
+        createdAt: new Date().toISOString()
+      });
+      
+      saveEvents();
+      navigateTo('calendar');
+    }
+    else if (type === 'file') {
+      const fileInput = document.getElementById('fileUpload');
+      if (!fileInput.files[0]) {
+        alert('Please select a file to upload!');
+        return;
+      }
+      
+      const title = document.getElementById('fileTitle').value;
+      const description = document.getElementById('fileDescription').value;
+      const category = document.getElementById('fileCategory').value;
+      const file = fileInput.files[0];
+      
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        files.push({
+          id: Date.now(),
+          title: title,
+          description: description,
+          category: category,
+          fileName: file.name,
+          fileData: e.target.result,
+          author: currentUser.fullName,
+          date: new Date().toISOString()
+        });
+        
+        saveFiles();
+        navigateTo('files');
+      };
+      reader.readAsDataURL(file);
+    }
+    else if (type === 'poll') {
+      const question = document.getElementById('pollQuestion').value;
+      const options = [
+        document.getElementById('pollOption1').value,
+        document.getElementById('pollOption2').value,
+        document.getElementById('pollOption3').value,
+        document.getElementById('pollOption4').value
+      ].filter(o => o.trim());
+      
+      if (options.length < 2) {
+        alert('Please provide at least 2 options!');
+        return;
+      }
+      
+      polls.push({
+        id: Date.now(),
+        question: question,
+        options: options,
+        author: currentUser.fullName,
+        date: new Date().toISOString(),
+        votes: []
+      });
+      
+      savePolls();
+      navigateTo('polls');
+    }
     
     closeAddContentModal();
-    
-    if (category === 'news') navigateTo('news');
-    else if (category === 'students') navigateTo('students');
-    else if (category === 'teachers') navigateTo('teachers');
   }
 
-  // ===== CONTACT =====
+  // ===== Delete Functions =====
+  function deleteItem(type, id) {
+    if (!confirm('Are you sure you want to delete this?')) return;
+    
+    if (type === 'post') {
+      posts = posts.filter(p => p.id !== id);
+      savePosts();
+      renderPosts();
+    } else if (type === 'homework') {
+      homework = homework.filter(h => h.id !== id);
+      saveHomework();
+      renderHomework();
+    } else if (type === 'event') {
+      events = events.filter(e => e.id !== id);
+      saveEvents();
+      renderCalendar();
+    } else if (type === 'file') {
+      files = files.filter(f => f.id !== id);
+      saveFiles();
+      renderFiles();
+    } else if (type === 'poll') {
+      polls = polls.filter(p => p.id !== id);
+      savePolls();
+      renderPolls();
+    }
+  }
+
+  // ===== Save Functions =====
+  function savePosts() {
+    localStorage.setItem('schoolPosts', JSON.stringify(posts));
+  }
+
+  function saveHomework() {
+    localStorage.setItem('schoolHomework', JSON.stringify(homework));
+  }
+
+  function saveEvents() {
+    localStorage.setItem('schoolEvents', JSON.stringify(events));
+  }
+
+  function saveFiles() {
+    localStorage.setItem('schoolFiles', JSON.stringify(files));
+  }
+
+  function savePolls() {
+    localStorage.setItem('schoolPolls', JSON.stringify(polls));
+  }
+
+  // ===== Contact Form =====
   function handleContactSubmit(event) {
     event.preventDefault();
-    
-    const name = document.getElementById('contactName').value;
-    const email = document.getElementById('contactEmail').value;
-    const message = document.getElementById('contactMessage').value;
-    
-    addNotification(
-      'New Message',
-      `Message from ${name} (${email})`,
-      { name: name, email: email, message: message }
-    );
-    
     const msg = document.getElementById('contactFormMessage');
     msg.textContent = '✅ Message sent successfully!';
     msg.style.display = 'block';
     event.target.reset();
-    
     setTimeout(() => {
       msg.style.display = 'none';
     }, 5000);
   }
 
-  // ===== INITIALIZATION =====
-  window.addEventListener('DOMContentLoaded', function() {
-    StorageManager.initialize();
-    
-    const savedSession = DataManager.getSession();
-    if (savedSession) {
-      currentUser = savedSession;
-      showMainWebsite();
-    }
-  });
-
+  // ===== Close modals =====
   window.onclick = function(event) {
-    const modal = document.getElementById('addContentModal');
-    if (event.target == modal) {
+    const addModal = document.getElementById('addContentModal');
+    const editModal = document.getElementById('editProfileModal');
+    if (event.target == addModal) {
       closeAddContentModal();
+    }
+    if (event.target == editModal) {
+      closeEditProfile();
     }
   }
 </script>
