@@ -384,21 +384,15 @@ let chats = JSON.parse(localStorage.getItem('vibe_chats') || '{}');
 let currentUser = null;
 let chatWith = null;
 
-const defaultUsers = {
-  alex: { name: 'Alex Nova', password: '1234', bio: 'Designer & dreamer 🎨', emoji: 'A' },
-  sara: { name: 'Sara Bloom', password: '1234', bio: 'Photographer 📸', emoji: 'S' },
-  kai: { name: 'Kai Storm', password: '1234', bio: 'Music producer 🎵', emoji: 'K' },
-  mia: { name: 'Mia Fox', password: '1234', bio: 'Writer & poet ✍️', emoji: 'M' },
-};
-if (!localStorage.getItem('vibe_users')) { users = { ...defaultUsers }; saveUsers(); }
-
-const defaultPosts = [
-  { id: 1, author: 'alex', text: 'Just finished a new UI project — feeling super inspired today! 🎨 The design process is such a journey.', tags: ['#design', '#ui'], time: '2h ago', likes: 24, liked: false },
-  { id: 2, author: 'sara', text: 'Golden hour hits differently when you\'re in the mountains. 🌄 Captured some amazing shots today!', tags: ['#photography', '#nature'], time: '4h ago', likes: 61, liked: false },
-  { id: 3, author: 'kai', text: 'New track dropping this Friday 🔥 Been working on the beat for weeks, finally nailed the drop. Stay tuned!', tags: ['#music', '#producer'], time: '6h ago', likes: 88, liked: false },
-  { id: 4, author: 'mia', text: 'Started a new short story today. Sometimes the blank page is the most terrifying and exciting thing. ✍️', tags: ['#writing', '#creative'], time: '1d ago', likes: 35, liked: false },
-];
-if (!posts.length) { posts = defaultPosts; savePosts(); }
+// Clear any old fake data from previous version on first load
+if (!localStorage.getItem('vibe_clean_v2')) {
+  localStorage.removeItem('vibe_users');
+  localStorage.removeItem('vibe_posts');
+  localStorage.removeItem('vibe_chats');
+  localStorage.setItem('vibe_clean_v2', '1');
+  users = {}; posts = []; chats = {};
+}
+// No default users or posts — starts completely empty, real users only
 
 function saveUsers() { localStorage.setItem('vibe_users', JSON.stringify(users)); }
 function savePosts() { localStorage.setItem('vibe_posts', JSON.stringify(posts)); }
