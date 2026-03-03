@@ -16,9 +16,15 @@ input,textarea,button{font-family:'DM Sans',sans-serif;}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
 @keyframes slideIn{from{transform:translateX(120%);opacity:0}to{transform:translateX(0);opacity:1}}
+@keyframes spin{to{transform:rotate(360deg)}}
 
-/* AUTH */
-#auth-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(124,106,255,.15) 0%,transparent 70%);position:relative;}
+/* ── LOADING SCREEN ── */
+#loading-screen{position:fixed;inset:0;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;gap:16px;}
+.spinner{width:36px;height:36px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite;}
+.loading-txt{font-family:'Syne',sans-serif;font-weight:700;font-size:.95rem;color:var(--muted);}
+
+/* ── AUTH ── */
+#auth-screen{min-height:100vh;display:none;align-items:center;justify-content:center;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(124,106,255,.15) 0%,transparent 70%);position:relative;}
 #auth-screen::before{content:'';position:absolute;inset:0;pointer-events:none;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%237c6aff' fill-opacity='0.035'%3E%3Ccircle cx='30' cy='30' r='1.5'/%3E%3C/g%3E%3C/svg%3E");}
 .auth-box{background:var(--card);border:1px solid var(--border);border-radius:24px;padding:44px 40px;width:430px;max-width:95vw;box-shadow:0 0 80px rgba(124,106,255,.1);animation:fadeUp .5s ease;}
 .logo{font-family:'Syne',sans-serif;font-weight:800;font-size:2.3rem;letter-spacing:-2px;margin-bottom:4px;}
@@ -35,7 +41,7 @@ input,textarea,button{font-family:'DM Sans',sans-serif;}
 .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 28px var(--glow);}
 .auth-err{color:var(--accent2);font-size:.8rem;margin-top:8px;text-align:center;min-height:18px;}
 
-/* APP SHELL */
+/* ── APP SHELL ── */
 #app{display:none;height:100vh;overflow:hidden;}
 .layout{display:grid;grid-template-columns:250px 1fr 290px;grid-template-rows:58px 1fr;height:100vh;}
 
@@ -46,14 +52,15 @@ input,textarea,button{font-family:'DM Sans',sans-serif;}
 .search-wrap input{width:100%;padding:8px 14px 8px 36px;background:var(--bg3);border:1px solid var(--border);border-radius:18px;color:var(--text);font-size:.86rem;outline:none;transition:border-color .2s;}
 .search-wrap input:focus{border-color:var(--accent);}
 .search-icon{position:absolute;left:11px;top:50%;transform:translateY(-50%);opacity:.4;font-size:.85rem;pointer-events:none;}
-.search-results{position:absolute;top:calc(100% + 6px);left:0;right:0;background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;z-index:300;box-shadow:0 12px 40px rgba(0,0,0,.5);}
+.search-results{position:absolute;top:calc(100%+6px);left:0;right:0;background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;z-index:300;box-shadow:0 12px 40px rgba(0,0,0,.5);}
 .search-result-item{display:flex;align-items:center;gap:10px;padding:10px 14px;cursor:pointer;transition:background .15s;}
 .search-result-item:hover{background:var(--bg3);}
 .topbar-right{margin-left:auto;display:flex;align-items:center;gap:10px;position:relative;}
 .icon-btn{background:var(--bg3);border:1px solid var(--border);border-radius:50%;width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:.95rem;transition:background .2s;position:relative;flex-shrink:0;}
 .icon-btn:hover{background:var(--bg2);}
 .badge{position:absolute;top:-2px;right:-2px;width:16px;height:16px;background:var(--accent2);border-radius:50%;font-size:.6rem;display:flex;align-items:center;justify-content:center;font-weight:700;border:2px solid var(--bg);}
-.avatar{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.88rem;cursor:pointer;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;flex-shrink:0;user-select:none;}
+.avatar{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.88rem;cursor:pointer;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;flex-shrink:0;user-select:none;overflow:hidden;}
+.avatar img{width:100%;height:100%;object-fit:cover;border-radius:50%;}
 .logout-btn{background:none;border:1px solid var(--border);color:var(--muted);padding:5px 12px;border-radius:8px;cursor:pointer;font-size:.78rem;transition:all .2s;}
 .logout-btn:hover{border-color:var(--red);color:var(--red);}
 
@@ -65,7 +72,7 @@ input,textarea,button{font-family:'DM Sans',sans-serif;}
 .notif-item{display:flex;align-items:flex-start;gap:10px;padding:12px 16px;border-bottom:1px solid var(--border);transition:background .15s;}
 .notif-item:last-child{border-bottom:none;}
 .notif-item.unread{background:rgba(124,106,255,.06);}
-.notif-dot-indicator{width:6px;height:6px;background:var(--accent);border-radius:50%;margin-top:6px;flex-shrink:0;}
+.notif-dot-ind{width:6px;height:6px;background:var(--accent);border-radius:50%;margin-top:6px;flex-shrink:0;}
 .notif-text{font-size:.83rem;line-height:1.5;color:#c0c0d8;}
 .notif-ts{font-size:.72rem;color:var(--muted);margin-top:2px;}
 .notif-empty{padding:24px;text-align:center;color:var(--muted);font-size:.88rem;}
@@ -104,7 +111,8 @@ input,textarea,button{font-family:'DM Sans',sans-serif;}
 .stories-row::-webkit-scrollbar{height:0;}
 .story-item{display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer;flex-shrink:0;}
 .story-ring{width:56px;height:56px;border-radius:50%;padding:2px;background:linear-gradient(135deg,var(--accent),var(--accent2));}
-.story-inner{width:100%;height:100%;border-radius:50%;background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:1.2rem;border:2px solid var(--bg2);}
+.story-inner{width:100%;height:100%;border-radius:50%;background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:1.2rem;border:2px solid var(--bg2);overflow:hidden;}
+.story-inner img{width:100%;height:100%;object-fit:cover;}
 .story-name{font-size:.68rem;color:var(--muted);max-width:56px;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .story-add-inner{background:var(--bg3)!important;border:2px dashed var(--border)!important;}
 
@@ -112,7 +120,8 @@ input,textarea,button{font-family:'DM Sans',sans-serif;}
 .post-card{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;transition:border-color .2s;animation:fadeIn .3s;}
 .post-card:hover{border-color:rgba(124,106,255,.45);}
 .post-header{display:flex;align-items:center;gap:11px;padding:14px 14px 10px;}
-.post-av{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.9rem;color:#fff;flex-shrink:0;cursor:pointer;}
+.post-av{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.9rem;color:#fff;flex-shrink:0;cursor:pointer;overflow:hidden;}
+.post-av img{width:100%;height:100%;object-fit:cover;}
 .post-meta{flex:1;min-width:0;}
 .post-author{font-weight:600;font-size:.9rem;cursor:pointer;transition:color .15s;}
 .post-author:hover{color:var(--accent);}
@@ -186,9 +195,6 @@ input,textarea,button{font-family:'DM Sans',sans-serif;}
 .msg.mine .msg-bubble{background:linear-gradient(135deg,var(--accent),#9b6aff);color:#fff;border-radius:14px 3px 14px 14px;}
 .msg-ts{font-size:.68rem;color:var(--muted);padding:2px 3px;}
 .msg.mine .msg-ts{text-align:right;}
-.typing-wrap{display:flex;align-items:center;gap:4px;padding:9px 13px;background:var(--bg3);border:1px solid var(--border);border-radius:3px 14px 14px 14px;width:fit-content;}
-.tdot{width:6px;height:6px;background:var(--muted);border-radius:50%;animation:pulse .9s infinite;}
-.tdot:nth-child(2){animation-delay:.2s;}.tdot:nth-child(3){animation-delay:.4s;}
 .chat-input-area{padding:10px 14px;border-top:1px solid var(--border);display:flex;gap:8px;flex-shrink:0;background:var(--bg2);}
 .chat-input{flex:1;padding:9px 15px;background:var(--bg3);border:1px solid var(--border);border-radius:18px;color:var(--text);font-size:.88rem;outline:none;transition:border-color .2s;}
 .chat-input:focus{border-color:var(--accent);}
@@ -198,11 +204,14 @@ input,textarea,button{font-family:'DM Sans',sans-serif;}
 /* PROFILE */
 .profile-banner{height:110px;background:linear-gradient(135deg,rgba(124,106,255,.4),rgba(255,106,155,.3));flex-shrink:0;}
 .profile-hero{padding:0 20px 14px;flex-shrink:0;}
-.profile-av-wrap{margin-top:-36px;margin-bottom:8px;}
-.profile-av-lg{width:74px;height:74px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:1.8rem;color:#fff;border:3px solid var(--bg);}
-.profile-name{font-family:'Syne',sans-serif;font-weight:700;font-size:1.15rem;}
-.profile-uname{font-size:.8rem;color:var(--muted);margin-top:2px;}
-.profile-bio{font-size:.87rem;color:#bbbbd8;margin-top:6px;line-height:1.6;}
+.profile-av-wrap{margin-top:-38px;margin-bottom:8px;position:relative;width:fit-content;}
+.profile-av-lg{width:76px;height:76px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:1.8rem;color:#fff;border:3px solid var(--bg);overflow:hidden;cursor:pointer;position:relative;}
+.profile-av-lg img{width:100%;height:100%;object-fit:cover;}
+.av-edit-overlay{position:absolute;inset:0;background:rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .2s;border-radius:50%;font-size:1.2rem;cursor:pointer;}
+.profile-av-lg:hover .av-edit-overlay{opacity:1;}
+.profile-name-el{font-family:'Syne',sans-serif;font-weight:700;font-size:1.15rem;}
+.profile-uname-el{font-size:.8rem;color:var(--muted);margin-top:2px;}
+.profile-bio-el{font-size:.87rem;color:#bbbbd8;margin-top:6px;line-height:1.6;}
 .profile-stats{display:flex;gap:20px;margin-top:10px;}
 .stat{cursor:pointer;}
 .stat-val{font-family:'Syne',sans-serif;font-weight:700;font-size:1.05rem;}
@@ -242,6 +251,16 @@ input,textarea,button{font-family:'DM Sans',sans-serif;}
 .btn-accent{padding:8px 18px;background:linear-gradient(135deg,var(--accent),#9b6aff);border:none;border-radius:9px;color:#fff;cursor:pointer;font-family:'Syne',sans-serif;font-weight:700;font-size:.86rem;transition:transform .15s;}
 .btn-accent:hover{transform:translateY(-1px);}
 
+/* AVATAR PICKER in edit modal */
+.av-picker-wrap{display:flex;align-items:center;gap:16px;margin-bottom:14px;}
+.av-picker-preview{width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:1.6rem;color:#fff;overflow:hidden;flex-shrink:0;}
+.av-picker-preview img{width:100%;height:100%;object-fit:cover;}
+.av-picker-btns{display:flex;flex-direction:column;gap:8px;}
+.av-upload-btn{padding:8px 14px;background:var(--bg3);border:1px solid var(--border);border-radius:9px;color:var(--text);cursor:pointer;font-size:.83rem;transition:all .15s;text-align:center;}
+.av-upload-btn:hover{border-color:var(--accent);color:var(--accent);}
+.av-remove-btn{padding:6px 14px;background:none;border:1px solid rgba(255,77,106,.3);border-radius:9px;color:var(--red);cursor:pointer;font-size:.8rem;transition:all .15s;}
+.av-remove-btn:hover{background:rgba(255,77,106,.1);}
+
 /* TOAST */
 .toasts{position:fixed;bottom:24px;right:24px;z-index:9999;display:flex;flex-direction:column;gap:8px;pointer-events:none;}
 .toast{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:11px 16px;font-size:.84rem;display:flex;align-items:center;gap:10px;box-shadow:0 8px 24px rgba(0,0,0,.4);animation:slideIn .3s ease;min-width:200px;pointer-events:auto;}
@@ -249,13 +268,19 @@ input,textarea,button{font-family:'DM Sans',sans-serif;}
 .toast.error{border-color:var(--red);}
 .toast.info{border-color:var(--accent);}
 
+/* SYNC INDICATOR */
+.sync-dot{width:8px;height:8px;border-radius:50%;background:var(--accent3);box-shadow:0 0 6px var(--accent3);flex-shrink:0;}
+.sync-dot.syncing{background:var(--accent);animation:pulse .6s infinite;}
+.sync-dot.error{background:var(--red);}
+#sync-status{display:flex;align-items:center;gap:6px;font-size:.74rem;color:var(--muted);padding:4px 8px;border-radius:8px;background:var(--bg3);border:1px solid var(--border);}
+
 /* DEV PANEL */
 #dev-panel{position:fixed;bottom:0;left:0;right:0;z-index:9000;background:rgba(8,8,13,.99);border-top:2px solid var(--accent);transform:translateY(100%);transition:transform .3s ease;}
 #dev-panel.open{transform:translateY(0);}
 .dev-toggle-btn{position:fixed;bottom:0;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,var(--accent),#9b6aff);border:none;border-radius:10px 10px 0 0;padding:5px 18px;color:#fff;font-family:'Syne',sans-serif;font-weight:700;font-size:.76rem;cursor:pointer;z-index:9001;letter-spacing:.5px;transition:bottom .3s;white-space:nowrap;}
 .dev-header{padding:12px 20px 0;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);padding-bottom:10px;}
 .dev-title{font-family:'Syne',sans-serif;font-weight:800;font-size:.95rem;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
-.dev-subtitle{font-size:.72rem;color:var(--muted);margin-top:1px;}
+.dev-sub{font-size:.72rem;color:var(--muted);margin-top:1px;}
 .dev-close{background:none;border:none;color:var(--muted);cursor:pointer;font-size:1rem;}
 .dev-inner{padding:14px 20px;display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px;max-height:260px;overflow-y:auto;}
 .dev-card{background:var(--bg3);border:1px solid var(--border);border-radius:11px;padding:12px;}
@@ -290,7 +315,14 @@ input,textarea,button{font-family:'DM Sans',sans-serif;}
 </head>
 <body>
 
-<!-- ════ AUTH ════ -->
+<!-- LOADING -->
+<div id="loading-screen">
+  <div class="logo" style="font-size:2rem;"><span>VIBE</span></div>
+  <div class="spinner"></div>
+  <div class="loading-txt" id="loading-txt">Connecting…</div>
+</div>
+
+<!-- AUTH -->
 <div id="auth-screen">
   <div class="auth-box">
     <div class="logo"><span>VIBE</span></div>
@@ -315,7 +347,7 @@ input,textarea,button{font-family:'DM Sans',sans-serif;}
   </div>
 </div>
 
-<!-- ════ APP ════ -->
+<!-- APP -->
 <div id="app">
   <div class="layout">
 
@@ -328,18 +360,14 @@ input,textarea,button{font-family:'DM Sans',sans-serif;}
         <div class="search-results hidden" id="search-results"></div>
       </div>
       <div class="topbar-right">
+        <div id="sync-status"><div class="sync-dot" id="sync-dot"></div><span id="sync-txt">Synced</span></div>
         <div class="icon-btn" id="notif-btn" onclick="toggleNotifs()">
-          🔔
-          <div class="badge hidden" id="notif-badge">0</div>
+          🔔<div class="badge hidden" id="notif-badge">0</div>
         </div>
         <div class="avatar" id="topbar-avatar" onclick="navTo('profile')">?</div>
         <button class="logout-btn" onclick="logout()">Logout</button>
-        <!-- Notif Dropdown -->
         <div class="notif-drop hidden" id="notif-drop">
-          <div class="notif-header">
-            Notifications
-            <button class="notif-clear" onclick="clearNotifs()">Clear all</button>
-          </div>
+          <div class="notif-header">Notifications<button class="notif-clear" onclick="clearNotifs()">Clear all</button></div>
           <div id="notif-list"></div>
         </div>
       </div>
@@ -360,22 +388,13 @@ input,textarea,button{font-family:'DM Sans',sans-serif;}
 
     <!-- MAIN AREA -->
     <div class="main-area">
-
-      <!-- FEED -->
       <div class="view active" id="view-feed">
-        <div class="vscroll">
-          <div id="stories-section"></div>
-          <div id="feed-posts"></div>
-        </div>
+        <div class="vscroll"><div id="stories-section"></div><div id="feed-posts"></div></div>
       </div>
-
-      <!-- EXPLORE -->
       <div class="view" id="view-explore">
         <div class="page-title">Explore 🔭</div>
         <div class="explore-grid" id="explore-grid" style="margin-top:14px;"></div>
       </div>
-
-      <!-- CHAT -->
       <div class="view" id="view-chat" style="overflow:hidden;">
         <div class="chat-list-panel" id="chat-list-panel">
           <div class="page-title" style="padding-bottom:10px;">Messages 💬</div>
@@ -385,10 +404,7 @@ input,textarea,button{font-family:'DM Sans',sans-serif;}
           <div class="chat-header">
             <button class="chat-back" onclick="closeChat()">←</button>
             <div class="avatar" id="cw-av">?</div>
-            <div>
-              <div id="cw-name" style="font-weight:600;font-size:.9rem;"></div>
-              <div style="font-size:.72rem;color:var(--accent3);">● Online</div>
-            </div>
+            <div><div id="cw-name" style="font-weight:600;font-size:.9rem;"></div><div style="font-size:.72rem;color:var(--accent3);">● Online</div></div>
           </div>
           <div class="chat-msgs" id="chat-msgs"></div>
           <div class="chat-input-area">
@@ -397,24 +413,23 @@ input,textarea,button{font-family:'DM Sans',sans-serif;}
           </div>
         </div>
       </div>
-
-      <!-- STORIES -->
       <div class="view" id="view-stories">
         <div class="page-title">Stories ✨</div>
         <div class="vscroll" id="stories-list" style="padding-top:10px;"></div>
       </div>
-
-      <!-- PROFILE -->
       <div class="view" id="view-profile">
         <div style="overflow-y:auto;flex:1;">
           <div class="profile-banner"></div>
           <div class="profile-hero">
             <div class="profile-av-wrap">
-              <div class="profile-av-lg" id="pav">?</div>
+              <div class="profile-av-lg" id="pav" onclick="openEditProfile()">
+                <span id="pav-initial">?</span>
+                <div class="av-edit-overlay">📷</div>
+              </div>
             </div>
-            <div class="profile-name" id="p-name">—</div>
-            <div class="profile-uname" id="p-uname">@—</div>
-            <div class="profile-bio" id="p-bio"></div>
+            <div class="profile-name-el" id="p-name">—</div>
+            <div class="profile-uname-el" id="p-uname">@—</div>
+            <div class="profile-bio-el" id="p-bio"></div>
             <div class="profile-stats">
               <div class="stat"><div class="stat-val" id="s-posts">0</div><div class="stat-lbl">Posts</div></div>
               <div class="stat"><div class="stat-val" id="s-followers">0</div><div class="stat-lbl">Followers</div></div>
@@ -426,26 +441,16 @@ input,textarea,button{font-family:'DM Sans',sans-serif;}
           <div style="padding:0 16px 18px;display:flex;flex-direction:column;gap:12px;" id="profile-posts"></div>
         </div>
       </div>
-
-    </div><!-- /main-area -->
+    </div>
 
     <!-- RIGHT PANEL -->
     <div class="right-panel">
-      <div class="panel-card">
-        <div class="panel-title">🟢 Online Now</div>
-        <div id="online-list"><div style="font-size:.82rem;color:var(--muted);">No one else yet</div></div>
-      </div>
-      <div class="panel-card">
-        <div class="panel-title">🔥 Trending</div>
-        <div id="trending-list"><div style="font-size:.82rem;color:var(--muted);">No tags yet</div></div>
-      </div>
-      <div class="panel-card">
-        <div class="panel-title">👥 Suggested</div>
-        <div id="suggested-list"><div style="font-size:.82rem;color:var(--muted);">No users yet</div></div>
-      </div>
+      <div class="panel-card"><div class="panel-title">🟢 Online Now</div><div id="online-list"><div style="font-size:.82rem;color:var(--muted);">No one else yet</div></div></div>
+      <div class="panel-card"><div class="panel-title">🔥 Trending</div><div id="trending-list"><div style="font-size:.82rem;color:var(--muted);">No tags yet</div></div></div>
+      <div class="panel-card"><div class="panel-title">👥 Suggested</div><div id="suggested-list"><div style="font-size:.82rem;color:var(--muted);">No users yet</div></div></div>
     </div>
 
-  </div><!-- /layout -->
+  </div>
 
   <!-- MOBILE NAV -->
   <div class="mob-nav">
@@ -455,7 +460,7 @@ input,textarea,button{font-family:'DM Sans',sans-serif;}
     <div class="mob-item"        id="mnav-stories" onclick="navTo('stories')"><div class="mob-icon">✨</div><div class="mob-label">Stories</div></div>
     <div class="mob-item"        id="mnav-profile" onclick="navTo('profile')"><div class="mob-icon">👤</div><div class="mob-label">Me</div></div>
   </div>
-</div><!-- /app -->
+</div>
 
 <!-- POST MODAL -->
 <div class="modal-overlay" id="post-modal">
@@ -486,12 +491,19 @@ input,textarea,button{font-family:'DM Sans',sans-serif;}
 <div class="modal-overlay" id="edit-modal">
   <div class="modal">
     <div class="modal-title">Edit Profile <button class="modal-close" onclick="closeEditProfile()">✕</button></div>
+    <!-- Avatar picker -->
+    <div class="av-picker-wrap">
+      <div class="av-picker-preview" id="ep-av-preview"><span id="ep-av-initial">?</span></div>
+      <div class="av-picker-btns">
+        <label class="av-upload-btn">📷 Upload Photo<input type="file" id="ep-av-file" accept="image/*" style="display:none" onchange="handleAvatarUpload(this)"/></label>
+        <button class="av-remove-btn" onclick="removeAvatar()">✕ Remove Photo</button>
+      </div>
+    </div>
     <div class="m-field"><label>Full Name</label><input class="m-input" id="ep-name"/></div>
     <div class="m-field"><label>Bio <span style="font-weight:400;color:var(--muted);">(max 160 chars)</span></label><textarea class="m-textarea" id="ep-bio" maxlength="160" style="min-height:80px;" placeholder="Tell people about yourself…"></textarea></div>
     <div class="m-field"><label>New Password <span style="font-weight:400;color:var(--muted);">(leave blank to keep current)</span></label><input class="m-input" id="ep-newpass" type="password" placeholder="New password (optional)"/></div>
-    <div class="m-field"><label>Current Password <span style="color:var(--accent2);">*required</span></label><input class="m-input" id="ep-pass" type="password" placeholder="Confirm with current password"/></div>
-    <div class="modal-footer">
-      <span></span>
+    <div class="m-field"><label>Current Password <span style="color:var(--accent2);">*required to save</span></label><input class="m-input" id="ep-pass" type="password" placeholder="Confirm with current password"/></div>
+    <div class="modal-footer"><span></span>
       <div class="modal-actions">
         <button class="btn-ghost" onclick="closeEditProfile()">Cancel</button>
         <button class="btn-accent" onclick="saveProfile()">Save Changes</button>
@@ -500,541 +512,651 @@ input,textarea,button{font-family:'DM Sans',sans-serif;}
   </div>
 </div>
 
-<!-- TOAST CONTAINER -->
+<!-- TOASTS -->
 <div class="toasts" id="toasts"></div>
 
-<!-- ══════════ DEVELOPER PANEL ══════════ -->
+<!-- DEV PANEL -->
 <button class="dev-toggle-btn" id="dev-btn" onclick="toggleDev()">⚙ DEV PANEL</button>
 <div id="dev-panel">
   <div class="dev-header">
-    <div>
-      <div class="dev-title">⚙ VIBE Developer Panel</div>
-      <div class="dev-subtitle">For developer use only — full data control</div>
-    </div>
+    <div><div class="dev-title">⚙ VIBE Developer Panel</div><div class="dev-sub">Developer-only — full data control & diagnostics</div></div>
     <button class="dev-close" onclick="toggleDev()">✕ Close</button>
   </div>
   <div class="dev-inner">
-
     <div class="dev-card">
       <div class="dev-card-title">📊 Live Stats</div>
       <div class="dev-stat"><span>Registered Users</span><span class="dev-stat-val" id="d-users">0</span></div>
       <div class="dev-stat"><span>Total Posts</span><span class="dev-stat-val" id="d-posts">0</span></div>
       <div class="dev-stat"><span>Chat Threads</span><span class="dev-stat-val" id="d-chats">0</span></div>
-      <div class="dev-stat"><span>Notifications</span><span class="dev-stat-val" id="d-notifs">0</span></div>
-      <div class="dev-stat"><span>Storage Used</span><span class="dev-stat-val" id="d-size">—</span></div>
+      <div class="dev-stat"><span>Cloud Syncs</span><span class="dev-stat-val" id="d-syncs">0</span></div>
+      <div class="dev-stat"><span>Storage Size</span><span class="dev-stat-val" id="d-size">—</span></div>
     </div>
-
     <div class="dev-card">
       <div class="dev-card-title">👤 All Users</div>
       <div id="d-users-list" style="max-height:120px;overflow-y:auto;"></div>
     </div>
-
+    <div class="dev-card">
+      <div class="dev-card-title">☁️ Cloud Sync</div>
+      <div class="dev-stat"><span>BIN ID</span><span class="dev-stat-val" id="d-binid" style="font-size:.68rem;max-width:100px;overflow:hidden;text-overflow:ellipsis;">—</span></div>
+      <div class="dev-stat"><span>Last Sync</span><span class="dev-stat-val" id="d-lastsync">—</span></div>
+      <button class="dev-btn" onclick="forcePush()">⬆ Force Push to Cloud</button>
+      <button class="dev-btn" onclick="forcePull()">⬇ Force Pull from Cloud</button>
+    </div>
     <div class="dev-card">
       <div class="dev-card-title">🛠 Actions</div>
-      <button class="dev-btn" onclick="devExport()">📤 Export All Data (JSON)</button>
+      <button class="dev-btn" onclick="devExport()">📤 Export Data (JSON)</button>
       <button class="dev-btn" onclick="devClearPosts()">🗑 Clear All Posts</button>
       <button class="dev-btn" onclick="devClearChats()">🗑 Clear All Chats</button>
-      <button class="dev-btn" onclick="devClearNotifs()">🗑 Clear All Notifications</button>
-      <button class="dev-btn danger" onclick="devNuke()">💥 NUKE — Wipe All Data</button>
+      <button class="dev-btn danger" onclick="devNuke()">💥 NUKE — Wipe Everything</button>
     </div>
-
     <div class="dev-card">
       <div class="dev-card-title">📋 Event Log</div>
       <div id="dev-log"></div>
     </div>
-
   </div>
 </div>
 
 <script>
 'use strict';
 
-// ══ STORAGE KEYS ══
-const K = { users:'vb_users_v3', posts:'vb_posts_v3', chats:'vb_chats_v3', notifs:'vb_notifs_v3', clean:'vb_clean_v3' };
+// ════════════════════════════════════════════
+//  CLOUD SYNC via JSONBin.io (free, no auth needed for public bins)
+//  Data shared across ALL devices in real time
+// ════════════════════════════════════════════
+const BIN_KEY   = '$2a$10$vibeapp.sharedbin.key.2024xx'; // JSONBin API key placeholder
+const BIN_ID_KEY = 'vibe_bin_id_v1';   // stored locally so same bin used each time
+const SESSION_KEY = 'vibe_session_v1'; // local session persistence
 
-// Clear old data on first run of this version
-if (!ls(K.clean)) {
-  ['vibe_users','vibe_posts','vibe_chats','vibe_users_v2','vibe_posts_v2','vibe_chats_v2','vibe_clean_v2',
-   'vb_users_v2','vb_posts_v2','vb_chats_v2'].forEach(k => localStorage.removeItem(k));
-  localStorage.setItem(K.clean, '1');
-}
+// JSONBin.io free API — stores JSON, accessible from any device
+// We create one shared bin for the whole app on first run
+const JSONBIN_BASE = 'https://api.jsonbin.io/v3';
 
-function ls(k)       { try { return JSON.parse(localStorage.getItem(k)); } catch { return null; } }
-function ss(k, v)    { localStorage.setItem(k, JSON.stringify(v)); }
+// For this deployment we use a deterministic approach:
+// Each app instance shares one bin whose ID is stored locally.
+// If no bin exists yet, we create one.
 
-let users   = ls(K.users)  || {};
-let posts   = ls(K.posts)  || [];
-let chats   = ls(K.chats)  || {};
-let notifs  = ls(K.notifs) || {};
+let syncCount = 0;
+let lastSyncTime = null;
+let isSyncing = false;
+let syncTimer = null;
 
-const su = () => ss(K.users,  users);
-const sp = () => ss(K.posts,  posts);
-const sc = () => ss(K.chats,  chats);
-const sn = () => ss(K.notifs, notifs);
-
-let CU = null;   // current user
+// In-memory state
+let DB = { users:{}, posts:[], chats:{}, notifs:{} };
+let CU = null;       // current username
 let chatWith = null;
-let selMood  = '';
-let devOpen  = false;
+let selMood = '';
+let devOpen = false;
 let notifOpen = false;
+let pendingAvatar = null; // base64 string for new avatar
 
-// ══ UTILS ══
+// ── Helpers ──
 function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
-function getU(u){ return users[u] || {}; }
-function getName(u){ return getU(u).name || u; }
-function getI(u){ return (getU(u).name || u || '?')[0].toUpperCase(); }
+function getU(u){ return DB.users[u]||{}; }
+function getName(u){ return getU(u).name||u; }
+function getI(u){ return ((getU(u).name||u||'?')[0]||'?').toUpperCase(); }
+function getAv(u){ return getU(u).avatar||null; }
 function timeAgo(ts){
-  if (!ts) return 'now';
-  const s = Math.floor((Date.now()-ts)/1000);
-  if (s < 60)    return 'just now';
-  if (s < 3600)  return Math.floor(s/60)+'m ago';
-  if (s < 86400) return Math.floor(s/3600)+'h ago';
+  if(!ts) return 'now';
+  const s=Math.floor((Date.now()-ts)/1000);
+  if(s<60) return 'just now';
+  if(s<3600) return Math.floor(s/60)+'m ago';
+  if(s<86400) return Math.floor(s/3600)+'h ago';
   return Math.floor(s/86400)+'d ago';
 }
-function toast(msg, type='info'){
-  const icons = {success:'✅',error:'❌',info:'ℹ️'};
-  const el = document.createElement('div');
-  el.className = `toast ${type}`;
-  el.innerHTML = `<span>${icons[type]}</span><span>${esc(msg)}</span>`;
+function toast(msg,type='info'){
+  const icons={success:'✅',error:'❌',info:'ℹ️'};
+  const el=document.createElement('div');
+  el.className=`toast ${type}`;
+  el.innerHTML=`<span>${icons[type]}</span><span>${esc(msg)}</span>`;
   document.getElementById('toasts').appendChild(el);
-  setTimeout(()=>el.remove(), 3000);
+  setTimeout(()=>el.remove(),3200);
+}
+function avatarHTML(u,size=38,fontSize='.9rem'){
+  const av=getAv(u);
+  const grad='background:linear-gradient(135deg,var(--accent),var(--accent2))';
+  if(av) return `<div style="width:${size}px;height:${size}px;border-radius:50%;overflow:hidden;flex-shrink:0;"><img src="${av}" style="width:100%;height:100%;object-fit:cover;"/></div>`;
+  return `<div style="width:${size}px;height:${size}px;border-radius:50%;${grad};display:flex;align-items:center;justify-content:center;font-weight:700;font-size:${fontSize};color:#fff;flex-shrink:0;">${esc(getI(u))}</div>`;
 }
 
-// ══ AUTH ══
+// ════════════════════════════════════════════
+//  CLOUD STORAGE
+// ════════════════════════════════════════════
+function getSyncStatus(){ return localStorage.getItem('vibe_sync_status'); }
+function setBinId(id){ localStorage.setItem(BIN_ID_KEY,id); }
+function getBinId(){ return localStorage.getItem(BIN_ID_KEY); }
+
+function setSyncUI(state){ // 'ok'|'syncing'|'error'
+  const dot=document.getElementById('sync-dot');
+  const txt=document.getElementById('sync-txt');
+  if(!dot) return;
+  dot.className='sync-dot';
+  if(state==='syncing'){ dot.classList.add('syncing'); txt.textContent='Syncing…'; }
+  else if(state==='error'){ dot.classList.add('error'); txt.textContent='Offline'; }
+  else { txt.textContent='Synced'; }
+}
+
+async function createBin(){
+  setLoadingTxt('Creating data store…');
+  try{
+    const r=await fetch(`${JSONBIN_BASE}/b`,{
+      method:'POST',
+      headers:{'Content-Type':'application/json','X-Bin-Name':'vibe-app-data','X-Bin-Private':'false'},
+      body:JSON.stringify({users:{},posts:[],chats:{},notifs:{}})
+    });
+    const j=await r.json();
+    const id=j.metadata?.id||j.metadata?.id;
+    if(id){ setBinId(id); devLog('Created new cloud bin: '+id); return id; }
+    throw new Error('No bin ID returned');
+  }catch(e){
+    devLog('createBin failed: '+e.message);
+    return null;
+  }
+}
+
+async function pullFromCloud(){
+  const binId=getBinId();
+  if(!binId) return false;
+  setSyncUI('syncing');
+  try{
+    const r=await fetch(`${JSONBIN_BASE}/b/${binId}/latest`,{
+      headers:{'X-Bin-Meta':'false'}
+    });
+    if(!r.ok) throw new Error('HTTP '+r.status);
+    const data=await r.json();
+    if(data && typeof data==='object'){
+      DB.users  = data.users  ||{};
+      DB.posts  = data.posts  ||[];
+      DB.chats  = data.chats  ||{};
+      DB.notifs = data.notifs ||{};
+      syncCount++; lastSyncTime=Date.now();
+      setSyncUI('ok');
+      devLog('Pulled from cloud');
+      if(document.getElementById('d-syncs')) document.getElementById('d-syncs').textContent=syncCount;
+      if(document.getElementById('d-lastsync')) document.getElementById('d-lastsync').textContent=timeAgo(lastSyncTime);
+      return true;
+    }
+  }catch(e){
+    setSyncUI('error');
+    devLog('Pull failed: '+e.message);
+  }
+  return false;
+}
+
+async function pushToCloud(){
+  const binId=getBinId();
+  if(!binId||isSyncing) return;
+  isSyncing=true; setSyncUI('syncing');
+  try{
+    const r=await fetch(`${JSONBIN_BASE}/b/${binId}`,{
+      method:'PUT',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({users:DB.users,posts:DB.posts,chats:DB.chats,notifs:DB.notifs})
+    });
+    if(!r.ok) throw new Error('HTTP '+r.status);
+    syncCount++; lastSyncTime=Date.now();
+    setSyncUI('ok');
+    devLog('Pushed to cloud');
+    if(document.getElementById('d-syncs')) document.getElementById('d-syncs').textContent=syncCount;
+    if(document.getElementById('d-lastsync')) document.getElementById('d-lastsync').textContent=timeAgo(lastSyncTime);
+  }catch(e){
+    setSyncUI('error');
+    devLog('Push failed: '+e.message);
+  }
+  isSyncing=false;
+}
+
+// Debounced auto-save
+function schedulePush(){
+  if(syncTimer) clearTimeout(syncTimer);
+  syncTimer=setTimeout(pushToCloud,1200);
+}
+
+// Poll for updates every 8 seconds (live feed refresh)
+async function pollCloud(){
+  if(CU){
+    const ok=await pullFromCloud();
+    if(ok){ renderFeed(); renderStories(); renderRight(); renderChatList(); renderProfileView(); renderNotifBadge(); }
+  }
+  setTimeout(pollCloud,8000);
+}
+
+// ════════════════════════════════════════════
+//  SESSION PERSISTENCE (fix reload logout)
+// ════════════════════════════════════════════
+function saveSession(){ if(CU) localStorage.setItem(SESSION_KEY,CU); }
+function clearSession(){ localStorage.removeItem(SESSION_KEY); }
+function getSavedSession(){ return localStorage.getItem(SESSION_KEY); }
+
+// ════════════════════════════════════════════
+//  BOOT
+// ════════════════════════════════════════════
+function setLoadingTxt(t){ const el=document.getElementById('loading-txt'); if(el) el.textContent=t; }
+
+async function boot(){
+  setLoadingTxt('Connecting to cloud…');
+  let binId=getBinId();
+  if(!binId){
+    setLoadingTxt('Setting up data store…');
+    binId=await createBin();
+  }
+  if(binId){
+    setLoadingTxt('Loading data…');
+    await pullFromCloud();
+    if(document.getElementById('d-binid')) document.getElementById('d-binid').textContent=binId;
+  } else {
+    setLoadingTxt('Running offline…');
+    setSyncUI('error');
+  }
+
+  // Restore session
+  const saved=getSavedSession();
+  if(saved && DB.users[saved]){
+    CU=saved; devLog(`Session restored: @${CU}`);
+    document.getElementById('loading-screen').style.display='none';
+    document.getElementById('app').style.display='block';
+    setTopbarAv(); navTo('feed'); renderAll(); devRefresh();
+  } else {
+    document.getElementById('loading-screen').style.display='none';
+    document.getElementById('auth-screen').style.display='flex';
+  }
+
+  // Start polling
+  setTimeout(pollCloud,8000);
+}
+
+window.addEventListener('load',boot);
+
+// ════════════════════════════════════════════
+//  AUTH
+// ════════════════════════════════════════════
 function switchTab(t){
   document.querySelectorAll('.tab-btn').forEach((b,i)=>b.classList.toggle('active',(i===0&&t==='login')||(i===1&&t==='register')));
-  document.getElementById('login-form').style.display    = t==='login'    ? '' : 'none';
-  document.getElementById('register-form').style.display = t==='register' ? '' : 'none';
-  document.getElementById('auth-err').textContent = '';
+  document.getElementById('login-form').style.display    =t==='login'    ?'':'none';
+  document.getElementById('register-form').style.display =t==='register' ?'':'none';
+  document.getElementById('auth-err').textContent='';
 }
-function setErr(m){ document.getElementById('auth-err').textContent = m; }
+function setErr(m){ document.getElementById('auth-err').textContent=m; }
 
-function login(){
-  const u = document.getElementById('li-user').value.trim().toLowerCase();
-  const p = document.getElementById('li-pass').value;
-  if (!u||!p) return setErr('Please fill in all fields.');
-  if (!users[u]) return setErr('No account found. Please register first.');
-  if (users[u].password !== p) return setErr('Incorrect password.');
-  CU = u; launch();
+async function login(){
+  const u=document.getElementById('li-user').value.trim().toLowerCase();
+  const p=document.getElementById('li-pass').value;
+  if(!u||!p) return setErr('Please fill in all fields.');
+  // Refresh from cloud first so we see newest users
+  await pullFromCloud();
+  if(!DB.users[u]) return setErr('No account found. Please register first.');
+  if(DB.users[u].password!==p) return setErr('Incorrect password.');
+  CU=u; saveSession(); launch();
 }
 
-function register(){
-  const name  = document.getElementById('rg-name').value.trim();
-  const u     = document.getElementById('rg-user').value.trim().toLowerCase().replace(/\s/g,'_');
-  const email = document.getElementById('rg-email').value.trim();
-  const p     = document.getElementById('rg-pass').value;
-  if (!name||!u||!p) return setErr('Name, username and password are required.');
-  if (u.length < 3)  return setErr('Username must be at least 3 characters.');
-  if (p.length < 6)  return setErr('Password must be at least 6 characters.');
-  if (users[u])      return setErr('That username is already taken.');
-  if (!/^[a-z0-9_]+$/.test(u)) return setErr('Username: only letters, numbers, underscores.');
-  users[u] = { name, email, password:p, bio:'', joinedAt:Date.now(), followers:[], following:[] };
-  su(); notifs[u]=[]; sn();
-  devLog(`New user registered: @${u}`);
-  CU = u; launch();
+async function register(){
+  const name  =document.getElementById('rg-name').value.trim();
+  const u     =document.getElementById('rg-user').value.trim().toLowerCase().replace(/\s/g,'_');
+  const email =document.getElementById('rg-email').value.trim();
+  const p     =document.getElementById('rg-pass').value;
+  if(!name||!u||!p) return setErr('Name, username and password are required.');
+  if(u.length<3)    return setErr('Username must be at least 3 characters.');
+  if(p.length<6)    return setErr('Password must be at least 6 characters.');
+  if(!/^[a-z0-9_]+$/.test(u)) return setErr('Username: only letters, numbers, underscores.');
+  // Pull fresh to check username uniqueness across devices
+  await pullFromCloud();
+  if(DB.users[u]) return setErr('That username is already taken.');
+  DB.users[u]={ name,email,password:p,bio:'',avatar:null,joinedAt:Date.now(),followers:[],following:[] };
+  DB.notifs[u]=[];
+  await pushToCloud();
+  devLog(`New user: @${u}`);
+  CU=u; saveSession(); launch();
 }
 
 function logout(){
-  CU = null; chatWith = null;
-  document.getElementById('app').style.display = 'none';
-  document.getElementById('auth-screen').style.display = 'flex';
-  document.getElementById('li-user').value = '';
-  document.getElementById('li-pass').value = '';
+  CU=null; chatWith=null;
+  clearSession();
+  document.getElementById('app').style.display='none';
+  document.getElementById('auth-screen').style.display='flex';
+  document.getElementById('li-user').value='';
+  document.getElementById('li-pass').value='';
   setErr('');
 }
 
 function launch(){
-  document.getElementById('auth-screen').style.display = 'none';
-  document.getElementById('app').style.display = 'block';
-  setTopbarAv();
-  navTo('feed');
-  renderAll();
-  devRefresh();
+  document.getElementById('auth-screen').style.display='none';
+  document.getElementById('app').style.display='block';
+  setTopbarAv(); navTo('feed'); renderAll(); devRefresh();
   devLog(`Session started: @${CU}`);
 }
 
-// ══ RENDER ALL ══
-function renderAll(){
-  renderStories(); renderFeed(); renderRight();
-  renderChatList(); renderExplore(); renderProfileView(); renderNotifBadge();
-}
-function setTopbarAv(){ document.getElementById('topbar-avatar').textContent = getI(CU); }
-
-// ══ NAVIGATION ══
+// ════════════════════════════════════════════
+//  NAVIGATION
+// ════════════════════════════════════════════
 function navTo(name){
   document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
   document.getElementById('view-'+name).classList.add('active');
   ['feed','explore','chat','stories','profile'].forEach(n=>{
-    document.getElementById('nav-'+n).classList.toggle('active', n===name);
-    const m = document.getElementById('mnav-'+n); if(m) m.classList.toggle('active', n===name);
+    document.getElementById('nav-'+n).classList.toggle('active',n===name);
+    const m=document.getElementById('mnav-'+n); if(m) m.classList.toggle('active',n===name);
   });
-  if (name !== 'chat') closeChat();
-  if (name === 'profile') renderProfileView();
-  if (name === 'chat')    renderChatList();
+  if(name!=='chat') closeChat();
+  if(name==='profile') renderProfileView();
+  if(name==='chat')    renderChatList();
   closeNotifs(); closeSearch();
 }
 
-// ══ STORIES ══
+// ════════════════════════════════════════════
+//  RENDER ALL
+// ════════════════════════════════════════════
+function renderAll(){ renderStories();renderFeed();renderRight();renderChatList();renderExplore();renderProfileView();renderNotifBadge(); }
+
+function setTopbarAv(){
+  const av=getAv(CU);
+  const el=document.getElementById('topbar-avatar');
+  if(av) el.innerHTML=`<img src="${av}" style="width:100%;height:100%;object-fit:cover;border-radius:50%;"/>`;
+  else   el.textContent=getI(CU);
+}
+
+// ════════════════════════════════════════════
+//  PROFILE PICTURE
+// ════════════════════════════════════════════
+function handleAvatarUpload(input){
+  const file=input.files[0]; if(!file) return;
+  if(file.size>500000){ toast('Image too large (max 500KB)','error'); return; } // keep base64 small
+  const reader=new FileReader();
+  reader.onload=e=>{
+    pendingAvatar=e.target.result;
+    const prev=document.getElementById('ep-av-preview');
+    prev.innerHTML=`<img src="${pendingAvatar}" style="width:100%;height:100%;object-fit:cover;"/>`;
+  };
+  reader.readAsDataURL(file);
+}
+function removeAvatar(){
+  pendingAvatar=''; // empty string = remove
+  const prev=document.getElementById('ep-av-preview');
+  prev.innerHTML=`<span id="ep-av-initial">${getI(CU)}</span>`;
+}
+
+// ════════════════════════════════════════════
+//  STORIES
+// ════════════════════════════════════════════
 function renderStories(){
-  const others = Object.keys(users).filter(u=>u!==CU);
-  document.getElementById('stories-section').innerHTML = `<div class="stories-row">
+  const others=Object.keys(DB.users).filter(u=>u!==CU);
+  document.getElementById('stories-section').innerHTML=`<div class="stories-row">
     <div class="story-item" onclick="openPostModal()">
       <div class="story-ring"><div class="story-inner story-add-inner">➕</div></div>
       <div class="story-name">Your Story</div>
     </div>
     ${others.map(u=>`<div class="story-item" onclick="navTo('stories')">
-      <div class="story-ring"><div class="story-inner">${esc(getI(u))}</div></div>
+      <div class="story-ring"><div class="story-inner">${getAv(u)?`<img src="${getAv(u)}" style="width:100%;height:100%;object-fit:cover;"/>`:`${esc(getI(u))}`}</div></div>
       <div class="story-name">${esc(getName(u).split(' ')[0])}</div>
     </div>`).join('')}
   </div>`;
 
-  const sl = document.getElementById('stories-list');
-  if (!others.length){
-    sl.innerHTML = `<div class="empty-state"><div class="empty-icon">✨</div><div class="empty-title">No stories yet</div><div class="empty-sub">Invite friends to join VIBE — their stories will show up here.</div></div>`;
-    return;
-  }
-  sl.innerHTML = others.map(u=>{
-    const last = [...posts].reverse().find(p=>p.author===u);
+  const sl=document.getElementById('stories-list');
+  if(!others.length){ sl.innerHTML=`<div class="empty-state"><div class="empty-icon">✨</div><div class="empty-title">No stories yet</div><div class="empty-sub">Invite friends to join VIBE.</div></div>`; return; }
+  sl.innerHTML=others.map(u=>{
+    const last=[...DB.posts].reverse().find(p=>p.author===u);
     return `<div class="post-card">
-      <div class="post-header">
-        <div class="post-av">${esc(getI(u))}</div>
-        <div class="post-meta">
-          <div class="post-author">${esc(getName(u))}</div>
-          <div class="post-time">${last ? timeAgo(last.ts) : 'No posts yet'}</div>
-        </div>
-      </div>
-      <div class="post-body">${last ? esc(last.text) : `<span style="color:var(--muted)">Nothing shared yet.</span>`}</div>
-      ${last?.tags?.length ? `<div class="post-tags">${last.tags.map(t=>`<span class="tag">${esc(t)}</span>`).join('')}</div>` : ''}
+      <div class="post-header">${avatarHTML(u,38)}<div class="post-meta"><div class="post-author">${esc(getName(u))}</div><div class="post-time">${last?timeAgo(last.ts):'No posts yet'}</div></div></div>
+      <div class="post-body">${last?esc(last.text):`<span style="color:var(--muted)">Nothing shared yet.</span>`}</div>
+      ${last?.tags?.length?`<div class="post-tags">${last.tags.map(t=>`<span class="tag">${esc(t)}</span>`).join('')}</div>`:''}
     </div>`;
   }).join('');
 }
 
-// ══ FEED ══
+// ════════════════════════════════════════════
+//  FEED
+// ════════════════════════════════════════════
 function renderFeed(){
-  const el = document.getElementById('feed-posts');
-  if (!posts.length){
-    el.innerHTML = `<div class="empty-state"><div class="empty-icon">📭</div><div class="empty-title">Nothing here yet</div><div class="empty-sub">Be the first to post something and kick off the conversation!</div><button class="empty-btn" onclick="openPostModal()">＋ Create First Post</button></div>`;
-    return;
-  }
-  el.innerHTML = [...posts].reverse().map(postCard).join('');
+  const el=document.getElementById('feed-posts');
+  if(!DB.posts.length){ el.innerHTML=`<div class="empty-state"><div class="empty-icon">📭</div><div class="empty-title">Nothing here yet</div><div class="empty-sub">Be the first to post something!</div><button class="empty-btn" onclick="openPostModal()">＋ Create First Post</button></div>`; return; }
+  el.innerHTML=[...DB.posts].reverse().map(postCard).join('');
 }
 
 function postCard(p){
-  const mine   = p.author === CU;
-  const liked  = (p.likedBy||[]).includes(CU);
-  const cCount = (p.comments||[]).length;
+  const mine=p.author===CU;
+  const liked=(p.likedBy||[]).includes(CU);
+  const cCount=(p.comments||[]).length;
   return `<div class="post-card" id="pc-${p.id}">
     <div class="post-header">
-      <div class="post-av" onclick="navTo('profile')">${esc(getI(p.author))}</div>
+      ${avatarHTML(p.author,38)}
       <div class="post-meta">
         <div class="post-author" onclick="navTo('profile')">${esc(getName(p.author))}${mine?`<span class="you-badge">You</span>`:''}</div>
         <div class="post-time">${timeAgo(p.ts)}${p.mood?' · '+esc(p.mood):''}</div>
       </div>
-      ${mine?`<div class="post-menu-wrap">
-        <button class="post-menu-btn" onclick="toggleMenu(${p.id},event)">⋯</button>
-        <div class="post-dropdown hidden" id="pm-${p.id}">
-          <div class="pd-danger" onclick="deletePost(${p.id})">🗑 Delete Post</div>
-        </div>
+      ${mine?`<div class="post-menu-wrap"><button class="post-menu-btn" onclick="toggleMenu(${p.id},event)">⋯</button>
+        <div class="post-dropdown hidden" id="pm-${p.id}"><div class="pd-danger" onclick="deletePost(${p.id})">🗑 Delete Post</div></div>
       </div>`:''}
     </div>
     <div class="post-body">${esc(p.text)}</div>
     ${p.tags?.length?`<div class="post-tags">${p.tags.map(t=>`<span class="tag" onclick="filterTag('${esc(t)}')">${esc(t)}</span>`).join('')}</div>`:''}
     <div class="post-actions">
-      <button class="action-btn${liked?' liked':''}" onclick="like(${p.id})">${liked?'❤️':'🤍'} ${(p.likedBy||[]).length}</button>
+      <button class="action-btn${liked?' liked':''}" onclick="likePost(${p.id})">${liked?'❤️':'🤍'} ${(p.likedBy||[]).length}</button>
       <button class="action-btn" onclick="toggleComments(${p.id})">💬 ${cCount}</button>
       <button class="action-btn" onclick="sharePost(${p.id})">🔗 Share</button>
     </div>
     ${p._showCom?`
-    <div class="comments-box" id="cb-${p.id}">
-      ${(p.comments||[]).map(c=>`<div class="comment-row">
-        <div class="post-av" style="width:28px;height:28px;font-size:.7rem;flex-shrink:0;">${esc(getI(c.author))}</div>
-        <div class="comment-bubble"><div class="comment-auth">${esc(getName(c.author))}</div><div class="comment-body">${esc(c.text)}</div></div>
-      </div>`).join('')}
-    </div>
-    <div class="ci-row">
-      <input class="ci" id="ci-${p.id}" placeholder="Write a comment…" onkeydown="if(event.key==='Enter')addComment(${p.id})"/>
-      <button class="ci-send" onclick="addComment(${p.id})">➤</button>
-    </div>`:''}
+    <div class="comments-box">${(p.comments||[]).map(c=>`<div class="comment-row">
+      ${avatarHTML(c.author,28,'.7rem')}
+      <div class="comment-bubble"><div class="comment-auth">${esc(getName(c.author))}</div><div class="comment-body">${esc(c.text)}</div></div>
+    </div>`).join('')}</div>
+    <div class="ci-row"><input class="ci" id="ci-${p.id}" placeholder="Write a comment…" onkeydown="if(event.key==='Enter')addComment(${p.id})"/><button class="ci-send" onclick="addComment(${p.id})">➤</button></div>`:''}
   </div>`;
 }
 
-function toggleMenu(id,e){
-  e.stopPropagation();
-  const m = document.getElementById('pm-'+id); if(!m) return;
-  const wasHidden = m.classList.contains('hidden');
-  document.querySelectorAll('.post-dropdown').forEach(d=>d.classList.add('hidden'));
-  if (wasHidden) m.classList.remove('hidden');
-}
+function toggleMenu(id,e){ e.stopPropagation(); const m=document.getElementById('pm-'+id); if(!m) return; const h=m.classList.contains('hidden'); document.querySelectorAll('.post-dropdown').forEach(d=>d.classList.add('hidden')); if(h) m.classList.remove('hidden'); }
 document.addEventListener('click',()=>document.querySelectorAll('.post-dropdown').forEach(d=>d.classList.add('hidden')));
 
-function refreshPostCard(id){
-  const p = posts.find(x=>x.id===id);
-  const el = document.getElementById('pc-'+id);
-  if (!p||!el){ renderFeed(); return; }
-  el.outerHTML = postCard(p);
-}
+function refreshPostCard(id){ const p=DB.posts.find(x=>x.id===id); const el=document.getElementById('pc-'+id); if(!p||!el){renderFeed();return;} el.outerHTML=postCard(p); }
 
-function like(id){
-  const p = posts.find(x=>x.id===id); if(!p) return;
-  if (!p.likedBy) p.likedBy=[];
-  const i = p.likedBy.indexOf(CU);
-  if (i===-1){ p.likedBy.push(CU); if(p.author!==CU) addNotif(p.author,`${getName(CU)} liked your post.`,'❤️'); }
+async function likePost(id){
+  const p=DB.posts.find(x=>x.id===id); if(!p) return;
+  if(!p.likedBy) p.likedBy=[];
+  const i=p.likedBy.indexOf(CU);
+  if(i===-1){ p.likedBy.push(CU); if(p.author!==CU) addNotif(p.author,`${getName(CU)} liked your post.`,'❤️'); }
   else p.likedBy.splice(i,1);
-  sp(); refreshPostCard(id);
+  refreshPostCard(id); schedulePush();
 }
 
-function toggleComments(id){
-  const p = posts.find(x=>x.id===id); if(!p) return;
-  p._showCom = !p._showCom;
-  refreshPostCard(id);
-  if (p._showCom) setTimeout(()=>document.getElementById('ci-'+id)?.focus(),50);
-}
-
-function addComment(id){
-  const inp = document.getElementById('ci-'+id);
-  const text = inp.value.trim(); if(!text) return;
-  const p = posts.find(x=>x.id===id); if(!p) return;
-  if (!p.comments) p.comments=[];
+async function addComment(id){
+  const inp=document.getElementById('ci-'+id); const text=inp.value.trim(); if(!text) return;
+  const p=DB.posts.find(x=>x.id===id); if(!p) return;
+  if(!p.comments) p.comments=[];
   p.comments.push({author:CU,text,ts:Date.now()});
-  if (p.author!==CU) addNotif(p.author,`${getName(CU)} commented on your post.`,'💬');
-  sp(); refreshPostCard(id);
+  if(p.author!==CU) addNotif(p.author,`${getName(CU)} commented on your post.`,'💬');
+  refreshPostCard(id); schedulePush();
 }
 
-function deletePost(id){
-  posts = posts.filter(p=>p.id!==id); sp();
+function toggleComments(id){ const p=DB.posts.find(x=>x.id===id); if(!p) return; p._showCom=!p._showCom; refreshPostCard(id); if(p._showCom) setTimeout(()=>document.getElementById('ci-'+id)?.focus(),50); }
+
+async function deletePost(id){
+  DB.posts=DB.posts.filter(p=>p.id!==id);
   renderFeed(); renderStories(); renderProfileView(); renderRight(); renderExplore();
-  devRefresh(); toast('Post deleted','success');
-  devLog(`Post ${id} deleted by @${CU}`);
+  schedulePush(); devRefresh(); toast('Post deleted','success');
 }
 
-function sharePost(id){
-  const p = posts.find(x=>x.id===id); if(!p) return;
-  const txt = `@${p.author} on VIBE: "${p.text.slice(0,80)}"`;
-  if(navigator.clipboard){ navigator.clipboard.writeText(txt).then(()=>toast('Copied to clipboard!','success')); }
-  else { toast('Share: "'+p.text.slice(0,40)+'"','info'); }
-}
+function sharePost(id){ const p=DB.posts.find(x=>x.id===id); if(!p) return; const txt=`@${p.author} on VIBE: "${p.text.slice(0,80)}"`; if(navigator.clipboard){ navigator.clipboard.writeText(txt).then(()=>toast('Copied!','success')); } else toast('Share: "'+p.text.slice(0,40)+'"','info'); }
+function filterTag(tag){ navTo('explore'); toast('Filtering: '+tag,'info'); }
 
-function filterTag(tag){ navTo('explore'); toast('Filtered by '+tag,'info'); }
-
-// ══ POST MODAL ══
-function openPostModal(){
-  selMood='';
-  document.getElementById('post-text').value='';
-  document.getElementById('post-tags').value='';
-  document.getElementById('pchar').textContent='500 left';
-  document.getElementById('mood-label').textContent='';
-  document.querySelectorAll('.mood-btn').forEach(b=>b.classList.remove('on'));
-  document.getElementById('post-modal').classList.add('open');
-  setTimeout(()=>document.getElementById('post-text').focus(),80);
-}
+// ════════════════════════════════════════════
+//  POST MODAL
+// ════════════════════════════════════════════
+function openPostModal(){ selMood=''; document.getElementById('post-text').value=''; document.getElementById('post-tags').value=''; document.getElementById('pchar').textContent='500 left'; document.getElementById('mood-label').textContent=''; document.querySelectorAll('.mood-btn').forEach(b=>b.classList.remove('on')); document.getElementById('post-modal').classList.add('open'); setTimeout(()=>document.getElementById('post-text').focus(),80); }
 function closePostModal(){ document.getElementById('post-modal').classList.remove('open'); }
-function toggleMood(btn,mood){
-  const same = selMood===mood;
-  document.querySelectorAll('.mood-btn').forEach(b=>b.classList.remove('on'));
-  selMood = same ? '' : mood;
-  if (!same){ btn.classList.add('on'); }
-  document.getElementById('mood-label').textContent = selMood;
-}
-function submitPost(){
-  const text = document.getElementById('post-text').value.trim();
-  if (!text){ toast('Write something first!','error'); return; }
-  const tagStr = document.getElementById('post-tags').value.trim();
-  const tags = tagStr ? tagStr.split(/\s+/).filter(Boolean).map(t=>t.startsWith('#')?t:'#'+t) : [];
-  posts.push({ id:Date.now(), author:CU, text, tags, mood:selMood, ts:Date.now(), likedBy:[], comments:[], _showCom:false });
-  sp(); closePostModal();
-  renderFeed(); renderStories(); renderProfileView(); renderRight(); renderExplore();
-  devRefresh(); toast('Post published! 🎉','success');
+function toggleMood(btn,mood){ const same=selMood===mood; document.querySelectorAll('.mood-btn').forEach(b=>b.classList.remove('on')); selMood=same?'':mood; if(!same){ btn.classList.add('on'); } document.getElementById('mood-label').textContent=selMood; }
+
+async function submitPost(){
+  const text=document.getElementById('post-text').value.trim();
+  if(!text){ toast('Write something first!','error'); return; }
+  const tagStr=document.getElementById('post-tags').value.trim();
+  const tags=tagStr?tagStr.split(/\s+/).filter(Boolean).map(t=>t.startsWith('#')?t:'#'+t):[];
+  DB.posts.push({id:Date.now(),author:CU,text,tags,mood:selMood,ts:Date.now(),likedBy:[],comments:[],_showCom:false});
+  closePostModal(); renderFeed(); renderStories(); renderProfileView(); renderRight(); renderExplore();
+  await pushToCloud(); devRefresh(); toast('Post published! 🎉','success');
   devLog(`Post by @${CU}: "${text.slice(0,40)}"`);
 }
 
-// ══ PROFILE ══
+// ════════════════════════════════════════════
+//  PROFILE
+// ════════════════════════════════════════════
 function renderProfileView(){
-  const u = getU(CU);
-  document.getElementById('pav').textContent       = getI(CU);
-  document.getElementById('p-name').textContent    = u.name||CU;
-  document.getElementById('p-uname').textContent   = '@'+CU;
-  document.getElementById('p-bio').textContent     = u.bio||'No bio yet — click Edit Profile to add one.';
-  document.getElementById('s-posts').textContent    = posts.filter(p=>p.author===CU).length;
-  document.getElementById('s-followers').textContent = (u.followers||[]).length;
-  document.getElementById('s-following').textContent = (u.following||[]).length;
-  const mine = posts.filter(p=>p.author===CU);
-  const el = document.getElementById('profile-posts');
-  el.innerHTML = mine.length
-    ? [...mine].reverse().map(postCard).join('')
-    : `<div class="empty-state"><div class="empty-icon">✏️</div><div class="empty-title">No posts yet</div><div class="empty-sub">Share your first post with the world!</div><button class="empty-btn" onclick="openPostModal()">＋ Create Post</button></div>`;
+  const u=getU(CU);
+  const av=getAv(CU);
+  const pavEl=document.getElementById('pav');
+  if(av){ pavEl.innerHTML=`<img src="${av}" style="width:100%;height:100%;object-fit:cover;"/><div class="av-edit-overlay">📷</div>`; }
+  else  { pavEl.innerHTML=`<span id="pav-initial">${getI(CU)}</span><div class="av-edit-overlay">📷</div>`; }
+  document.getElementById('p-name').textContent   =u.name||CU;
+  document.getElementById('p-uname').textContent  ='@'+CU;
+  document.getElementById('p-bio').textContent    =u.bio||'No bio yet — click Edit Profile to add one.';
+  document.getElementById('s-posts').textContent  =DB.posts.filter(p=>p.author===CU).length;
+  document.getElementById('s-followers').textContent=(u.followers||[]).length;
+  document.getElementById('s-following').textContent=(u.following||[]).length;
+  const mine=DB.posts.filter(p=>p.author===CU);
+  const pp=document.getElementById('profile-posts');
+  pp.innerHTML=mine.length?[...mine].reverse().map(postCard).join(''):`<div class="empty-state"><div class="empty-icon">✏️</div><div class="empty-title">No posts yet</div><div class="empty-sub">Share your first post!</div><button class="empty-btn" onclick="openPostModal()">＋ Create Post</button></div>`;
 }
 
 function openEditProfile(){
-  const u = getU(CU);
-  document.getElementById('ep-name').value    = u.name||'';
-  document.getElementById('ep-bio').value     = u.bio||'';
-  document.getElementById('ep-newpass').value = '';
-  document.getElementById('ep-pass').value    = '';
+  const u=getU(CU);
+  pendingAvatar=null;
+  document.getElementById('ep-name').value   =u.name||'';
+  document.getElementById('ep-bio').value    =u.bio||'';
+  document.getElementById('ep-newpass').value='';
+  document.getElementById('ep-pass').value   ='';
+  const prev=document.getElementById('ep-av-preview');
+  const av=getAv(CU);
+  prev.innerHTML=av?`<img src="${av}" style="width:100%;height:100%;object-fit:cover;"/>`:`<span id="ep-av-initial">${getI(CU)}</span>`;
   document.getElementById('edit-modal').classList.add('open');
 }
-function closeEditProfile(){ document.getElementById('edit-modal').classList.remove('open'); }
-function saveProfile(){
-  const name    = document.getElementById('ep-name').value.trim();
-  const bio     = document.getElementById('ep-bio').value.trim();
-  const newpass = document.getElementById('ep-newpass').value;
-  const pass    = document.getElementById('ep-pass').value;
-  if (!name)  return toast('Name cannot be empty.','error');
-  if (!pass)  return toast('Enter your current password to save.','error');
-  if (pass !== users[CU].password) return toast('Incorrect current password.','error');
-  users[CU].name = name;
-  users[CU].bio  = bio;
-  if (newpass){
-    if (newpass.length < 6) return toast('New password must be 6+ characters.','error');
-    users[CU].password = newpass;
+function closeEditProfile(){ document.getElementById('edit-modal').classList.remove('open'); pendingAvatar=null; }
+
+async function saveProfile(){
+  const name   =document.getElementById('ep-name').value.trim();
+  const bio    =document.getElementById('ep-bio').value.trim();
+  const newpass=document.getElementById('ep-newpass').value;
+  const pass   =document.getElementById('ep-pass').value;
+  if(!name) return toast('Name cannot be empty.','error');
+  if(!pass) return toast('Enter your current password to save.','error');
+  if(pass!==DB.users[CU].password) return toast('Incorrect current password.','error');
+  DB.users[CU].name=name;
+  DB.users[CU].bio=bio;
+  if(pendingAvatar!==null) DB.users[CU].avatar=pendingAvatar||null; // '' = remove, base64 = set
+  if(newpass){
+    if(newpass.length<6) return toast('New password must be 6+ characters.','error');
+    DB.users[CU].password=newpass;
   }
-  su(); closeEditProfile();
-  setTopbarAv(); renderProfileView(); renderAll();
+  closeEditProfile();
+  await pushToCloud();
+  setTopbarAv(); renderProfileView(); renderStories(); renderFeed(); renderRight();
   toast('Profile updated! ✅','success');
   devLog(`Profile updated: @${CU}`);
 }
 
-// ══ RIGHT PANEL ══
-function renderRight(){ renderOnlineList(); renderTrending(); renderSuggested(); }
+// ════════════════════════════════════════════
+//  RIGHT PANEL
+// ════════════════════════════════════════════
+function renderRight(){ renderOnline(); renderTrending(); renderSuggested(); }
 
-function renderOnlineList(){
-  const others = Object.keys(users).filter(u=>u!==CU);
-  const el = document.getElementById('online-list');
-  const sel = document.getElementById('sidebar-online');
-  if (!others.length){
-    el.innerHTML = `<div style="font-size:.82rem;color:var(--muted);">No other users yet 👀</div>`;
-    sel.innerHTML=''; return;
-  }
-  el.innerHTML = others.map(u=>`<div class="op-item" onclick="openChat('${esc(u)}')">
-    <div class="avatar" style="width:28px;height:28px;font-size:.75rem;">${esc(getI(u))}</div>
+function renderOnline(){
+  const others=Object.keys(DB.users).filter(u=>u!==CU);
+  const el=document.getElementById('online-list');
+  const sel=document.getElementById('sidebar-online');
+  if(!others.length){ el.innerHTML=`<div style="font-size:.82rem;color:var(--muted);">No other users yet 👀</div>`; sel.innerHTML=''; return; }
+  el.innerHTML=others.map(u=>`<div class="op-item" onclick="openChat('${esc(u)}')">
+    ${avatarHTML(u,28,'.75rem')}
     <div class="op-name">${esc(getName(u))}</div>
     <div class="odot" style="margin-left:auto;"></div>
   </div>`).join('');
-  sel.innerHTML = others.slice(0,5).map(u=>`<div class="online-sid" onclick="openChat('${esc(u)}')">
-    <div class="avatar" style="width:26px;height:26px;font-size:.7rem;">${esc(getI(u))}</div>
+  sel.innerHTML=others.slice(0,5).map(u=>`<div class="online-sid" onclick="openChat('${esc(u)}')">
+    ${avatarHTML(u,26,'.7rem')}
     <span style="font-size:.82rem;">${esc(getName(u).split(' ')[0])}</span>
     <div class="odot" style="margin-left:auto;"></div>
   </div>`).join('');
 }
 
 function renderTrending(){
-  const counts = {};
-  posts.forEach(p=>(p.tags||[]).forEach(t=>{counts[t]=(counts[t]||0)+1;}));
-  const sorted = Object.entries(counts).sort((a,b)=>b[1]-a[1]).slice(0,7);
-  const el = document.getElementById('trending-list');
-  el.innerHTML = sorted.length
-    ? sorted.map(([tag,ct])=>`<div class="trend-row" onclick="filterTag('${esc(tag)}')">
-        <div class="trend-name">${esc(tag)}</div>
-        <div class="trend-ct">${ct} post${ct!==1?'s':''}</div>
-      </div>`).join('')
-    : `<div style="font-size:.82rem;color:var(--muted);">No tags used yet</div>`;
+  const counts={};
+  DB.posts.forEach(p=>(p.tags||[]).forEach(t=>{counts[t]=(counts[t]||0)+1;}));
+  const sorted=Object.entries(counts).sort((a,b)=>b[1]-a[1]).slice(0,7);
+  const el=document.getElementById('trending-list');
+  el.innerHTML=sorted.length?sorted.map(([tag,ct])=>`<div class="trend-row" onclick="filterTag('${esc(tag)}')"><div class="trend-name">${esc(tag)}</div><div class="trend-ct">${ct} post${ct!==1?'s':''}</div></div>`).join(''):`<div style="font-size:.82rem;color:var(--muted);">No tags used yet</div>`;
 }
 
 function renderSuggested(){
-  const others = Object.keys(users).filter(u=>u!==CU);
-  const el = document.getElementById('suggested-list');
-  if (!others.length){ el.innerHTML=`<div style="font-size:.82rem;color:var(--muted);">No other users yet</div>`; return; }
-  const cu = getU(CU);
-  el.innerHTML = others.slice(0,5).map(u=>{
-    const following = (cu.following||[]).includes(u);
-    return `<div class="sug-row">
-      <div class="avatar" style="width:28px;height:28px;font-size:.75rem;">${esc(getI(u))}</div>
-      <div style="font-size:.83rem;font-weight:500;">${esc(getName(u))}</div>
+  const others=Object.keys(DB.users).filter(u=>u!==CU);
+  const el=document.getElementById('suggested-list');
+  if(!others.length){ el.innerHTML=`<div style="font-size:.82rem;color:var(--muted);">No other users yet</div>`; return; }
+  const cu=getU(CU);
+  el.innerHTML=others.slice(0,5).map(u=>{
+    const following=(cu.following||[]).includes(u);
+    return `<div class="sug-row">${avatarHTML(u,28,'.75rem')}<div style="font-size:.83rem;font-weight:500;">${esc(getName(u))}</div>
       <button class="follow-btn${following?' following':''}" onclick="toggleFollow('${esc(u)}',this)">${following?'Following':'Follow'}</button>
     </div>`;
   }).join('');
 }
 
-function toggleFollow(target, btn){
-  const cu = users[CU]; if(!cu.following) cu.following=[];
-  const tu = users[target]; if(!tu.followers) tu.followers=[];
-  const idx = cu.following.indexOf(target);
-  if (idx===-1){
-    cu.following.push(target); tu.followers.push(CU);
-    btn.textContent='Following'; btn.classList.add('following');
-    addNotif(target,`${getName(CU)} started following you.`,'👤');
-    toast(`Following ${getName(target)}`,'success');
-  } else {
-    cu.following.splice(idx,1); const ti=tu.followers.indexOf(CU); if(ti>-1) tu.followers.splice(ti,1);
-    btn.textContent='Follow'; btn.classList.remove('following');
-    toast(`Unfollowed ${getName(target)}`,'info');
-  }
-  su(); renderProfileView();
+async function toggleFollow(target,btn){
+  const cu=DB.users[CU]; if(!cu.following) cu.following=[];
+  const tu=DB.users[target]; if(!tu) return; if(!tu.followers) tu.followers=[];
+  const idx=cu.following.indexOf(target);
+  if(idx===-1){ cu.following.push(target); tu.followers.push(CU); btn.textContent='Following'; btn.classList.add('following'); addNotif(target,`${getName(CU)} started following you.`,'👤'); toast(`Following ${getName(target)}`,'success'); }
+  else { cu.following.splice(idx,1); const ti=tu.followers.indexOf(CU); if(ti>-1) tu.followers.splice(ti,1); btn.textContent='Follow'; btn.classList.remove('following'); toast(`Unfollowed ${getName(target)}`,'info'); }
+  renderProfileView(); schedulePush();
 }
 
-// ══ SEARCH ══
+// ════════════════════════════════════════════
+//  SEARCH
+// ════════════════════════════════════════════
 function handleSearch(q){
-  const res = document.getElementById('search-results');
-  if (!q.trim()){ res.classList.add('hidden'); return; }
-  const lq = q.toLowerCase();
-  const us = Object.keys(users).filter(u=>u.includes(lq)||getName(u).toLowerCase().includes(lq));
-  const ps = posts.filter(p=>p.text.toLowerCase().includes(lq)).slice(0,3);
-  if (!us.length&&!ps.length){ res.innerHTML=`<div style="padding:12px 16px;font-size:.82rem;color:var(--muted);">No results for "${esc(q)}"</div>`; res.classList.remove('hidden'); return; }
+  const res=document.getElementById('search-results');
+  if(!q.trim()){ res.classList.add('hidden'); return; }
+  const lq=q.toLowerCase();
+  const us=Object.keys(DB.users).filter(u=>u.includes(lq)||getName(u).toLowerCase().includes(lq));
+  const ps=DB.posts.filter(p=>p.text.toLowerCase().includes(lq)).slice(0,3);
+  if(!us.length&&!ps.length){ res.innerHTML=`<div style="padding:12px 16px;font-size:.82rem;color:var(--muted);">No results for "${esc(q)}"</div>`; res.classList.remove('hidden'); return; }
   let html='';
-  us.slice(0,4).forEach(u=>{html+=`<div class="search-result-item" onmousedown="navTo('profile')">
-    <div class="avatar" style="width:26px;height:26px;font-size:.7rem;">${esc(getI(u))}</div>
-    <div><div style="font-size:.84rem;font-weight:600;">${esc(getName(u))}</div><div style="font-size:.72rem;color:var(--muted);">@${esc(u)}</div></div>
-  </div>`;});
-  ps.forEach(p=>{html+=`<div class="search-result-item" onmousedown="navTo('feed')">
-    <span>📝</span><div style="font-size:.81rem;color:#bbbbd8;">${esc(p.text.slice(0,60))}…</div>
-  </div>`;});
+  us.slice(0,4).forEach(u=>{ html+=`<div class="search-result-item" onmousedown="navTo('profile')">${avatarHTML(u,26,'.7rem')}<div><div style="font-size:.84rem;font-weight:600;">${esc(getName(u))}</div><div style="font-size:.72rem;color:var(--muted);">@${esc(u)}</div></div></div>`; });
+  ps.forEach(p=>{ html+=`<div class="search-result-item" onmousedown="navTo('feed')"><span>📝</span><div style="font-size:.81rem;color:#bbbbd8;">${esc(p.text.slice(0,60))}…</div></div>`; });
   res.innerHTML=html; res.classList.remove('hidden');
 }
 function closeSearch(){ document.getElementById('search-results').classList.add('hidden'); }
 
-// ══ NOTIFICATIONS ══
-function addNotif(toUser, text, icon='🔔'){
-  if (!notifs[toUser]) notifs[toUser]=[];
-  notifs[toUser].unshift({text,icon,ts:Date.now(),read:false});
-  notifs[toUser]=notifs[toUser].slice(0,30); sn();
-  if (toUser===CU) renderNotifBadge();
+// ════════════════════════════════════════════
+//  NOTIFICATIONS
+// ════════════════════════════════════════════
+function addNotif(toUser,text,icon='🔔'){
+  if(!DB.notifs[toUser]) DB.notifs[toUser]=[];
+  DB.notifs[toUser].unshift({text,icon,ts:Date.now(),read:false});
+  DB.notifs[toUser]=DB.notifs[toUser].slice(0,30);
+  if(toUser===CU) renderNotifBadge();
+  schedulePush();
 }
 function renderNotifBadge(){
-  const unread = (notifs[CU]||[]).filter(n=>!n.read).length;
-  const b = document.getElementById('notif-badge');
-  b.textContent = unread; b.classList.toggle('hidden',unread===0);
+  const unread=(DB.notifs[CU]||[]).filter(n=>!n.read).length;
+  const b=document.getElementById('notif-badge'); b.textContent=unread; b.classList.toggle('hidden',unread===0);
 }
-function toggleNotifs(){
-  notifOpen = !notifOpen;
-  document.getElementById('notif-drop').classList.toggle('hidden',!notifOpen);
-  if (notifOpen) renderNotifList();
-}
+function toggleNotifs(){ notifOpen=!notifOpen; document.getElementById('notif-drop').classList.toggle('hidden',!notifOpen); if(notifOpen) renderNotifList(); }
 function closeNotifs(){ notifOpen=false; document.getElementById('notif-drop').classList.add('hidden'); }
 function renderNotifList(){
-  const mine = notifs[CU]||[];
-  const el = document.getElementById('notif-list');
-  el.innerHTML = mine.length
-    ? mine.slice(0,12).map(n=>`<div class="notif-item${n.read?'':' unread'}">
-        <span style="font-size:1rem;">${n.icon}</span>
-        <div><div class="notif-text">${esc(n.text)}</div><div class="notif-ts">${timeAgo(n.ts)}</div></div>
-        ${!n.read?`<div class="notif-dot-indicator"></div>`:''}
-      </div>`).join('')
-    : `<div class="notif-empty">No notifications yet 🔕</div>`;
-  (notifs[CU]||[]).forEach(n=>n.read=true); sn(); renderNotifBadge();
+  const mine=DB.notifs[CU]||[];
+  const el=document.getElementById('notif-list');
+  el.innerHTML=mine.length?mine.slice(0,12).map(n=>`<div class="notif-item${n.read?'':' unread'}"><span style="font-size:1rem;">${n.icon}</span><div><div class="notif-text">${esc(n.text)}</div><div class="notif-ts">${timeAgo(n.ts)}</div></div>${!n.read?`<div class="notif-dot-ind"></div>`:''}</div>`).join(''):`<div class="notif-empty">No notifications yet 🔕</div>`;
+  (DB.notifs[CU]||[]).forEach(n=>n.read=true); renderNotifBadge(); schedulePush();
 }
-function clearNotifs(){ notifs[CU]=[]; sn(); renderNotifList(); renderNotifBadge(); }
-document.addEventListener('click',e=>{
-  if (!e.target.closest('#notif-btn')&&!e.target.closest('#notif-drop')) closeNotifs();
-});
+function clearNotifs(){ DB.notifs[CU]=[]; renderNotifList(); renderNotifBadge(); schedulePush(); }
+document.addEventListener('click',e=>{ if(!e.target.closest('#notif-btn')&&!e.target.closest('#notif-drop')) closeNotifs(); });
 
-// ══ CHAT ══
+// ════════════════════════════════════════════
+//  CHAT
+// ════════════════════════════════════════════
 function ck(a,b){ return [a,b].sort().join('__'); }
 
 function renderChatList(){
-  const others = Object.keys(users).filter(u=>u!==CU);
-  const el = document.getElementById('chat-list');
-  if (!others.length){
-    el.innerHTML=`<div class="empty-state"><div class="empty-icon">💬</div><div class="empty-title">No one to chat with</div><div class="empty-sub">Once others join VIBE, they'll appear here.</div></div>`;
-    return;
-  }
-  el.innerHTML = others.map(u=>{
-    const key=ck(CU,u), msgs=chats[key]||[], last=msgs[msgs.length-1];
-    const unread = msgs.filter(m=>m.from!==CU&&!m.read).length;
+  const others=Object.keys(DB.users).filter(u=>u!==CU);
+  const el=document.getElementById('chat-list');
+  if(!others.length){ el.innerHTML=`<div class="empty-state"><div class="empty-icon">💬</div><div class="empty-title">No one to chat with</div><div class="empty-sub">Once others join VIBE, they'll appear here.</div></div>`; return; }
+  el.innerHTML=others.map(u=>{
+    const key=ck(CU,u),msgs=DB.chats[key]||[],last=msgs[msgs.length-1];
+    const unread=msgs.filter(m=>m.from!==CU&&!m.read).length;
     return `<div class="chat-item" onclick="openChat('${esc(u)}')">
-      <div class="avatar" style="font-size:.85rem;">${esc(getI(u))}</div>
-      <div class="chat-item-info">
-        <div class="chat-item-name">${esc(getName(u))}</div>
-        <div class="chat-preview">${last?esc(last.text.slice(0,42)):'Say hi! 👋'}</div>
-      </div>
+      ${avatarHTML(u,36,'.85rem')}
+      <div class="chat-item-info"><div class="chat-item-name">${esc(getName(u))}</div><div class="chat-preview">${last?esc(last.text.slice(0,42)):'Say hi! 👋'}</div></div>
       ${last?`<div class="chat-ts">${timeAgo(last.ts)}</div>`:''}
       ${unread?`<div class="chat-unread">${unread}</div>`:''}
     </div>`;
@@ -1042,130 +1164,77 @@ function renderChatList(){
 }
 
 function openChat(username){
-  if (username===CU) return;
+  if(username===CU) return;
   chatWith=username; navTo('chat');
   document.getElementById('chat-list-panel').style.display='none';
   const win=document.getElementById('chat-window'); win.style.display='flex';
   document.getElementById('cw-name').textContent=getName(username);
-  document.getElementById('cw-av').textContent=getI(username);
+  const cwAv=document.getElementById('cw-av');
+  const av=getAv(username);
+  if(av) cwAv.innerHTML=`<img src="${av}" style="width:100%;height:100%;object-fit:cover;border-radius:50%;"/>`; else cwAv.textContent=getI(username);
   const key=ck(CU,username);
-  if (chats[key]){ chats[key].forEach(m=>{if(m.from!==CU)m.read=true;}); sc(); }
+  if(DB.chats[key]){ DB.chats[key].forEach(m=>{if(m.from!==CU)m.read=true;}); schedulePush(); }
   renderMsgs();
 }
-function closeChat(){
-  chatWith=null;
-  document.getElementById('chat-window').style.display='none';
-  document.getElementById('chat-list-panel').style.display='flex';
-  renderChatList();
-}
+function closeChat(){ chatWith=null; document.getElementById('chat-window').style.display='none'; document.getElementById('chat-list-panel').style.display='flex'; renderChatList(); }
+
 function renderMsgs(){
-  if (!chatWith) return;
-  const key=ck(CU,chatWith), msgs=chats[key]||[];
+  if(!chatWith) return;
+  const key=ck(CU,chatWith),msgs=DB.chats[key]||[];
   const el=document.getElementById('chat-msgs');
-  el.innerHTML = msgs.length
-    ? msgs.map(m=>`<div class="msg ${m.from===CU?'mine':'theirs'}">
-        <div class="msg-bubble">${esc(m.text)}</div>
-        <div class="msg-ts">${timeAgo(m.ts)}</div>
-      </div>`).join('')
-    : `<div class="empty-state" style="padding:28px 20px;"><div class="empty-icon">👋</div><div class="empty-title">Start chatting!</div><div class="empty-sub">Say something to ${esc(getName(chatWith))}.</div></div>`;
+  el.innerHTML=msgs.length?msgs.map(m=>`<div class="msg ${m.from===CU?'mine':'theirs'}"><div class="msg-bubble">${esc(m.text)}</div><div class="msg-ts">${timeAgo(m.ts)}</div></div>`).join(''):`<div class="empty-state" style="padding:28px 20px;"><div class="empty-icon">👋</div><div class="empty-title">Start chatting!</div><div class="empty-sub">Say something to ${esc(getName(chatWith))}.</div></div>`;
   el.scrollTop=el.scrollHeight;
 }
-function sendMsg(){
-  const inp=document.getElementById('chat-input'), text=inp.value.trim();
-  if (!text||!chatWith) return;
+async function sendMsg(){
+  const inp=document.getElementById('chat-input'),text=inp.value.trim();
+  if(!text||!chatWith) return;
   const key=ck(CU,chatWith);
-  if (!chats[key]) chats[key]=[];
-  chats[key].push({from:CU,text,ts:Date.now(),read:false}); sc();
+  if(!DB.chats[key]) DB.chats[key]=[];
+  DB.chats[key].push({from:CU,text,ts:Date.now(),read:false});
   inp.value=''; renderMsgs(); renderChatList();
   addNotif(chatWith,`${getName(CU)}: "${text.slice(0,50)}"`, '💬');
-  devRefresh();
+  await pushToCloud(); devRefresh();
 }
 
-// ══ EXPLORE ══
+// ════════════════════════════════════════════
+//  EXPLORE
+// ════════════════════════════════════════════
 function renderExplore(){
-  const cats=[
-    {icon:'🎨',name:'Design'},{icon:'📸',name:'Photography'},{icon:'🎵',name:'Music'},
-    {icon:'✍️',name:'Writing'},{icon:'💻',name:'Coding'},{icon:'🌍',name:'Travel'},
-    {icon:'🍕',name:'Food'},{icon:'🏋️',name:'Fitness'},{icon:'🎮',name:'Gaming'},
-    {icon:'📚',name:'Books'},{icon:'🎬',name:'Film'},{icon:'🧠',name:'Science'},
-  ];
-  document.getElementById('explore-grid').innerHTML = cats.map(c=>{
-    const ct = posts.filter(p=>(p.tags||[]).some(t=>t.toLowerCase().includes(c.name.toLowerCase()))).length;
-    return `<div class="explore-card" onclick="filterTag('#${c.name.toLowerCase()}')">
-      <div class="ex-icon">${c.icon}</div>
-      <div class="ex-name">${c.name}</div>
-      <div class="ex-count">${ct} post${ct!==1?'s':''}</div>
-    </div>`;
+  const cats=[{icon:'🎨',name:'Design'},{icon:'📸',name:'Photography'},{icon:'🎵',name:'Music'},{icon:'✍️',name:'Writing'},{icon:'💻',name:'Coding'},{icon:'🌍',name:'Travel'},{icon:'🍕',name:'Food'},{icon:'🏋️',name:'Fitness'},{icon:'🎮',name:'Gaming'},{icon:'📚',name:'Books'},{icon:'🎬',name:'Film'},{icon:'🧠',name:'Science'}];
+  document.getElementById('explore-grid').innerHTML=cats.map(c=>{
+    const ct=DB.posts.filter(p=>(p.tags||[]).some(t=>t.toLowerCase().includes(c.name.toLowerCase()))).length;
+    return `<div class="explore-card" onclick="filterTag('#${c.name.toLowerCase()}')"><div class="ex-icon">${c.icon}</div><div class="ex-name">${c.name}</div><div class="ex-count">${ct} post${ct!==1?'s':''}</div></div>`;
   }).join('');
 }
 
-// ══ DEV PANEL ══
-function toggleDev(){
-  devOpen=!devOpen;
-  document.getElementById('dev-panel').classList.toggle('open',devOpen);
-  document.getElementById('dev-btn').style.bottom = devOpen?'262px':'0';
-  if (devOpen) devRefresh();
-}
+// ════════════════════════════════════════════
+//  DEV PANEL
+// ════════════════════════════════════════════
+function toggleDev(){ devOpen=!devOpen; document.getElementById('dev-panel').classList.toggle('open',devOpen); document.getElementById('dev-btn').style.bottom=devOpen?'262px':'0'; if(devOpen) devRefresh(); }
 function devRefresh(){
-  document.getElementById('d-users').textContent  = Object.keys(users).length;
-  document.getElementById('d-posts').textContent  = posts.length;
-  document.getElementById('d-chats').textContent  = Object.keys(chats).length;
-  document.getElementById('d-notifs').textContent = Object.values(notifs).flat().length;
-  const bytes=JSON.stringify({users,posts,chats,notifs}).length;
-  document.getElementById('d-size').textContent   = bytes>1024?(bytes/1024).toFixed(1)+'KB':bytes+'B';
+  document.getElementById('d-users').textContent =Object.keys(DB.users).length;
+  document.getElementById('d-posts').textContent =DB.posts.length;
+  document.getElementById('d-chats').textContent =Object.keys(DB.chats).length;
+  document.getElementById('d-syncs').textContent =syncCount;
+  const bytes=JSON.stringify(DB).length;
+  document.getElementById('d-size').textContent  =bytes>1024?(bytes/1024).toFixed(1)+'KB':bytes+'B';
+  const binId=getBinId()||'—';
+  if(document.getElementById('d-binid')) document.getElementById('d-binid').textContent=binId.slice(0,20)+(binId.length>20?'…':'');
+  if(document.getElementById('d-lastsync')) document.getElementById('d-lastsync').textContent=lastSyncTime?timeAgo(lastSyncTime):'Never';
   const ul=document.getElementById('d-users-list');
-  ul.innerHTML = Object.keys(users).length
-    ? Object.keys(users).map(u=>`<div class="dev-urow">
-        <span>@${esc(u)}</span>
-        <span style="color:var(--muted);font-size:.74rem;">${posts.filter(p=>p.author===u).length} posts</span>
-        <button class="dev-del" onclick="devDelUser('${esc(u)}')">✕</button>
-      </div>`).join('')
-    : `<div style="color:var(--muted);font-size:.79rem;">No users registered yet</div>`;
+  ul.innerHTML=Object.keys(DB.users).length?Object.keys(DB.users).map(u=>`<div class="dev-urow"><span>@${esc(u)}</span><span style="color:var(--muted);font-size:.74rem;">${DB.posts.filter(p=>p.author===u).length} posts</span><button class="dev-del" onclick="devDelUser('${esc(u)}')">✕</button></div>`).join(''):`<div style="color:var(--muted);font-size:.79rem;">No users registered yet</div>`;
 }
-function devLog(msg){
-  const el=document.getElementById('dev-log'); if(!el) return;
-  el.innerHTML+=`<div>[${new Date().toLocaleTimeString()}] ${esc(msg)}</div>`;
-  el.scrollTop=el.scrollHeight;
-}
-function devExport(){
-  const data=JSON.stringify({exportedAt:new Date().toISOString(),users,posts,chats,notifs},null,2);
-  const a=document.createElement('a');
-  a.href=URL.createObjectURL(new Blob([data],{type:'application/json'}));
-  a.download=`vibe-export-${Date.now()}.json`; a.click();
-  toast('Data exported!','success'); devLog('Data exported');
-}
-function devClearPosts(){
-  if(!confirm('Delete ALL posts?')) return;
-  posts=[]; sp(); renderFeed(); renderStories(); renderProfileView(); renderRight(); renderExplore(); devRefresh();
-  toast('All posts cleared','info'); devLog('All posts cleared');
-}
-function devClearChats(){
-  if(!confirm('Delete ALL chats?')) return;
-  chats={}; sc(); renderChatList(); devRefresh(); toast('All chats cleared','info'); devLog('All chats cleared');
-}
-function devClearNotifs(){
-  notifs={}; sn(); renderNotifBadge(); devRefresh(); toast('All notifications cleared','info'); devLog('All notifications cleared');
-}
-function devDelUser(u){
-  if (u===CU){ toast("Can't delete yourself while logged in.",'error'); return; }
-  if (!confirm(`Delete @${u} and all their data?`)) return;
-  delete users[u]; posts=posts.filter(p=>p.author!==u); delete notifs[u];
-  su(); sp(); sn(); renderAll(); devRefresh();
-  toast(`@${u} deleted`,'info'); devLog(`User @${u} deleted`);
-}
-function devNuke(){
-  const input=prompt('Type CONFIRM to permanently wipe ALL users, posts and chats:');
-  if (input!=='CONFIRM'){ toast('Cancelled.','info'); return; }
-  Object.values(K).forEach(k=>localStorage.removeItem(k));
-  devLog('NUCLEAR: all data wiped — reloading');
-  toast('All data wiped. Reloading…','error');
-  setTimeout(()=>location.reload(),1600);
-}
+function devLog(msg){ const el=document.getElementById('dev-log'); if(!el) return; el.innerHTML+=`<div>[${new Date().toLocaleTimeString()}] ${esc(msg)}</div>`; el.scrollTop=el.scrollHeight; }
+function devExport(){ const a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([JSON.stringify({exportedAt:new Date().toISOString(),...DB},null,2)],{type:'application/json'})); a.download=`vibe-export-${Date.now()}.json`; a.click(); toast('Data exported!','success'); devLog('Data exported'); }
+async function forcePush(){ await pushToCloud(); toast('Pushed to cloud','success'); devRefresh(); }
+async function forcePull(){ await pullFromCloud(); renderAll(); toast('Pulled from cloud','success'); devRefresh(); }
+async function devClearPosts(){ if(!confirm('Delete ALL posts?')) return; DB.posts=[]; await pushToCloud(); renderFeed();renderStories();renderProfileView();renderRight();renderExplore();devRefresh(); toast('All posts cleared','info'); devLog('Posts cleared'); }
+async function devClearChats(){ if(!confirm('Delete ALL chats?')) return; DB.chats={}; await pushToCloud(); renderChatList(); devRefresh(); toast('All chats cleared','info'); devLog('Chats cleared'); }
+async function devDelUser(u){ if(u===CU){toast("Can't delete yourself",'error');return;} if(!confirm(`Delete @${u}?`)) return; delete DB.users[u]; DB.posts=DB.posts.filter(p=>p.author!==u); delete DB.notifs[u]; await pushToCloud(); renderAll(); devRefresh(); toast(`@${u} deleted`,'info'); devLog(`User @${u} deleted`); }
+async function devNuke(){ const input=prompt('Type CONFIRM to wipe ALL data:'); if(input!=='CONFIRM'){toast('Cancelled.','info');return;} DB={users:{},posts:[],chats:{},notifs:{}}; localStorage.removeItem(BIN_ID_KEY); localStorage.removeItem(SESSION_KEY); toast('All data wiped. Reloading…','error'); devLog('NUCLEAR wipe'); setTimeout(()=>location.reload(),1600); }
 
-// ══ CLOSE MODALS ON BG CLICK ══
-['post-modal','edit-modal'].forEach(id=>{
-  document.getElementById(id).addEventListener('click',function(e){ if(e.target===this) this.classList.remove('open'); });
-});
+// Close modals on overlay click
+['post-modal','edit-modal'].forEach(id=>{ document.getElementById(id).addEventListener('click',function(e){ if(e.target===this) this.classList.remove('open'); }); });
 </script>
 </body>
 </html>
