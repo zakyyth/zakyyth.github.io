@@ -699,6 +699,125 @@
 
   .toast.show { transform: translateX(-50%) translateY(0); }
 
+  /* ===== WELCOME SCREEN ===== */
+  #welcomeScreen {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: var(--green-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    overflow: hidden;
+  }
+  #welcomeScreen.hidden {
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(1.04);
+  }
+  .ws-bg { position: absolute; inset: 0; overflow: hidden; }
+  .ws-circle {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(201,168,76,0.13), transparent 70%);
+    animation: floatCircle 8s ease-in-out infinite;
+  }
+  .ws-circle:nth-child(1) { width: 500px; height: 500px; top: -150px; right: -100px; }
+  .ws-circle:nth-child(2) { width: 350px; height: 350px; bottom: -80px; left: -80px; animation-delay: 2s; }
+  .ws-circle:nth-child(3) { width: 200px; height: 200px; top: 40%; left: 20%; animation-delay: 4s; }
+  .ws-grid {
+    position: absolute; inset: 0;
+    background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+  .ws-box {
+    position: relative; z-index: 2;
+    width: 100%; max-width: 420px;
+    padding: 1.5rem;
+    animation: fadeUp 0.7s ease;
+  }
+  .ws-logo { text-align: center; margin-bottom: 2rem; }
+  .ws-emblem {
+    width: 80px; height: 80px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    border-radius: 24px;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 2.2rem; margin-bottom: 1rem;
+    box-shadow: 0 8px 30px rgba(201,168,76,0.35);
+    animation: pulse 3s ease-in-out infinite;
+  }
+  .ws-logo h1 { font-family: 'Tajawal', sans-serif; font-size: 1.6rem; font-weight: 900; color: white; margin-bottom: 4px; }
+  .ws-logo h1 span { color: var(--gold-light); }
+  .ws-logo p { font-size: 0.82rem; color: rgba(255,255,255,0.5); }
+  .ws-card {
+    background: rgba(255,255,255,0.06);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 24px; padding: 2rem;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  }
+  .ws-tabs {
+    display: flex; background: rgba(0,0,0,0.25);
+    border-radius: 12px; padding: 4px; margin-bottom: 1.8rem; gap: 4px;
+  }
+  .ws-tab {
+    flex: 1; padding: 9px; border-radius: 9px; border: none;
+    font-family: 'Cairo', sans-serif; font-size: 0.85rem; font-weight: 700;
+    cursor: pointer; transition: all 0.25s;
+    color: rgba(255,255,255,0.5); background: transparent;
+  }
+  .ws-tab.active {
+    background: linear-gradient(135deg, var(--green), var(--green-light));
+    color: white; box-shadow: 0 4px 12px rgba(0,98,51,0.4);
+  }
+  .ws-input-group { margin-bottom: 1rem; }
+  .ws-input-group label { display: block; font-size: 0.8rem; font-weight: 600; color: rgba(255,255,255,0.75); margin-bottom: 7px; }
+  .ws-input-wrap { position: relative; }
+  .ws-input-icon { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); font-size: 1rem; pointer-events: none; }
+  .ws-input-group input {
+    width: 100%; background: rgba(255,255,255,0.08);
+    border: 1.5px solid rgba(255,255,255,0.12); border-radius: 12px;
+    padding: 12px 42px 12px 16px;
+    font-family: 'Cairo', sans-serif; font-size: 0.88rem; color: white;
+    outline: none; transition: all 0.2s; direction: rtl;
+  }
+  .ws-input-group input::placeholder { color: rgba(255,255,255,0.3); }
+  .ws-input-group input:focus {
+    border-color: var(--gold); background: rgba(255,255,255,0.12);
+    box-shadow: 0 0 0 4px rgba(201,168,76,0.1);
+  }
+  .ws-divider {
+    display: flex; align-items: center; gap: 10px; margin: 1.2rem 0;
+    color: rgba(255,255,255,0.3); font-size: 0.75rem;
+  }
+  .ws-divider::before, .ws-divider::after { content: ''; flex: 1; height: 1px; background: rgba(255,255,255,0.1); }
+  .ws-btn-main {
+    width: 100%; padding: 13px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    border: none; border-radius: 13px;
+    font-family: 'Cairo', sans-serif; font-size: 0.95rem; font-weight: 800;
+    color: var(--green-dark); cursor: pointer; transition: all 0.25s;
+    box-shadow: 0 6px 20px rgba(201,168,76,0.35);
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    margin-top: 0.5rem;
+  }
+  .ws-btn-main:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(201,168,76,0.45); }
+  .ws-btn-guest {
+    width: 100%; padding: 11px; background: transparent;
+    border: 1.5px solid rgba(255,255,255,0.2); border-radius: 13px;
+    font-family: 'Cairo', sans-serif; font-size: 0.85rem; font-weight: 600;
+    color: rgba(255,255,255,0.7); cursor: pointer; transition: all 0.25s; margin-top: 0.7rem;
+  }
+  .ws-btn-guest:hover { background: rgba(255,255,255,0.08); color: white; border-color: rgba(255,255,255,0.35); }
+  .ws-footer-note { text-align: center; font-size: 0.73rem; color: rgba(255,255,255,0.3); margin-top: 1.2rem; }
+  .ws-panel { display: none; }
+  .ws-panel.active { display: block; }
+  @keyframes floatCircle {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-20px) scale(1.05); }
+  }
+
   /* ANIMATIONS */
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(20px); }
@@ -728,6 +847,91 @@
 </head>
 <body>
 
+<!-- WELCOME SCREEN -->
+<div id="welcomeScreen">
+  <div class="ws-bg">
+    <div class="ws-circle"></div>
+    <div class="ws-circle"></div>
+    <div class="ws-circle"></div>
+    <div class="ws-grid"></div>
+  </div>
+  <div class="ws-box">
+    <div class="ws-logo">
+      <div class="ws-emblem">🏛️</div>
+      <h1>بلدية <span>بوزريعة</span></h1>
+      <p>منصة الخدمات الذكية · ولاية الجزائر العاصمة</p>
+    </div>
+    <div class="ws-card">
+      <div class="ws-tabs">
+        <button class="ws-tab active" onclick="switchTab('login')">تسجيل الدخول</button>
+        <button class="ws-tab" onclick="switchTab('register')">حساب جديد</button>
+      </div>
+
+      <!-- LOGIN PANEL -->
+      <div class="ws-panel active" id="panel-login">
+        <div class="ws-input-group">
+          <label>رقم الهاتف</label>
+          <div class="ws-input-wrap">
+            <span class="ws-input-icon">📱</span>
+            <input type="tel" placeholder="05XX XXX XXX">
+          </div>
+        </div>
+        <div class="ws-input-group">
+          <label>كلمة المرور</label>
+          <div class="ws-input-wrap">
+            <span class="ws-input-icon">🔒</span>
+            <input type="password" placeholder="••••••••">
+          </div>
+        </div>
+        <button class="ws-btn-main" onclick="enterSite('مرحباً بعودتك!')">
+          🚀 دخول
+        </button>
+        <div class="ws-divider">أو</div>
+        <button class="ws-btn-guest" onclick="enterSite('أهلاً بك زائراً!')">
+          👤 تصفح كزائر
+        </button>
+      </div>
+
+      <!-- REGISTER PANEL -->
+      <div class="ws-panel" id="panel-register">
+        <div class="ws-input-group">
+          <label>الاسم الكامل</label>
+          <div class="ws-input-wrap">
+            <span class="ws-input-icon">👤</span>
+            <input type="text" placeholder="مثال: أحمد بن علي">
+          </div>
+        </div>
+        <div class="ws-input-group">
+          <label>رقم الهاتف</label>
+          <div class="ws-input-wrap">
+            <span class="ws-input-icon">📱</span>
+            <input type="tel" placeholder="05XX XXX XXX">
+          </div>
+        </div>
+        <div class="ws-input-group">
+          <label>الحي / المنطقة</label>
+          <div class="ws-input-wrap">
+            <span class="ws-input-icon">📍</span>
+            <input type="text" placeholder="مثال: حي بن عمر">
+          </div>
+        </div>
+        <div class="ws-input-group">
+          <label>كلمة المرور</label>
+          <div class="ws-input-wrap">
+            <span class="ws-input-icon">🔒</span>
+            <input type="password" placeholder="••••••••">
+          </div>
+        </div>
+        <button class="ws-btn-main" onclick="enterSite('مرحباً بك في عائلة بوزريعة!')">
+          ✅ إنشاء الحساب
+        </button>
+      </div>
+
+      <div class="ws-footer-note">🔐 بياناتك محمية ولن تُشارك مع أي جهة</div>
+    </div>
+  </div>
+</div>
+
 <!-- NAV -->
 <nav>
   <div class="nav-logo">
@@ -754,20 +958,20 @@
     <p>كل ما تحتاجه في مكان واحد — من الإبلاغ عن مشاكل الحي إلى مواعيد الصيدليات والنقل والمدارس</p>
     <div class="hero-stats">
       <div class="stat">
-        <span class="stat-num">+120</span>
-        <span class="stat-label">بلاغ تمت معالجته</span>
+        <span class="stat-num">🚨</span>
+        <span class="stat-label">الإبلاغ عن مشاكل الحي</span>
       </div>
       <div class="stat">
-        <span class="stat-num">8</span>
-        <span class="stat-label">خطوط نقل</span>
+        <span class="stat-num">🚌</span>
+        <span class="stat-label">مواقيت النقل</span>
       </div>
       <div class="stat">
-        <span class="stat-num">24/7</span>
+        <span class="stat-num">💊</span>
         <span class="stat-label">صيدليات المناوبة</span>
       </div>
       <div class="stat">
-        <span class="stat-num">15</span>
-        <span class="stat-label">مؤسسة تعليمية</span>
+        <span class="stat-num">🏫</span>
+        <span class="stat-label">المؤسسات التربوية</span>
       </div>
     </div>
   </div>
@@ -814,14 +1018,7 @@
 <div class="main">
   <div class="left-col">
 
-    <!-- ALERT -->
-    <div class="alert-banner">
-      <div class="alert-icon">⚠️</div>
-      <div class="alert-text">
-        <strong>انقطاع في المياه — حي العناصر</strong>
-        <span>الأعمال جارية حتى 18:00 — فريق الصيانة في الميدان</span>
-      </div>
-    </div>
+    <!-- ALERT: يُضاف هنا عند وجود تنبيه حقيقي -->
 
     <!-- REPORT -->
     <div class="report-section" id="report">
@@ -878,45 +1075,10 @@
         <input type="text" placeholder="🔍 ابحث عن خط أو وجهة..." style="width:100%;border:1.5px solid var(--gray);border-radius:10px;padding:10px 14px;font-family:'Cairo',sans-serif;font-size:0.88rem;outline:none;direction:rtl;" oninput="filterBus(this.value)">
       </div>
       <div class="transport-list" id="busList">
-        <div class="transport-item">
-          <div class="bus-num">21</div>
-          <div class="bus-info">
-            <strong>بوزريعة ← أول ماي</strong>
-            <span>via بن عكنون · أولاد فايت</span>
-          </div>
-          <div class="bus-time">كل 15 دقيقة</div>
-        </div>
-        <div class="transport-item">
-          <div class="bus-num">35</div>
-          <div class="bus-info">
-            <strong>بوزريعة ← باب الوادي</strong>
-            <span>via زرالدة · حيدرة</span>
-          </div>
-          <div class="bus-time">كل 20 دقيقة</div>
-        </div>
-        <div class="transport-item">
-          <div class="bus-num" style="background:linear-gradient(135deg,#7b2d8b,#a044bb)">M</div>
-          <div class="bus-info">
-            <strong>ميتر — بن عكنون</strong>
-            <span>أقرب محطة: 800م</span>
-          </div>
-          <div class="bus-time">كل 5 دقائق</div>
-        </div>
-        <div class="transport-item">
-          <div class="bus-num">62</div>
-          <div class="bus-info">
-            <strong>بوزريعة ← الحراش</strong>
-            <span>via باب الزوار · رويسو</span>
-          </div>
-          <div class="bus-time">كل 25 دقيقة</div>
-        </div>
-        <div class="transport-item">
-          <div class="bus-num">14</div>
-          <div class="bus-info">
-            <strong>بوزريعة ← الجزائر وسط</strong>
-            <span>via المنهل · الأبيار</span>
-          </div>
-          <div class="bus-time">كل 12 دقيقة</div>
+        <div style="text-align:center;padding:2.5rem 1rem;color:var(--muted)">
+          <div style="font-size:2.5rem;margin-bottom:0.8rem">🚌</div>
+          <div style="font-weight:700;font-size:0.95rem;margin-bottom:4px">لا توجد بيانات بعد</div>
+          <div style="font-size:0.8rem">سيتم إضافة خطوط النقل قريباً</div>
         </div>
       </div>
     </div>
@@ -929,53 +1091,20 @@
     <!-- PHARMACY -->
     <div class="pharmacy-card" id="pharmacy">
       <h3>💊 صيدليات المناوبة الليلة</h3>
-      <div class="pharmacy-item">
-        <div>
-          <span class="pharmacy-name">صيدلية الأمل</span>
-          <div class="pharmacy-addr">📍 شارع العربي بن مهيدي</div>
-        </div>
-        <span class="open-badge">مفتوحة ✓</span>
-      </div>
-      <div class="pharmacy-item">
-        <div>
-          <span class="pharmacy-name">صيدلية النور</span>
-          <div class="pharmacy-addr">📍 حي بن عمر، شارع 3</div>
-        </div>
-        <span class="open-badge">مفتوحة ✓</span>
-      </div>
-      <div class="pharmacy-item">
-        <div>
-          <span class="pharmacy-name">صيدلية الشفاء</span>
-          <div class="pharmacy-addr">📍 طريق الجزائر العليا</div>
-        </div>
-        <span class="closed-badge">من 22:00</span>
-      </div>
-      <div class="pharmacy-item">
-        <div>
-          <span class="pharmacy-name">صيدلية القدس</span>
-          <div class="pharmacy-addr">📍 مقابل ثانوية الأمير</div>
-        </div>
-        <span class="open-badge">24/24 ✓</span>
+      <div style="text-align:center;padding:2rem 1rem;color:var(--muted)">
+        <div style="font-size:2rem;margin-bottom:0.6rem">💊</div>
+        <div style="font-weight:700;font-size:0.88rem;margin-bottom:4px">لا توجد بيانات بعد</div>
+        <div style="font-size:0.76rem">سيتم إضافة الصيدليات المناوبة يومياً</div>
       </div>
     </div>
 
     <!-- SCHOOL ABSENCES -->
     <div class="school-card" id="school">
       <h3>🏫 غيابات الأساتذة اليوم</h3>
-      <div class="absence-item">
-        <div class="absence-school">ثانوية الأمير عبد القادر</div>
-        <div class="absence-detail">⚠️ غياب أستاذ الرياضيات — قسم 3 ع</div>
-        <div class="absence-time">🕐 أُبلّغ الساعة 07:45</div>
-      </div>
-      <div class="absence-item">
-        <div class="absence-school">ابتدائية الشهيد بومعزة</div>
-        <div class="absence-detail">⚠️ غياب معلمة الفرنسية — القسم الرابع</div>
-        <div class="absence-time">🕐 أُبلّغ الساعة 08:10</div>
-      </div>
-      <div class="absence-item">
-        <div class="absence-school">متوسطة الزبير بن العوام</div>
-        <div class="absence-detail">⚠️ غياب أستاذ التاريخ — 2م1</div>
-        <div class="absence-time">🕐 أُبلّغ الساعة 08:30</div>
+      <div style="text-align:center;padding:1.5rem 1rem;color:var(--muted)">
+        <div style="font-size:2rem;margin-bottom:0.6rem">🏫</div>
+        <div style="font-weight:700;font-size:0.88rem;margin-bottom:4px">لا توجد غيابات مسجلة</div>
+        <div style="font-size:0.76rem">ستظهر هنا إشعارات الغياب فور التبليغ</div>
       </div>
       <button class="btn-submit" style="width:100%;justify-content:center;margin-top:0.5rem;background:linear-gradient(135deg,var(--orange),#e8894a)" onclick="showToast('🔔 سيتم إشعارك بأي غياب جديد')">
         🔔 تفعيل الإشعارات
@@ -985,33 +1114,10 @@
     <!-- ANNOUNCEMENTS -->
     <div class="announce-card">
       <h3 style="color:var(--green-dark)">📢 إعلانات البلدية</h3>
-      <div class="announce-item">
-        <div class="announce-dot" style="background:var(--red)"></div>
-        <div class="announce-text">
-          <strong>أشغال تهيئة طريق بن عكنون</strong>
-          <span>تبدأ الإثنين 01/04 · مدة 3 أسابيع</span>
-        </div>
-      </div>
-      <div class="announce-item">
-        <div class="announce-dot" style="background:var(--green)"></div>
-        <div class="announce-text">
-          <strong>افتتاح الحديقة العامة الجديدة</strong>
-          <span>حي الوادي الكبير · الجمعة 29/03</span>
-        </div>
-      </div>
-      <div class="announce-item">
-        <div class="announce-dot" style="background:var(--blue)"></div>
-        <div class="announce-text">
-          <strong>حملة تطهير الشوارع</strong>
-          <span>كل سبت · 07:00 صباحًا</span>
-        </div>
-      </div>
-      <div class="announce-item">
-        <div class="announce-dot" style="background:var(--gold)"></div>
-        <div class="announce-text">
-          <strong>استئناف خدمة الحالة المدنية</strong>
-          <span>من بعد عيد الفطر المبارك</span>
-        </div>
+      <div style="text-align:center;padding:2rem 1rem;color:var(--muted)">
+        <div style="font-size:2rem;margin-bottom:0.6rem">📢</div>
+        <div style="font-weight:700;font-size:0.88rem;margin-bottom:4px">لا توجد إعلانات حالياً</div>
+        <div style="font-size:0.76rem">ستظهر هنا الإعلانات الرسمية للبلدية</div>
       </div>
     </div>
 
@@ -1030,6 +1136,22 @@
 <div class="toast" id="toast">✅ تم إرسال بلاغك بنجاح!</div>
 
 <script>
+  function switchTab(tab) {
+    document.querySelectorAll('.ws-tab').forEach((t, i) => {
+      t.classList.toggle('active', (tab === 'login' && i === 0) || (tab === 'register' && i === 1));
+    });
+    document.getElementById('panel-login').classList.toggle('active', tab === 'login');
+    document.getElementById('panel-register').classList.toggle('active', tab === 'register');
+  }
+
+  function enterSite(msg) {
+    document.getElementById('welcomeScreen').classList.add('hidden');
+    setTimeout(() => {
+      document.getElementById('welcomeScreen').style.display = 'none';
+      showToast('👋 ' + msg);
+    }, 650);
+  }
+
   function scrollToSection(id) {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
