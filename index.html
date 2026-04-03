@@ -1118,7 +1118,7 @@
 <!-- TOAST -->
 <div class="toast" id="toast">✅ تم إرسال بلاغك بنجاح!</div>
 
-<script>
+<script type="module">
   function emptyState(icon, title, sub) {
     return `<div style="text-align:center;padding:2rem 1rem;color:var(--muted)">
       <div style="font-size:2rem;margin-bottom:0.6rem">${icon}</div>
@@ -1127,9 +1127,32 @@
     </div>`;
   }
 
-  function loadSiteData() {
+  // ===== FIREBASE =====
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import { getDatabase, ref, get, onValue } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyBY-HruRlXQ0iazUfCRwu4Fy_ubGqOicIg",
+    authDomain: "bouzareah-80151.firebaseapp.com",
+    databaseURL: "https://bouzareah-80151-default-rtdb.firebaseio.com",
+    projectId: "bouzareah-80151",
+    storageBucket: "bouzareah-80151.firebasestorage.app",
+    messagingSenderId: "353214800081",
+    appId: "1:353214800081:web:d6ce663a1042f36fb525f0"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getDatabase(app);
+
+  async function fbGet(key) {
+    const snap = await get(ref(db, key));
+    return snap.exists() ? snap.val() : [];
+  }
+
+  async function loadSiteData() {
     // ALERT
-    const alertData = JSON.parse(localStorage.getItem('bz_alert') || 'null');
+    const alertSnap = await get(ref(db, 'bz_alert'));
+    const alertData = alertSnap.exists() ? alertSnap.val() : null;
     const alertEl = document.getElementById('alertBanner');
     if (alertData && alertEl) {
       alertEl.innerHTML = `<div class="alert-icon">⚠️</div><div class="alert-text"><strong>${alertData.title}</strong><span>${alertData.sub}</span></div>`;
@@ -1137,13 +1160,14 @@
     }
 
     // TRANSPORT
-    const buses = JSON.parse(localStorage.getItem('bz_transport') || '[]');
+    const buses = await fbGet('bz_transport');
+    const busArr = Array.isArray(buses) ? buses : [];
     const busList = document.getElementById('busList');
     if (busList) {
-      if (!buses.length) {
+      if (!busArr.length) {
         busList.innerHTML = emptyState('🚌','لا توجد بيانات بعد','سيتم إضافة خطوط النقل قريباً');
       } else {
-        busList.innerHTML = buses.map(b => `
+        busList.innerHTML = busArr.map(b => `
           <div class="transport-item">
             <div class="bus-num">${b.num}</div>
             <div class="bus-info"><strong>${b.route}</strong><span>${b.via||''}</span></div>
@@ -1153,13 +1177,14 @@
     }
 
     // PHARMACY
-    const pharmacies = JSON.parse(localStorage.getItem('bz_pharmacy') || '[]');
+    const pharmacies = await fbGet('bz_pharmacy');
+    const pharmArr = Array.isArray(pharmacies) ? pharmacies : [];
     const pharmList = document.getElementById('pharmacyList');
     if (pharmList) {
-      if (!pharmacies.length) {
+      if (!pharmArr.length) {
         pharmList.innerHTML = emptyState('💊','لا توجد بيانات بعد','سيتم إضافة الصيدليات المناوبة يومياً');
       } else {
-        pharmList.innerHTML = pharmacies.map(p => `
+        pharmList.innerHTML = pharmArr.map(p => `
           <div class="pharmacy-item">
             <div><span class="pharmacy-name">${p.name}</span><div class="pharmacy-addr">📍 ${p.addr}</div></div>
             <span class="${p.open ? 'open-badge':'closed-badge'}">${p.open ? 'مفتوحة ✓' : (p.hours||'مغلقة')}</span>
@@ -1168,13 +1193,14 @@
     }
 
     // SCHOOL
-    const absences = JSON.parse(localStorage.getItem('bz_school') || '[]');
+    const absences = await fbGet('bz_school');
+    const absArr = Array.isArray(absences) ? absences : [];
     const schoolList = document.getElementById('schoolList');
     if (schoolList) {
-      if (!absences.length) {
+      if (!absArr.length) {
         schoolList.innerHTML = emptyState('🏫','لا توجد غيابات مسجلة','ستظهر هنا إشعارات الغياب فور التبليغ');
       } else {
-        schoolList.innerHTML = absences.map(a => `
+        schoolList.innerHTML = absArr.map(a => `
           <div class="absence-item">
             <div class="absence-school">${a.school}</div>
             <div class="absence-detail">⚠️ ${a.detail}</div>
@@ -1184,14 +1210,15 @@
     }
 
     // ANNOUNCEMENTS
-    const announces = JSON.parse(localStorage.getItem('bz_announce') || '[]');
+    const announces = await fbGet('bz_announce');
+    const annArr = Array.isArray(announces) ? announces : [];
     const announceList = document.getElementById('announceList');
     if (announceList) {
       const colors = ['var(--red)','var(--green)','var(--blue)','var(--gold)','var(--orange)'];
-      if (!announces.length) {
+      if (!annArr.length) {
         announceList.innerHTML = emptyState('📢','لا توجد إعلانات حالياً','ستظهر هنا الإعلانات الرسمية للبلدية');
       } else {
-        announceList.innerHTML = announces.map((a,i) => `
+        announceList.innerHTML = annArr.map((a,i) => `
           <div class="announce-item">
             <div class="announce-dot" style="background:${colors[i%colors.length]}"></div>
             <div class="announce-text"><strong>${a.title}</strong><span>${a.sub||''}</span></div>
@@ -1209,6 +1236,7 @@
     document.getElementById('panel-login').classList.toggle('active', tab === 'login');
     document.getElementById('panel-register').classList.toggle('active', tab === 'register');
   }
+  window.switchTab = switchTab;
 
   function enterSite(msg) {
     document.getElementById('welcomeScreen').classList.add('hidden');
@@ -1217,19 +1245,23 @@
       showToast('👋 ' + msg);
     }, 650);
   }
+  window.enterSite = enterSite;
 
   function scrollToSection(id) {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
+  window.scrollToSection = scrollToSection;
 
   function selectPill(el) {
     document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
     el.classList.add('active');
   }
+  window.selectPill = selectPill;
 
   function submitReport() {
     showToast('✅ تم إرسال بلاغك! سيتم الرد خلال 48 ساعة');
   }
+  window.submitReport = submitReport;
 
   function showToast(msg) {
     const t = document.getElementById('toast');
@@ -1244,6 +1276,7 @@
       item.style.display = item.textContent.includes(val) ? 'flex' : 'none';
     });
   }
+  window.filterBus = filterBus;
 
   // Animate cards on scroll
   const observer = new IntersectionObserver(entries => {
