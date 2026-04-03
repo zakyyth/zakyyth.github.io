@@ -338,6 +338,7 @@ body {
     <button class="tab-btn" onclick="switchPanel('pharmacy')">💊 الصيدليات</button>
     <button class="tab-btn" onclick="switchPanel('transport')">🚌 النقل</button>
     <button class="tab-btn" onclick="switchPanel('school')">🏫 التعليم</button>
+    <button class="tab-btn" onclick="switchPanel('jobs')">💼 التوظيف</button>
   </div>
 
   <!-- CONTENT -->
@@ -522,6 +523,53 @@ body {
       </div>
     </div>
 
+    <!-- JOBS PANEL -->
+    <div class="panel" id="panel-jobs">
+      <!-- Post a job (admin) -->
+      <div class="admin-card">
+        <h3>➕ نشر عرض عمل جديد</h3>
+        <div class="form-row">
+          <div class="f-group">
+            <label>عنوان الوظيفة</label>
+            <input type="text" id="adm-job-title" placeholder="مثال: سائق، محاسب، عامل نظافة">
+          </div>
+          <div class="f-group">
+            <label>القطاع / المؤسسة</label>
+            <input type="text" id="adm-job-sector" placeholder="مثال: بلدية، مصنع، تجارة">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="f-group">
+            <label>رقم التواصل</label>
+            <input type="tel" id="adm-job-phone" placeholder="05XX XXX XXX">
+          </div>
+          <div class="f-group">
+            <label>الحي / المنطقة</label>
+            <input type="text" id="adm-job-location" placeholder="مثال: وسط بوزريعة">
+          </div>
+        </div>
+        <div class="form-row full">
+          <div class="f-group">
+            <label>وصف الوظيفة والشروط</label>
+            <textarea id="adm-job-desc" placeholder="الراتب، الخبرة المطلوبة، أوقات العمل..." style="min-height:80px;"></textarea>
+          </div>
+        </div>
+        <button class="btn-add" onclick="adminAddJob()">➕ نشر الوظيفة</button>
+      </div>
+
+      <!-- All job listings -->
+      <div class="admin-card">
+        <h3>📋 كل عروض العمل</h3>
+        <div class="data-list" id="adminJobsList"><div class="empty-list">⏳ جارٍ التحميل...</div></div>
+      </div>
+
+      <!-- All seekers -->
+      <div class="admin-card">
+        <h3>👥 الباحثون عن عمل المسجّلون</h3>
+        <div class="data-list" id="adminSeekersList"><div class="empty-list">⏳ جارٍ التحميل...</div></div>
+      </div>
+    </div>
+
   </div>
 </div>
 
@@ -531,7 +579,7 @@ body {
 <!-- Firebase SDK -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getDatabase, ref, set, get, remove, onValue } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+import { getDatabase, ref, set, get, push, remove, onValue } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
 // ===== FIREBASE CONFIG =====
 const firebaseConfig = {
@@ -587,6 +635,7 @@ window.switchPanel = function(name) {
   event.target.classList.add('active');
   if (name === 'dashboard') updateStats();
   if (name === 'reports') loadReports();
+  if (name === 'jobs') { renderAdminJobs(); renderAdminSeekers(); }
 }
 
 // ===== TOAST =====
@@ -781,6 +830,66 @@ async function loadAll() {
   await Promise.all([renderAnnounce(), renderPharmacy(), renderTransport(), renderSchool(), loadAlert()]);
   updateStats();
   loadReports();
+}
+
+// ===== JOBS (ADMIN) =====
+window.adminAddJob = async function() {
+  const title = document.getElementById('adm-job-title').value.trim();
+  const sector = document.getElementById('adm-job-sector').value.trim();
+  const phone = document.getElementById('adm-job-phone').value.trim();
+  const location = document.getElementById('adm-job-location').value.trim();
+  const desc = document.getElementById('adm-job-desc').value.trim();
+  if (!title || !desc) return showToast('⚠️ أدخل العنوان والوصف');
+  await push(ref(db, 'bz_jobs'), {
+    title, sector, phone, location, desc,
+    source: 'admin',
+    time: new Date().toLocaleString('ar-DZ'),
+    timestamp: Date.now()
+  });
+  ['adm-job-title','adm-job-sector','adm-job-phone','adm-job-location','adm-job-desc'].forEach(id => document.getElementById(id).value='');
+  renderAdminJobs();
+  showToast('✅ تم نشر الوظيفة!');
+}
+
+async function renderAdminJobs() {
+  const snap = await get(ref(db, 'bz_jobs'));
+  const el = document.getElementById('adminJobsList');
+  if (!snap.exists()) { el.innerHTML = '<div class="empty-list">لا توجد عروض عمل بعد</div>'; return; }
+  const arr = Object.entries(snap.val()).map(([k,v])=>({key:k,...v})).reverse();
+  el.innerHTML = arr.map(j => `
+    <div class="data-item">
+      <div class="data-item-info">
+        <div class="data-item-title">${j.source==='admin'?'✅':'👤'} ${j.title} · ${j.sector||'—'}</div>
+        <div class="data-item-sub">📍 ${j.location||'—'} · 📱 ${j.phone||'—'} · 🕐 ${j.time||''}</div>
+        <div class="data-item-sub" style="margin-top:3px;color:var(--text)">${j.desc||''}</div>
+      </div>
+      <button class="btn-del" onclick="deleteFirebaseKey('bz_jobs','${j.key}',renderAdminJobsW)">حذف</button>
+    </div>`).join('');
+}
+window.renderAdminJobsW = renderAdminJobs;
+
+async function renderAdminSeekers() {
+  const snap = await get(ref(db, 'bz_seekers'));
+  const el = document.getElementById('adminSeekersList');
+  if (!snap.exists()) { el.innerHTML = '<div class="empty-list">لا يوجد مسجّلون بعد</div>'; return; }
+  const arr = Object.entries(snap.val()).map(([k,v])=>({key:k,...v})).reverse();
+  el.innerHTML = arr.map(s => `
+    <div class="data-item">
+      <div class="data-item-info">
+        <div class="data-item-title">👤 ${s.name} · ${s.jobType||''}</div>
+        <div class="data-item-sub">📱 ${s.phone} ${s.email?'· 📧 '+s.email:''} ${s.lastJob?'· 💼 '+s.lastJob:''}</div>
+        ${s.skills?`<div class="data-item-sub" style="margin-top:3px;color:var(--green-dark)">🛠️ ${s.skills}</div>`:''}
+      </div>
+      <button class="btn-del" onclick="deleteFirebaseKey('bz_seekers','${s.key}',renderAdminSeekersW)">حذف</button>
+    </div>`).join('');
+}
+window.renderAdminSeekersW = renderAdminSeekers;
+
+window.deleteFirebaseKey = async function(path, key, renderFn) {
+  if (!confirm('حذف هذا العنصر؟')) return;
+  await set(ref(db, path + '/' + key), null);
+  renderFn();
+  showToast('🗑️ تم الحذف');
 }
 
 // ===== REPORTS =====
