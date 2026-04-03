@@ -95,6 +95,21 @@ footer strong{color:var(--gold-light);}
 .toast.show{transform:translateX(-50%) translateY(0);}
 .loading{text-align:center;padding:2rem;color:var(--muted);font-size:0.88rem;}
 @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.job-item{background:white;border:1.5px solid var(--gray);border-radius:14px;padding:1.2rem 1.4rem;margin-bottom:0.8rem;transition:all 0.2s;cursor:default;}
+.job-item:hover{border-color:rgba(0,98,51,0.3);box-shadow:0 4px 16px rgba(0,98,51,0.08);}
+.job-title{font-family:'Tajawal',sans-serif;font-size:1rem;font-weight:800;color:var(--green-dark);margin-bottom:4px;}
+.job-meta{display:flex;gap:12px;flex-wrap:wrap;font-size:0.76rem;color:var(--muted);margin-bottom:8px;}
+.job-meta span{display:flex;align-items:center;gap:4px;}
+.job-desc{font-size:0.82rem;color:var(--text);line-height:1.7;margin-bottom:10px;}
+.job-contact{font-size:0.78rem;font-weight:700;color:var(--blue);background:rgba(26,111,168,0.07);padding:5px 12px;border-radius:8px;display:inline-block;}
+.job-badge{display:inline-block;font-size:0.72rem;font-weight:700;padding:3px 10px;border-radius:20px;margin-bottom:8px;}
+.badge-admin{background:rgba(0,98,51,0.1);color:var(--green);}
+.badge-user{background:rgba(201,168,76,0.15);color:#8a6f20;}
+.seeker-item{background:white;border:1.5px solid var(--gray);border-radius:14px;padding:1.1rem 1.3rem;margin-bottom:0.7rem;transition:all 0.2s;}
+.seeker-item:hover{border-color:rgba(0,98,51,0.25);}
+.seeker-name{font-weight:800;font-size:0.9rem;color:var(--text);margin-bottom:4px;}
+.seeker-info{font-size:0.76rem;color:var(--muted);display:flex;gap:12px;flex-wrap:wrap;margin-bottom:6px;}
+.seeker-skills{font-size:0.78rem;color:var(--green-dark);background:rgba(0,98,51,0.06);padding:5px 10px;border-radius:8px;line-height:1.6;}
 @media(max-width:768px){.form-grid{grid-template-columns:1fr;}.nav-links{display:none;}.hero{padding:3rem 1.5rem 2.5rem;}.hero-stats{gap:1.5rem;}.quick-access,.page-content{padding:1.2rem;}.cards-grid{grid-template-columns:1fr 1fr;}}
 </style>
 </head>
@@ -115,6 +130,8 @@ footer strong{color:var(--gold-light);}
     <li><a onclick="showPage('page-school')">التعليم</a></li>
     <li><a onclick="showPage('page-pharmacy')">الصيدليات</a></li>
     <li><a onclick="showPage('page-announce')">الإعلانات</a></li>
+    <li><a onclick="showPage('page-jobs')">🧾 فرص العمل</a></li>
+    <li><a onclick="showPage('page-seekers')">💼 سجّل سيرتك</a></li>
   </ul>
 </nav>
 
@@ -142,6 +159,8 @@ footer strong{color:var(--gold-light);}
       <div class="card card-green" onclick="showPage('page-pharmacy')"><div class="card-icon">💊</div><h3>صيدليات المناوبة</h3><p>الأقرب إليك الآن</p><div class="card-arrow">←</div></div>
       <div class="card card-orange" onclick="showPage('page-school')"><div class="card-icon">🏫</div><h3>المؤسسات التربوية</h3><p>غياب الأساتذة والإشعارات</p><div class="card-arrow">←</div></div>
       <div class="card card-gold" onclick="showPage('page-announce')"><div class="card-icon">📢</div><h3>إعلانات البلدية</h3><p>أخبار وإشعارات رسمية</p><div class="card-arrow">←</div></div>
+      <div class="card card-green" onclick="showPage('page-jobs')"><div class="card-icon">🧾</div><h3>فرص العمل</h3><p>وظائف متاحة في بوزريعة</p><div class="card-arrow">←</div></div>
+      <div class="card card-blue" onclick="showPage('page-seekers')"><div class="card-icon">💼</div><h3>سجّل سيرتك الذاتية</h3><p>ابحث عن عمل وسجّل بياناتك</p><div class="card-arrow">←</div></div>
     </div>
   </div>
   <footer>
@@ -244,6 +263,66 @@ footer strong{color:var(--gold-light);}
   </div>
 </div>
 
+<!-- JOBS PAGE -->
+<div class="page" id="page-jobs">
+  <div class="page-header">
+    <button class="btn-back" onclick="showPage('home')">→ رجوع</button>
+    <div><h2>🧾 فرص العمل في بوزريعة</h2><p>وظائف نشرتها البلدية أو السكان</p></div>
+  </div>
+  <div class="page-content">
+    <div class="section-box">
+      <h2>📋 عروض العمل المتاحة</h2>
+      <div id="jobsList"><div class="loading">⏳ جارٍ التحميل...</div></div>
+    </div>
+    <div class="section-box">
+      <h2>➕ أنشر عرض عمل</h2>
+      <p style="font-size:0.8rem;color:var(--muted);margin-bottom:1rem">هل تملك متجراً أو مشروعاً وتبحث عن موظفين؟ أضف إعلانك هنا.</p>
+      <div class="form-grid">
+        <div class="form-group"><label>عنوان الوظيفة</label><input type="text" id="job-title" placeholder="مثال: بائع، سائق، أمين صندوق"></div>
+        <div class="form-group"><label>القطاع / المؤسسة</label><input type="text" id="job-sector" placeholder="مثال: تجارة، مطعم، نقل"></div>
+        <div class="form-group"><label>رقم التواصل</label><input type="tel" id="job-phone" placeholder="05XX XXX XXX"></div>
+        <div class="form-group"><label>الحي / المنطقة</label><input type="text" id="job-location" placeholder="مثال: حي بن عمر، وسط البلدية"></div>
+        <div class="form-group full"><label>وصف الوظيفة والشروط</label><textarea id="job-desc" placeholder="اشرح الوظيفة، الراتب المتوقع، الخبرة المطلوبة..."></textarea></div>
+      </div>
+      <button class="btn-submit" onclick="submitJob()">📤 نشر الإعلان</button>
+    </div>
+  </div>
+</div>
+
+<!-- SEEKERS PAGE -->
+<div class="page" id="page-seekers">
+  <div class="page-header">
+    <button class="btn-back" onclick="showPage('home')">→ رجوع</button>
+    <div><h2>💼 سجّل سيرتك الذاتية</h2><p>أبحث عن عمل؟ أضف بياناتك ليتصل بك أصحاب العمل</p></div>
+  </div>
+  <div class="page-content">
+    <div class="section-box">
+      <h2>📝 نموذج التسجيل</h2>
+      <div class="form-grid">
+        <div class="form-group"><label>الاسم الكامل</label><input type="text" id="sk-name" placeholder="اسمك الثلاثي"></div>
+        <div class="form-group"><label>رقم الهاتف</label><input type="tel" id="sk-phone" placeholder="05XX XXX XXX"></div>
+        <div class="form-group"><label>البريد الإلكتروني (اختياري)</label><input type="email" id="sk-email" placeholder="exemple@gmail.com"></div>
+        <div class="form-group"><label>آخر منصب شغلته</label><input type="text" id="sk-last" placeholder="مثال: عامل في محل تجاري"></div>
+        <div class="form-group full"><label>المهارات والخبرات</label><textarea id="sk-skills" placeholder="مثال: إجادة الحاسوب، قيادة السيارة، خبرة في البيع، اللغات..."></textarea></div>
+        <div class="form-group full"><label>نوع العمل المبحوث عنه</label>
+          <select id="sk-type">
+            <option value="دوام كامل">دوام كامل</option>
+            <option value="دوام جزئي">دوام جزئي</option>
+            <option value="مؤقت / موسمي">مؤقت / موسمي</option>
+            <option value="عمل حر">عمل حر / فريلانس</option>
+          </select>
+        </div>
+      </div>
+      <button class="btn-submit" onclick="submitSeeker()">✅ تسجيل ملفي</button>
+    </div>
+    <div class="section-box">
+      <h2>👥 الباحثون عن عمل المسجّلون</h2>
+      <p style="font-size:0.78rem;color:var(--muted);margin-bottom:1rem">أصحاب العمل يمكنهم التواصل مباشرة مع هؤلاء.</p>
+      <div id="seekersList"><div class="loading">⏳ جارٍ التحميل...</div></div>
+    </div>
+  </div>
+</div>
+
 <div class="toast" id="toast">✅ تم!</div>
 
 <script type="module">
@@ -291,6 +370,8 @@ window.showPage = function(pageId) {
   else if (pageId === 'page-pharmacy') loadPharmacy();
   else if (pageId === 'page-school') loadSchool();
   else if (pageId === 'page-announce') loadAnnounce();
+  else if (pageId === 'page-jobs') loadJobs();
+  else if (pageId === 'page-seekers') { loadSeekers(); }
 }
 
 async function loadTransport() {
@@ -385,6 +466,87 @@ get(ref(db, 'bz_alert')).then(snap => {
     el.style.display = 'flex';
   }
 });
+
+// ===== JOBS =====
+async function loadJobs() {
+  const snap = await get(ref(db, 'bz_jobs'));
+  const el = document.getElementById('jobsList');
+  if (!snap.exists()) { el.innerHTML = emptyState('🧾','لا توجد عروض عمل بعد','ستظهر هنا الوظائف المتاحة'); return; }
+  const data = snap.val();
+  const arr = Object.entries(data).map(([k,v]) => ({key:k,...v})).reverse();
+  el.innerHTML = arr.map(j => `
+    <div class="job-item">
+      <span class="job-badge ${j.source==='admin'?'badge-admin':'badge-user'}">${j.source==='admin'?'✅ بلدية':'👤 مواطن'}</span>
+      <div class="job-title">💼 ${j.title}</div>
+      <div class="job-meta">
+        <span>🏢 ${j.sector||'—'}</span>
+        <span>📍 ${j.location||'—'}</span>
+        <span>🕐 ${j.time||''}</span>
+      </div>
+      <div class="job-desc">${j.desc||''}</div>
+      <div class="job-contact">📱 للتواصل: ${j.phone||'—'}</div>
+    </div>`).join('');
+}
+
+window.submitJob = async function() {
+  const title = document.getElementById('job-title').value.trim();
+  const sector = document.getElementById('job-sector').value.trim();
+  const phone = document.getElementById('job-phone').value.trim();
+  const location = document.getElementById('job-location').value.trim();
+  const desc = document.getElementById('job-desc').value.trim();
+  if (!title || !phone || !desc) return showToast('⚠️ يرجى ملء العنوان والوصف والهاتف');
+  try {
+    await push(ref(db, 'bz_jobs'), {
+      title, sector, phone, location, desc,
+      source: 'user',
+      time: new Date().toLocaleString('ar-DZ'),
+      timestamp: Date.now()
+    });
+    ['job-title','job-sector','job-phone','job-location','job-desc'].forEach(id => document.getElementById(id).value='');
+    showToast('✅ تم نشر إعلان عملك بنجاح!');
+    loadJobs();
+  } catch(e) { showToast('❌ حدث خطأ، حاول مجدداً'); }
+}
+
+// ===== SEEKERS =====
+async function loadSeekers() {
+  const snap = await get(ref(db, 'bz_seekers'));
+  const el = document.getElementById('seekersList');
+  if (!snap.exists()) { el.innerHTML = emptyState('👥','لا يوجد مسجّلون بعد','كن أول من يسجّل!'); return; }
+  const data = snap.val();
+  const arr = Object.entries(data).map(([k,v]) => ({key:k,...v})).reverse();
+  el.innerHTML = arr.map(s => `
+    <div class="seeker-item">
+      <div class="seeker-name">👤 ${s.name}</div>
+      <div class="seeker-info">
+        <span>📱 ${s.phone}</span>
+        ${s.email?`<span>📧 ${s.email}</span>`:''}
+        <span>🔍 ${s.jobType||''}</span>
+        ${s.lastJob?`<span>💼 ${s.lastJob}</span>`:''}
+      </div>
+      ${s.skills?`<div class="seeker-skills">🛠️ ${s.skills}</div>`:''}
+    </div>`).join('');
+}
+
+window.submitSeeker = async function() {
+  const name = document.getElementById('sk-name').value.trim();
+  const phone = document.getElementById('sk-phone').value.trim();
+  const email = document.getElementById('sk-email').value.trim();
+  const lastJob = document.getElementById('sk-last').value.trim();
+  const skills = document.getElementById('sk-skills').value.trim();
+  const jobType = document.getElementById('sk-type').value;
+  if (!name || !phone) return showToast('⚠️ الاسم والهاتف إلزاميان');
+  try {
+    await push(ref(db, 'bz_seekers'), {
+      name, phone, email, lastJob, skills, jobType,
+      time: new Date().toLocaleString('ar-DZ'),
+      timestamp: Date.now()
+    });
+    ['sk-name','sk-phone','sk-email','sk-last','sk-skills'].forEach(id => document.getElementById(id).value='');
+    showToast('✅ تم تسجيل ملفك! سيتصل بك أصحاب العمل');
+    loadSeekers();
+  } catch(e) { showToast('❌ حدث خطأ، حاول مجدداً'); }
+}
 </script>
 </body>
 </html>
