@@ -1019,6 +1019,7 @@
   <div class="left-col">
 
     <!-- ALERT: يُضاف هنا عند وجود تنبيه حقيقي -->
+    <div class="alert-banner" id="alertBanner" style="display:none"></div>
 
     <!-- REPORT -->
     <div class="report-section" id="report">
@@ -1074,13 +1075,7 @@
       <div style="margin-bottom:1rem">
         <input type="text" placeholder="🔍 ابحث عن خط أو وجهة..." style="width:100%;border:1.5px solid var(--gray);border-radius:10px;padding:10px 14px;font-family:'Cairo',sans-serif;font-size:0.88rem;outline:none;direction:rtl;" oninput="filterBus(this.value)">
       </div>
-      <div class="transport-list" id="busList">
-        <div style="text-align:center;padding:2.5rem 1rem;color:var(--muted)">
-          <div style="font-size:2.5rem;margin-bottom:0.8rem">🚌</div>
-          <div style="font-weight:700;font-size:0.95rem;margin-bottom:4px">لا توجد بيانات بعد</div>
-          <div style="font-size:0.8rem">سيتم إضافة خطوط النقل قريباً</div>
-        </div>
-      </div>
+      <div class="transport-list" id="busList"></div>
     </div>
 
   </div>
@@ -1091,21 +1086,13 @@
     <!-- PHARMACY -->
     <div class="pharmacy-card" id="pharmacy">
       <h3>💊 صيدليات المناوبة الليلة</h3>
-      <div style="text-align:center;padding:2rem 1rem;color:var(--muted)">
-        <div style="font-size:2rem;margin-bottom:0.6rem">💊</div>
-        <div style="font-weight:700;font-size:0.88rem;margin-bottom:4px">لا توجد بيانات بعد</div>
-        <div style="font-size:0.76rem">سيتم إضافة الصيدليات المناوبة يومياً</div>
-      </div>
+      <div id="pharmacyList"></div>
     </div>
 
     <!-- SCHOOL ABSENCES -->
     <div class="school-card" id="school">
       <h3>🏫 غيابات الأساتذة اليوم</h3>
-      <div style="text-align:center;padding:1.5rem 1rem;color:var(--muted)">
-        <div style="font-size:2rem;margin-bottom:0.6rem">🏫</div>
-        <div style="font-weight:700;font-size:0.88rem;margin-bottom:4px">لا توجد غيابات مسجلة</div>
-        <div style="font-size:0.76rem">ستظهر هنا إشعارات الغياب فور التبليغ</div>
-      </div>
+      <div id="schoolList"></div>
       <button class="btn-submit" style="width:100%;justify-content:center;margin-top:0.5rem;background:linear-gradient(135deg,var(--orange),#e8894a)" onclick="showToast('🔔 سيتم إشعارك بأي غياب جديد')">
         🔔 تفعيل الإشعارات
       </button>
@@ -1114,11 +1101,7 @@
     <!-- ANNOUNCEMENTS -->
     <div class="announce-card">
       <h3 style="color:var(--green-dark)">📢 إعلانات البلدية</h3>
-      <div style="text-align:center;padding:2rem 1rem;color:var(--muted)">
-        <div style="font-size:2rem;margin-bottom:0.6rem">📢</div>
-        <div style="font-weight:700;font-size:0.88rem;margin-bottom:4px">لا توجد إعلانات حالياً</div>
-        <div style="font-size:0.76rem">ستظهر هنا الإعلانات الرسمية للبلدية</div>
-      </div>
+      <div id="announceList"></div>
     </div>
 
   </div>
@@ -1136,6 +1119,89 @@
 <div class="toast" id="toast">✅ تم إرسال بلاغك بنجاح!</div>
 
 <script>
+  function emptyState(icon, title, sub) {
+    return `<div style="text-align:center;padding:2rem 1rem;color:var(--muted)">
+      <div style="font-size:2rem;margin-bottom:0.6rem">${icon}</div>
+      <div style="font-weight:700;font-size:0.88rem;margin-bottom:4px">${title}</div>
+      <div style="font-size:0.76rem">${sub}</div>
+    </div>`;
+  }
+
+  function loadSiteData() {
+    // ALERT
+    const alertData = JSON.parse(localStorage.getItem('bz_alert') || 'null');
+    const alertEl = document.getElementById('alertBanner');
+    if (alertData && alertEl) {
+      alertEl.innerHTML = `<div class="alert-icon">⚠️</div><div class="alert-text"><strong>${alertData.title}</strong><span>${alertData.sub}</span></div>`;
+      alertEl.style.display = 'flex';
+    }
+
+    // TRANSPORT
+    const buses = JSON.parse(localStorage.getItem('bz_transport') || '[]');
+    const busList = document.getElementById('busList');
+    if (busList) {
+      if (!buses.length) {
+        busList.innerHTML = emptyState('🚌','لا توجد بيانات بعد','سيتم إضافة خطوط النقل قريباً');
+      } else {
+        busList.innerHTML = buses.map(b => `
+          <div class="transport-item">
+            <div class="bus-num">${b.num}</div>
+            <div class="bus-info"><strong>${b.route}</strong><span>${b.via||''}</span></div>
+            <div class="bus-time">${b.freq||''}</div>
+          </div>`).join('');
+      }
+    }
+
+    // PHARMACY
+    const pharmacies = JSON.parse(localStorage.getItem('bz_pharmacy') || '[]');
+    const pharmList = document.getElementById('pharmacyList');
+    if (pharmList) {
+      if (!pharmacies.length) {
+        pharmList.innerHTML = emptyState('💊','لا توجد بيانات بعد','سيتم إضافة الصيدليات المناوبة يومياً');
+      } else {
+        pharmList.innerHTML = pharmacies.map(p => `
+          <div class="pharmacy-item">
+            <div><span class="pharmacy-name">${p.name}</span><div class="pharmacy-addr">📍 ${p.addr}</div></div>
+            <span class="${p.open ? 'open-badge':'closed-badge'}">${p.open ? 'مفتوحة ✓' : (p.hours||'مغلقة')}</span>
+          </div>`).join('');
+      }
+    }
+
+    // SCHOOL
+    const absences = JSON.parse(localStorage.getItem('bz_school') || '[]');
+    const schoolList = document.getElementById('schoolList');
+    if (schoolList) {
+      if (!absences.length) {
+        schoolList.innerHTML = emptyState('🏫','لا توجد غيابات مسجلة','ستظهر هنا إشعارات الغياب فور التبليغ');
+      } else {
+        schoolList.innerHTML = absences.map(a => `
+          <div class="absence-item">
+            <div class="absence-school">${a.school}</div>
+            <div class="absence-detail">⚠️ ${a.detail}</div>
+            <div class="absence-time">🕐 ${a.time||''}</div>
+          </div>`).join('');
+      }
+    }
+
+    // ANNOUNCEMENTS
+    const announces = JSON.parse(localStorage.getItem('bz_announce') || '[]');
+    const announceList = document.getElementById('announceList');
+    if (announceList) {
+      const colors = ['var(--red)','var(--green)','var(--blue)','var(--gold)','var(--orange)'];
+      if (!announces.length) {
+        announceList.innerHTML = emptyState('📢','لا توجد إعلانات حالياً','ستظهر هنا الإعلانات الرسمية للبلدية');
+      } else {
+        announceList.innerHTML = announces.map((a,i) => `
+          <div class="announce-item">
+            <div class="announce-dot" style="background:${colors[i%colors.length]}"></div>
+            <div class="announce-text"><strong>${a.title}</strong><span>${a.sub||''}</span></div>
+          </div>`).join('');
+      }
+    }
+  }
+
+  loadSiteData();
+
   function switchTab(tab) {
     document.querySelectorAll('.ws-tab').forEach((t, i) => {
       t.classList.toggle('active', (tab === 'login' && i === 0) || (tab === 'register' && i === 1));
