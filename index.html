@@ -76,10 +76,6 @@ nav{position:sticky;top:0;z-index:100;background:rgba(0,98,51,0.97);backdrop-fil
 .pharmacy-addr{font-size:0.74rem;color:var(--muted);margin-top:2px;}
 .open-badge{background:rgba(0,98,51,0.1);color:var(--green);font-size:0.72rem;font-weight:700;padding:3px 10px;border-radius:20px;white-space:nowrap;}
 .closed-badge{background:rgba(192,57,43,0.08);color:var(--red);font-size:0.72rem;font-weight:700;padding:3px 10px;border-radius:20px;}
-.absence-item{background:rgba(212,117,42,0.06);border:1px solid rgba(212,117,42,0.2);border-radius:12px;padding:1rem;margin-bottom:0.7rem;}
-.absence-school{font-size:0.82rem;font-weight:700;color:var(--text);margin-bottom:4px;}
-.absence-detail{font-size:0.75rem;color:var(--orange);}
-.absence-time{font-size:0.72rem;color:var(--muted);margin-top:4px;}
 .announce-item{display:flex;gap:0.8rem;padding:0.8rem 0;border-bottom:1px solid var(--gray);cursor:pointer;transition:padding 0.2s;}
 .announce-item:hover{padding-right:6px;}.announce-item:last-child{border-bottom:none;}
 .announce-dot{width:8px;height:8px;border-radius:50%;margin-top:6px;flex-shrink:0;}
@@ -127,7 +123,6 @@ footer strong{color:var(--gold-light);}
     <li><a onclick="showPage('home')">الرئيسية</a></li>
     <li><a onclick="showPage('page-report')">الإبلاغ</a></li>
     <li><a onclick="showPage('page-transport')">النقل</a></li>
-    <li><a onclick="showPage('page-school')">التعليم</a></li>
     <li><a onclick="showPage('page-pharmacy')">الصيدليات</a></li>
     <li><a onclick="showPage('page-announce')">الإعلانات</a></li>
     <li><a onclick="showPage('page-jobs')">🧾 فرص العمل</a></li>
@@ -141,12 +136,12 @@ footer strong{color:var(--gold-light);}
     <div class="hero-content">
       <div class="hero-badge">🌿 منصة الخدمات الذكية · الجزائر</div>
       <h1>بوزريعة <span>الرقمية</span><br>في خدمتك دائماً</h1>
-      <p>كل ما تحتاجه في مكان واحد — الإبلاغ، النقل، الصيدليات، المدارس</p>
+      <p>كل ما تحتاجه في مكان واحد — الإبلاغ، النقل، الصيدليات</p>
       <div class="hero-stats">
         <div class="stat"><span class="stat-num">🚨</span><span class="stat-label">الإبلاغ</span></div>
         <div class="stat"><span class="stat-num">🚌</span><span class="stat-label">النقل</span></div>
         <div class="stat"><span class="stat-num">💊</span><span class="stat-label">الصيدليات</span></div>
-        <div class="stat"><span class="stat-num">🏫</span><span class="stat-label">المدارس</span></div>
+        <div class="stat"><span class="stat-num">💼</span><span class="stat-label">فرص العمل</span></div>
       </div>
     </div>
   </div>
@@ -157,7 +152,6 @@ footer strong{color:var(--gold-light);}
       <div class="card card-red" onclick="showPage('page-report')"><div class="card-icon">🚨</div><h3>الإبلاغ عن مشكلة</h3><p>طرقات، مياه، إنارة، نظافة</p><div class="card-arrow">←</div></div>
       <div class="card card-blue" onclick="showPage('page-transport')"><div class="card-icon">🚌</div><h3>مواقيت النقل</h3><p>الحافلات والميتر والطرامواي</p><div class="card-arrow">←</div></div>
       <div class="card card-green" onclick="showPage('page-pharmacy')"><div class="card-icon">💊</div><h3>صيدليات المناوبة</h3><p>الأقرب إليك الآن</p><div class="card-arrow">←</div></div>
-      <div class="card card-orange" onclick="showPage('page-school')"><div class="card-icon">🏫</div><h3>المؤسسات التربوية</h3><p>غياب الأساتذة والإشعارات</p><div class="card-arrow">←</div></div>
       <div class="card card-gold" onclick="showPage('page-announce')"><div class="card-icon">📢</div><h3>إعلانات البلدية</h3><p>أخبار وإشعارات رسمية</p><div class="card-arrow">←</div></div>
       <div class="card card-green" onclick="showPage('page-jobs')"><div class="card-icon">🧾</div><h3>فرص العمل</h3><p>وظائف متاحة في بوزريعة</p><div class="card-arrow">←</div></div>
       <div class="card card-blue" onclick="showPage('page-seekers')"><div class="card-icon">💼</div><h3>سجّل سيرتك الذاتية</h3><p>ابحث عن عمل وسجّل بياناتك</p><div class="card-arrow">←</div></div>
@@ -230,21 +224,6 @@ footer strong{color:var(--gold-light);}
     <div class="section-box">
       <h2>💊 الصيدليات المفتوحة</h2>
       <div id="pharmacyList"><div class="loading">⏳ جارٍ التحميل...</div></div>
-    </div>
-  </div>
-</div>
-
-<!-- SCHOOL PAGE -->
-<div class="page" id="page-school">
-  <div class="page-header">
-    <button class="btn-back" onclick="showPage('home')">→ رجوع</button>
-    <div><h2>🏫 المؤسسات التربوية</h2><p>غيابات الأساتذة وإشعارات المدارس</p></div>
-  </div>
-  <div class="page-content">
-    <div id="alertBannerSchool" style="display:none"></div>
-    <div class="section-box">
-      <h2>🏫 غيابات الأساتذة اليوم</h2>
-      <div id="schoolList"><div class="loading">⏳ جارٍ التحميل...</div></div>
     </div>
   </div>
 </div>
@@ -362,17 +341,24 @@ async function showAlertIn(elId) {
   }
 }
 
-window.showPage = function(pageId) {
+window.showPage = function(pageId, fromHistory) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.getElementById(pageId).classList.add('active');
   window.scrollTo(0, 0);
+  if (!fromHistory) history.pushState({ page: pageId }, '', '#' + pageId);
   if (pageId === 'page-transport') loadTransport();
   else if (pageId === 'page-pharmacy') loadPharmacy();
-  else if (pageId === 'page-school') loadSchool();
   else if (pageId === 'page-announce') loadAnnounce();
   else if (pageId === 'page-jobs') loadJobs();
-  else if (pageId === 'page-seekers') { loadSeekers(); }
+  else if (pageId === 'page-seekers') loadSeekers();
 }
+
+window.addEventListener('popstate', function(e) {
+  const page = (e.state && e.state.page) ? e.state.page : 'home';
+  showPage(page, true);
+});
+
+history.replaceState({ page: 'home' }, '', '#home');
 
 async function loadTransport() {
   showAlertIn('alertBannerTransport');
@@ -390,15 +376,6 @@ async function loadPharmacy() {
   const el = document.getElementById('pharmacyList');
   if (!list.length) { el.innerHTML = emptyState('💊','لا توجد بيانات بعد','سيتم إضافة الصيدليات يومياً'); return; }
   el.innerHTML = list.map(p => `<div class="pharmacy-item"><div><span class="pharmacy-name">${p.name}</span><div class="pharmacy-addr">📍 ${p.addr}</div></div><span class="${p.open?'open-badge':'closed-badge'}">${p.open?'مفتوحة ✓':(p.hours||'مغلقة')}</span></div>`).join('');
-}
-
-async function loadSchool() {
-  showAlertIn('alertBannerSchool');
-  const arr = await fbGet('bz_school');
-  const list = Array.isArray(arr) ? arr : [];
-  const el = document.getElementById('schoolList');
-  if (!list.length) { el.innerHTML = emptyState('🏫','لا توجد غيابات','ستظهر هنا إشعارات الغياب فور التبليغ'); return; }
-  el.innerHTML = list.map(a => `<div class="absence-item"><div class="absence-school">${a.school}</div><div class="absence-detail">⚠️ ${a.detail}</div><div class="absence-time">🕐 ${a.time||''}</div></div>`).join('');
 }
 
 async function loadAnnounce() {
