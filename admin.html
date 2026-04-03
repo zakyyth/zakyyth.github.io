@@ -514,12 +514,39 @@ body {
 <!-- TOAST -->
 <div class="toast" id="toast">✅ تم الحفظ!</div>
 
-<script>
-const PASS = 'admin123'; // غيّر كلمة المرور هنا
+<!-- Firebase SDK -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getDatabase, ref, set, get, remove, onValue } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+
+// ===== FIREBASE CONFIG =====
+const firebaseConfig = {
+  apiKey: "AIzaSyBY-HruRlXQ0iazUfCRwu4Fy_ubGqOicIg",
+  authDomain: "bouzareah-80151.firebaseapp.com",
+  databaseURL: "https://bouzareah-80151-default-rtdb.firebaseio.com",
+  projectId: "bouzareah-80151",
+  storageBucket: "bouzareah-80151.firebasestorage.app",
+  messagingSenderId: "353214800081",
+  appId: "1:353214800081:web:d6ce663a1042f36fb525f0"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
+const PASS = 'admin123';
 const USER = 'admin';
 
+// ===== HELPERS =====
+async function fbGet(key) {
+  const snap = await get(ref(db, key));
+  return snap.exists() ? snap.val() : [];
+}
+async function fbSet(key, val) {
+  await set(ref(db, key), val);
+}
+
 // ===== LOGIN =====
-function doLogin() {
+window.doLogin = function() {
   const u = document.getElementById('loginUser').value.trim();
   const p = document.getElementById('loginPass').value;
   if (u === USER && p === PASS) {
@@ -531,7 +558,7 @@ function doLogin() {
   }
 }
 
-function doLogout() {
+window.doLogout = function() {
   document.getElementById('loginScreen').classList.remove('hidden');
   document.getElementById('adminApp').classList.remove('show');
   document.getElementById('loginPass').value = '';
@@ -539,7 +566,7 @@ function doLogout() {
 }
 
 // ===== TABS =====
-function switchPanel(name) {
+window.switchPanel = function(name) {
   document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   document.getElementById('panel-' + name).classList.add('active');
@@ -548,7 +575,7 @@ function switchPanel(name) {
 }
 
 // ===== TOAST =====
-function showToast(msg) {
+window.showToast = function(msg) {
   const t = document.getElementById('toast');
   t.textContent = msg;
   t.classList.add('show');
@@ -556,55 +583,55 @@ function showToast(msg) {
 }
 
 // ===== STATS =====
-function updateStats() {
-  document.getElementById('statAnnounce').textContent = get('bz_announce').length;
-  document.getElementById('statPharm').textContent = get('bz_pharmacy').length;
-  document.getElementById('statTransport').textContent = get('bz_transport').length;
-  document.getElementById('statSchool').textContent = get('bz_school').length;
+async function updateStats() {
+  const a = await fbGet('bz_announce'); document.getElementById('statAnnounce').textContent = Array.isArray(a) ? a.length : 0;
+  const ph = await fbGet('bz_pharmacy'); document.getElementById('statPharm').textContent = Array.isArray(ph) ? ph.length : 0;
+  const tr = await fbGet('bz_transport'); document.getElementById('statTransport').textContent = Array.isArray(tr) ? tr.length : 0;
+  const sc = await fbGet('bz_school'); document.getElementById('statSchool').textContent = Array.isArray(sc) ? sc.length : 0;
 }
 
-// ===== STORAGE HELPERS =====
-function get(key) { return JSON.parse(localStorage.getItem(key) || '[]'); }
-function set(key, val) { localStorage.setItem(key, JSON.stringify(val)); }
-
 // ===== ANNOUNCEMENTS =====
-function addAnnounce() {
+window.addAnnounce = async function() {
   const title = document.getElementById('ann-title').value.trim();
   const sub = document.getElementById('ann-sub').value.trim();
   if (!title) return showToast('⚠️ أدخل عنوان الإعلان');
-  const list = get('bz_announce');
-  list.unshift({ title, sub, id: Date.now() });
-  set('bz_announce', list);
+  const list = await fbGet('bz_announce');
+  const arr = Array.isArray(list) ? list : [];
+  arr.unshift({ title, sub, id: Date.now() });
+  await fbSet('bz_announce', arr);
   document.getElementById('ann-title').value = '';
   document.getElementById('ann-sub').value = '';
   renderAnnounce();
   showToast('✅ تمت إضافة الإعلان!');
 }
 
-function renderAnnounce() {
-  const list = get('bz_announce');
+async function renderAnnounce() {
+  const list = await fbGet('bz_announce');
+  const arr = Array.isArray(list) ? list : [];
   const el = document.getElementById('announceItems');
-  if (!list.length) { el.innerHTML = '<div class="empty-list">لا توجد إعلانات بعد</div>'; return; }
-  el.innerHTML = list.map(a => `
+  if (!arr.length) { el.innerHTML = '<div class="empty-list">لا توجد إعلانات بعد</div>'; return; }
+  el.innerHTML = arr.map(a => `
     <div class="data-item">
       <div class="data-item-info">
         <div class="data-item-title">📢 ${a.title}</div>
         <div class="data-item-sub">${a.sub || '—'}</div>
       </div>
-      <button class="btn-del" onclick="delItem('bz_announce',${a.id},renderAnnounce)">حذف</button>
+      <button class="btn-del" onclick="delItem('bz_announce',${a.id},renderAnnounceW)">حذف</button>
     </div>`).join('');
 }
+window.renderAnnounceW = renderAnnounce;
 
 // ===== ALERT =====
-function saveAlert() {
+window.saveAlert = async function() {
   const active = document.getElementById('alertToggle').checked;
   const title = document.getElementById('alert-title').value;
   const sub = document.getElementById('alert-sub').value;
-  localStorage.setItem('bz_alert', JSON.stringify(active ? { title, sub } : null));
+  await fbSet('bz_alert', active ? { title, sub } : null);
 }
 
-function loadAlert() {
-  const a = JSON.parse(localStorage.getItem('bz_alert') || 'null');
+async function loadAlert() {
+  const snap = await get(ref(db, 'bz_alert'));
+  const a = snap.exists() ? snap.val() : null;
   if (a) {
     document.getElementById('alertToggle').checked = true;
     document.getElementById('alert-title').value = a.title || '';
@@ -617,15 +644,16 @@ document.getElementById('ph-open').addEventListener('change', function() {
   document.getElementById('ph-hours-wrap').style.display = this.value === '0' ? 'block' : 'none';
 });
 
-function addPharmacy() {
+window.addPharmacy = async function() {
   const name = document.getElementById('ph-name').value.trim();
   const addr = document.getElementById('ph-addr').value.trim();
   const open = document.getElementById('ph-open').value === '1';
   const hours = document.getElementById('ph-hours').value.trim();
   if (!name || !addr) return showToast('⚠️ أدخل الاسم والعنوان');
-  const list = get('bz_pharmacy');
-  list.push({ name, addr, open, hours: hours || 'ساعات محددة', id: Date.now() });
-  set('bz_pharmacy', list);
+  const list = await fbGet('bz_pharmacy');
+  const arr = Array.isArray(list) ? list : [];
+  arr.push({ name, addr, open, hours: hours || 'ساعات محددة', id: Date.now() });
+  await fbSet('bz_pharmacy', arr);
   document.getElementById('ph-name').value = '';
   document.getElementById('ph-addr').value = '';
   document.getElementById('ph-hours').value = '';
@@ -633,30 +661,33 @@ function addPharmacy() {
   showToast('✅ تمت إضافة الصيدلية!');
 }
 
-function renderPharmacy() {
-  const list = get('bz_pharmacy');
+async function renderPharmacy() {
+  const list = await fbGet('bz_pharmacy');
+  const arr = Array.isArray(list) ? list : [];
   const el = document.getElementById('pharmacyItems');
-  if (!list.length) { el.innerHTML = '<div class="empty-list">لا توجد صيدليات بعد</div>'; return; }
-  el.innerHTML = list.map(p => `
+  if (!arr.length) { el.innerHTML = '<div class="empty-list">لا توجد صيدليات بعد</div>'; return; }
+  el.innerHTML = arr.map(p => `
     <div class="data-item">
       <div class="data-item-info">
         <div class="data-item-title">💊 ${p.name}</div>
         <div class="data-item-sub">📍 ${p.addr} · ${p.open ? 'مفتوحة' : p.hours}</div>
       </div>
-      <button class="btn-del" onclick="delItem('bz_pharmacy',${p.id},renderPharmacy)">حذف</button>
+      <button class="btn-del" onclick="delItem('bz_pharmacy',${p.id},renderPharmacyW)">حذف</button>
     </div>`).join('');
 }
+window.renderPharmacyW = renderPharmacy;
 
 // ===== TRANSPORT =====
-function addTransport() {
+window.addTransport = async function() {
   const num = document.getElementById('tr-num').value.trim();
   const route = document.getElementById('tr-route').value.trim();
   const via = document.getElementById('tr-via').value.trim();
   const freq = document.getElementById('tr-freq').value.trim();
   if (!num || !route) return showToast('⚠️ أدخل رقم الخط والمسار');
-  const list = get('bz_transport');
-  list.push({ num, route, via, freq, id: Date.now() });
-  set('bz_transport', list);
+  const list = await fbGet('bz_transport');
+  const arr = Array.isArray(list) ? list : [];
+  arr.push({ num, route, via, freq, id: Date.now() });
+  await fbSet('bz_transport', arr);
   document.getElementById('tr-num').value = '';
   document.getElementById('tr-route').value = '';
   document.getElementById('tr-via').value = '';
@@ -665,29 +696,32 @@ function addTransport() {
   showToast('✅ تمت إضافة خط النقل!');
 }
 
-function renderTransport() {
-  const list = get('bz_transport');
+async function renderTransport() {
+  const list = await fbGet('bz_transport');
+  const arr = Array.isArray(list) ? list : [];
   const el = document.getElementById('transportItems');
-  if (!list.length) { el.innerHTML = '<div class="empty-list">لا توجد خطوط نقل بعد</div>'; return; }
-  el.innerHTML = list.map(t => `
+  if (!arr.length) { el.innerHTML = '<div class="empty-list">لا توجد خطوط نقل بعد</div>'; return; }
+  el.innerHTML = arr.map(t => `
     <div class="data-item">
       <div class="data-item-info">
         <div class="data-item-title">🚌 خط ${t.num} · ${t.route}</div>
         <div class="data-item-sub">${t.via ? t.via + ' · ' : ''}${t.freq}</div>
       </div>
-      <button class="btn-del" onclick="delItem('bz_transport',${t.id},renderTransport)">حذف</button>
+      <button class="btn-del" onclick="delItem('bz_transport',${t.id},renderTransportW)">حذف</button>
     </div>`).join('');
 }
+window.renderTransportW = renderTransport;
 
 // ===== SCHOOL =====
-function addAbsence() {
+window.addAbsence = async function() {
   const school = document.getElementById('sc-school').value.trim();
   const detail = document.getElementById('sc-detail').value.trim();
   const time = document.getElementById('sc-time').value.trim() || 'الآن';
   if (!school || !detail) return showToast('⚠️ أدخل المؤسسة وتفاصيل الغياب');
-  const list = get('bz_school');
-  list.push({ school, detail, time, id: Date.now() });
-  set('bz_school', list);
+  const list = await fbGet('bz_school');
+  const arr = Array.isArray(list) ? list : [];
+  arr.push({ school, detail, time, id: Date.now() });
+  await fbSet('bz_school', arr);
   document.getElementById('sc-school').value = '';
   document.getElementById('sc-detail').value = '';
   document.getElementById('sc-time').value = '';
@@ -695,44 +729,45 @@ function addAbsence() {
   showToast('✅ تم تسجيل الغياب!');
 }
 
-function clearSchool() {
+window.clearSchool = async function() {
   if (!confirm('مسح كل غيابات اليوم؟')) return;
-  set('bz_school', []);
+  await fbSet('bz_school', []);
   renderSchool();
   showToast('🗑️ تم مسح غيابات اليوم');
 }
 
-function renderSchool() {
-  const list = get('bz_school');
+async function renderSchool() {
+  const list = await fbGet('bz_school');
+  const arr = Array.isArray(list) ? list : [];
   const el = document.getElementById('schoolItems');
-  if (!list.length) { el.innerHTML = '<div class="empty-list">لا توجد غيابات مسجلة</div>'; return; }
-  el.innerHTML = list.map(a => `
+  if (!arr.length) { el.innerHTML = '<div class="empty-list">لا توجد غيابات مسجلة</div>'; return; }
+  el.innerHTML = arr.map(a => `
     <div class="data-item">
       <div class="data-item-info">
         <div class="data-item-title">🏫 ${a.school}</div>
         <div class="data-item-sub">⚠️ ${a.detail} · 🕐 ${a.time}</div>
       </div>
-      <button class="btn-del" onclick="delItem('bz_school',${a.id},renderSchool)">حذف</button>
+      <button class="btn-del" onclick="delItem('bz_school',${a.id},renderSchoolW)">حذف</button>
     </div>`).join('');
 }
+window.renderSchoolW = renderSchool;
 
 // ===== DELETE =====
-function delItem(key, id, renderFn) {
-  const list = get(key).filter(i => i.id !== id);
-  set(key, list);
+window.delItem = async function(key, id, renderFn) {
+  const list = await fbGet(key);
+  const arr = Array.isArray(list) ? list : [];
+  await fbSet(key, arr.filter(i => i.id !== id));
   renderFn();
   showToast('🗑️ تم الحذف');
 }
 
 // ===== LOAD ALL =====
-function loadAll() {
-  renderAnnounce();
-  renderPharmacy();
-  renderTransport();
-  renderSchool();
-  loadAlert();
+async function loadAll() {
+  await Promise.all([renderAnnounce(), renderPharmacy(), renderTransport(), renderSchool(), loadAlert()]);
   updateStats();
 }
+
+window.loadAll = loadAll;
 </script>
 </body>
 </html>
