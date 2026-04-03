@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>\u0644\u0648\u062d\u0629 \u0627\u0644\u062a\u062d\u0643\u0645 | \u0628\u0644\u062f\u064a\u0629 \u0628\u0648\u0632\u0631\u064a\u0639\u0629</title>
+<title>لوحة التحكم | بلدية بوزريعة</title>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Tajawal:wght@400;700;800;900&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -145,4 +145,594 @@ body {
 /* TABS NAV */
 .tab-nav {
   background: white;
-  border-bottom: 2
+  border-bottom: 2px solid var(--border);
+  display: flex; gap: 0; overflow-x: auto;
+  padding: 0 1.5rem;
+}
+
+.tab-btn {
+  padding: 14px 20px;
+  border: none; background: transparent;
+  font-family: 'Cairo', sans-serif; font-size: 0.85rem; font-weight: 700;
+  color: var(--muted); cursor: pointer; transition: all 0.2s;
+  border-bottom: 3px solid transparent; margin-bottom: -2px;
+  white-space: nowrap; display:flex;align-items:center;gap:6px;
+}
+.tab-btn:hover { color: var(--text); }
+.tab-btn.active { color: var(--green); border-bottom-color: var(--green); }
+
+/* CONTENT */
+.content { flex:1;padding:2rem 1.5rem;max-width:900px;margin:0 auto;width:100%; }
+
+.panel { display:none; }
+.panel.active { display:block; }
+
+/* CARDS */
+.admin-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 16px; padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+.admin-card h3 {
+  font-family:'Tajawal',sans-serif;font-size:1rem;font-weight:800;
+  color:var(--text);margin-bottom:1.2rem;
+  display:flex;align-items:center;gap:8px;
+  padding-bottom:0.8rem;border-bottom:1px solid var(--border);
+}
+
+.form-row { display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem; }
+.form-row.three { grid-template-columns:1fr 1fr 1fr; }
+.form-row.full { grid-template-columns:1fr; }
+
+.f-group { display:flex;flex-direction:column;gap:5px; }
+.f-group label { font-size:0.8rem;font-weight:700;color:var(--text); }
+.f-group input, .f-group select, .f-group textarea {
+  border:1.5px solid var(--border);border-radius:10px;
+  padding:9px 13px;font-family:'Cairo',sans-serif;font-size:0.86rem;color:var(--text);
+  background:var(--white);outline:none;transition:border-color 0.2s;direction:rtl;
+}
+.f-group input:focus, .f-group select:focus, .f-group textarea:focus { border-color:var(--green);background:white; }
+
+.toggle-wrap { display:flex;align-items:center;gap:10px; }
+.toggle { position:relative;width:44px;height:24px;cursor:pointer; }
+.toggle input { opacity:0;width:0;height:0; }
+.toggle-slider {
+  position:absolute;inset:0;background:#ccc;border-radius:24px;transition:0.3s;
+}
+.toggle-slider:before { content:'';position:absolute;width:18px;height:18px;right:3px;top:3px;background:white;border-radius:50%;transition:0.3s; }
+.toggle input:checked + .toggle-slider { background:var(--green); }
+.toggle input:checked + .toggle-slider:before { transform:translateX(-20px); }
+
+.btn-add {
+  background:linear-gradient(135deg,var(--green),var(--green-light));
+  color:white;border:none;border-radius:11px;
+  padding:10px 22px;font-family:'Cairo',sans-serif;font-size:0.88rem;font-weight:700;
+  cursor:pointer;transition:all 0.2s;display:flex;align-items:center;gap:7px;
+  box-shadow:0 4px 12px rgba(0,98,51,0.25);
+}
+.btn-add:hover { transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,98,51,0.35); }
+
+/* LIST */
+.data-list { margin-top:1.2rem; }
+.data-item {
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0.9rem 1rem;background:var(--white);border:1px solid var(--border);
+  border-radius:11px;margin-bottom:0.6rem;gap:1rem;
+  transition:all 0.2s;
+}
+.data-item:hover { border-color:rgba(0,98,51,0.2);background:white; }
+.data-item-info { flex:1; }
+.data-item-title { font-weight:700;font-size:0.88rem;color:var(--text); }
+.data-item-sub { font-size:0.76rem;color:var(--muted);margin-top:2px; }
+.btn-del {
+  background:rgba(192,57,43,0.08);color:var(--red);
+  border:1px solid rgba(192,57,43,0.2);border-radius:8px;
+  padding:5px 12px;font-family:'Cairo',sans-serif;font-size:0.78rem;font-weight:700;
+  cursor:pointer;transition:all 0.2s;white-space:nowrap;
+}
+.btn-del:hover { background:rgba(192,57,43,0.15); }
+
+.empty-list { text-align:center;padding:2rem;color:var(--muted);font-size:0.84rem; }
+
+/* ALERT SPECIAL */
+.alert-toggle-row {
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(192,57,43,0.05);border:1px solid rgba(192,57,43,0.15);
+  border-radius:12px;padding:1rem 1.2rem;margin-bottom:1rem;
+}
+.alert-toggle-label { font-weight:700;font-size:0.88rem;color:var(--red); }
+.alert-toggle-sub { font-size:0.76rem;color:var(--muted);margin-top:2px; }
+
+/* STATS BAR */
+.stats-row { display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:2rem; }
+.stat-box {
+  background:white;border:1px solid var(--border);border-radius:14px;
+  padding:1.2rem;text-align:center;
+}
+.stat-box .num { font-family:'Tajawal',sans-serif;font-size:1.8rem;font-weight:900; }
+.stat-box .lbl { font-size:0.75rem;color:var(--muted);margin-top:2px; }
+
+/* TOAST */
+.toast {
+  position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(100px);
+  background:var(--green-dark);color:white;padding:11px 22px;border-radius:50px;
+  font-size:0.85rem;font-weight:600;z-index:999;transition:transform 0.4s ease;
+  box-shadow:0 8px 30px rgba(0,0,0,0.25);display:flex;align-items:center;gap:8px;
+}
+.toast.show { transform:translateX(-50%) translateY(0); }
+
+/* ANIMATIONS */
+@keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+@keyframes floatC { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-18px)} }
+
+@media (max-width:640px) {
+  .stats-row { grid-template-columns:1fr 1fr; }
+  .form-row { grid-template-columns:1fr; }
+  .form-row.three { grid-template-columns:1fr; }
+  .content { padding:1rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="loginScreen">
+  <div class="login-bg-circle"></div>
+  <div class="login-bg-circle"></div>
+  <div class="login-grid"></div>
+  <div class="login-box">
+    <div class="login-logo">
+      <div class="login-emblem">⚙️</div>
+      <h1>لوحة <span>التحكم</span></h1>
+      <p>بلدية بوزريعة · للمسؤولين فقط</p>
+    </div>
+    <div class="login-card">
+      <h2>🔐 دخول الأدمن</h2>
+      <div class="login-err" id="loginErr">❌ كلمة المرور غير صحيحة</div>
+      <div class="l-group">
+        <label>اسم المستخدم</label>
+        <div class="l-wrap">
+          <span class="l-icon">👤</span>
+          <input type="text" id="loginUser" placeholder="admin">
+        </div>
+      </div>
+      <div class="l-group">
+        <label>كلمة المرور</label>
+        <div class="l-wrap">
+          <span class="l-icon">🔒</span>
+          <input type="password" id="loginPass" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()">
+        </div>
+      </div>
+      <button class="btn-login" onclick="doLogin()">🚀 دخول</button>
+    </div>
+  </div>
+</div>
+
+<!-- ADMIN APP -->
+<div id="adminApp">
+
+  <!-- TOP BAR -->
+  <div class="top-bar">
+    <div class="top-bar-logo">
+      <div class="ico">🏛️</div>
+      <div>
+        <span>لوحة التحكم</span>
+        <small>بلدية بوزريعة</small>
+      </div>
+    </div>
+    <div class="top-bar-right">
+      <a class="btn-preview" href="bouzareah.html" target="_blank">👁️ عرض الموقع</a>
+      <button class="btn-logout" onclick="doLogout()">خروج</button>
+    </div>
+  </div>
+
+  <!-- TAB NAV -->
+  <div class="tab-nav">
+    <button class="tab-btn active" onclick="switchPanel('dashboard')">📊 الرئيسية</button>
+    <button class="tab-btn" onclick="switchPanel('announce')">📢 الإعلانات</button>
+    <button class="tab-btn" onclick="switchPanel('alert')">⚠️ التنبيهات</button>
+    <button class="tab-btn" onclick="switchPanel('pharmacy')">💊 الصيدليات</button>
+    <button class="tab-btn" onclick="switchPanel('transport')">🚌 النقل</button>
+    <button class="tab-btn" onclick="switchPanel('school')">🏫 التعليم</button>
+  </div>
+
+  <!-- CONTENT -->
+  <div class="content">
+
+    <!-- DASHBOARD -->
+    <div class="panel active" id="panel-dashboard">
+      <div class="stats-row">
+        <div class="stat-box">
+          <div class="num" id="statAnnounce" style="color:var(--green)">0</div>
+          <div class="lbl">إعلانات</div>
+        </div>
+        <div class="stat-box">
+          <div class="num" id="statPharm" style="color:var(--blue)">0</div>
+          <div class="lbl">صيدليات</div>
+        </div>
+        <div class="stat-box">
+          <div class="num" id="statTransport" style="color:var(--orange)">0</div>
+          <div class="lbl">خطوط نقل</div>
+        </div>
+        <div class="stat-box">
+          <div class="num" id="statSchool" style="color:var(--red)">0</div>
+          <div class="lbl">غيابات اليوم</div>
+        </div>
+      </div>
+      <div class="admin-card">
+        <h3>🚀 مرحباً بك في لوحة التحكم</h3>
+        <p style="color:var(--muted);font-size:0.88rem;line-height:1.8">
+          من هنا تتحكم في كل محتوى موقع بوزريعة الرقمية.<br>
+          اختر من الأقسام في الأعلى لإضافة أو حذف المعلومات.<br>
+          كل تغيير يظهر فوراً في الموقع الرئيسي للسكان. ✅
+        </p>
+      </div>
+    </div>
+
+    <!-- ANNOUNCEMENTS -->
+    <div class="panel" id="panel-announce">
+      <div class="admin-card">
+        <h3>📢 إضافة إعلان جديد</h3>
+        <div class="form-row">
+          <div class="f-group">
+            <label>عنوان الإعلان</label>
+            <input type="text" id="ann-title" placeholder="مثال: أشغال طريق بن عكنون">
+          </div>
+          <div class="f-group">
+            <label>التفاصيل / التاريخ</label>
+            <input type="text" id="ann-sub" placeholder="مثال: تبدأ الإثنين · مدة أسبوع">
+          </div>
+        </div>
+        <button class="btn-add" onclick="addAnnounce()">➕ إضافة الإعلان</button>
+        <div class="data-list" id="announceItems"></div>
+      </div>
+    </div>
+
+    <!-- ALERT -->
+    <div class="panel" id="panel-alert">
+      <div class="admin-card">
+        <h3>⚠️ التنبيه الطارئ</h3>
+        <div class="alert-toggle-row">
+          <div>
+            <div class="alert-toggle-label">⚠️ تفعيل التنبيه الطارئ</div>
+            <div class="alert-toggle-sub">يظهر بشريط أحمر في أعلى الموقع</div>
+          </div>
+          <label class="toggle">
+            <input type="checkbox" id="alertToggle" onchange="saveAlert()">
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+        <div class="form-row">
+          <div class="f-group">
+            <label>عنوان التنبيه</label>
+            <input type="text" id="alert-title" placeholder="مثال: انقطاع في المياه — حي العناصر" oninput="saveAlert()">
+          </div>
+          <div class="f-group">
+            <label>التفاصيل</label>
+            <input type="text" id="alert-sub" placeholder="مثال: الأعمال جارية حتى 18:00" oninput="saveAlert()">
+          </div>
+        </div>
+        <p style="font-size:0.78rem;color:var(--muted);margin-top:0.5rem">💡 التغييرات تُحفظ تلقائياً</p>
+      </div>
+    </div>
+
+    <!-- PHARMACY -->
+    <div class="panel" id="panel-pharmacy">
+      <div class="admin-card">
+        <h3>💊 إضافة صيدلية مناوبة</h3>
+        <div class="form-row three">
+          <div class="f-group">
+            <label>اسم الصيدلية</label>
+            <input type="text" id="ph-name" placeholder="صيدلية الأمل">
+          </div>
+          <div class="f-group">
+            <label>العنوان</label>
+            <input type="text" id="ph-addr" placeholder="شارع العربي بن مهيدي">
+          </div>
+          <div class="f-group">
+            <label>الحالة</label>
+            <select id="ph-open">
+              <option value="1">مفتوحة ✓</option>
+              <option value="0">ساعات محددة</option>
+            </select>
+          </div>
+        </div>
+        <div class="f-group" id="ph-hours-wrap" style="display:none;margin-bottom:1rem">
+          <label>الساعات (إذا محددة)</label>
+          <input type="text" id="ph-hours" placeholder="مثال: من 20:00 إلى 08:00">
+        </div>
+        <button class="btn-add" onclick="addPharmacy()">➕ إضافة الصيدلية</button>
+        <div class="data-list" id="pharmacyItems"></div>
+      </div>
+    </div>
+
+    <!-- TRANSPORT -->
+    <div class="panel" id="panel-transport">
+      <div class="admin-card">
+        <h3>🚌 إضافة خط نقل</h3>
+        <div class="form-row">
+          <div class="f-group">
+            <label>رقم الخط</label>
+            <input type="text" id="tr-num" placeholder="مثال: 21">
+          </div>
+          <div class="f-group">
+            <label>المسار (من ← إلى)</label>
+            <input type="text" id="tr-route" placeholder="بوزريعة ← باب الوادي">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="f-group">
+            <label>المحطات الوسيطة</label>
+            <input type="text" id="tr-via" placeholder="via بن عكنون · حيدرة">
+          </div>
+          <div class="f-group">
+            <label>التردد</label>
+            <input type="text" id="tr-freq" placeholder="كل 15 دقيقة">
+          </div>
+        </div>
+        <button class="btn-add" onclick="addTransport()">➕ إضافة الخط</button>
+        <div class="data-list" id="transportItems"></div>
+      </div>
+    </div>
+
+    <!-- SCHOOL -->
+    <div class="panel" id="panel-school">
+      <div class="admin-card">
+        <h3>🏫 تسجيل غياب أستاذ</h3>
+        <div class="form-row">
+          <div class="f-group">
+            <label>اسم المؤسسة</label>
+            <input type="text" id="sc-school" placeholder="ثانوية / متوسطة / ابتدائية...">
+          </div>
+          <div class="f-group">
+            <label>تفاصيل الغياب</label>
+            <input type="text" id="sc-detail" placeholder="غياب أستاذ الرياضيات — قسم 3 ع">
+          </div>
+        </div>
+        <div class="form-row full">
+          <div class="f-group">
+            <label>وقت الإبلاغ</label>
+            <input type="text" id="sc-time" placeholder="مثال: الساعة 07:45">
+          </div>
+        </div>
+        <button class="btn-add" onclick="addAbsence()">➕ تسجيل الغياب</button>
+        <div style="margin-top:1rem;display:flex;justify-content:flex-end">
+          <button onclick="clearSchool()" style="background:rgba(192,57,43,0.08);color:var(--red);border:1px solid rgba(192,57,43,0.2);border-radius:9px;padding:7px 16px;font-family:'Cairo',sans-serif;font-size:0.8rem;font-weight:700;cursor:pointer;">
+            🗑️ مسح غيابات اليوم كلها
+          </button>
+        </div>
+        <div class="data-list" id="schoolItems"></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast">✅ تم الحفظ!</div>
+
+<script>
+const PASS = 'admin123'; // غيّر كلمة المرور هنا
+const USER = 'admin';
+
+// ===== LOGIN =====
+function doLogin() {
+  const u = document.getElementById('loginUser').value.trim();
+  const p = document.getElementById('loginPass').value;
+  if (u === USER && p === PASS) {
+    document.getElementById('loginScreen').classList.add('hidden');
+    document.getElementById('adminApp').classList.add('show');
+    loadAll();
+  } else {
+    document.getElementById('loginErr').style.display = 'block';
+  }
+}
+
+function doLogout() {
+  document.getElementById('loginScreen').classList.remove('hidden');
+  document.getElementById('adminApp').classList.remove('show');
+  document.getElementById('loginPass').value = '';
+  document.getElementById('loginErr').style.display = 'none';
+}
+
+// ===== TABS =====
+function switchPanel(name) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('panel-' + name).classList.add('active');
+  event.target.classList.add('active');
+  if (name === 'dashboard') updateStats();
+}
+
+// ===== TOAST =====
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2800);
+}
+
+// ===== STATS =====
+function updateStats() {
+  document.getElementById('statAnnounce').textContent = get('bz_announce').length;
+  document.getElementById('statPharm').textContent = get('bz_pharmacy').length;
+  document.getElementById('statTransport').textContent = get('bz_transport').length;
+  document.getElementById('statSchool').textContent = get('bz_school').length;
+}
+
+// ===== STORAGE HELPERS =====
+function get(key) { return JSON.parse(localStorage.getItem(key) || '[]'); }
+function set(key, val) { localStorage.setItem(key, JSON.stringify(val)); }
+
+// ===== ANNOUNCEMENTS =====
+function addAnnounce() {
+  const title = document.getElementById('ann-title').value.trim();
+  const sub = document.getElementById('ann-sub').value.trim();
+  if (!title) return showToast('⚠️ أدخل عنوان الإعلان');
+  const list = get('bz_announce');
+  list.unshift({ title, sub, id: Date.now() });
+  set('bz_announce', list);
+  document.getElementById('ann-title').value = '';
+  document.getElementById('ann-sub').value = '';
+  renderAnnounce();
+  showToast('✅ تمت إضافة الإعلان!');
+}
+
+function renderAnnounce() {
+  const list = get('bz_announce');
+  const el = document.getElementById('announceItems');
+  if (!list.length) { el.innerHTML = '<div class="empty-list">لا توجد إعلانات بعد</div>'; return; }
+  el.innerHTML = list.map(a => `
+    <div class="data-item">
+      <div class="data-item-info">
+        <div class="data-item-title">📢 ${a.title}</div>
+        <div class="data-item-sub">${a.sub || '—'}</div>
+      </div>
+      <button class="btn-del" onclick="delItem('bz_announce',${a.id},renderAnnounce)">حذف</button>
+    </div>`).join('');
+}
+
+// ===== ALERT =====
+function saveAlert() {
+  const active = document.getElementById('alertToggle').checked;
+  const title = document.getElementById('alert-title').value;
+  const sub = document.getElementById('alert-sub').value;
+  localStorage.setItem('bz_alert', JSON.stringify(active ? { title, sub } : null));
+}
+
+function loadAlert() {
+  const a = JSON.parse(localStorage.getItem('bz_alert') || 'null');
+  if (a) {
+    document.getElementById('alertToggle').checked = true;
+    document.getElementById('alert-title').value = a.title || '';
+    document.getElementById('alert-sub').value = a.sub || '';
+  }
+}
+
+// ===== PHARMACY =====
+document.getElementById('ph-open').addEventListener('change', function() {
+  document.getElementById('ph-hours-wrap').style.display = this.value === '0' ? 'block' : 'none';
+});
+
+function addPharmacy() {
+  const name = document.getElementById('ph-name').value.trim();
+  const addr = document.getElementById('ph-addr').value.trim();
+  const open = document.getElementById('ph-open').value === '1';
+  const hours = document.getElementById('ph-hours').value.trim();
+  if (!name || !addr) return showToast('⚠️ أدخل الاسم والعنوان');
+  const list = get('bz_pharmacy');
+  list.push({ name, addr, open, hours: hours || 'ساعات محددة', id: Date.now() });
+  set('bz_pharmacy', list);
+  document.getElementById('ph-name').value = '';
+  document.getElementById('ph-addr').value = '';
+  document.getElementById('ph-hours').value = '';
+  renderPharmacy();
+  showToast('✅ تمت إضافة الصيدلية!');
+}
+
+function renderPharmacy() {
+  const list = get('bz_pharmacy');
+  const el = document.getElementById('pharmacyItems');
+  if (!list.length) { el.innerHTML = '<div class="empty-list">لا توجد صيدليات بعد</div>'; return; }
+  el.innerHTML = list.map(p => `
+    <div class="data-item">
+      <div class="data-item-info">
+        <div class="data-item-title">💊 ${p.name}</div>
+        <div class="data-item-sub">📍 ${p.addr} · ${p.open ? 'مفتوحة' : p.hours}</div>
+      </div>
+      <button class="btn-del" onclick="delItem('bz_pharmacy',${p.id},renderPharmacy)">حذف</button>
+    </div>`).join('');
+}
+
+// ===== TRANSPORT =====
+function addTransport() {
+  const num = document.getElementById('tr-num').value.trim();
+  const route = document.getElementById('tr-route').value.trim();
+  const via = document.getElementById('tr-via').value.trim();
+  const freq = document.getElementById('tr-freq').value.trim();
+  if (!num || !route) return showToast('⚠️ أدخل رقم الخط والمسار');
+  const list = get('bz_transport');
+  list.push({ num, route, via, freq, id: Date.now() });
+  set('bz_transport', list);
+  document.getElementById('tr-num').value = '';
+  document.getElementById('tr-route').value = '';
+  document.getElementById('tr-via').value = '';
+  document.getElementById('tr-freq').value = '';
+  renderTransport();
+  showToast('✅ تمت إضافة خط النقل!');
+}
+
+function renderTransport() {
+  const list = get('bz_transport');
+  const el = document.getElementById('transportItems');
+  if (!list.length) { el.innerHTML = '<div class="empty-list">لا توجد خطوط نقل بعد</div>'; return; }
+  el.innerHTML = list.map(t => `
+    <div class="data-item">
+      <div class="data-item-info">
+        <div class="data-item-title">🚌 خط ${t.num} · ${t.route}</div>
+        <div class="data-item-sub">${t.via ? t.via + ' · ' : ''}${t.freq}</div>
+      </div>
+      <button class="btn-del" onclick="delItem('bz_transport',${t.id},renderTransport)">حذف</button>
+    </div>`).join('');
+}
+
+// ===== SCHOOL =====
+function addAbsence() {
+  const school = document.getElementById('sc-school').value.trim();
+  const detail = document.getElementById('sc-detail').value.trim();
+  const time = document.getElementById('sc-time').value.trim() || 'الآن';
+  if (!school || !detail) return showToast('⚠️ أدخل المؤسسة وتفاصيل الغياب');
+  const list = get('bz_school');
+  list.push({ school, detail, time, id: Date.now() });
+  set('bz_school', list);
+  document.getElementById('sc-school').value = '';
+  document.getElementById('sc-detail').value = '';
+  document.getElementById('sc-time').value = '';
+  renderSchool();
+  showToast('✅ تم تسجيل الغياب!');
+}
+
+function clearSchool() {
+  if (!confirm('مسح كل غيابات اليوم؟')) return;
+  set('bz_school', []);
+  renderSchool();
+  showToast('🗑️ تم مسح غيابات اليوم');
+}
+
+function renderSchool() {
+  const list = get('bz_school');
+  const el = document.getElementById('schoolItems');
+  if (!list.length) { el.innerHTML = '<div class="empty-list">لا توجد غيابات مسجلة</div>'; return; }
+  el.innerHTML = list.map(a => `
+    <div class="data-item">
+      <div class="data-item-info">
+        <div class="data-item-title">🏫 ${a.school}</div>
+        <div class="data-item-sub">⚠️ ${a.detail} · 🕐 ${a.time}</div>
+      </div>
+      <button class="btn-del" onclick="delItem('bz_school',${a.id},renderSchool)">حذف</button>
+    </div>`).join('');
+}
+
+// ===== DELETE =====
+function delItem(key, id, renderFn) {
+  const list = get(key).filter(i => i.id !== id);
+  set(key, list);
+  renderFn();
+  showToast('🗑️ تم الحذف');
+}
+
+// ===== LOAD ALL =====
+function loadAll() {
+  renderAnnounce();
+  renderPharmacy();
+  renderTransport();
+  renderSchool();
+  loadAlert();
+  updateStats();
+}
+</script>
+</body>
+</html>
