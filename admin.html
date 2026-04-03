@@ -337,7 +337,6 @@ body {
     <button class="tab-btn" onclick="switchPanel('alert')">⚠️ التنبيهات</button>
     <button class="tab-btn" onclick="switchPanel('pharmacy')">💊 الصيدليات</button>
     <button class="tab-btn" onclick="switchPanel('transport')">🚌 النقل</button>
-    <button class="tab-btn" onclick="switchPanel('school')">🏫 التعليم</button>
     <button class="tab-btn" onclick="switchPanel('jobs')">💼 التوظيف</button>
   </div>
 
@@ -371,10 +370,6 @@ body {
         <div class="stat-box">
           <div class="num" id="statTransport" style="color:var(--orange)">0</div>
           <div class="lbl">خطوط نقل</div>
-        </div>
-        <div class="stat-box">
-          <div class="num" id="statSchool" style="color:var(--red)">0</div>
-          <div class="lbl">غيابات اليوم</div>
         </div>
       </div>
       <div class="admin-card">
@@ -494,35 +489,6 @@ body {
     </div>
 
     <!-- SCHOOL -->
-    <div class="panel" id="panel-school">
-      <div class="admin-card">
-        <h3>🏫 تسجيل غياب أستاذ</h3>
-        <div class="form-row">
-          <div class="f-group">
-            <label>اسم المؤسسة</label>
-            <input type="text" id="sc-school" placeholder="ثانوية / متوسطة / ابتدائية...">
-          </div>
-          <div class="f-group">
-            <label>تفاصيل الغياب</label>
-            <input type="text" id="sc-detail" placeholder="غياب أستاذ الرياضيات — قسم 3 ع">
-          </div>
-        </div>
-        <div class="form-row full">
-          <div class="f-group">
-            <label>وقت الإبلاغ</label>
-            <input type="text" id="sc-time" placeholder="مثال: الساعة 07:45">
-          </div>
-        </div>
-        <button class="btn-add" onclick="addAbsence()">➕ تسجيل الغياب</button>
-        <div style="margin-top:1rem;display:flex;justify-content:flex-end">
-          <button onclick="clearSchool()" style="background:rgba(192,57,43,0.08);color:var(--red);border:1px solid rgba(192,57,43,0.2);border-radius:9px;padding:7px 16px;font-family:'Cairo',sans-serif;font-size:0.8rem;font-weight:700;cursor:pointer;">
-            🗑️ مسح غيابات اليوم كلها
-          </button>
-        </div>
-        <div class="data-list" id="schoolItems"></div>
-      </div>
-    </div>
-
     <!-- JOBS PANEL -->
     <div class="panel" id="panel-jobs">
       <!-- Post a job (admin) -->
@@ -651,7 +617,6 @@ async function updateStats() {
   const a = await fbGet('bz_announce'); document.getElementById('statAnnounce').textContent = Array.isArray(a) ? a.length : 0;
   const ph = await fbGet('bz_pharmacy'); document.getElementById('statPharm').textContent = Array.isArray(ph) ? ph.length : 0;
   const tr = await fbGet('bz_transport'); document.getElementById('statTransport').textContent = Array.isArray(tr) ? tr.length : 0;
-  const sc = await fbGet('bz_school'); document.getElementById('statSchool').textContent = Array.isArray(sc) ? sc.length : 0;
 }
 
 // ===== ANNOUNCEMENTS =====
@@ -776,46 +741,6 @@ async function renderTransport() {
 }
 window.renderTransportW = renderTransport;
 
-// ===== SCHOOL =====
-window.addAbsence = async function() {
-  const school = document.getElementById('sc-school').value.trim();
-  const detail = document.getElementById('sc-detail').value.trim();
-  const time = document.getElementById('sc-time').value.trim() || 'الآن';
-  if (!school || !detail) return showToast('⚠️ أدخل المؤسسة وتفاصيل الغياب');
-  const list = await fbGet('bz_school');
-  const arr = Array.isArray(list) ? list : [];
-  arr.push({ school, detail, time, id: Date.now() });
-  await fbSet('bz_school', arr);
-  document.getElementById('sc-school').value = '';
-  document.getElementById('sc-detail').value = '';
-  document.getElementById('sc-time').value = '';
-  renderSchool();
-  showToast('✅ تم تسجيل الغياب!');
-}
-
-window.clearSchool = async function() {
-  if (!confirm('مسح كل غيابات اليوم؟')) return;
-  await fbSet('bz_school', []);
-  renderSchool();
-  showToast('🗑️ تم مسح غيابات اليوم');
-}
-
-async function renderSchool() {
-  const list = await fbGet('bz_school');
-  const arr = Array.isArray(list) ? list : [];
-  const el = document.getElementById('schoolItems');
-  if (!arr.length) { el.innerHTML = '<div class="empty-list">لا توجد غيابات مسجلة</div>'; return; }
-  el.innerHTML = arr.map(a => `
-    <div class="data-item">
-      <div class="data-item-info">
-        <div class="data-item-title">🏫 ${a.school}</div>
-        <div class="data-item-sub">⚠️ ${a.detail} · 🕐 ${a.time}</div>
-      </div>
-      <button class="btn-del" onclick="delItem('bz_school',${a.id},renderSchoolW)">حذف</button>
-    </div>`).join('');
-}
-window.renderSchoolW = renderSchool;
-
 // ===== DELETE =====
 window.delItem = async function(key, id, renderFn) {
   const list = await fbGet(key);
@@ -827,7 +752,7 @@ window.delItem = async function(key, id, renderFn) {
 
 // ===== LOAD ALL =====
 async function loadAll() {
-  await Promise.all([renderAnnounce(), renderPharmacy(), renderTransport(), renderSchool(), loadAlert()]);
+  await Promise.all([renderAnnounce(), renderPharmacy(), renderTransport(), loadAlert()]);
   updateStats();
   loadReports();
 }
