@@ -3,936 +3,103 @@
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>بلدية بوزريعة | خدمات ذكية</title>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --green: #006233;
-    --green-light: #00874a;
-    --green-dark: #004a25;
-    --gold: #C9A84C;
-    --gold-light: #e8c96a;
-    --white: #f8faf8;
-    --gray: #e8ede9;
-    --dark: #0d1f14;
-    --text: #1a2e1e;
-    --muted: #6b8070;
-    --red: #c0392b;
-    --blue: #1a6fa8;
-    --orange: #d4752a;
-  }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  body {
-    font-family: 'Cairo', sans-serif;
-    background: var(--white);
-    color: var(--text);
-    overflow-x: hidden;
-  }
-
-  /* NAV */
-  nav {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    background: rgba(0,98,51,0.97);
-    backdrop-filter: blur(12px);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 2rem;
-    height: 64px;
-    box-shadow: 0 2px 20px rgba(0,0,0,0.2);
-  }
-
-  .nav-logo {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    color: white;
-    font-family: 'Tajawal', sans-serif;
-    font-weight: 800;
-    font-size: 1.15rem;
-    letter-spacing: -0.3px;
-  }
-
-  .nav-logo .emblem {
-    width: 38px;
-    height: 38px;
-    background: linear-gradient(135deg, var(--gold), var(--gold-light));
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.1rem;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-  }
-
-  .nav-links {
-    display: flex;
-    gap: 0.3rem;
-    list-style: none;
-  }
-
-  .nav-links a {
-    color: rgba(255,255,255,0.85);
-    text-decoration: none;
-    font-size: 0.88rem;
-    font-weight: 600;
-    padding: 6px 14px;
-    border-radius: 8px;
-    transition: all 0.2s;
-    cursor: pointer;
-  }
-
-  .nav-links a:hover, .nav-links a.active {
-    background: rgba(255,255,255,0.15);
-    color: white;
-  }
-
-  /* HERO */
-  .hero {
-    background: linear-gradient(135deg, var(--green-dark) 0%, var(--green) 60%, var(--green-light) 100%);
-    padding: 5rem 2rem 4rem;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .hero::before {
-    content: '';
-    position: absolute;
-    top: -60px; left: -60px;
-    width: 400px; height: 400px;
-    background: radial-gradient(circle, rgba(201,168,76,0.15) 0%, transparent 70%);
-    border-radius: 50%;
-  }
-
-  .hero::after {
-    content: '';
-    position: absolute;
-    bottom: -80px; right: -40px;
-    width: 350px; height: 350px;
-    background: radial-gradient(circle, rgba(255,255,255,0.06) 0%, transparent 70%);
-    border-radius: 50%;
-  }
-
-  .hero-content {
-    max-width: 900px;
-    margin: 0 auto;
-    text-align: center;
-    position: relative;
-    z-index: 1;
-  }
-
-  .hero-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: rgba(201,168,76,0.2);
-    border: 1px solid rgba(201,168,76,0.4);
-    color: var(--gold-light);
-    padding: 6px 16px;
-    border-radius: 50px;
-    font-size: 0.82rem;
-    font-weight: 600;
-    margin-bottom: 1.5rem;
-    animation: fadeDown 0.6s ease;
-  }
-
-  .hero h1 {
-    font-family: 'Tajawal', sans-serif;
-    font-size: clamp(2rem, 5vw, 3.2rem);
-    font-weight: 900;
-    color: white;
-    line-height: 1.2;
-    margin-bottom: 1rem;
-    animation: fadeUp 0.7s ease;
-  }
-
-  .hero h1 span { color: var(--gold-light); }
-
-  .hero p {
-    color: rgba(255,255,255,0.75);
-    font-size: 1rem;
-    max-width: 500px;
-    margin: 0 auto 2.5rem;
-    line-height: 1.7;
-    animation: fadeUp 0.8s ease;
-  }
-
-  .hero-stats {
-    display: flex;
-    justify-content: center;
-    gap: 2.5rem;
-    flex-wrap: wrap;
-    animation: fadeUp 0.9s ease;
-  }
-
-  .stat {
-    text-align: center;
-    color: white;
-  }
-
-  .stat-num {
-    font-family: 'Tajawal', sans-serif;
-    font-size: 1.8rem;
-    font-weight: 800;
-    color: var(--gold-light);
-    display: block;
-  }
-
-  .stat-label {
-    font-size: 0.78rem;
-    color: rgba(255,255,255,0.65);
-    font-weight: 500;
-  }
-
-  /* QUICK ACCESS */
-  .quick-access {
-    padding: 2.5rem 2rem;
-    max-width: 1100px;
-    margin: 0 auto;
-  }
-
-  .section-title {
-    font-family: 'Tajawal', sans-serif;
-    font-size: 1.4rem;
-    font-weight: 800;
-    color: var(--green-dark);
-    margin-bottom: 1.5rem;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .section-title::after {
-    content: '';
-    flex: 1;
-    height: 2px;
-    background: linear-gradient(to left, transparent, var(--green), transparent);
-    opacity: 0.3;
-  }
-
-  .cards-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 1rem;
-  }
-
-  .card {
-    background: white;
-    border-radius: 16px;
-    padding: 1.5rem;
-    border: 1px solid var(--gray);
-    cursor: pointer;
-    transition: all 0.25s ease;
-    position: relative;
-    overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-  }
-
-  .card::before {
-    content: '';
-    position: absolute;
-    top: 0; right: 0;
-    width: 70px; height: 70px;
-    border-radius: 0 0 0 70px;
-    opacity: 0.08;
-    transition: all 0.3s;
-  }
-
-  .card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 30px rgba(0,0,0,0.1);
-    border-color: transparent;
-  }
-
-  .card-icon {
-    width: 48px; height: 48px;
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.4rem;
-    margin-bottom: 1rem;
-  }
-
-  .card h3 {
-    font-size: 0.95rem;
-    font-weight: 700;
-    margin-bottom: 0.4rem;
-    color: var(--text);
-  }
-
-  .card p {
-    font-size: 0.78rem;
-    color: var(--muted);
-    line-height: 1.5;
-  }
-
-  .card-arrow {
-    position: absolute;
-    bottom: 1.2rem;
-    left: 1.2rem;
-    font-size: 1rem;
-    opacity: 0;
-    transform: translateX(6px);
-    transition: all 0.2s;
-  }
-
-  .card:hover .card-arrow { opacity: 1; transform: translateX(0); }
-
-  /* card colors */
-  .card-red .card-icon { background: rgba(192,57,43,0.1); }
-  .card-red::before { background: var(--red); }
-  .card-red:hover { border-color: rgba(192,57,43,0.15); }
-
-  .card-green .card-icon { background: rgba(0,98,51,0.1); }
-  .card-green::before { background: var(--green); }
-  .card-green:hover { border-color: rgba(0,98,51,0.15); }
-
-  .card-blue .card-icon { background: rgba(26,111,168,0.1); }
-  .card-blue::before { background: var(--blue); }
-  .card-blue:hover { border-color: rgba(26,111,168,0.15); }
-
-  .card-orange .card-icon { background: rgba(212,117,42,0.1); }
-  .card-orange::before { background: var(--orange); }
-  .card-orange:hover { border-color: rgba(212,117,42,0.15); }
-
-  .card-gold .card-icon { background: rgba(201,168,76,0.12); }
-  .card-gold::before { background: var(--gold); }
-  .card-gold:hover { border-color: rgba(201,168,76,0.2); }
-
-  /* MAIN CONTENT */
-  .main {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 0 2rem 4rem;
-    display: grid;
-    grid-template-columns: 1fr 340px;
-    gap: 2rem;
-  }
-
-  /* REPORT FORM */
-  .report-section {
-    background: white;
-    border-radius: 20px;
-    padding: 2rem;
-    border: 1px solid var(--gray);
-    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
-    margin-bottom: 1.5rem;
-  }
-
-  .report-section h2 {
-    font-family: 'Tajawal', sans-serif;
-    font-size: 1.2rem;
-    font-weight: 800;
-    color: var(--green-dark);
-    margin-bottom: 1.5rem;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .form-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-  }
-
-  .form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-  }
-
-  .form-group.full { grid-column: 1 / -1; }
-
-  .form-group label {
-    font-size: 0.82rem;
-    font-weight: 600;
-    color: var(--text);
-  }
-
-  .form-group input,
-  .form-group select,
-  .form-group textarea {
-    border: 1.5px solid var(--gray);
-    border-radius: 10px;
-    padding: 10px 14px;
-    font-family: 'Cairo', sans-serif;
-    font-size: 0.88rem;
-    color: var(--text);
-    background: var(--white);
-    transition: border-color 0.2s;
-    outline: none;
-    direction: rtl;
-  }
-
-  .form-group input:focus,
-  .form-group select:focus,
-  .form-group textarea:focus {
-    border-color: var(--green);
-    background: white;
-  }
-
-  .form-group textarea { resize: vertical; min-height: 90px; }
-
-  .category-pills {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-bottom: 1rem;
-  }
-
-  .pill {
-    padding: 6px 14px;
-    border-radius: 50px;
-    border: 1.5px solid var(--gray);
-    font-size: 0.8rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s;
-    background: white;
-    color: var(--muted);
-    display: flex;
-    align-items: center;
-    gap: 5px;
-  }
-
-  .pill:hover, .pill.active {
-    background: var(--green);
-    border-color: var(--green);
-    color: white;
-  }
-
-  .btn-submit {
-    background: linear-gradient(135deg, var(--green), var(--green-light));
-    color: white;
-    border: none;
-    padding: 12px 28px;
-    border-radius: 12px;
-    font-family: 'Cairo', sans-serif;
-    font-size: 0.92rem;
-    font-weight: 700;
-    cursor: pointer;
-    transition: all 0.25s;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    box-shadow: 0 4px 15px rgba(0,98,51,0.3);
-    margin-top: 1rem;
-  }
-
-  .btn-submit:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(0,98,51,0.4);
-  }
-
-  /* TRANSPORT */
-  .transport-list {
-    display: flex;
-    flex-direction: column;
-    gap: 0.7rem;
-  }
-
-  .transport-item {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    background: var(--white);
-    border: 1.5px solid var(--gray);
-    border-radius: 12px;
-    padding: 1rem 1.2rem;
-    transition: all 0.2s;
-    cursor: pointer;
-  }
-
-  .transport-item:hover {
-    border-color: var(--blue);
-    background: white;
-    transform: translateX(-4px);
-  }
-
-  .bus-num {
-    min-width: 44px;
-    height: 44px;
-    background: linear-gradient(135deg, var(--blue), #2a8fd4);
-    color: white;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 800;
-    font-size: 1rem;
-    box-shadow: 0 2px 8px rgba(26,111,168,0.3);
-  }
-
-  .bus-info { flex: 1; }
-  .bus-info strong { font-size: 0.88rem; display: block; }
-  .bus-info span { font-size: 0.76rem; color: var(--muted); }
-
-  .bus-time {
-    font-size: 0.78rem;
-    color: var(--green);
-    font-weight: 700;
-    background: rgba(0,98,51,0.08);
-    padding: 4px 10px;
-    border-radius: 8px;
-  }
-
-  /* SIDEBAR */
-  .sidebar { display: flex; flex-direction: column; gap: 1.5rem; }
-
-  /* PHARMACY */
-  .pharmacy-card {
-    background: white;
-    border-radius: 20px;
-    padding: 1.5rem;
-    border: 1px solid var(--gray);
-    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
-  }
-
-  .pharmacy-card h3 {
-    font-family: 'Tajawal', sans-serif;
-    font-size: 1rem;
-    font-weight: 800;
-    color: var(--text);
-    margin-bottom: 1rem;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .pharmacy-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    padding: 0.9rem 0;
-    border-bottom: 1px solid var(--gray);
-  }
-
-  .pharmacy-item:last-child { border-bottom: none; }
-
-  .pharmacy-name {
-    font-size: 0.88rem;
-    font-weight: 700;
-    color: var(--text);
-    display: block;
-  }
-
-  .pharmacy-addr {
-    font-size: 0.74rem;
-    color: var(--muted);
-    margin-top: 2px;
-  }
-
-  .open-badge {
-    background: rgba(0,98,51,0.1);
-    color: var(--green);
-    font-size: 0.72rem;
-    font-weight: 700;
-    padding: 3px 10px;
-    border-radius: 20px;
-    white-space: nowrap;
-  }
-
-  .closed-badge {
-    background: rgba(192,57,43,0.08);
-    color: var(--red);
-    font-size: 0.72rem;
-    font-weight: 700;
-    padding: 3px 10px;
-    border-radius: 20px;
-  }
-
-  /* SCHOOL */
-  .school-card {
-    background: white;
-    border-radius: 20px;
-    padding: 1.5rem;
-    border: 1px solid var(--gray);
-    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
-  }
-
-  .school-card h3 {
-    font-family: 'Tajawal', sans-serif;
-    font-size: 1rem;
-    font-weight: 800;
-    color: var(--text);
-    margin-bottom: 1rem;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .absence-item {
-    background: rgba(212,117,42,0.06);
-    border: 1px solid rgba(212,117,42,0.2);
-    border-radius: 12px;
-    padding: 1rem;
-    margin-bottom: 0.7rem;
-  }
-
-  .absence-school {
-    font-size: 0.82rem;
-    font-weight: 700;
-    color: var(--text);
-    margin-bottom: 4px;
-  }
-
-  .absence-detail {
-    font-size: 0.75rem;
-    color: var(--orange);
-    display: flex;
-    align-items: center;
-    gap: 5px;
-  }
-
-  .absence-time {
-    font-size: 0.72rem;
-    color: var(--muted);
-    margin-top: 4px;
-  }
-
-  /* ANNOUNCEMENTS */
-  .announce-card {
-    background: white;
-    border-radius: 20px;
-    padding: 1.5rem;
-    border: 1px solid var(--gray);
-    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
-  }
-
-  .announce-card h3 {
-    font-family: 'Tajawal', sans-serif;
-    font-size: 1rem;
-    font-weight: 800;
-    margin-bottom: 1rem;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .announce-item {
-    display: flex;
-    gap: 0.8rem;
-    padding: 0.8rem 0;
-    border-bottom: 1px solid var(--gray);
-    cursor: pointer;
-    transition: padding 0.2s;
-  }
-
-  .announce-item:hover { padding-right: 6px; }
-  .announce-item:last-child { border-bottom: none; }
-
-  .announce-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    margin-top: 6px;
-    flex-shrink: 0;
-  }
-
-  .announce-text strong {
-    font-size: 0.84rem;
-    display: block;
-    margin-bottom: 2px;
-    color: var(--text);
-  }
-
-  .announce-text span {
-    font-size: 0.73rem;
-    color: var(--muted);
-  }
-
-  /* ALERT BANNER */
-  .alert-banner {
-    background: linear-gradient(135deg, #c0392b, #e74c3c);
-    color: white;
-    padding: 1rem 1.5rem;
-    border-radius: 14px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 1.5rem;
-    animation: pulse 2s infinite;
-  }
-
-  .alert-icon { font-size: 1.4rem; }
-  .alert-text strong { font-size: 0.9rem; display: block; }
-  .alert-text span { font-size: 0.78rem; opacity: 0.85; }
-
-  /* FOOTER */
-  footer {
-    background: var(--green-dark);
-    color: rgba(255,255,255,0.7);
-    text-align: center;
-    padding: 2rem;
-    font-size: 0.82rem;
-  }
-
-  footer strong { color: var(--gold-light); }
-
-  /* TOAST */
-  .toast {
-    position: fixed;
-    bottom: 2rem;
-    left: 50%;
-    transform: translateX(-50%) translateY(100px);
-    background: var(--green-dark);
-    color: white;
-    padding: 12px 24px;
-    border-radius: 50px;
-    font-size: 0.88rem;
-    font-weight: 600;
-    z-index: 999;
-    transition: transform 0.4s ease;
-    box-shadow: 0 8px 30px rgba(0,0,0,0.3);
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .toast.show { transform: translateX(-50%) translateY(0); }
-
-  /* ===== WELCOME SCREEN ===== */
-  #welcomeScreen {
-    position: fixed;
-    inset: 0;
-    z-index: 9999;
-    background: var(--green-dark);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: opacity 0.6s ease, transform 0.6s ease;
-    overflow: hidden;
-  }
-  #welcomeScreen.hidden {
-    opacity: 0;
-    pointer-events: none;
-    transform: scale(1.04);
-  }
-  .ws-bg { position: absolute; inset: 0; overflow: hidden; }
-  .ws-circle {
-    position: absolute;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(201,168,76,0.13), transparent 70%);
-    animation: floatCircle 8s ease-in-out infinite;
-  }
-  .ws-circle:nth-child(1) { width: 500px; height: 500px; top: -150px; right: -100px; }
-  .ws-circle:nth-child(2) { width: 350px; height: 350px; bottom: -80px; left: -80px; animation-delay: 2s; }
-  .ws-circle:nth-child(3) { width: 200px; height: 200px; top: 40%; left: 20%; animation-delay: 4s; }
-  .ws-grid {
-    position: absolute; inset: 0;
-    background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
-    background-size: 60px 60px;
-  }
-  .ws-box {
-    position: relative; z-index: 2;
-    width: 100%; max-width: 420px;
-    padding: 1.5rem;
-    animation: fadeUp 0.7s ease;
-  }
-  .ws-logo { text-align: center; margin-bottom: 2rem; }
-  .ws-emblem {
-    width: 80px; height: 80px;
-    background: linear-gradient(135deg, var(--gold), var(--gold-light));
-    border-radius: 24px;
-    display: inline-flex; align-items: center; justify-content: center;
-    font-size: 2.2rem; margin-bottom: 1rem;
-    box-shadow: 0 8px 30px rgba(201,168,76,0.35);
-    animation: pulse 3s ease-in-out infinite;
-  }
-  .ws-logo h1 { font-family: 'Tajawal', sans-serif; font-size: 1.6rem; font-weight: 900; color: white; margin-bottom: 4px; }
-  .ws-logo h1 span { color: var(--gold-light); }
-  .ws-logo p { font-size: 0.82rem; color: rgba(255,255,255,0.5); }
-  .ws-card {
-    background: rgba(255,255,255,0.06);
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(255,255,255,0.12);
-    border-radius: 24px; padding: 2rem;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-  }
-  .ws-tabs {
-    display: flex; background: rgba(0,0,0,0.25);
-    border-radius: 12px; padding: 4px; margin-bottom: 1.8rem; gap: 4px;
-  }
-  .ws-tab {
-    flex: 1; padding: 9px; border-radius: 9px; border: none;
-    font-family: 'Cairo', sans-serif; font-size: 0.85rem; font-weight: 700;
-    cursor: pointer; transition: all 0.25s;
-    color: rgba(255,255,255,0.5); background: transparent;
-  }
-  .ws-tab.active {
-    background: linear-gradient(135deg, var(--green), var(--green-light));
-    color: white; box-shadow: 0 4px 12px rgba(0,98,51,0.4);
-  }
-  .ws-input-group { margin-bottom: 1rem; }
-  .ws-input-group label { display: block; font-size: 0.8rem; font-weight: 600; color: rgba(255,255,255,0.75); margin-bottom: 7px; }
-  .ws-input-wrap { position: relative; }
-  .ws-input-icon { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); font-size: 1rem; pointer-events: none; }
-  .ws-input-group input {
-    width: 100%; background: rgba(255,255,255,0.08);
-    border: 1.5px solid rgba(255,255,255,0.12); border-radius: 12px;
-    padding: 12px 42px 12px 16px;
-    font-family: 'Cairo', sans-serif; font-size: 0.88rem; color: white;
-    outline: none; transition: all 0.2s; direction: rtl;
-  }
-  .ws-input-group input::placeholder { color: rgba(255,255,255,0.3); }
-  .ws-input-group input:focus {
-    border-color: var(--gold); background: rgba(255,255,255,0.12);
-    box-shadow: 0 0 0 4px rgba(201,168,76,0.1);
-  }
-  .ws-divider {
-    display: flex; align-items: center; gap: 10px; margin: 1.2rem 0;
-    color: rgba(255,255,255,0.3); font-size: 0.75rem;
-  }
-  .ws-divider::before, .ws-divider::after { content: ''; flex: 1; height: 1px; background: rgba(255,255,255,0.1); }
-  .ws-btn-main {
-    width: 100%; padding: 13px;
-    background: linear-gradient(135deg, var(--gold), var(--gold-light));
-    border: none; border-radius: 13px;
-    font-family: 'Cairo', sans-serif; font-size: 0.95rem; font-weight: 800;
-    color: var(--green-dark); cursor: pointer; transition: all 0.25s;
-    box-shadow: 0 6px 20px rgba(201,168,76,0.35);
-    display: flex; align-items: center; justify-content: center; gap: 8px;
-    margin-top: 0.5rem;
-  }
-  .ws-btn-main:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(201,168,76,0.45); }
-  .ws-btn-guest {
-    width: 100%; padding: 11px; background: transparent;
-    border: 1.5px solid rgba(255,255,255,0.2); border-radius: 13px;
-    font-family: 'Cairo', sans-serif; font-size: 0.85rem; font-weight: 600;
-    color: rgba(255,255,255,0.7); cursor: pointer; transition: all 0.25s; margin-top: 0.7rem;
-  }
-  .ws-btn-guest:hover { background: rgba(255,255,255,0.08); color: white; border-color: rgba(255,255,255,0.35); }
-  .ws-footer-note { text-align: center; font-size: 0.73rem; color: rgba(255,255,255,0.3); margin-top: 1.2rem; }
-  .ws-panel { display: none; }
-  .ws-panel.active { display: block; }
-  @keyframes floatCircle {
-    0%, 100% { transform: translateY(0) scale(1); }
-    50% { transform: translateY(-20px) scale(1.05); }
-  }
-
-  /* ANIMATIONS */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  @keyframes fadeDown {
-    from { opacity: 0; transform: translateY(-10px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  @keyframes pulse {
-    0%, 100% { box-shadow: 0 0 0 0 rgba(192,57,43,0.4); }
-    50% { box-shadow: 0 0 0 8px rgba(192,57,43,0); }
-  }
-
-  /* RESPONSIVE */
-  @media (max-width: 768px) {
-    .main { grid-template-columns: 1fr; }
-    .form-grid { grid-template-columns: 1fr; }
-    .nav-links { display: none; }
-    .hero { padding: 3rem 1.5rem 2.5rem; }
-    .hero-stats { gap: 1.5rem; }
-    .quick-access, .main { padding-inline: 1rem; }
-  }
+:root{--green:#006233;--green-light:#00874a;--green-dark:#004a25;--gold:#C9A84C;--gold-light:#e8c96a;--white:#f8faf8;--gray:#e8ede9;--text:#1a2e1e;--muted:#6b8070;--red:#c0392b;--blue:#1a6fa8;--orange:#d4752a;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Cairo',sans-serif;background:var(--white);color:var(--text);overflow-x:hidden;}
+nav{position:sticky;top:0;z-index:100;background:rgba(0,98,51,0.97);backdrop-filter:blur(12px);display:flex;align-items:center;justify-content:space-between;padding:0 2rem;height:64px;box-shadow:0 2px 20px rgba(0,0,0,0.2);}
+.nav-logo{display:flex;align-items:center;gap:10px;color:white;font-family:'Tajawal',sans-serif;font-weight:800;font-size:1.1rem;}
+.nav-logo .emblem{width:36px;height:36px;background:linear-gradient(135deg,var(--gold),var(--gold-light));border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1rem;}
+.nav-links{display:flex;gap:0.3rem;list-style:none;}
+.nav-links a{color:rgba(255,255,255,0.85);text-decoration:none;font-size:0.82rem;font-weight:600;padding:6px 12px;border-radius:8px;transition:all 0.2s;cursor:pointer;}
+.nav-links a:hover{background:rgba(255,255,255,0.15);color:white;}
+.page{display:none;}.page.active{display:block;}
+.hero{background:linear-gradient(135deg,var(--green-dark) 0%,var(--green) 60%,var(--green-light) 100%);padding:5rem 2rem 4rem;position:relative;overflow:hidden;}
+.hero-content{max-width:900px;margin:0 auto;text-align:center;position:relative;z-index:1;}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(201,168,76,0.2);border:1px solid rgba(201,168,76,0.4);color:var(--gold-light);padding:6px 16px;border-radius:50px;font-size:0.82rem;font-weight:600;margin-bottom:1.5rem;}
+.hero h1{font-family:'Tajawal',sans-serif;font-size:clamp(2rem,5vw,3.2rem);font-weight:900;color:white;line-height:1.2;margin-bottom:1rem;}
+.hero h1 span{color:var(--gold-light);}
+.hero p{color:rgba(255,255,255,0.75);font-size:1rem;max-width:500px;margin:0 auto 2.5rem;line-height:1.7;}
+.hero-stats{display:flex;justify-content:center;gap:2.5rem;flex-wrap:wrap;}
+.stat{text-align:center;color:white;}
+.stat-num{font-family:'Tajawal',sans-serif;font-size:1.8rem;font-weight:800;color:var(--gold-light);display:block;}
+.stat-label{font-size:0.78rem;color:rgba(255,255,255,0.65);font-weight:500;}
+.quick-access{padding:2.5rem 2rem;max-width:1100px;margin:0 auto;}
+.section-title{font-family:'Tajawal',sans-serif;font-size:1.4rem;font-weight:800;color:var(--green-dark);margin-bottom:1.5rem;display:flex;align-items:center;gap:10px;}
+.section-title::after{content:'';flex:1;height:2px;background:linear-gradient(to left,transparent,var(--green),transparent);opacity:0.3;}
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem;}
+.card{background:white;border-radius:16px;padding:1.5rem;border:1px solid var(--gray);cursor:pointer;transition:all 0.25s;position:relative;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.04);}
+.card::before{content:'';position:absolute;top:0;right:0;width:70px;height:70px;border-radius:0 0 0 70px;opacity:0.08;transition:all 0.3s;}
+.card:hover{transform:translateY(-4px);box-shadow:0 12px 30px rgba(0,0,0,0.1);border-color:transparent;}
+.card-icon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin-bottom:1rem;}
+.card h3{font-size:0.95rem;font-weight:700;margin-bottom:0.4rem;color:var(--text);}
+.card p{font-size:0.78rem;color:var(--muted);line-height:1.5;}
+.card-arrow{position:absolute;bottom:1.2rem;left:1.2rem;font-size:1rem;opacity:0;transform:translateX(6px);transition:all 0.2s;}
+.card:hover .card-arrow{opacity:1;transform:translateX(0);}
+.card-red .card-icon{background:rgba(192,57,43,0.1);}.card-red::before{background:var(--red);}
+.card-green .card-icon{background:rgba(0,98,51,0.1);}.card-green::before{background:var(--green);}
+.card-blue .card-icon{background:rgba(26,111,168,0.1);}.card-blue::before{background:var(--blue);}
+.card-orange .card-icon{background:rgba(212,117,42,0.1);}.card-orange::before{background:var(--orange);}
+.card-gold .card-icon{background:rgba(201,168,76,0.12);}.card-gold::before{background:var(--gold);}
+.page-header{background:linear-gradient(135deg,var(--green-dark),var(--green));padding:2rem;display:flex;align-items:center;gap:1rem;}
+.btn-back{background:rgba(255,255,255,0.15);color:white;border:1px solid rgba(255,255,255,0.25);border-radius:10px;padding:8px 16px;font-family:'Cairo',sans-serif;font-size:0.85rem;font-weight:700;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;gap:6px;white-space:nowrap;}
+.btn-back:hover{background:rgba(255,255,255,0.25);}
+.page-header h2{font-family:'Tajawal',sans-serif;font-size:1.3rem;font-weight:900;color:white;}
+.page-header p{font-size:0.8rem;color:rgba(255,255,255,0.65);margin-top:2px;}
+.page-content{max-width:900px;margin:0 auto;padding:2rem;}
+.section-box{background:white;border-radius:20px;padding:2rem;border:1px solid var(--gray);box-shadow:0 2px 12px rgba(0,0,0,0.04);margin-bottom:1.5rem;}
+.section-box h2{font-family:'Tajawal',sans-serif;font-size:1.1rem;font-weight:800;color:var(--green-dark);margin-bottom:1.2rem;display:flex;align-items:center;gap:8px;padding-bottom:0.8rem;border-bottom:1px solid var(--gray);}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+.form-group{display:flex;flex-direction:column;gap:6px;}
+.form-group.full{grid-column:1/-1;}
+.form-group label{font-size:0.82rem;font-weight:600;color:var(--text);}
+.form-group input,.form-group select,.form-group textarea{border:1.5px solid var(--gray);border-radius:10px;padding:10px 14px;font-family:'Cairo',sans-serif;font-size:0.88rem;color:var(--text);background:var(--white);transition:border-color 0.2s;outline:none;direction:rtl;}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--green);background:white;}
+.form-group textarea{resize:vertical;min-height:90px;}
+.category-pills{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:1rem;}
+.pill{padding:6px 14px;border-radius:50px;border:1.5px solid var(--gray);font-size:0.8rem;font-weight:600;cursor:pointer;transition:all 0.2s;background:white;color:var(--muted);}
+.pill:hover,.pill.active{background:var(--green);border-color:var(--green);color:white;}
+.btn-submit{background:linear-gradient(135deg,var(--green),var(--green-light));color:white;border:none;padding:12px 28px;border-radius:12px;font-family:'Cairo',sans-serif;font-size:0.92rem;font-weight:700;cursor:pointer;transition:all 0.25s;display:flex;align-items:center;gap:8px;box-shadow:0 4px 15px rgba(0,98,51,0.3);margin-top:1rem;}
+.btn-submit:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(0,98,51,0.4);}
+.transport-list{display:flex;flex-direction:column;gap:0.7rem;}
+.transport-item{display:flex;align-items:center;gap:1rem;background:var(--white);border:1.5px solid var(--gray);border-radius:12px;padding:1rem 1.2rem;transition:all 0.2s;cursor:pointer;}
+.transport-item:hover{border-color:var(--blue);background:white;transform:translateX(-4px);}
+.bus-num{min-width:44px;height:44px;background:linear-gradient(135deg,var(--blue),#2a8fd4);color:white;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1rem;box-shadow:0 2px 8px rgba(26,111,168,0.3);}
+.bus-info{flex:1;}.bus-info strong{font-size:0.88rem;display:block;}.bus-info span{font-size:0.76rem;color:var(--muted);}
+.bus-time{font-size:0.78rem;color:var(--green);font-weight:700;background:rgba(0,98,51,0.08);padding:4px 10px;border-radius:8px;}
+.pharmacy-item{display:flex;justify-content:space-between;align-items:flex-start;padding:0.9rem 0;border-bottom:1px solid var(--gray);}
+.pharmacy-item:last-child{border-bottom:none;}
+.pharmacy-name{font-size:0.88rem;font-weight:700;color:var(--text);display:block;}
+.pharmacy-addr{font-size:0.74rem;color:var(--muted);margin-top:2px;}
+.open-badge{background:rgba(0,98,51,0.1);color:var(--green);font-size:0.72rem;font-weight:700;padding:3px 10px;border-radius:20px;white-space:nowrap;}
+.closed-badge{background:rgba(192,57,43,0.08);color:var(--red);font-size:0.72rem;font-weight:700;padding:3px 10px;border-radius:20px;}
+.absence-item{background:rgba(212,117,42,0.06);border:1px solid rgba(212,117,42,0.2);border-radius:12px;padding:1rem;margin-bottom:0.7rem;}
+.absence-school{font-size:0.82rem;font-weight:700;color:var(--text);margin-bottom:4px;}
+.absence-detail{font-size:0.75rem;color:var(--orange);}
+.absence-time{font-size:0.72rem;color:var(--muted);margin-top:4px;}
+.announce-item{display:flex;gap:0.8rem;padding:0.8rem 0;border-bottom:1px solid var(--gray);cursor:pointer;transition:padding 0.2s;}
+.announce-item:hover{padding-right:6px;}.announce-item:last-child{border-bottom:none;}
+.announce-dot{width:8px;height:8px;border-radius:50%;margin-top:6px;flex-shrink:0;}
+.announce-text strong{font-size:0.84rem;display:block;margin-bottom:2px;color:var(--text);}
+.announce-text span{font-size:0.73rem;color:var(--muted);}
+.alert-banner{background:linear-gradient(135deg,#c0392b,#e74c3c);color:white;padding:1rem 1.5rem;border-radius:14px;display:flex;align-items:center;gap:12px;margin-bottom:1.5rem;}
+.alert-icon{font-size:1.4rem;}
+.alert-text strong{font-size:0.9rem;display:block;}
+.alert-text span{font-size:0.78rem;opacity:0.85;}
+footer{background:var(--green-dark);color:rgba(255,255,255,0.7);text-align:center;padding:2rem;font-size:0.82rem;}
+footer strong{color:var(--gold-light);}
+.toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(100px);background:var(--green-dark);color:white;padding:12px 24px;border-radius:50px;font-size:0.88rem;font-weight:600;z-index:999;transition:transform 0.4s ease;box-shadow:0 8px 30px rgba(0,0,0,0.3);}
+.toast.show{transform:translateX(-50%) translateY(0);}
+.loading{text-align:center;padding:2rem;color:var(--muted);font-size:0.88rem;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:768px){.form-grid{grid-template-columns:1fr;}.nav-links{display:none;}.hero{padding:3rem 1.5rem 2.5rem;}.hero-stats{gap:1.5rem;}.quick-access,.page-content{padding:1.2rem;}.cards-grid{grid-template-columns:1fr 1fr;}}
 </style>
 </head>
 <body>
 
-<!-- WELCOME SCREEN -->
-<div id="welcomeScreen">
-  <div class="ws-bg">
-    <div class="ws-circle"></div>
-    <div class="ws-circle"></div>
-    <div class="ws-circle"></div>
-    <div class="ws-grid"></div>
-  </div>
-  <div class="ws-box">
-    <div class="ws-logo">
-      <div class="ws-emblem">🏛️</div>
-      <h1>بلدية <span>بوزريعة</span></h1>
-      <p>منصة الخدمات الذكية · ولاية الجزائر العاصمة</p>
-    </div>
-    <div class="ws-card">
-      <div class="ws-tabs">
-        <button class="ws-tab active" onclick="switchTab('login')">تسجيل الدخول</button>
-        <button class="ws-tab" onclick="switchTab('register')">حساب جديد</button>
-      </div>
-
-      <!-- LOGIN PANEL -->
-      <div class="ws-panel active" id="panel-login">
-        <div class="ws-input-group">
-          <label>رقم الهاتف</label>
-          <div class="ws-input-wrap">
-            <span class="ws-input-icon">📱</span>
-            <input type="tel" placeholder="05XX XXX XXX">
-          </div>
-        </div>
-        <div class="ws-input-group">
-          <label>كلمة المرور</label>
-          <div class="ws-input-wrap">
-            <span class="ws-input-icon">🔒</span>
-            <input type="password" placeholder="••••••••">
-          </div>
-        </div>
-        <button class="ws-btn-main" onclick="enterSite('مرحباً بعودتك!')">
-          🚀 دخول
-        </button>
-        <div class="ws-divider">أو</div>
-        <button class="ws-btn-guest" onclick="enterSite('أهلاً بك زائراً!')">
-          👤 تصفح كزائر
-        </button>
-      </div>
-
-      <!-- REGISTER PANEL -->
-      <div class="ws-panel" id="panel-register">
-        <div class="ws-input-group">
-          <label>الاسم الكامل</label>
-          <div class="ws-input-wrap">
-            <span class="ws-input-icon">👤</span>
-            <input type="text" placeholder="مثال: أحمد بن علي">
-          </div>
-        </div>
-        <div class="ws-input-group">
-          <label>رقم الهاتف</label>
-          <div class="ws-input-wrap">
-            <span class="ws-input-icon">📱</span>
-            <input type="tel" placeholder="05XX XXX XXX">
-          </div>
-        </div>
-        <div class="ws-input-group">
-          <label>الحي / المنطقة</label>
-          <div class="ws-input-wrap">
-            <span class="ws-input-icon">📍</span>
-            <input type="text" placeholder="مثال: حي بن عمر">
-          </div>
-        </div>
-        <div class="ws-input-group">
-          <label>كلمة المرور</label>
-          <div class="ws-input-wrap">
-            <span class="ws-input-icon">🔒</span>
-            <input type="password" placeholder="••••••••">
-          </div>
-        </div>
-        <button class="ws-btn-main" onclick="enterSite('مرحباً بك في عائلة بوزريعة!')">
-          ✅ إنشاء الحساب
-        </button>
-      </div>
-
-      <div class="ws-footer-note">🔐 بياناتك محمية ولن تُشارك مع أي جهة</div>
-    </div>
-  </div>
-</div>
-
-<!-- NAV -->
 <nav>
   <div class="nav-logo">
     <div class="emblem">🏛️</div>
@@ -942,91 +109,59 @@
     </div>
   </div>
   <ul class="nav-links">
-    <li><a class="active" onclick="scrollTo(0,0)">الرئيسية</a></li>
-    <li><a onclick="scrollToSection('report')">الإبلاغ</a></li>
-    <li><a onclick="scrollToSection('transport')">النقل</a></li>
-    <li><a onclick="scrollToSection('school')">التعليم</a></li>
-    <li><a onclick="scrollToSection('pharmacy')">الصيدليات</a></li>
+    <li><a onclick="showPage('home')">الرئيسية</a></li>
+    <li><a onclick="showPage('page-report')">الإبلاغ</a></li>
+    <li><a onclick="showPage('page-transport')">النقل</a></li>
+    <li><a onclick="showPage('page-school')">التعليم</a></li>
+    <li><a onclick="showPage('page-pharmacy')">الصيدليات</a></li>
+    <li><a onclick="showPage('page-announce')">الإعلانات</a></li>
   </ul>
 </nav>
 
-<!-- HERO -->
-<div class="hero">
-  <div class="hero-content">
-    <div class="hero-badge">🌿 منصة الخدمات الذكية · الجزائر</div>
-    <h1>بوزريعة <span>الرقمية</span><br>في خدمتك دائماً</h1>
-    <p>كل ما تحتاجه في مكان واحد — من الإبلاغ عن مشاكل الحي إلى مواعيد الصيدليات والنقل والمدارس</p>
-    <div class="hero-stats">
-      <div class="stat">
-        <span class="stat-num">🚨</span>
-        <span class="stat-label">الإبلاغ عن مشاكل الحي</span>
-      </div>
-      <div class="stat">
-        <span class="stat-num">🚌</span>
-        <span class="stat-label">مواقيت النقل</span>
-      </div>
-      <div class="stat">
-        <span class="stat-num">💊</span>
-        <span class="stat-label">صيدليات المناوبة</span>
-      </div>
-      <div class="stat">
-        <span class="stat-num">🏫</span>
-        <span class="stat-label">المؤسسات التربوية</span>
+<!-- HOME -->
+<div class="page active" id="home">
+  <div class="hero">
+    <div class="hero-content">
+      <div class="hero-badge">🌿 منصة الخدمات الذكية · الجزائر</div>
+      <h1>بوزريعة <span>الرقمية</span><br>في خدمتك دائماً</h1>
+      <p>كل ما تحتاجه في مكان واحد — الإبلاغ، النقل، الصيدليات، المدارس</p>
+      <div class="hero-stats">
+        <div class="stat"><span class="stat-num">🚨</span><span class="stat-label">الإبلاغ</span></div>
+        <div class="stat"><span class="stat-num">🚌</span><span class="stat-label">النقل</span></div>
+        <div class="stat"><span class="stat-num">💊</span><span class="stat-label">الصيدليات</span></div>
+        <div class="stat"><span class="stat-num">🏫</span><span class="stat-label">المدارس</span></div>
       </div>
     </div>
   </div>
-</div>
-
-<!-- QUICK ACCESS -->
-<div class="quick-access">
-  <div class="section-title">⚡ وصول سريع</div>
-  <div class="cards-grid">
-    <div class="card card-red" onclick="scrollToSection('report')">
-      <div class="card-icon">🚨</div>
-      <h3>الإبلاغ عن مشكلة</h3>
-      <p>طرقات، مياه، إنارة، مخدرات</p>
-      <div class="card-arrow">←</div>
-    </div>
-    <div class="card card-blue" onclick="scrollToSection('transport')">
-      <div class="card-icon">🚌</div>
-      <h3>مواقيت النقل</h3>
-      <p>الحافلات والميتر والطرامواي</p>
-      <div class="card-arrow">←</div>
-    </div>
-    <div class="card card-green" onclick="scrollToSection('pharmacy')">
-      <div class="card-icon">💊</div>
-      <h3>صيدليات المناوبة</h3>
-      <p>الأقرب إليك الآن</p>
-      <div class="card-arrow">←</div>
-    </div>
-    <div class="card card-orange" onclick="scrollToSection('school')">
-      <div class="card-icon">🏫</div>
-      <h3>المؤسسات التربوية</h3>
-      <p>غياب الأساتذة والإشعارات</p>
-      <div class="card-arrow">←</div>
-    </div>
-    <div class="card card-gold">
-      <div class="card-icon">📋</div>
-      <h3>إعلانات البلدية</h3>
-      <p>أخبار وإشعارات رسمية</p>
-      <div class="card-arrow">←</div>
+  <div id="alertBannerHome" style="display:none;margin:1.5rem 2rem 0;max-width:1060px;margin-left:auto;margin-right:auto;"></div>
+  <div class="quick-access">
+    <div class="section-title">⚡ وصول سريع</div>
+    <div class="cards-grid">
+      <div class="card card-red" onclick="showPage('page-report')"><div class="card-icon">🚨</div><h3>الإبلاغ عن مشكلة</h3><p>طرقات، مياه، إنارة، نظافة</p><div class="card-arrow">←</div></div>
+      <div class="card card-blue" onclick="showPage('page-transport')"><div class="card-icon">🚌</div><h3>مواقيت النقل</h3><p>الحافلات والميتر والطرامواي</p><div class="card-arrow">←</div></div>
+      <div class="card card-green" onclick="showPage('page-pharmacy')"><div class="card-icon">💊</div><h3>صيدليات المناوبة</h3><p>الأقرب إليك الآن</p><div class="card-arrow">←</div></div>
+      <div class="card card-orange" onclick="showPage('page-school')"><div class="card-icon">🏫</div><h3>المؤسسات التربوية</h3><p>غياب الأساتذة والإشعارات</p><div class="card-arrow">←</div></div>
+      <div class="card card-gold" onclick="showPage('page-announce')"><div class="card-icon">📢</div><h3>إعلانات البلدية</h3><p>أخبار وإشعارات رسمية</p><div class="card-arrow">←</div></div>
     </div>
   </div>
+  <footer>
+    <div style="font-size:1.5rem;margin-bottom:8px">🏛️</div>
+    <strong>بلدية بوزريعة الرقمية</strong><br>
+    <span style="font-size:0.75rem">ولاية الجزائر العاصمة · جميع الحقوق محفوظة © 2025</span>
+  </footer>
 </div>
 
-<!-- MAIN CONTENT -->
-<div class="main">
-  <div class="left-col">
-
-    <!-- ALERT: يُضاف هنا عند وجود تنبيه حقيقي -->
-    <div class="alert-banner" id="alertBanner" style="display:none"></div>
-
-    <!-- REPORT -->
-    <div class="report-section" id="report">
-      <h2>🚨 الإبلاغ عن مشكلة في الحي</h2>
-
+<!-- REPORT PAGE -->
+<div class="page" id="page-report">
+  <div class="page-header">
+    <button class="btn-back" onclick="showPage('home')">→ رجوع</button>
+    <div><h2>🚨 الإبلاغ عن مشكلة</h2><p>أبلغ عن مشكلة في حيك — تصل للمسؤولين فوراً</p></div>
+  </div>
+  <div class="page-content">
+    <div class="section-box">
+      <h2>📝 نموذج الإبلاغ</h2>
       <div style="margin-bottom:1rem">
-        <div style="font-size:0.82rem;font-weight:600;margin-bottom:8px;color:var(--text)">نوع المشكلة</div>
+        <div style="font-size:0.82rem;font-weight:600;margin-bottom:8px;">نوع المشكلة</div>
         <div class="category-pills">
           <div class="pill active" onclick="selectPill(this)">🛣️ طرقات</div>
           <div class="pill" onclick="selectPill(this)">💧 مياه</div>
@@ -1037,263 +172,219 @@
           <div class="pill" onclick="selectPill(this)">⚠️ أخرى</div>
         </div>
       </div>
-
       <div class="form-grid">
-        <div class="form-group">
-          <label>الاسم (اختياري)</label>
-          <input type="text" placeholder="اسمك">
-        </div>
-        <div class="form-group">
-          <label>رقم الهاتف</label>
-          <input type="tel" placeholder="05XX XXX XXX">
-        </div>
-        <div class="form-group">
-          <label>الحي / الشارع</label>
-          <input type="text" placeholder="مثال: حي بن عمر، شارع العربي">
-        </div>
-        <div class="form-group">
-          <label>درجة الخطورة</label>
-          <select>
-            <option>عادية</option>
-            <option>متوسطة</option>
-            <option>عاجلة 🔴</option>
-          </select>
-        </div>
-        <div class="form-group full">
-          <label>وصف المشكلة</label>
-          <textarea placeholder="اشرح المشكلة بالتفصيل... كلما كانت التفاصيل أكثر كلما كانت المعالجة أسرع"></textarea>
-        </div>
+        <div class="form-group"><label>الاسم (اختياري)</label><input type="text" id="rep-name" placeholder="اسمك"></div>
+        <div class="form-group"><label>رقم الهاتف</label><input type="tel" id="rep-phone" placeholder="05XX XXX XXX"></div>
+        <div class="form-group"><label>الحي / الشارع</label><input type="text" id="rep-location" placeholder="مثال: حي بن عمر، شارع العربي"></div>
+        <div class="form-group"><label>درجة الخطورة</label><select id="rep-severity"><option value="عادية">عادية</option><option value="متوسطة">متوسطة</option><option value="عاجلة">عاجلة 🔴</option></select></div>
+        <div class="form-group full"><label>وصف المشكلة</label><textarea id="rep-desc" placeholder="اشرح المشكلة بالتفصيل..."></textarea></div>
       </div>
-      <button class="btn-submit" onclick="submitReport()">
-        📤 إرسال البلاغ
-      </button>
+      <button class="btn-submit" onclick="submitReport()">📤 إرسال البلاغ</button>
     </div>
-
-    <!-- TRANSPORT -->
-    <div class="report-section" id="transport">
-      <h2>🚌 مواقيت النقل الحضري</h2>
-      <div style="margin-bottom:1rem">
-        <input type="text" placeholder="🔍 ابحث عن خط أو وجهة..." style="width:100%;border:1.5px solid var(--gray);border-radius:10px;padding:10px 14px;font-family:'Cairo',sans-serif;font-size:0.88rem;outline:none;direction:rtl;" oninput="filterBus(this.value)">
-      </div>
-      <div class="transport-list" id="busList"></div>
-    </div>
-
-  </div>
-
-  <!-- SIDEBAR -->
-  <div class="sidebar">
-
-    <!-- PHARMACY -->
-    <div class="pharmacy-card" id="pharmacy">
-      <h3>💊 صيدليات المناوبة الليلة</h3>
-      <div id="pharmacyList"></div>
-    </div>
-
-    <!-- SCHOOL ABSENCES -->
-    <div class="school-card" id="school">
-      <h3>🏫 غيابات الأساتذة اليوم</h3>
-      <div id="schoolList"></div>
-      <button class="btn-submit" style="width:100%;justify-content:center;margin-top:0.5rem;background:linear-gradient(135deg,var(--orange),#e8894a)" onclick="showToast('🔔 سيتم إشعارك بأي غياب جديد')">
-        🔔 تفعيل الإشعارات
-      </button>
-    </div>
-
-    <!-- ANNOUNCEMENTS -->
-    <div class="announce-card">
-      <h3 style="color:var(--green-dark)">📢 إعلانات البلدية</h3>
-      <div id="announceList"></div>
-    </div>
-
   </div>
 </div>
 
-<!-- FOOTER -->
-<footer>
-  <div style="font-size:1.5rem;margin-bottom:8px">🏛️</div>
-  <strong>بلدية بوزريعة الرقمية</strong><br>
-  <span style="font-size:0.75rem">ولاية الجزائر العاصمة · جميع الحقوق محفوظة © 2025</span><br>
-  <span style="font-size:0.73rem;margin-top:4px;display:block;opacity:0.6">مبادرة مجتمعية بالتعاون مع سكان البلدية</span>
-</footer>
+<!-- TRANSPORT PAGE -->
+<div class="page" id="page-transport">
+  <div class="page-header">
+    <button class="btn-back" onclick="showPage('home')">→ رجوع</button>
+    <div><h2>🚌 مواقيت النقل الحضري</h2><p>جميع خطوط الحافلات في بوزريعة</p></div>
+  </div>
+  <div class="page-content">
+    <div id="alertBannerTransport" style="display:none"></div>
+    <div class="section-box">
+      <h2>🔍 البحث عن خط</h2>
+      <input type="text" placeholder="ابحث عن خط أو وجهة..." style="width:100%;border:1.5px solid var(--gray);border-radius:10px;padding:10px 14px;font-family:'Cairo',sans-serif;font-size:0.88rem;outline:none;direction:rtl;background:var(--white);margin-bottom:1rem;" oninput="filterBus(this.value)">
+      <div class="transport-list" id="busList"><div class="loading">⏳ جارٍ التحميل...</div></div>
+    </div>
+  </div>
+</div>
 
-<!-- TOAST -->
-<div class="toast" id="toast">✅ تم إرسال بلاغك بنجاح!</div>
+<!-- PHARMACY PAGE -->
+<div class="page" id="page-pharmacy">
+  <div class="page-header">
+    <button class="btn-back" onclick="showPage('home')">→ رجوع</button>
+    <div><h2>💊 صيدليات المناوبة</h2><p>الصيدليات المفتوحة الليلة في بوزريعة</p></div>
+  </div>
+  <div class="page-content">
+    <div id="alertBannerPharmacy" style="display:none"></div>
+    <div class="section-box">
+      <h2>💊 الصيدليات المفتوحة</h2>
+      <div id="pharmacyList"><div class="loading">⏳ جارٍ التحميل...</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- SCHOOL PAGE -->
+<div class="page" id="page-school">
+  <div class="page-header">
+    <button class="btn-back" onclick="showPage('home')">→ رجوع</button>
+    <div><h2>🏫 المؤسسات التربوية</h2><p>غيابات الأساتذة وإشعارات المدارس</p></div>
+  </div>
+  <div class="page-content">
+    <div id="alertBannerSchool" style="display:none"></div>
+    <div class="section-box">
+      <h2>🏫 غيابات الأساتذة اليوم</h2>
+      <div id="schoolList"><div class="loading">⏳ جارٍ التحميل...</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ANNOUNCE PAGE -->
+<div class="page" id="page-announce">
+  <div class="page-header">
+    <button class="btn-back" onclick="showPage('home')">→ رجوع</button>
+    <div><h2>📢 إعلانات البلدية</h2><p>الأخبار والإشعارات الرسمية</p></div>
+  </div>
+  <div class="page-content">
+    <div class="section-box">
+      <h2 style="color:var(--green-dark)">📢 آخر الإعلانات</h2>
+      <div id="announceList"><div class="loading">⏳ جارٍ التحميل...</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast">✅ تم!</div>
 
 <script type="module">
-  function emptyState(icon, title, sub) {
-    return `<div style="text-align:center;padding:2rem 1rem;color:var(--muted)">
-      <div style="font-size:2rem;margin-bottom:0.6rem">${icon}</div>
-      <div style="font-weight:700;font-size:0.88rem;margin-bottom:4px">${title}</div>
-      <div style="font-size:0.76rem">${sub}</div>
-    </div>`;
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getDatabase, ref, get, push } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBY-HruRlXQ0iazUfCRwu4Fy_ubGqOicIg",
+  authDomain: "bouzareah-80151.firebaseapp.com",
+  databaseURL: "https://bouzareah-80151-default-rtdb.firebaseio.com",
+  projectId: "bouzareah-80151",
+  storageBucket: "bouzareah-80151.firebasestorage.app",
+  messagingSenderId: "353214800081",
+  appId: "1:353214800081:web:d6ce663a1042f36fb525f0"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
+async function fbGet(key) {
+  const snap = await get(ref(db, key));
+  return snap.exists() ? snap.val() : [];
+}
+
+function emptyState(icon, title, sub) {
+  return `<div style="text-align:center;padding:2rem 1rem;color:var(--muted)"><div style="font-size:2rem;margin-bottom:0.6rem">${icon}</div><div style="font-weight:700;font-size:0.88rem;margin-bottom:4px">${title}</div><div style="font-size:0.76rem">${sub}</div></div>`;
+}
+
+async function showAlertIn(elId) {
+  const snap = await get(ref(db, 'bz_alert'));
+  const a = snap.exists() ? snap.val() : null;
+  const el = document.getElementById(elId);
+  if (a && el) {
+    el.className = 'alert-banner';
+    el.innerHTML = `<div class="alert-icon">⚠️</div><div class="alert-text"><strong>${a.title}</strong><span>${a.sub}</span></div>`;
+    el.style.display = 'flex';
   }
+}
 
-  // ===== FIREBASE =====
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-  import { getDatabase, ref, get, onValue } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+window.showPage = function(pageId) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById(pageId).classList.add('active');
+  window.scrollTo(0, 0);
+  if (pageId === 'page-transport') loadTransport();
+  else if (pageId === 'page-pharmacy') loadPharmacy();
+  else if (pageId === 'page-school') loadSchool();
+  else if (pageId === 'page-announce') loadAnnounce();
+}
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyBY-HruRlXQ0iazUfCRwu4Fy_ubGqOicIg",
-    authDomain: "bouzareah-80151.firebaseapp.com",
-    databaseURL: "https://bouzareah-80151-default-rtdb.firebaseio.com",
-    projectId: "bouzareah-80151",
-    storageBucket: "bouzareah-80151.firebasestorage.app",
-    messagingSenderId: "353214800081",
-    appId: "1:353214800081:web:d6ce663a1042f36fb525f0"
-  };
+async function loadTransport() {
+  showAlertIn('alertBannerTransport');
+  const arr = await fbGet('bz_transport');
+  const list = Array.isArray(arr) ? arr : [];
+  const el = document.getElementById('busList');
+  if (!list.length) { el.innerHTML = emptyState('🚌','لا توجد بيانات بعد','سيتم إضافة خطوط النقل قريباً'); return; }
+  el.innerHTML = list.map(b => `<div class="transport-item"><div class="bus-num">${b.num}</div><div class="bus-info"><strong>${b.route}</strong><span>${b.via||''}</span></div><div class="bus-time">${b.freq||''}</div></div>`).join('');
+}
 
-  const app = initializeApp(firebaseConfig);
-  const db = getDatabase(app);
+async function loadPharmacy() {
+  showAlertIn('alertBannerPharmacy');
+  const arr = await fbGet('bz_pharmacy');
+  const list = Array.isArray(arr) ? arr : [];
+  const el = document.getElementById('pharmacyList');
+  if (!list.length) { el.innerHTML = emptyState('💊','لا توجد بيانات بعد','سيتم إضافة الصيدليات يومياً'); return; }
+  el.innerHTML = list.map(p => `<div class="pharmacy-item"><div><span class="pharmacy-name">${p.name}</span><div class="pharmacy-addr">📍 ${p.addr}</div></div><span class="${p.open?'open-badge':'closed-badge'}">${p.open?'مفتوحة ✓':(p.hours||'مغلقة')}</span></div>`).join('');
+}
 
-  async function fbGet(key) {
-    const snap = await get(ref(db, key));
-    return snap.exists() ? snap.val() : [];
-  }
+async function loadSchool() {
+  showAlertIn('alertBannerSchool');
+  const arr = await fbGet('bz_school');
+  const list = Array.isArray(arr) ? arr : [];
+  const el = document.getElementById('schoolList');
+  if (!list.length) { el.innerHTML = emptyState('🏫','لا توجد غيابات','ستظهر هنا إشعارات الغياب فور التبليغ'); return; }
+  el.innerHTML = list.map(a => `<div class="absence-item"><div class="absence-school">${a.school}</div><div class="absence-detail">⚠️ ${a.detail}</div><div class="absence-time">🕐 ${a.time||''}</div></div>`).join('');
+}
 
-  async function loadSiteData() {
-    // ALERT
-    const alertSnap = await get(ref(db, 'bz_alert'));
-    const alertData = alertSnap.exists() ? alertSnap.val() : null;
-    const alertEl = document.getElementById('alertBanner');
-    if (alertData && alertEl) {
-      alertEl.innerHTML = `<div class="alert-icon">⚠️</div><div class="alert-text"><strong>${alertData.title}</strong><span>${alertData.sub}</span></div>`;
-      alertEl.style.display = 'flex';
-    }
+async function loadAnnounce() {
+  const arr = await fbGet('bz_announce');
+  const list = Array.isArray(arr) ? arr : [];
+  const el = document.getElementById('announceList');
+  const colors = ['var(--red)','var(--green)','var(--blue)','var(--gold)','var(--orange)'];
+  if (!list.length) { el.innerHTML = emptyState('📢','لا توجد إعلانات','ستظهر هنا الإعلانات الرسمية'); return; }
+  el.innerHTML = list.map((a,i) => `<div class="announce-item"><div class="announce-dot" style="background:${colors[i%colors.length]}"></div><div class="announce-text"><strong>${a.title}</strong><span>${a.sub||''}</span></div></div>`).join('');
+}
 
-    // TRANSPORT
-    const buses = await fbGet('bz_transport');
-    const busArr = Array.isArray(buses) ? buses : [];
-    const busList = document.getElementById('busList');
-    if (busList) {
-      if (!busArr.length) {
-        busList.innerHTML = emptyState('🚌','لا توجد بيانات بعد','سيتم إضافة خطوط النقل قريباً');
-      } else {
-        busList.innerHTML = busArr.map(b => `
-          <div class="transport-item">
-            <div class="bus-num">${b.num}</div>
-            <div class="bus-info"><strong>${b.route}</strong><span>${b.via||''}</span></div>
-            <div class="bus-time">${b.freq||''}</div>
-          </div>`).join('');
-      }
-    }
+let selectedPill = '🛣️ طرقات';
 
-    // PHARMACY
-    const pharmacies = await fbGet('bz_pharmacy');
-    const pharmArr = Array.isArray(pharmacies) ? pharmacies : [];
-    const pharmList = document.getElementById('pharmacyList');
-    if (pharmList) {
-      if (!pharmArr.length) {
-        pharmList.innerHTML = emptyState('💊','لا توجد بيانات بعد','سيتم إضافة الصيدليات المناوبة يومياً');
-      } else {
-        pharmList.innerHTML = pharmArr.map(p => `
-          <div class="pharmacy-item">
-            <div><span class="pharmacy-name">${p.name}</span><div class="pharmacy-addr">📍 ${p.addr}</div></div>
-            <span class="${p.open ? 'open-badge':'closed-badge'}">${p.open ? 'مفتوحة ✓' : (p.hours||'مغلقة')}</span>
-          </div>`).join('');
-      }
-    }
+window.selectPill = function(el) {
+  document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
+  el.classList.add('active');
+  selectedPill = el.textContent.trim();
+}
 
-    // SCHOOL
-    const absences = await fbGet('bz_school');
-    const absArr = Array.isArray(absences) ? absences : [];
-    const schoolList = document.getElementById('schoolList');
-    if (schoolList) {
-      if (!absArr.length) {
-        schoolList.innerHTML = emptyState('🏫','لا توجد غيابات مسجلة','ستظهر هنا إشعارات الغياب فور التبليغ');
-      } else {
-        schoolList.innerHTML = absArr.map(a => `
-          <div class="absence-item">
-            <div class="absence-school">${a.school}</div>
-            <div class="absence-detail">⚠️ ${a.detail}</div>
-            <div class="absence-time">🕐 ${a.time||''}</div>
-          </div>`).join('');
-      }
-    }
-
-    // ANNOUNCEMENTS
-    const announces = await fbGet('bz_announce');
-    const annArr = Array.isArray(announces) ? announces : [];
-    const announceList = document.getElementById('announceList');
-    if (announceList) {
-      const colors = ['var(--red)','var(--green)','var(--blue)','var(--gold)','var(--orange)'];
-      if (!annArr.length) {
-        announceList.innerHTML = emptyState('📢','لا توجد إعلانات حالياً','ستظهر هنا الإعلانات الرسمية للبلدية');
-      } else {
-        announceList.innerHTML = annArr.map((a,i) => `
-          <div class="announce-item">
-            <div class="announce-dot" style="background:${colors[i%colors.length]}"></div>
-            <div class="announce-text"><strong>${a.title}</strong><span>${a.sub||''}</span></div>
-          </div>`).join('');
-      }
-    }
-  }
-
-  loadSiteData();
-
-  function switchTab(tab) {
-    document.querySelectorAll('.ws-tab').forEach((t, i) => {
-      t.classList.toggle('active', (tab === 'login' && i === 0) || (tab === 'register' && i === 1));
+window.submitReport = async function() {
+  const name = document.getElementById('rep-name').value.trim() || 'مجهول';
+  const phone = document.getElementById('rep-phone').value.trim() || 'غير محدد';
+  const location = document.getElementById('rep-location').value.trim();
+  const severity = document.getElementById('rep-severity').value;
+  const desc = document.getElementById('rep-desc').value.trim();
+  if (!location || !desc) return showToast('⚠️ يرجى ملء الحي والوصف');
+  try {
+    await push(ref(db, 'bz_reports'), {
+      name, phone, location, severity,
+      type: selectedPill, desc,
+      time: new Date().toLocaleString('ar-DZ'),
+      timestamp: Date.now(),
+      status: 'جديد'
     });
-    document.getElementById('panel-login').classList.toggle('active', tab === 'login');
-    document.getElementById('panel-register').classList.toggle('active', tab === 'register');
-  }
-  window.switchTab = switchTab;
-
-  function enterSite(msg) {
-    document.getElementById('welcomeScreen').classList.add('hidden');
-    setTimeout(() => {
-      document.getElementById('welcomeScreen').style.display = 'none';
-      showToast('👋 ' + msg);
-    }, 650);
-  }
-  window.enterSite = enterSite;
-
-  function scrollToSection(id) {
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }
-  window.scrollToSection = scrollToSection;
-
-  function selectPill(el) {
-    document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
-    el.classList.add('active');
-  }
-  window.selectPill = selectPill;
-
-  function submitReport() {
+    document.getElementById('rep-name').value = '';
+    document.getElementById('rep-phone').value = '';
+    document.getElementById('rep-location').value = '';
+    document.getElementById('rep-desc').value = '';
     showToast('✅ تم إرسال بلاغك! سيتم الرد خلال 48 ساعة');
+  } catch(e) {
+    showToast('❌ حدث خطأ، حاول مرة أخرى');
   }
-  window.submitReport = submitReport;
+}
 
-  function showToast(msg) {
-    const t = document.getElementById('toast');
-    t.textContent = msg;
-    t.classList.add('show');
-    setTimeout(() => t.classList.remove('show'), 3500);
-  }
-
-  function filterBus(val) {
-    const items = document.querySelectorAll('#busList .transport-item');
-    items.forEach(item => {
-      item.style.display = item.textContent.includes(val) ? 'flex' : 'none';
-    });
-  }
-  window.filterBus = filterBus;
-
-  // Animate cards on scroll
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.style.opacity = 1;
-        e.target.style.transform = 'translateY(0)';
-      }
-    });
-  }, { threshold: 0.1 });
-
-  document.querySelectorAll('.card, .report-section, .pharmacy-card, .school-card, .announce-card').forEach(el => {
-    el.style.opacity = 0;
-    el.style.transform = 'translateY(20px)';
-    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease, border-color 0.25s, box-shadow 0.25s';
-    observer.observe(el);
+window.filterBus = function(val) {
+  document.querySelectorAll('#busList .transport-item').forEach(item => {
+    item.style.display = item.textContent.includes(val) ? 'flex' : 'none';
   });
+}
+
+window.showToast = function(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3500);
+}
+
+// Load home alert
+get(ref(db, 'bz_alert')).then(snap => {
+  const a = snap.exists() ? snap.val() : null;
+  const el = document.getElementById('alertBannerHome');
+  if (a && el) {
+    el.className = 'alert-banner';
+    el.innerHTML = `<div class="alert-icon">⚠️</div><div class="alert-text"><strong>${a.title}</strong><span>${a.sub}</span></div>`;
+    el.style.display = 'flex';
+  }
+});
 </script>
 </body>
 </html>
