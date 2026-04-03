@@ -5,94 +5,395 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>بلدية بوزريعة | خدمات ذكية</title>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Tajawal:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-:root{--green:#006233;--green-light:#00874a;--green-dark:#004a25;--gold:#C9A84C;--gold-light:#e8c96a;--white:#f8faf8;--gray:#e8ede9;--text:#1a2e1e;--muted:#6b8070;--red:#c0392b;--blue:#1a6fa8;--orange:#d4752a;}
+:root{
+  --green:#006233;--green-light:#00874a;--green-dark:#004a25;
+  --gold:#C9A84C;--gold-light:#e8c96a;
+  --white:#f8faf8;--gray:#e8ede9;--text:#1a2e1e;--muted:#6b8070;
+  --red:#c0392b;--blue:#1a6fa8;--orange:#d4752a;
+  --shadow-sm:0 2px 8px rgba(0,0,0, 0.04);
+  --shadow-md:0 4px 16px rgba(0, 0, 0, 0.08);
+  --shadow-lg:0 8px 30px rgba(0, 0, 0, 0.12);
+  --radius-sm:8px;--radius-md:12px;--radius-lg:16px;--radius-xl:22px;
+}
 *{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'Cairo',sans-serif;background:var(--white);color:var(--text);overflow-x:hidden;}
-nav{position:sticky;top:0;z-index:100;background:rgba(0,98,51,0.97);backdrop-filter:blur(12px);display:flex;align-items:center;justify-content:space-between;padding:0 2rem;height:64px;box-shadow:0 2px 20px rgba(0,0,0,0.2);}
+html{scroll-behavior:smooth;}
+
+body{
+  font-family:'Cairo',sans-serif;
+  background:var(--white);
+  color:var(--text);
+  overflow-x:hidden;
+  opacity:0;
+  animation:fadeIn 0.5s ease forwards;
+}
+
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes slideInRight{from{opacity:0;transform:translateX(30px)}to{opacity:1;transform:translateX(0)}}
+@keyframes scaleIn{from{opacity:0;transform:scale(0.9)}to{opacity:1;transform:scale(1)}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.5}}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+
+/* NAV */
+nav{
+  position:sticky;top:0;z-index:100;
+  background:rgba(0,98,51,0.97);
+  backdrop-filter:blur(12px);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 2rem;height:64px;
+  box-shadow:0 2px 20px rgba(0,0, 0, 0.2);
+  animation:fadeDown 0.5s ease;
+}
 .nav-logo{display:flex;align-items:center;gap:10px;color:white;font-family:'Tajawal',sans-serif;font-weight:800;font-size:1.1rem;}
-.nav-logo .emblem{width:36px;height:36px;background:linear-gradient(135deg,var(--gold),var(--gold-light));border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1rem;}
+.nav-logo .emblem{
+  width:36px;height:36px;
+  background:linear-gradient(135deg,var(--gold),var(--gold-light));
+  border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1rem;
+  animation:float 3s ease-in-out infinite;
+}
 .nav-links{display:flex;gap:0.3rem;list-style:none;}
-.nav-links a{color:rgba(255,255,255,0.85);text-decoration:none;font-size:0.82rem;font-weight:600;padding:6px 12px;border-radius:8px;transition:all 0.2s;cursor:pointer;}
+.nav-links a{
+  color:rgba(255,255,255,0.85);
+  text-decoration:none;font-size:0.82rem;font-weight:600;
+  padding:6px 12px;border-radius:8px;
+  transition:all 0.25s;
+  cursor:pointer;
+}
 .nav-links a:hover{background:rgba(255,255,255,0.15);color:white;}
-.page{display:none;}.page.active{display:block;}
-.hero{background:linear-gradient(135deg,var(--green-dark) 0%,var(--green) 60%,var(--green-light) 100%);padding:5rem 2rem 4rem;position:relative;overflow:hidden;}
+.hamburger{display:none;background:none;border:none;cursor:pointer;padding:8px;}
+.hamburger span{display:block;width:24px;height:2px;background:white;margin:5px 0;transition:0.3s;}
+
+/* PAGES */
+.page{display:none;min-height:100vh;}
+.page.active{display:block;animation:fadeUp 0.4s ease;}
+
+/* HERO */
+.hero{
+  background:linear-gradient(135deg,var(--green-dark) 0%,var(--green) 60%,var(--green-light) 100%);
+  padding:5rem 2rem 4rem;
+  position:relative;
+  overflow:hidden;
+}
+.hero::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2v-4h4v-2h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  animation:float 20s linear infinite;
+}
 .hero-content{max-width:900px;margin:0 auto;text-align:center;position:relative;z-index:1;}
-.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(201,168,76,0.2);border:1px solid rgba(201,168,76,0.4);color:var(--gold-light);padding:6px 16px;border-radius:50px;font-size:0.82rem;font-weight:600;margin-bottom:1.5rem;}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(201,168,76,0.2);
+  border:1px solid rgba(201,168,76,0.4);
+  color:var(--gold-light);
+  padding:6px 16px;border-radius:50px;
+  font-size:0.82rem;font-weight:600;
+  margin-bottom:1.5rem;
+  animation:bounce 2s ease-in-out infinite;
+}
 .hero h1{font-family:'Tajawal',sans-serif;font-size:clamp(2rem,5vw,3.2rem);font-weight:900;color:white;line-height:1.2;margin-bottom:1rem;}
 .hero h1 span{color:var(--gold-light);}
 .hero p{color:rgba(255,255,255,0.75);font-size:1rem;max-width:500px;margin:0 auto 2.5rem;line-height:1.7;}
 .hero-stats{display:flex;justify-content:center;gap:2.5rem;flex-wrap:wrap;}
-.stat{text-align:center;color:white;}
+.stat{text-align:center;color:white;animation:fadeUp 0.5s ease backwards;}
+.stat:nth-child(1){animation-delay:0.1s}
+.stat:nth-child(2){animation-delay:0.2s}
+.stat:nth-child(3){animation-delay:0.3s}
+.stat:nth-child(4){animation-delay:0.4s}
 .stat-num{font-family:'Tajawal',sans-serif;font-size:1.8rem;font-weight:800;color:var(--gold-light);display:block;}
 .stat-label{font-size:0.78rem;color:rgba(255,255,255,0.65);font-weight:500;}
+
+/* ALERT BANNER */
+.alert-banner{
+  background:linear-gradient(135deg,#c0392b,#e74c3c);
+  color:white;
+  padding:1rem 1.5rem;
+  border-radius:14px;
+  display:flex;
+  align-items:center;gap:12px;
+  margin-bottom:1.5rem;
+  animation:scaleIn 0.4s ease;
+}
+.alert-banner.hidden{display:none;}
+.alert-icon{font-size:1.4rem;}
+.alert-text strong{font-size:0.9rem;display:block;}
+.alert-text span{font-size:0.78rem;opacity:0.85;}
+
+/* QUICK ACCESS */
 .quick-access{padding:2.5rem 2rem;max-width:1100px;margin:0 auto;}
 .section-title{font-family:'Tajawal',sans-serif;font-size:1.4rem;font-weight:800;color:var(--green-dark);margin-bottom:1.5rem;display:flex;align-items:center;gap:10px;}
 .section-title::after{content:'';flex:1;height:2px;background:linear-gradient(to left,transparent,var(--green),transparent);opacity:0.3;}
+
 .cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem;}
-.card{background:white;border-radius:16px;padding:1.5rem;border:1px solid var(--gray);cursor:pointer;transition:all 0.25s;position:relative;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.04);}
-.card::before{content:'';position:absolute;top:0;right:0;width:70px;height:70px;border-radius:0 0 0 70px;opacity:0.08;transition:all 0.3s;}
-.card:hover{transform:translateY(-4px);box-shadow:0 12px 30px rgba(0,0,0,0.1);border-color:transparent;}
+.card{
+  background:white;
+  border-radius:16px;
+  padding:1.5rem;
+  border:1px solid var(--gray);
+  cursor:pointer;
+  transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position:relative;
+  overflow:hidden;
+  box-shadow:var(--shadow-sm);
+  animation:fadeUp 0.5s ease backwards;
+}
+.card:nth-child(1){animation-delay:0.05s}
+.card:nth-child(2){animation-delay:0.1s}
+.card:nth-child(3){animation-delay:0.15s}
+.card:nth-child(4){animation-delay:0.2s}
+.card:nth-child(5){animation-delay:0.25s}
+.card:nth-child(6){animation-delay:0.3s}
+
+.card::before{
+  content:'';
+  position:absolute;
+  top:0;right:0;
+  width:70px;height:70px;
+  border-radius:0 0 0 70px;
+  opacity:0.08;
+  transition:all 0.3s;
+}
+.card:hover{
+  transform:translateY(-6px) scale(1.02);
+  box-shadow:var(--shadow-lg);
+  border-color:transparent;
+}
+.card:hover::before{opacity:0.15;transform:scale(1.2);}
+.card:active{transform:scale(0.98);}
+
 .card-icon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin-bottom:1rem;}
 .card h3{font-size:0.95rem;font-weight:700;margin-bottom:0.4rem;color:var(--text);}
 .card p{font-size:0.78rem;color:var(--muted);line-height:1.5;}
-.card-arrow{position:absolute;bottom:1.2rem;left:1.2rem;font-size:1rem;opacity:0;transform:translateX(6px);transition:all 0.2s;}
+.card-arrow{
+  position:absolute;
+  bottom:1.2rem;left:1.2rem;
+  font-size:1rem;
+  opacity:0;
+  transform:translateX(-10px);
+  transition:all 0.3s;
+}
 .card:hover .card-arrow{opacity:1;transform:translateX(0);}
+
 .card-red .card-icon{background:rgba(192,57,43,0.1);}.card-red::before{background:var(--red);}
 .card-green .card-icon{background:rgba(0,98,51,0.1);}.card-green::before{background:var(--green);}
 .card-blue .card-icon{background:rgba(26,111,168,0.1);}.card-blue::before{background:var(--blue);}
-.card-orange .card-icon{background:rgba(212,117,42,0.1);}.card-orange::before{background:var(--orange);}
 .card-gold .card-icon{background:rgba(201,168,76,0.12);}.card-gold::before{background:var(--gold);}
-.page-header{background:linear-gradient(135deg,var(--green-dark),var(--green));padding:2rem;display:flex;align-items:center;gap:1rem;}
-.btn-back{background:rgba(255,255,255,0.15);color:white;border:1px solid rgba(255,255,255,0.25);border-radius:10px;padding:8px 16px;font-family:'Cairo',sans-serif;font-size:0.85rem;font-weight:700;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;gap:6px;white-space:nowrap;}
-.btn-back:hover{background:rgba(255,255,255,0.25);}
+.card-orange .card-icon{background:rgba(212,117,42,0.1);}.card-orange::before{background:var(--orange);}
+
+/* PAGE HEADER */
+.page-header{
+  background:linear-gradient(135deg,var(--green-dark),var(--green));
+  padding:2rem;
+  display:flex;align-items:center;gap:1rem;
+  animation:fadeDown 0.4s ease;
+}
+.btn-back{
+  background:rgba(255,255,255,0.15);
+  color:white;border:1px solid rgba(255,255,255,0.25);
+  border-radius:10px;padding:8px 16px;
+  font-family:'Cairo',sans-serif;font-size:0.85rem;font-weight:700;
+  cursor:pointer;transition:all 0.25s;
+  display:flex;align-items:center;gap:6px;white-space:nowrap;
+}
+.btn-back:hover{background:rgba(255,255,255,0.25);transform:translateX(-3px);}
 .page-header h2{font-family:'Tajawal',sans-serif;font-size:1.3rem;font-weight:900;color:white;}
 .page-header p{font-size:0.8rem;color:rgba(255,255,255,0.65);margin-top:2px;}
-.page-content{max-width:900px;margin:0 auto;padding:2rem;}
-.section-box{background:white;border-radius:20px;padding:2rem;border:1px solid var(--gray);box-shadow:0 2px 12px rgba(0,0,0,0.04);margin-bottom:1.5rem;}
-.section-box h2{font-family:'Tajawal',sans-serif;font-size:1.1rem;font-weight:800;color:var(--green-dark);margin-bottom:1.2rem;display:flex;align-items:center;gap:8px;padding-bottom:0.8rem;border-bottom:1px solid var(--gray);}
+
+/* PAGE CONTENT */
+.page-content{max-width:900px;margin:0 auto;padding:2rem;animation:fadeUp 0.4s ease 0.1s backwards;}
+
+.section-box{
+  background:white;
+  border-radius:20px;
+  padding:2rem;
+  border:1px solid var(--gray);
+  box-shadow:var(--shadow-sm);
+  margin-bottom:1.5rem;
+  animation:fadeUp 0.5s ease backwards;
+}
+.section-box:nth-child(1){animation-delay:0.1s}
+.section-box:nth-child(2){animation-delay:0.2s}
+
+.section-box h2{
+  font-family:'Tajawal',sans-serif;
+  font-size:1.1rem;font-weight:800;
+  color:var(--green-dark);
+  margin-bottom:1.2rem;
+  display:flex;align-items:center;gap:8px;
+  padding-bottom:0.8rem;
+  border-bottom:1px solid var(--gray);
+}
+
+/* FORMS */
 .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
 .form-group{display:flex;flex-direction:column;gap:6px;}
 .form-group.full{grid-column:1/-1;}
 .form-group label{font-size:0.82rem;font-weight:600;color:var(--text);}
-.form-group input,.form-group select,.form-group textarea{border:1.5px solid var(--gray);border-radius:10px;padding:10px 14px;font-family:'Cairo',sans-serif;font-size:0.88rem;color:var(--text);background:var(--white);transition:border-color 0.2s;outline:none;direction:rtl;}
-.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--green);background:white;}
+.form-group input,.form-group select,.form-group textarea{
+  border:1.5px solid var(--gray);
+  border-radius:10px;padding:10px 14px;
+  font-family:'Cairo',sans-serif;font-size:0.88rem;color:var(--text);
+  background:var(--white);
+  transition:all 0.25s;
+  outline:none;direction:rtl;
+}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{
+  border-color:var(--green);
+  background:white;
+  box-shadow:0 0 0 3px rgba(0,98,51,0.1);
+  transform:translateY(-2px);
+}
 .form-group textarea{resize:vertical;min-height:90px;}
+
+/* CATEGORY PILLS */
 .category-pills{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:1rem;}
-.pill{padding:6px 14px;border-radius:50px;border:1.5px solid var(--gray);font-size:0.8rem;font-weight:600;cursor:pointer;transition:all 0.2s;background:white;color:var(--muted);}
-.pill:hover,.pill.active{background:var(--green);border-color:var(--green);color:white;}
-.btn-submit{background:linear-gradient(135deg,var(--green),var(--green-light));color:white;border:none;padding:12px 28px;border-radius:12px;font-family:'Cairo',sans-serif;font-size:0.92rem;font-weight:700;cursor:pointer;transition:all 0.25s;display:flex;align-items:center;gap:8px;box-shadow:0 4px 15px rgba(0,98,51,0.3);margin-top:1rem;}
-.btn-submit:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(0,98,51,0.4);}
+.pill{
+  padding:6px 14px;
+  border-radius:50px;
+  border:1.5px solid var(--gray);
+  font-size:0.8rem;font-weight:600;
+  cursor:pointer;
+  transition:all 0.25s;
+  background:white;color:var(--muted);
+}
+.pill:hover,.pill.active{
+  background:var(--green);
+  border-color:var(--green);
+  color:white;
+  transform:scale(1.05);
+}
+
+/* BUTTONS */
+.btn-submit{
+  background:linear-gradient(135deg,var(--green),var(--green-light));
+  color:white;border:none;padding:12px 28px;
+  border-radius:12px;
+  font-family:'Cairo',sans-serif;font-size:0.92rem;font-weight:700;
+  cursor:pointer;transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display:flex;align-items:center;gap:8px;
+  box-shadow:0 4px 15px rgba(0,98,51,0.3);
+  margin-top:1rem;
+}
+.btn-submit:hover{
+  transform:translateY(-3px);
+  box-shadow:0 8px 25px rgba(0,98,51,0.4);
+}
+.btn-submit:active{transform:scale(0.98);}
+.btn-submit:disabled{opacity:0.6;cursor:not-allowed;}
+
+/* TRANSPORT LIST */
 .transport-list{display:flex;flex-direction:column;gap:0.7rem;}
-.transport-item{display:flex;align-items:center;gap:1rem;background:var(--white);border:1.5px solid var(--gray);border-radius:12px;padding:1rem 1.2rem;transition:all 0.2s;cursor:pointer;}
-.transport-item:hover{border-color:var(--blue);background:white;transform:translateX(-4px);}
-.bus-num{min-width:44px;height:44px;background:linear-gradient(135deg,var(--blue),#2a8fd4);color:white;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1rem;box-shadow:0 2px 8px rgba(26,111,168,0.3);}
-.bus-info{flex:1;}.bus-info strong{font-size:0.88rem;display:block;}.bus-info span{font-size:0.76rem;color:var(--muted);}
-.bus-time{font-size:0.78rem;color:var(--green);font-weight:700;background:rgba(0,98,51,0.08);padding:4px 10px;border-radius:8px;}
-.pharmacy-item{display:flex;justify-content:space-between;align-items:flex-start;padding:0.9rem 0;border-bottom:1px solid var(--gray);}
+.transport-item{
+  display:flex;align-items:center;gap:1rem;
+  background:var(--white);
+  border:1.5px solid var(--gray);
+  border-radius:12px;
+  padding:1rem 1.2rem;
+  transition:all 0.3s;
+  cursor:pointer;
+  animation:fadeUp 0.4s ease backwards;
+}
+.transport-item:nth-child(odd){animation-delay:0.05s}
+.transport-item:nth-child(even){animation-delay:0.1s}
+
+.transport-item:hover{
+  border-color:var(--blue);
+  background:white;
+  transform:translateX(-6px);
+  box-shadow:var(--shadow-md);
+}
+.bus-num{
+  min-width:44px;height:44px;
+  background:linear-gradient(135deg,var(--blue),#2a8fd4);
+  color:white;
+  border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  font-weight:800;font-size:1rem;
+  box-shadow:0 2px 8px rgba(26,111,168,0.3);
+}
+.bus-info{flex:1;}
+.bus-info strong{font-size:0.88rem;display:block;}
+.bus-info span{font-size:0.76rem;color:var(--muted);}
+.bus-time{
+  font-size:0.78rem;color:var(--green);
+  font-weight:700;
+  background:rgba(0,98,51,0.08);
+  padding:4px 10px;
+  border-radius:8px;
+}
+
+/* PHARMACY */
+.pharmacy-item{
+  display:flex;justify-content:space-between;align-items:flex-start;
+  padding:0.9rem 0;
+  border-bottom:1px solid var(--gray);
+  animation:fadeUp 0.3s ease backwards;
+}
+.pharmacy-item:nth-child(1){animation-delay:0s}
+.pharmacy-item:nth-child(2){animation-delay:0.05s}
+.pharmacy-item:nth-child(3){animation-delay:0.1s}
 .pharmacy-item:last-child{border-bottom:none;}
 .pharmacy-name{font-size:0.88rem;font-weight:700;color:var(--text);display:block;}
 .pharmacy-addr{font-size:0.74rem;color:var(--muted);margin-top:2px;}
-.open-badge{background:rgba(0,98,51,0.1);color:var(--green);font-size:0.72rem;font-weight:700;padding:3px 10px;border-radius:20px;white-space:nowrap;}
-.closed-badge{background:rgba(192,57,43,0.08);color:var(--red);font-size:0.72rem;font-weight:700;padding:3px 10px;border-radius:20px;}
-.announce-item{display:flex;gap:0.8rem;padding:0.8rem 0;border-bottom:1px solid var(--gray);cursor:pointer;transition:padding 0.2s;}
-.announce-item:hover{padding-right:6px;}.announce-item:last-child{border-bottom:none;}
+.open-badge{
+  background:rgba(0,98,51,0.1);
+  color:var(--green);
+  font-size:0.72rem;font-weight:700;
+  padding:3px 10px;border-radius:20px;
+  white-space:nowrap;
+}
+.closed-badge{
+  background:rgba(192,57,43,0.08);
+  color:var(--red);
+  font-size:0.72rem;font-weight:700;
+  padding:3px 10px;border-radius:20px;
+}
+
+/* ANNOUNCEMENTS */
+.announce-item{
+  display:flex;gap:0.8rem;
+  padding:0.8rem 0;
+  border-bottom:1px solid var(--gray);
+  cursor:pointer;
+  transition:all 0.25s;
+  animation:fadeUp 0.3s ease backwards;
+}
+.announce-item:hover{padding-right:8px;}
+.announce-item:last-child{border-bottom:none;}
 .announce-dot{width:8px;height:8px;border-radius:50%;margin-top:6px;flex-shrink:0;}
 .announce-text strong{font-size:0.84rem;display:block;margin-bottom:2px;color:var(--text);}
 .announce-text span{font-size:0.73rem;color:var(--muted);}
-.alert-banner{background:linear-gradient(135deg,#c0392b,#e74c3c);color:white;padding:1rem 1.5rem;border-radius:14px;display:flex;align-items:center;gap:12px;margin-bottom:1.5rem;}
-.alert-icon{font-size:1.4rem;}
-.alert-text strong{font-size:0.9rem;display:block;}
-.alert-text span{font-size:0.78rem;opacity:0.85;}
-footer{background:var(--green-dark);color:rgba(255,255,255,0.7);text-align:center;padding:2rem;font-size:0.82rem;}
-footer strong{color:var(--gold-light);}
-.toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(100px);background:var(--green-dark);color:white;padding:12px 24px;border-radius:50px;font-size:0.88rem;font-weight:600;z-index:999;transition:transform 0.4s ease;box-shadow:0 8px 30px rgba(0,0,0,0.3);}
-.toast.show{transform:translateX(-50%) translateY(0);}
-.loading{text-align:center;padding:2rem;color:var(--muted);font-size:0.88rem;}
-@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-.job-item{background:white;border:1.5px solid var(--gray);border-radius:14px;padding:1.2rem 1.4rem;margin-bottom:0.8rem;transition:all 0.2s;cursor:default;}
-.job-item:hover{border-color:rgba(0,98,51,0.3);box-shadow:0 4px 16px rgba(0,98,51,0.08);}
+
+/* JOBS */
+.job-item{
+  background:white;
+  border:1.5px solid var(--gray);
+  border-radius:14px;
+  padding:1.2rem 1.4rem;
+  margin-bottom:0.8rem;
+  transition:all 0.25s;
+  cursor:default;
+  animation:fadeUp 0.4s ease backwards;
+}
+.job-item:nth-child(1){animation-delay:0.05s}
+.job-item:nth-child(2){animation-delay:0.1s}
+.job-item:nth-child(3){animation-delay:0.15s}
+
+.job-item:hover{
+  border-color:rgba(0,98,51,0.3);
+  box-shadow:0 4px 16px rgba(0,98,51,0.08);
+  transform:translateX(4px);
+}
 .job-title{font-family:'Tajawal',sans-serif;font-size:1rem;font-weight:800;color:var(--green-dark);margin-bottom:4px;}
 .job-meta{display:flex;gap:12px;flex-wrap:wrap;font-size:0.76rem;color:var(--muted);margin-bottom:8px;}
 .job-meta span{display:flex;align-items:center;gap:4px;}
@@ -101,12 +402,126 @@ footer strong{color:var(--gold-light);}
 .job-badge{display:inline-block;font-size:0.72rem;font-weight:700;padding:3px 10px;border-radius:20px;margin-bottom:8px;}
 .badge-admin{background:rgba(0,98,51,0.1);color:var(--green);}
 .badge-user{background:rgba(201,168,76,0.15);color:#8a6f20;}
-.seeker-item{background:white;border:1.5px solid var(--gray);border-radius:14px;padding:1.1rem 1.3rem;margin-bottom:0.7rem;transition:all 0.2s;}
+
+/* SEEKERS */
+.seeker-item{
+  background:white;
+  border:1.5px solid var(--gray);
+  border-radius:14px;
+  padding:1.1rem 1.3rem;
+  margin-bottom:0.7rem;
+  transition:all 0.25s;
+  animation:fadeUp 0.3s ease backwards;
+}
 .seeker-item:hover{border-color:rgba(0,98,51,0.25);}
 .seeker-name{font-weight:800;font-size:0.9rem;color:var(--text);margin-bottom:4px;}
 .seeker-info{font-size:0.76rem;color:var(--muted);display:flex;gap:12px;flex-wrap:wrap;margin-bottom:6px;}
 .seeker-skills{font-size:0.78rem;color:var(--green-dark);background:rgba(0,98,51,0.06);padding:5px 10px;border-radius:8px;line-height:1.6;}
-@media(max-width:768px){.form-grid{grid-template-columns:1fr;}.nav-links{display:none;}.hero{padding:3rem 1.5rem 2.5rem;}.hero-stats{gap:1.5rem;}.quick-access,.page-content{padding:1.2rem;}.cards-grid{grid-template-columns:1fr 1fr;}}
+
+/* TOAST */
+.toast{
+  position:fixed;
+  bottom:2rem;
+  left:50%;
+  transform:translateX(-50%) translateY(100px);
+  background:var(--green-dark);
+  color:white;
+  padding:12px 24px;
+  border-radius:50px;
+  font-size:0.88rem;font-weight:600;
+  z-index:999;
+  transition:all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow:0 8px 30px rgba(0, 0, 0, 0.3);
+  opacity:0;pointer-events:none;
+}
+.toast.show{
+  transform:translateX(-50%) translateY(0);
+  opacity:1;
+  pointer-events:auto;
+}
+.toast.error{background:var(--red);}
+.toast.warning{background:var(--orange);}
+
+/* LOADING */
+.loading{text-align:center;padding:2rem;color:var(--muted);font-size:0.88rem;}
+.loading::after{
+  content:'';
+  display:inline-block;
+  width:16px;height:16px;
+  border:2px solid var(--gray);
+  border-top-color:var(--green);
+  border-radius:50%;
+  margin-right:8px;
+  animation:spin 0.8s linear infinite;
+  vertical-align:middle;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.empty-state{text-align:center;padding:2rem 1rem;color:var(--muted);}
+.empty-state div:first-child{font-size:2rem;margin-bottom:0.6rem;}
+.empty-state strong{display:block;font-size:0.88rem;margin-bottom:4px;}
+.empty-state span{font-size:0.76rem;}
+
+/* FOOTER */
+footer{background:var(--green-dark);color:rgba(255,255,255,0.7);text-align:center;padding:2rem;font-size:0.82rem;}
+footer strong{color:var(--gold-light);}
+
+/* SEARCH */
+.search-box{
+  position:relative;
+  margin-bottom:1rem;
+}
+.search-box input{
+  width:100%;
+  border:1.5px solid var(--gray);
+  border-radius:10px;
+  padding:10px 14px 10px 40px;
+  font-family:'Cairo',sans-serif;font-size:0.88rem;
+  outline:none;direction:rtl;
+  background:var(--white);
+  transition:all 0.25s;
+}
+.search-box input:focus{
+  border-color:var(--green);
+  box-shadow:0 0 0 3px rgba(0,98,51,0.1);
+}
+.search-box::before{
+  content:'🔍';
+  position:absolute;
+  left:12px;top:50%;
+  transform:translateY(-50%);
+  font-size:1rem;
+}
+.search-box .clear-search{
+  position:absolute;left:12px;top:50%;
+  transform:translateY(-50%);
+  background:none;border:none;font-size:1rem;cursor:pointer;padding:4px;
+  display:none;
+}
+.search-box .clear-search.show{display:block;}
+
+/* SPINNER */
+.spinner{
+  width:40px;height:40px;
+  border:3px solid var(--gray);
+  border-top-color:var(--green);
+  border-radius:50%;
+  animation:spin 0.8s linear infinite;
+  margin:1rem auto;
+}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .form-grid{grid-template-columns:1fr}
+  .nav-links{display:none}
+  .hamburger{display:block}
+  .hero{padding:3rem 1.5rem 2.5rem}
+  .hero-stats{gap:1.5rem}
+  .quick-access,.page-content{padding:1.2rem}
+  .cards-grid{grid-template-columns:1fr 1fr}
+  .page-header{flex-direction:column;align-items:flex-start;gap:1rem}
+  .btn-back{width:100%;justify-content:center}
+}
 </style>
 </head>
 <body>
@@ -128,9 +543,12 @@ footer strong{color:var(--gold-light);}
     <li><a onclick="showPage('page-jobs')">🧾 فرص العمل</a></li>
     <li><a onclick="showPage('page-seekers')">💼 سجّل سيرتك</a></li>
   </ul>
+  <button class="hamburger" onclick="toggleMobileMenu()">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
-<!-- HOME -->
+<!-- HOME PAGE -->
 <div class="page active" id="home">
   <div class="hero">
     <div class="hero-content">
@@ -145,16 +563,48 @@ footer strong{color:var(--gold-light);}
       </div>
     </div>
   </div>
-  <div id="alertBannerHome" style="display:none;margin:1.5rem 2rem 0;max-width:1060px;margin-left:auto;margin-right:auto;"></div>
+  
+  <div id="alertBannerHome" class="alert-banner hidden" style="margin:1.5rem 2rem 0;max-width:1060px;margin-left:auto;margin-right:auto"></div>
+  
   <div class="quick-access">
     <div class="section-title">⚡ وصول سريع</div>
     <div class="cards-grid">
-      <div class="card card-red" onclick="showPage('page-report')"><div class="card-icon">🚨</div><h3>الإبلاغ عن مشكلة</h3><p>طرقات، مياه، إنارة، نظافة</p><div class="card-arrow">←</div></div>
-      <div class="card card-blue" onclick="showPage('page-transport')"><div class="card-icon">🚌</div><h3>مواقيت النقل</h3><p>الحافلات والميتر والطرامواي</p><div class="card-arrow">←</div></div>
-      <div class="card card-green" onclick="showPage('page-pharmacy')"><div class="card-icon">💊</div><h3>صيدليات المناوبة</h3><p>الأقرب إليك الآن</p><div class="card-arrow">←</div></div>
-      <div class="card card-gold" onclick="showPage('page-announce')"><div class="card-icon">📢</div><h3>إعلانات البلدية</h3><p>أخبار وإشعارات رسمية</p><div class="card-arrow">←</div></div>
-      <div class="card card-green" onclick="showPage('page-jobs')"><div class="card-icon">🧾</div><h3>فرص العمل</h3><p>وظائف متاحة في بوزريعة</p><div class="card-arrow">←</div></div>
-      <div class="card card-blue" onclick="showPage('page-seekers')"><div class="card-icon">💼</div><h3>سجّل سيرتك الذاتية</h3><p>ابحث عن عمل وسجّل بياناتك</p><div class="card-arrow">←</div></div>
+      <div class="card card-red" onclick="showPage('page-report')">
+        <div class="card-icon">🚨</div>
+        <h3>الإبلاغ عن مشكلة</h3>
+        <p>طرقات، مياه، إنارة، نظافة</p>
+        <div class="card-arrow">←</div>
+      </div>
+      <div class="card card-blue" onclick="showPage('page-transport')">
+        <div class="card-icon">🚌</div>
+        <h3>مواقيت النقل</h3>
+        <p>الحافلات والم��تر والطرامواي</p>
+        <div class="card-arrow">←</div>
+      </div>
+      <div class="card card-green" onclick="showPage('page-pharmacy')">
+        <div class="card-icon">💊</div>
+        <h3>صيدليات المناوبة</h3>
+        <p>الأقرب إليك الآن</p>
+        <div class="card-arrow">←</div>
+      </div>
+      <div class="card card-gold" onclick="showPage('page-announce')">
+        <div class="card-icon">📢</div>
+        <h3>إعلانات البلدية</h3>
+        <p>أخبار وإشعارات رسمية</p>
+        <div class="card-arrow">←</div>
+      </div>
+      <div class="card card-green" onclick="showPage('page-jobs')">
+        <div class="card-icon">🧾</div>
+        <h3>فرص العمل</h3>
+        <p>وظائف متاحة في بوزريعة</p>
+        <div class="card-arrow">←</div>
+      </div>
+      <div class="card card-blue" onclick="showPage('page-seekers')">
+        <div class="card-icon">💼</div>
+        <h3>سجّل سيرتك الذاتية</h3>
+        <p>ابحث عن عمل وسجّل بياناتك</p>
+        <div class="card-arrow">←</div>
+      </div>
     </div>
   </div>
   <footer>
@@ -174,25 +624,31 @@ footer strong{color:var(--gold-light);}
     <div class="section-box">
       <h2>📝 نموذج الإبلاغ</h2>
       <div style="margin-bottom:1rem">
-        <div style="font-size:0.82rem;font-weight:600;margin-bottom:8px;">نوع المشكلة</div>
-        <div class="category-pills">
-          <div class="pill active" onclick="selectPill(this)">🛣️ طرقات</div>
-          <div class="pill" onclick="selectPill(this)">💧 مياه</div>
-          <div class="pill" onclick="selectPill(this)">💡 إنارة</div>
-          <div class="pill" onclick="selectPill(this)">🗑️ نظافة</div>
-          <div class="pill" onclick="selectPill(this)">🚔 أمن</div>
-          <div class="pill" onclick="selectPill(this)">🏗️ بنية تحتية</div>
-          <div class="pill" onclick="selectPill(this)">⚠️ أخرى</div>
+        <div style="font-size:0.82rem;font-weight:600;margin-bottom:8px">نوع المشكلة</div>
+        <div class="category-pills" id="categoryPills">
+          <div class="pill active" data-value="🛣️ طرقات" onclick="selectPill(this)">🛣️ طرقات</div>
+          <div class="pill" data-value="💧 مياه" onclick="selectPill(this)">💧 مياه</div>
+          <div class="pill" data-value="💡 إنارة" onclick="selectPill(this)">💡 إنارة</div>
+          <div class="pill" data-value="🗑️ نظافة" onclick="selectPill(this)">🗑️ نظافة</div>
+          <div class="pill" data-value="🚔 أمن" onclick="selectPill(this)">🚔 أمن</div>
+          <div class="pill" data-value="🏗️ بنية تحتية" onclick="selectPill(this)">🏗️ بنية تحتية</div>
+          <div class="pill" data-value="⚠️ أخرى" onclick="selectPill(this)">⚠️ أخرى</div>
         </div>
       </div>
       <div class="form-grid">
         <div class="form-group"><label>الاسم (اختياري)</label><input type="text" id="rep-name" placeholder="اسمك"></div>
         <div class="form-group"><label>رقم الهاتف</label><input type="tel" id="rep-phone" placeholder="05XX XXX XXX"></div>
         <div class="form-group"><label>الحي / الشارع</label><input type="text" id="rep-location" placeholder="مثال: حي بن عمر، شارع العربي"></div>
-        <div class="form-group"><label>درجة الخطورة</label><select id="rep-severity"><option value="عادية">عادية</option><option value="متوسطة">متوسطة</option><option value="عاجلة">عاجلة 🔴</option></select></div>
+        <div class="form-group"><label>درجة الخطورة</label>
+          <select id="rep-severity">
+            <option value="عادية">عادية</option>
+            <option value="متوسطة">متوسطة</option>
+            <option value="عاجلة">عاجلة 🔴</option>
+          </select>
+        </div>
         <div class="form-group full"><label>وصف المشكلة</label><textarea id="rep-desc" placeholder="اشرح المشكلة بالتفصيل..."></textarea></div>
       </div>
-      <button class="btn-submit" onclick="submitReport()">📤 إرسال البلاغ</button>
+      <button class="btn-submit" id="btn-submit-report" onclick="submitReport()">📤 إرسال البلاغ</button>
     </div>
   </div>
 </div>
@@ -204,11 +660,16 @@ footer strong{color:var(--gold-light);}
     <div><h2>🚌 مواقيت النقل الحضري</h2><p>جميع خطوط الحافلات في بوزريعة</p></div>
   </div>
   <div class="page-content">
-    <div id="alertBannerTransport" style="display:none"></div>
+    <div id="alertBannerTransport" class="alert-banner hidden"></div>
     <div class="section-box">
       <h2>🔍 البحث عن خط</h2>
-      <input type="text" placeholder="ابحث عن خط أو وجهة..." style="width:100%;border:1.5px solid var(--gray);border-radius:10px;padding:10px 14px;font-family:'Cairo',sans-serif;font-size:0.88rem;outline:none;direction:rtl;background:var(--white);margin-bottom:1rem;" oninput="filterBus(this.value)">
-      <div class="transport-list" id="busList"><div class="loading">⏳ جارٍ التحميل...</div></div>
+      <div class="search-box">
+        <input type="text" id="busSearchInput" placeholder="ابحث عن خط أو وجهة..." oninput="filterBus(this.value)">
+        <button class="clear-search" onclick="clearBusSearch()">✕</button>
+      </div>
+      <div class="transport-list" id="busList">
+        <div class="loading">جاري التحميل...</div>
+      </div>
     </div>
   </div>
 </div>
@@ -220,10 +681,12 @@ footer strong{color:var(--gold-light);}
     <div><h2>💊 صيدليات المناوبة</h2><p>الصيدليات المفتوحة الليلة في بوزريعة</p></div>
   </div>
   <div class="page-content">
-    <div id="alertBannerPharmacy" style="display:none"></div>
+    <div id="alertBannerPharmacy" class="alert-banner hidden"></div>
     <div class="section-box">
       <h2>💊 الصيدليات المفتوحة</h2>
-      <div id="pharmacyList"><div class="loading">⏳ جارٍ التحميل...</div></div>
+      <div id="pharmacyList">
+        <div class="loading">جاري التحميل...</div>
+      </div>
     </div>
   </div>
 </div>
@@ -237,7 +700,9 @@ footer strong{color:var(--gold-light);}
   <div class="page-content">
     <div class="section-box">
       <h2 style="color:var(--green-dark)">📢 آخر الإعلانات</h2>
-      <div id="announceList"><div class="loading">⏳ جارٍ التحميل...</div></div>
+      <div id="announceList">
+        <div class="loading">جاري التحميل...</div>
+      </div>
     </div>
   </div>
 </div>
@@ -251,7 +716,9 @@ footer strong{color:var(--gold-light);}
   <div class="page-content">
     <div class="section-box">
       <h2>📋 عروض العمل المتاحة</h2>
-      <div id="jobsList"><div class="loading">⏳ جارٍ التحميل...</div></div>
+      <div id="jobsList">
+        <div class="loading">جاري التحميل...</div>
+      </div>
     </div>
     <div class="section-box">
       <h2>➕ أنشر عرض عمل</h2>
@@ -263,7 +730,7 @@ footer strong{color:var(--gold-light);}
         <div class="form-group"><label>الحي / المنطقة</label><input type="text" id="job-location" placeholder="مثال: حي بن عمر، وسط البلدية"></div>
         <div class="form-group full"><label>وصف الوظيفة والشروط</label><textarea id="job-desc" placeholder="اشرح الوظيفة، الراتب المتوقع، الخبرة المطلوبة..."></textarea></div>
       </div>
-      <button class="btn-submit" onclick="submitJob()">📤 نشر الإعلان</button>
+      <button class="btn-submit" id="btn-submit-job" onclick="submitJob()">📤 نشر الإعلان</button>
     </div>
   </div>
 </div>
@@ -292,21 +759,25 @@ footer strong{color:var(--gold-light);}
           </select>
         </div>
       </div>
-      <button class="btn-submit" onclick="submitSeeker()">✅ تسجيل ملفي</button>
+      <button class="btn-submit" id="btn-submit-seeker" onclick="submitSeeker()">✅ تسجيل ملفي</button>
     </div>
     <div class="section-box">
       <h2>👥 الباحثون عن عمل المسجّلون</h2>
       <p style="font-size:0.78rem;color:var(--muted);margin-bottom:1rem">أصحاب العمل يمكنهم التواصل مباشرة مع هؤلاء.</p>
-      <div id="seekersList"><div class="loading">⏳ جارٍ التحميل...</div></div>
+      <div id="seekersList">
+        <div class="loading">جاري التحميل...</div>
+      </div>
     </div>
   </div>
 </div>
 
-<div class="toast" id="toast">✅ تم!</div>
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
 
+<!-- FIREBASE -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getDatabase, ref, get, push } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+import { getDatabase, ref, get, push, onValue } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBY-HruRlXQ0iazUfCRwu4Fy_ubGqOicIg",
@@ -321,38 +792,68 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
-async function fbGet(key) {
-  const snap = await get(ref(db, key));
-  return snap.exists() ? snap.val() : [];
+// ===== STATE =====
+let selectedPill = '🛣️ طرقات';
+let currentPage = 'home';
+
+// ===== CACHE =====
+const cache = {
+  transport: [],
+  pharmacy: [],
+  announce: [],
+  jobs: [],
+  seekers: [],
+  alert: null
+};
+
+// ===== TOAST =====
+window.showToast = function(msg, type = 'success') {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast ' + type + ' show';
+  setTimeout(() => t.classList.remove('show'), 3500);
 }
 
-function emptyState(icon, title, sub) {
-  return `<div style="text-align:center;padding:2rem 1rem;color:var(--muted)"><div style="font-size:2rem;margin-bottom:0.6rem">${icon}</div><div style="font-weight:700;font-size:0.88rem;margin-bottom:4px">${title}</div><div style="font-size:0.76rem">${sub}</div></div>`;
-}
-
-async function showAlertIn(elId) {
-  const snap = await get(ref(db, 'bz_alert'));
-  const a = snap.exists() ? snap.val() : null;
-  const el = document.getElementById(elId);
-  if (a && el) {
-    el.className = 'alert-banner';
-    el.innerHTML = `<div class="alert-icon">⚠️</div><div class="alert-text"><strong>${a.title}</strong><span>${a.sub}</span></div>`;
-    el.style.display = 'flex';
-  }
-}
-
-window.showPage = function(pageId, fromHistory) {
+// ===== PAGE NAVIGATION =====
+window.showPage = function(pageId, fromHistory = false) {
+  if (currentPage === pageId) return;
+  
+  const fromPage = currentPage;
+  currentPage = pageId;
+  
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.getElementById(pageId).classList.add('active');
+  
   window.scrollTo(0, 0);
-  if (!fromHistory) history.pushState({ page: pageId }, '', '#' + pageId);
-  if (pageId === 'page-transport') loadTransport();
-  else if (pageId === 'page-pharmacy') loadPharmacy();
-  else if (pageId === 'page-announce') loadAnnounce();
-  else if (pageId === 'page-jobs') loadJobs();
-  else if (pageId === 'page-seekers') loadSeekers();
+  
+  if (!fromHistory) {
+    history.pushState({ page: pageId }, '', '#' + pageId);
+  }
+  
+  // Load data for page
+  switch(pageId) {
+    case 'page-transport':
+      loadTransport();
+      break;
+    case 'page-pharmacy':
+      loadPharmacy();
+      break;
+    case 'page-announce':
+      loadAnnounce();
+      break;
+    case 'page-jobs':
+      loadJobs();
+      break;
+    case 'page-seekers':
+      loadSeekers();
+      break;
+  }
+  
+  // Close mobile menu if open
+  document.querySelector('.nav-links').classList.remove('mobile-open');
 }
 
+// History API
 window.addEventListener('popstate', function(e) {
   const page = (e.state && e.state.page) ? e.state.page : 'home';
   showPage(page, true);
@@ -360,48 +861,173 @@ window.addEventListener('popstate', function(e) {
 
 history.replaceState({ page: 'home' }, '', '#home');
 
-async function loadTransport() {
-  showAlertIn('alertBannerTransport');
-  const arr = await fbGet('bz_transport');
-  const list = Array.isArray(arr) ? arr : [];
-  const el = document.getElementById('busList');
-  if (!list.length) { el.innerHTML = emptyState('🚌','لا توجد بيانات بعد','سيتم إضافة خطوط النقل قريباً'); return; }
-  el.innerHTML = list.map(b => `<div class="transport-item"><div class="bus-num">${b.num}</div><div class="bus-info"><strong>${b.route}</strong><span>${b.via||''}</span></div><div class="bus-time">${b.freq||''}</div></div>`).join('');
-}
+// ===== MOBILE MENU =====
+window.toggleMobileMenu = function() {
+  document.querySelector('.nav-links').classList.toggle('mobile-open');
+};
 
-async function loadPharmacy() {
-  showAlertIn('alertBannerPharmacy');
-  const arr = await fbGet('bz_pharmacy');
-  const list = Array.isArray(arr) ? arr : [];
-  const el = document.getElementById('pharmacyList');
-  if (!list.length) { el.innerHTML = emptyState('💊','لا توجد بيانات بعد','سيتم إضافة الصيدليات يومياً'); return; }
-  el.innerHTML = list.map(p => `<div class="pharmacy-item"><div><span class="pharmacy-name">${p.name}</span><div class="pharmacy-addr">📍 ${p.addr}</div></div><span class="${p.open?'open-badge':'closed-badge'}">${p.open?'مفتوحة ✓':(p.hours||'مغلقة')}</span></div>`).join('');
-}
-
-async function loadAnnounce() {
-  const arr = await fbGet('bz_announce');
-  const list = Array.isArray(arr) ? arr : [];
-  const el = document.getElementById('announceList');
-  const colors = ['var(--red)','var(--green)','var(--blue)','var(--gold)','var(--orange)'];
-  if (!list.length) { el.innerHTML = emptyState('📢','لا توجد إعلانات','ستظهر هنا الإعلانات الرسمية'); return; }
-  el.innerHTML = list.map((a,i) => `<div class="announce-item"><div class="announce-dot" style="background:${colors[i%colors.length]}"></div><div class="announce-text"><strong>${a.title}</strong><span>${a.sub||''}</span></div></div>`).join('');
-}
-
-let selectedPill = '🛣️ طرقات';
-
+// ===== PILLS =====
 window.selectPill = function(el) {
   document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
   el.classList.add('active');
-  selectedPill = el.textContent.trim();
+  selectedPill = el.dataset.value;
+};
+
+// ===== Firebase Helpers =====
+async function fbGet(key) {
+  const snap = await get(ref(db, key));
+  return snap.exists() ? snap.val() : null;
 }
 
+function emptyState(icon, title, sub) {
+  return `<div class="empty-state"><div>${icon}</div><strong>${title}</strong><span>${sub}</span></div>`;
+}
+
+// ===== ALERT BANNER =====
+async function showAlertIn(elId) {
+  const a = await fbGet('bz_alert');
+  const el = document.getElementById(elId);
+  if (a && el) {
+    el.className = 'alert-banner';
+    el.innerHTML = `<div class="alert-icon">⚠️</div><div class="alert-text"><strong>${a.title}</strong><span>${a.sub}</span></div>`;
+  } else if (el) {
+    el.className = 'alert-banner hidden';
+  }
+}
+
+// ===== LOAD TRANSPORT =====
+async function loadTransport() {
+  await showAlertIn('alertBannerTransport');
+  const arr = await fbGet('bz_transport');
+  cache.transport = Array.isArray(arr) ? arr : [];
+  
+  const el = document.getElementById('busList');
+  if (!cache.transport.length) {
+    el.innerHTML = emptyState('🚌', 'لا توجد بيانات بعد', 'سيتم إضافة خطوط النقل قريباً');
+    return;
+  }
+  
+  renderTransport(cache.transport);
+}
+
+function renderTransport(list) {
+  const el = document.getElementById('busList');
+  if (!list.length) {
+    el.innerHTML = emptyState('🚌', 'لا توجد نتائج', 'جرب كلمة أخرى');
+    return;
+  }
+  
+  el.innerHTML = list.map((b, i) => `
+    <div class="transport-item" style="animation-delay:${i * 0.05}s">
+      <div class="bus-num">${b.num}</div>
+      <div class="bus-info">
+        <strong>${b.route}</strong>
+        <span>${b.via || ''}</span>
+      </div>
+      <div class="bus-time">${b.freq || ''}</div>
+    </div>
+  `).join('');
+}
+
+window.filterBus = function(val) {
+  const search = val.toLowerCase().trim();
+  const clearBtn = document.querySelector('.clear-search');
+  clearBtn.classList.toggle('show', search.length > 0);
+  
+  if (!search) {
+    renderTransport(cache.transport);
+    return;
+  }
+  
+  const filtered = cache.transport.filter(b => 
+    b.num.toString().includes(search) ||
+    b.route.toLowerCase().includes(search) ||
+    (b.via && b.via.toLowerCase().includes(search))
+  );
+  
+  renderTransport(filtered);
+};
+
+window.clearBusSearch = function() {
+  const input = document.getElementById('busSearchInput');
+  input.value = '';
+  renderTransport(cache.transport);
+  document.querySelector('.clear-search').classList.remove('show');
+};
+
+// ===== LOAD PHARMACY =====
+async function loadPharmacy() {
+  await showAlertIn('alertBannerPharmacy');
+  const arr = await fbGet('bz_pharmacy');
+  cache.pharmacy = Array.isArray(arr) ? arr : [];
+  
+  const el = document.getElementById('pharmacyList');
+  if (!cache.pharmacy.length) {
+    el.innerHTML = emptyState('💊', 'لا توجد بيانات بعد', 'سيتم إضافة الصيدليات يومياً');
+    return;
+  }
+  
+  const open = cache.pharmacy.filter(p => p.open);
+  const closed = cache.pharmacy.filter(p => !p.open);
+  const sorted = [...open, ...closed];
+  
+  el.innerHTML = sorted.map((p, i) => `
+    <div class="pharmacy-item" style="animation-delay:${i * 0.05}s">
+      <div>
+        <span class="pharmacy-name">${p.name}</span>
+        <div class="pharmacy-addr">📍 ${p.addr}</div>
+      </div>
+      <span class="${p.open ? 'open-badge' : 'closed-badge'}">${p.open ? 'مفتوحة ✓' : (p.hours || 'مغلقة')}</span>
+    </div>
+  `).join('');
+}
+
+// ===== LOAD ANNOUNCE =====
+async function loadAnnounce() {
+  const arr = await fbGet('bz_announce');
+  cache.announce = Array.isArray(arr) ? arr : [];
+  
+  const el = document.getElementById('announceList');
+  const colors = ['var(--red)', 'var(--green)', 'var(--blue)', 'var(--gold)', 'var(--orange)'];
+  
+  if (!cache.announce.length) {
+    el.innerHTML = emptyState('📢', 'لا توجد إعلانات', 'ستظهر هنا الإعلانات الرسمية');
+    return;
+  }
+  
+  el.innerHTML = cache.announce.map((a, i) => `
+    <div class="announce-item" style="animation-delay:${i * 0.05}s">
+      <div class="announce-dot" style="background:${colors[i % colors.length]}"></div>
+      <div class="announce-text">
+        <strong>${a.title}</strong>
+        <span>${a.sub || ''}</span>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ===== SUBMIT REPORT =====
 window.submitReport = async function() {
   const name = document.getElementById('rep-name').value.trim() || 'مجهول';
-  const phone = document.getElementById('rep-phone').value.trim() || 'غير محدد';
+  const phone = document.getElementById('rep-phone').value.trim();
   const location = document.getElementById('rep-location').value.trim();
   const severity = document.getElementById('rep-severity').value;
   const desc = document.getElementById('rep-desc').value.trim();
-  if (!location || !desc) return showToast('⚠️ يرجى ملء الحي والوصف');
+  
+  if (!location || !desc) {
+    showToast('⚠️ يرجى ملء الحي والوصف', 'warning');
+    return;
+  }
+  
+  if (!phone) {
+    showToast('⚠️ رقم الهاتف إلزامي', 'warning');
+    return;
+  }
+  
+  const btn = document.getElementById('btn-submit-report');
+  btn.disabled = true;
+  btn.textContent = '⏳ جاري الإرسال...';
+  
   try {
     await push(ref(db, 'bz_reports'), {
       name, phone, location, severity,
@@ -410,59 +1036,47 @@ window.submitReport = async function() {
       timestamp: Date.now(),
       status: 'جديد'
     });
+    
+    // Clear form
     document.getElementById('rep-name').value = '';
     document.getElementById('rep-phone').value = '';
     document.getElementById('rep-location').value = '';
     document.getElementById('rep-desc').value = '';
-    showToast('✅ تم إرسال بلاغك! سيتم الرد خلال 48 ساعة');
+    
+    showToast('✅ تم إر��ال بلاغك! سيتم الرد خلال 48 ساعة');
   } catch(e) {
-    showToast('❌ حدث خطأ، حاول مرة أخرى');
+    showToast('❌ حدث خطأ، حاول مرة أخرى', 'error');
+  } finally {
+    btn.disabled = false;
+    btn.textContent = '📤 إرسال البلاغ';
   }
-}
-
-window.filterBus = function(val) {
-  document.querySelectorAll('#busList .transport-item').forEach(item => {
-    item.style.display = item.textContent.includes(val) ? 'flex' : 'none';
-  });
-}
-
-window.showToast = function(msg) {
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 3500);
-}
-
-// Load home alert
-get(ref(db, 'bz_alert')).then(snap => {
-  const a = snap.exists() ? snap.val() : null;
-  const el = document.getElementById('alertBannerHome');
-  if (a && el) {
-    el.className = 'alert-banner';
-    el.innerHTML = `<div class="alert-icon">⚠️</div><div class="alert-text"><strong>${a.title}</strong><span>${a.sub}</span></div>`;
-    el.style.display = 'flex';
-  }
-});
+};
 
 // ===== JOBS =====
 async function loadJobs() {
-  const snap = await get(ref(db, 'bz_jobs'));
+  const snap = await fbGet('bz_jobs');
   const el = document.getElementById('jobsList');
-  if (!snap.exists()) { el.innerHTML = emptyState('🧾','لا توجد عروض عمل بعد','ستظهر هنا الوظائف المتاحة'); return; }
-  const data = snap.val();
-  const arr = Object.entries(data).map(([k,v]) => ({key:k,...v})).reverse();
-  el.innerHTML = arr.map(j => `
-    <div class="job-item">
-      <span class="job-badge ${j.source==='admin'?'badge-admin':'badge-user'}">${j.source==='admin'?'✅ بلدية':'👤 مواطن'}</span>
+  
+  if (!snap) {
+    el.innerHTML = emptyState('🧾', 'لا توجد عروض عمل بعد', 'ستظهر هنا الوظائف المتاحة');
+    return;
+  }
+  
+  cache.jobs = Object.entries(snap).map(([k, v]) => ({key: k, ...v})).reverse();
+  
+  el.innerHTML = cache.jobs.map((j, i) => `
+    <div class="job-item" style="animation-delay:${i * 0.05}s">
+      <span class="job-badge ${j.source === 'admin' ? 'badge-admin' : 'badge-user'}">${j.source === 'admin' ? '✅ بلدية' : '👤 مواطن'}</span>
       <div class="job-title">💼 ${j.title}</div>
       <div class="job-meta">
-        <span>🏢 ${j.sector||'—'}</span>
-        <span>📍 ${j.location||'—'}</span>
-        <span>🕐 ${j.time||''}</span>
+        <span>🏢 ${j.sector || '—'}</span>
+        <span>📍 ${j.location || '—'}</span>
+        <span>🕐 ${j.time || ''}</span>
       </div>
-      <div class="job-desc">${j.desc||''}</div>
-      <div class="job-contact">📱 للتواصل: ${j.phone||'—'}</div>
-    </div>`).join('');
+      <div class="job-desc">${j.desc || ''}</div>
+      <div class="job-contact">📱 للتواصل: ${j.phone || '—'}</div>
+    </div>
+  `).join('');
 }
 
 window.submitJob = async function() {
@@ -471,7 +1085,16 @@ window.submitJob = async function() {
   const phone = document.getElementById('job-phone').value.trim();
   const location = document.getElementById('job-location').value.trim();
   const desc = document.getElementById('job-desc').value.trim();
-  if (!title || !phone || !desc) return showToast('⚠️ يرجى ملء العنوان والوصف والهاتف');
+  
+  if (!title || !phone || !desc) {
+    showToast('⚠️ يرجى ملء العنوان والوصف والهاتف', 'warning');
+    return;
+  }
+  
+  const btn = document.getElementById('btn-submit-job');
+  btn.disabled = true;
+  btn.textContent = '⏳ جاري النشر...';
+  
   try {
     await push(ref(db, 'bz_jobs'), {
       title, sector, phone, location, desc,
@@ -479,30 +1102,45 @@ window.submitJob = async function() {
       time: new Date().toLocaleString('ar-DZ'),
       timestamp: Date.now()
     });
-    ['job-title','job-sector','job-phone','job-location','job-desc'].forEach(id => document.getElementById(id).value='');
+    
+    ['job-title', 'job-sector', 'job-phone', 'job-location', 'job-desc'].forEach(id => {
+      document.getElementById(id).value = '';
+    });
+    
     showToast('✅ تم نشر إعلان عملك بنجاح!');
     loadJobs();
-  } catch(e) { showToast('❌ حدث خطأ، حاول مجدداً'); }
-}
+  } catch(e) {
+    showToast('❌ حدث خطأ، حاول مجدداً', 'error');
+  } finally {
+    btn.disabled = false;
+    btn.textContent = '📤 نشر الإعلان';
+  }
+};
 
 // ===== SEEKERS =====
 async function loadSeekers() {
-  const snap = await get(ref(db, 'bz_seekers'));
+  const snap = await fbGet('bz_seekers');
   const el = document.getElementById('seekersList');
-  if (!snap.exists()) { el.innerHTML = emptyState('👥','لا يوجد مسجّلون بعد','كن أول من يسجّل!'); return; }
-  const data = snap.val();
-  const arr = Object.entries(data).map(([k,v]) => ({key:k,...v})).reverse();
-  el.innerHTML = arr.map(s => `
-    <div class="seeker-item">
+  
+  if (!snap) {
+    el.innerHTML = emptyState('👥', 'لا يوجد مسجّلون بعد', 'كن أول من يسجّل!');
+    return;
+  }
+  
+  cache.seekers = Object.entries(snap).map(([k, v]) => ({key: k, ...v})).reverse();
+  
+  el.innerHTML = cache.seekers.map((s, i) => `
+    <div class="seeker-item" style="animation-delay:${i * 0.05}s">
       <div class="seeker-name">👤 ${s.name}</div>
       <div class="seeker-info">
         <span>📱 ${s.phone}</span>
-        ${s.email?`<span>📧 ${s.email}</span>`:''}
-        <span>🔍 ${s.jobType||''}</span>
-        ${s.lastJob?`<span>💼 ${s.lastJob}</span>`:''}
+        ${s.email ? `<span>📧 ${s.email}</span>` : ''}
+        <span>🔍 ${s.jobType || ''}</span>
+        ${s.lastJob ? `<span>💼 ${s.lastJob}</span>` : ''}
       </div>
-      ${s.skills?`<div class="seeker-skills">🛠️ ${s.skills}</div>`:''}
-    </div>`).join('');
+      ${s.skills ? `<div class="seeker-skills">🛠️ ${s.skills}</div>` : ''}
+    </div>
+  `).join('');
 }
 
 window.submitSeeker = async function() {
@@ -512,18 +1150,60 @@ window.submitSeeker = async function() {
   const lastJob = document.getElementById('sk-last').value.trim();
   const skills = document.getElementById('sk-skills').value.trim();
   const jobType = document.getElementById('sk-type').value;
-  if (!name || !phone) return showToast('⚠️ الاسم والهاتف إلزاميان');
+  
+  if (!name || !phone) {
+    showToast('⚠️ الاسم والهاتف إلزاميان', 'warning');
+    return;
+  }
+  
+  const btn = document.getElementById('btn-submit-seeker');
+  btn.disabled = true;
+  btn.textContent = '⏳ جاري التسجيل...';
+  
   try {
     await push(ref(db, 'bz_seekers'), {
       name, phone, email, lastJob, skills, jobType,
       time: new Date().toLocaleString('ar-DZ'),
       timestamp: Date.now()
     });
-    ['sk-name','sk-phone','sk-email','sk-last','sk-skills'].forEach(id => document.getElementById(id).value='');
+    
+    ['sk-name', 'sk-phone', 'sk-email', 'sk-last', 'sk-skills'].forEach(id => {
+      document.getElementById(id).value = '';
+    });
+    
     showToast('✅ تم تسجيل ملفك! سيتصل بك أصحاب العمل');
     loadSeekers();
-  } catch(e) { showToast('❌ حدث خطأ، حاول مجدداً'); }
-}
+  } catch(e) {
+    showToast('❌ حدث خطأ، حاول مجدداً', 'error');
+  } finally {
+    btn.disabled = false;
+    btn.textContent = '✅ تسجيل ملفي';
+  }
+};
+
+// ===== INIT =====
+(async function init() {
+  // Load alert on home
+  await showAlertIn('alertBannerHome');
+})();
 </script>
+
+<style>
+@media(max-width:768px){
+  .nav-links.mobile-open{
+    display:flex;
+    flex-direction:column;
+    position:absolute;
+    top:64px;left:0;right:0;
+    background:var(--green-dark);
+    padding:1rem;
+    gap:0.5rem;
+  }
+  .nav-links.mobile-open a{
+    padding:1rem;
+    border-radius:8px;
+  }
+}
+</style>
 </body>
 </html>
