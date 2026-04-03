@@ -332,6 +332,7 @@ body {
   <!-- TAB NAV -->
   <div class="tab-nav">
     <button class="tab-btn active" onclick="switchPanel('dashboard')">📊 الرئيسية</button>
+    <button class="tab-btn" onclick="switchPanel('reports')" id="reportsTabBtn">📥 البلاغات <span id="reportsCount" style="background:var(--red);color:white;border-radius:20px;padding:1px 7px;font-size:0.72rem;margin-right:4px;display:none">0</span></button>
     <button class="tab-btn" onclick="switchPanel('announce')">📢 الإعلانات</button>
     <button class="tab-btn" onclick="switchPanel('alert')">⚠️ التنبيهات</button>
     <button class="tab-btn" onclick="switchPanel('pharmacy')">💊 الصيدليات</button>
@@ -341,6 +342,19 @@ body {
 
   <!-- CONTENT -->
   <div class="content">
+
+    <!-- REPORTS INBOX -->
+    <div class="panel" id="panel-reports">
+      <div class="admin-card">
+        <h3>📥 البلاغات الواردة من السكان</h3>
+        <div style="display:flex;gap:10px;margin-bottom:1rem;flex-wrap:wrap;">
+          <button onclick="filterReports('all')" id="rf-all" style="background:var(--green);color:white;border:none;border-radius:9px;padding:6px 14px;font-family:'Cairo',sans-serif;font-size:0.8rem;font-weight:700;cursor:pointer;">الكل</button>
+          <button onclick="filterReports('جديد')" id="rf-new" style="background:rgba(192,57,43,0.1);color:var(--red);border:1px solid rgba(192,57,43,0.2);border-radius:9px;padding:6px 14px;font-family:'Cairo',sans-serif;font-size:0.8rem;font-weight:700;cursor:pointer;">🔴 جديد</button>
+          <button onclick="filterReports('عاجلة')" id="rf-urgent" style="background:rgba(212,117,42,0.1);color:var(--orange);border:1px solid rgba(212,117,42,0.2);border-radius:9px;padding:6px 14px;font-family:'Cairo',sans-serif;font-size:0.8rem;font-weight:700;cursor:pointer;">🚨 عاجلة</button>
+        </div>
+        <div id="reportsList"><div style="text-align:center;padding:2rem;color:var(--muted)">⏳ جارٍ التحميل...</div></div>
+      </div>
+    </div>
 
     <!-- DASHBOARD -->
     <div class="panel active" id="panel-dashboard">
@@ -572,6 +586,7 @@ window.switchPanel = function(name) {
   document.getElementById('panel-' + name).classList.add('active');
   event.target.classList.add('active');
   if (name === 'dashboard') updateStats();
+  if (name === 'reports') loadReports();
 }
 
 // ===== TOAST =====
@@ -765,6 +780,84 @@ window.delItem = async function(key, id, renderFn) {
 async function loadAll() {
   await Promise.all([renderAnnounce(), renderPharmacy(), renderTransport(), renderSchool(), loadAlert()]);
   updateStats();
+  loadReports();
+}
+
+// ===== REPORTS =====
+let allReports = [];
+let currentFilter = 'all';
+
+async function loadReports() {
+  const snap = await get(ref(db, 'bz_reports'));
+  allReports = [];
+  if (snap.exists()) {
+    const data = snap.val();
+    Object.entries(data).forEach(([key, val]) => {
+      allReports.push({ key, ...val });
+    });
+    // Sort newest first
+    allReports.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
+  }
+  renderReports();
+  // Show badge count on tab
+  const newCount = allReports.filter(r => r.status === 'جديد').length;
+  const badge = document.getElementById('reportsCount');
+  if (badge) {
+    badge.textContent = newCount;
+    badge.style.display = newCount > 0 ? 'inline' : 'none';
+  }
+}
+
+function renderReports() {
+  const el = document.getElementById('reportsList');
+  let filtered = allReports;
+  if (currentFilter === 'جديد') filtered = allReports.filter(r => r.status === 'جديد');
+  if (currentFilter === 'عاجلة') filtered = allReports.filter(r => r.severity && r.severity.includes('عاجلة'));
+  if (!filtered.length) { el.innerHTML = '<div style="text-align:center;padding:2rem;color:var(--muted)">لا توجد بلاغات</div>'; return; }
+
+  const severityClass = s => s && s.includes('عاجلة') ? 'urgent' : s && s.includes('متوسطة') ? 'medium' : 'normal';
+  el.innerHTML = filtered.map(r => `
+    <div style="background:var(--white);border:1px solid var(--border);border-radius:12px;padding:1rem;margin-bottom:0.8rem;transition:all 0.2s;" onmouseover="this.style.borderColor='rgba(0,98,51,0.25)'" onmouseout="this.style.borderColor='var(--border)'">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:0.5rem;gap:8px;flex-wrap:wrap;">
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <span style="background:${r.severity&&r.severity.includes('عاجلة')?'rgba(192,57,43,0.12)':r.severity&&r.severity.includes('متوسطة')?'rgba(212,117,42,0.1)':'rgba(0,98,51,0.08)'};color:${r.severity&&r.severity.includes('عاجلة')?'var(--red)':r.severity&&r.severity.includes('متوسطة')?'var(--orange)':'var(--green)'};font-size:0.75rem;font-weight:700;padding:3px 10px;border-radius:20px;">${r.severity||'عادية'}</span>
+          <span style="background:rgba(26,111,168,0.08);color:var(--blue);font-size:0.75rem;font-weight:700;padding:3px 10px;border-radius:20px;">${r.type||''}</span>
+          ${r.status==='جديد'?'<span style="background:rgba(192,57,43,0.1);color:var(--red);font-size:0.72rem;font-weight:700;padding:3px 10px;border-radius:20px;animation:pulse 2s infinite">🔴 جديد</span>':'<span style="background:rgba(0,98,51,0.08);color:var(--green);font-size:0.72rem;font-weight:700;padding:3px 10px;border-radius:20px;">✅ تمت المعالجة</span>'}
+        </div>
+        <div style="display:flex;gap:6px;">
+          ${r.status==='جديد'?`<button onclick="markDone('${r.key}')" style="background:rgba(0,98,51,0.1);color:var(--green);border:1px solid rgba(0,98,51,0.2);border-radius:8px;padding:4px 10px;font-family:'Cairo',sans-serif;font-size:0.75rem;font-weight:700;cursor:pointer;">✅ تمت المعالجة</button>`:''}
+          <button onclick="deleteReport('${r.key}')" style="background:rgba(192,57,43,0.08);color:var(--red);border:1px solid rgba(192,57,43,0.15);border-radius:8px;padding:4px 10px;font-family:'Cairo',sans-serif;font-size:0.75rem;font-weight:700;cursor:pointer;">🗑️ حذف</button>
+        </div>
+      </div>
+      <div style="font-size:0.85rem;font-weight:700;color:var(--text);margin-bottom:4px;">${r.desc||''}</div>
+      <div style="font-size:0.76rem;color:var(--muted);display:flex;gap:14px;flex-wrap:wrap;margin-top:6px;">
+        <span>👤 ${r.name||'مجهول'}</span>
+        <span>📱 ${r.phone||'—'}</span>
+        <span>📍 ${r.location||'—'}</span>
+        <span>🕐 ${r.time||'—'}</span>
+      </div>
+    </div>`).join('');
+}
+
+window.filterReports = function(filter) {
+  currentFilter = filter;
+  renderReports();
+}
+
+window.markDone = async function(key) {
+  const snap = await get(ref(db, 'bz_reports/' + key));
+  if (snap.exists()) {
+    await set(ref(db, 'bz_reports/' + key), { ...snap.val(), status: 'تمت المعالجة' });
+    loadReports();
+    showToast('✅ تم تحديث حالة البلاغ');
+  }
+}
+
+window.deleteReport = async function(key) {
+  if (!confirm('حذف هذا البلاغ؟')) return;
+  await set(ref(db, 'bz_reports/' + key), null);
+  loadReports();
+  showToast('🗑️ تم حذف البلاغ');
 }
 
 window.loadAll = loadAll;
